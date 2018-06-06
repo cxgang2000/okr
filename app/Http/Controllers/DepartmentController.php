@@ -128,23 +128,27 @@ class DepartmentController extends Controller
 
         // var_dump($department->toArray()['data']);die();
 
+
+        // 本页所有部门id，为了找领导用
         $arr_dpt = $department->toArray()['data'];
-        foreach ($arr_dpt as $v) {
-        	$arr_dptids[] = $v['id'];
-        }
-        // var_dump($arr_dptids);//die();
-        $user = new User;
-        $arr_leader = $user->getDptLeader($arr_dptids);
-        // var_dump($arr_leader);//die();
-        for ($i=0; $i < count($arr_dpt); $i++) {
-        	$arr_dpt[$i]['leader'] = "";
-        	for ($j=0; $j < count($arr_leader); $j++) { 
-        		if($arr_dpt[$i]['id']==$arr_leader[$j]['department_id']){
-        			$arr_dpt[$i]['leader']=$arr_leader[$j]['name'];
-        			break;
-        		}
-        	}
-        }
+        if(count($arr_dpt)!=0){
+	        foreach ($arr_dpt as $v) {
+	        	$arr_dptids[] = $v['id'];
+	        }
+	        // var_dump($arr_dptids);//die();
+	        $user = new User;
+	        $arr_leader = $user->getDptLeader($arr_dptids);
+	        // var_dump($arr_leader);//die();
+	        for ($i=0; $i < count($arr_dpt); $i++) {
+	        	$arr_dpt[$i]['leader'] = "";
+	        	for ($j=0; $j < count($arr_leader); $j++) { 
+	        		if($arr_dpt[$i]['id']==$arr_leader[$j]['department_id']){
+	        			$arr_dpt[$i]['leader']=$arr_leader[$j]['name'];
+	        			break;
+	        		}
+	        	}
+	        }
+	    }
         // var_dump($arr_dpt);die();
 
 
