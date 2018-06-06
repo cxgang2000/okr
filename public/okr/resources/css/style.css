@@ -1,0 +1,358 @@
+
+/********************************      Basic Structure      ********************************/
+
+html {
+    font-size: 100%;
+    height: 100%;
+    margin-bottom: 1px; /* Always show a scrollbar to avoid jumping when the scrollbar appears  */
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #555;
+    background: #f5f5f5;
+    font-size: 12px;
+}
+/********************************      Elements styling      ********************************/
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #222;
+    font-weight: bold;
+}
+
+h1            { font-family: Calibri, Helvetica, Arial, sans-serif; font-size: 31px; font-weight: bold; color: #fff; 
+  position: absolute; top: -1000px;  /* Remove this line and delete the logo (in the HTML) if you don't want an image as a logo */
+}
+
+h2            { font-size: 26px; padding: 0 0 8px 0; }
+h3            { font-size: 17px; padding: 0 0 10px 0; }
+h4            { font-size: 16px; padding: 0 0 5px 0; }
+h5            { font-size: 14px; padding: 0 0 5px 0; }
+h6            { font-size: 12px; padding: 0 0 5px 0; }
+
+
+
+
+strong       { font-weight: bold; color: #333; }
+
+small           { font-size: 0.85em; }
+
+pre           { font-family: monospace; }
+
+p {
+    line-height: 1.6em;
+}
+
+/********************************      General Classes      ********************************/
+
+.clear {
+    clear: both;
+}
+
+.align-left {
+    float: left;
+}
+
+.align-right {
+    float: right;
+}
+
+/************ Button ************/
+.button {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    background-color: #1E9FFF;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: .9;
+    filter: alpha(opacity=90);
+}
+
+.button:hover {
+    text-decoration: none;
+    color: #fff;
+    background: #4BB2FF;
+}
+
+.button:active {
+    text-decoration: none;
+    color: #fff;
+}
+
+a.remove-link {
+    text-decoration: none;
+    color: #fff;
+}
+
+a.remove-link:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+
+/************ Layout ************/
+
+#main-content {
+    margin: 0 0 0 245px;
+}
+
+.column-left {
+    width: 48%;
+    float: left;
+}
+
+.column-right {
+    width: 48%;
+    float: right;
+}
+
+#page-intro {
+    font-size: 17px;
+    padding: 0 0 20px 0;
+}
+
+
+
+/* 公用的中间头部  2018 4 18*/
+.p_rel{
+    position: relative;
+}
+/*block*/
+.in_block{
+    display: inline-block;
+}
+/*字体*/
+.ft_15{
+    font-size: 15px;
+}
+.ft_18{
+    font-size: 18px;
+}
+/*加粗*/
+.ft_w{
+    font-weight: bolder;
+}
+/*颜色*/
+.ft_c{
+    color: #209ee4;
+}
+.c_333{
+    color: #333;
+}
+.c_666{
+    color: #666;
+}
+.c_999{
+    color: #999;
+}
+
+/*margin*/
+.mg_t16{
+    margin-top: 16px;
+}
+.mg_t36{
+    margin-top: 36px;
+}
+.mg_t24{
+    margin-top: 24px;
+}
+.mg_t48{
+    margin-top: 48px;
+}
+.mg_t95{
+    margin-top: 95px;
+}
+.mg_l96{
+    margin-left: 96px;
+}
+.mg_l16{
+    margin-left: 16px;
+}
+.mg_l32{
+    margin-left: 32px;
+}
+.mg_b40{
+    margin-bottom: 40px;
+}
+
+.mg_f{
+    margin: 32px 0 15px 0;
+}
+
+/*padding*/
+.p_l8{
+    padding-left: 8px;
+}
+.p_l16{
+    padding-left: 16px;
+}
+input::-webkit-input-placeholder {
+ /* placeholder颜色  */
+ color: #bbb!important;         /* placeholder字体大小  */         
+ font-size: 15px;
+}
+
+input::-moz-input-placeholder{ /*Mozilla Firefox*/
+
+    color: #bbb!important;
+
+}
+
+input::-ms-input-placeholder{ /*Internet Explorer*/ 
+
+    color: #bbb!important;
+
+}
+input[type=file] {
+    display: inline-block;
+}
+
+.h2Title{
+    background:#fff; 
+    margin-bottom: 16px;
+    height: 32px;
+    font-size: 15px;
+    line-height: 32px;
+    margin-left: -16px;
+    padding-left: 16px;
+}
+.h2Title a{
+    color: #999;
+}
+.h2Title a.nows{
+    color: #209ee4;
+    font-weight: bolder;
+}
+
+/*课间列表*/
+
+.content-box{
+    background: #fff;
+    padding: 32px 16px 16px 0;
+}
+.clss_type{
+    padding-right: 8px;
+    height: 51px;
+    line-height: 51px;
+}
+
+.layui-table th{
+    font-size: 15px;
+    color: #333;
+    font-weight: bolder;
+}
+
+/*2018.4.19*/
+.text-right{
+    text-align: right!important;
+}
+.jy_search{
+    position: relative;
+}
+.jy_btn{
+    position: absolute;
+    top:10px;
+    right: 8px;
+    cursor: pointer;
+}
+.con_down{
+    cursor: pointer;
+}
+
+.kc_type .type_titles{
+    font-size: 15px;
+    font-weight: bolder;
+    color: #209ee4;
+}
+.con_down.type_active{
+    border: 1px solid #209ee4;
+    border-bottom:none;
+}
+.border_type td{
+    border-bottom: 1px solid #209ee4;
+}
+.con_type{
+    display: none;
+    background: #fff!important;
+}
+#iy_manage .jy_search .layui-btn{
+    width: 88px;
+    height: 36px;
+}
+#iy_manage table tbody tr:hover{
+    background: #f5f7fb;
+}
+/*一下的都已经删除了*/
+.layui-table td, .layui-table th{
+    padding: 0;
+}
+.models_mid.text-center table tr{
+    background: none;
+}
+.models_mid.text-center table tr td,.models_mid.text-center table th{
+    border: none;
+}
+.models_mid.text-center table tr td input[type="text"]{
+    width: 200px;
+    display: initial;
+}
+.models_mid.text-center table tr:hover{
+    background: none!important;
+}
+#basic{
+    display: inline-block;
+    width: 200px!important;
+}
+.rad_c{
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+}
+.rd{
+    color: red;
+}
+
+/*models*/
+.models{
+    display: none;
+    height: 100%;
+    position: fixed;
+    z-index: 999999;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.65);
+}
+.models #layui-layer-shade1{
+    background: #000;
+    z-index: 99999;
+    opacity: 0.3;
+}
+.models #layui-layer1{
+    z-index: 19891015; width: 666px; height: auto; top: 15%; left: 30%;
+}
+.models .bootstrap-select{
+    width: 200px!important;
+}
+.models .modes_con{
+    position: fixed;
+    left: 30%;
+    top: 20%;width: 666px;
+    background: #fff;
+}
+.models .layui-table th{
+    font-size: 18px;
+}
+
+td .layui-btn-primary{
+    border: none;
+    color: #209ee4;
+}

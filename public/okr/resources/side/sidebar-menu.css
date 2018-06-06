@@ -1,0 +1,136 @@
+.sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.sidebar-menu > li {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-menu > li > a {
+  padding: 20px 5px 20px 15px;
+  display: block;
+  border-left: 3px solid transparent;
+  color: #000;
+  font-size: 18px;
+}
+
+.sidebar-menu > li > a.active{
+  background: #209ee4;
+  color: #fff;
+}
+
+.sidebar-menu > li > a > .fa {
+  width: 20px;
+}
+
+.sidebar-menu > li:hover > a, .sidebar-menu > li.active > a {
+  color: #fff;
+  background: #209ee4;
+}
+
+.sidebar-menu > li > .treeview-menu {
+  margin: 0 1px;
+  background: #2c3b41;
+}
+
+.sidebar-menu > li .label,
+    .sidebar-menu > li .badge {
+  margin-top: 3px;
+  margin-right: 5px;
+}
+
+.sidebar-menu li.header {
+  height: 32px;
+  background: #fff;
+}
+
+.sidebar-menu li > a > .fa-angle-left {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+.sidebar-menu li.active > a > .fa-angle-left {
+  transform: rotate(-90deg);
+}
+
+.sidebar-menu li.active > .treeview-menu {
+  display: block;
+}
+
+.sidebar-menu a {
+  color: #b8c7ce;
+  text-decoration: none;
+}
+
+.sidebar-menu .treeview-menu {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 5px;
+}
+
+.sidebar-menu .treeview-menu .treeview-menu {
+  padding-left: 20px;
+}
+
+.sidebar-menu .treeview-menu > li {
+  margin: 0;
+}
+
+.sidebar-menu .treeview-menu > li > a {
+  padding: 20px 5px 20px 15px;
+  display: block;
+  font-size: 16px;
+  color: #8aa4af;
+}
+
+.sidebar-menu .treeview-menu > li > a > .fa {
+  width: 20px;
+}
+
+.sidebar-menu .treeview-menu > li > a > .fa-angle-left,.sidebar-menu .treeview-menu > li > a > .fa-angle-down {
+  width: auto;
+}
+
+.sidebar-menu .treeview-menu > li.active > a, .sidebar-menu .treeview-menu > li > a:hover {
+  color: #fff;
+}
+.side_content{
+  display: none;
+  position: absolute;
+  left: 230px;
+  top: 0;
+  width: 267px;
+  height: 140px;
+  background: #fff;
+  border: 2px solid #209ee4;
+  padding: 16px;
+  font-size: 15px;
+  color: #666;
+}
+.side_content a{
+  color: #666;
+}
+.side_content ul li a:hover{
+  color: #209ee4;
+  cursor: pointer;
+}
+.side_content ul li:hover .fangkuai{
+  background: #209ee4;
+}
+.fangkuai{
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: #666;
+  margin-right: 8px;
+}
