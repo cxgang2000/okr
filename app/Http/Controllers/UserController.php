@@ -83,6 +83,7 @@ class UserController extends Controller
     	$arr_status = [0,1];
 
     	// 计算员工上级 1取所有部门 2取所有员工 2将员工放在部门下 4去掉没有员工的部门
+        $arr_litedpt = array();
     	$arr_alldpt = Department::select(['id','name'])->whereIn("status",$arr_status)->orderBy('id',"asc")->get()->toArray();
     	// var_dump($arr_alldpt);die();
     	$arr_alluser = User::select(['id','name','department_id'])->whereIn("status",$arr_status)->orderBy('id',"desc")->get()->toArray();
