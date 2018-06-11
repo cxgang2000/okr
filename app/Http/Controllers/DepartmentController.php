@@ -154,8 +154,9 @@ class DepartmentController extends Controller
 
 
 
-        // 取所有部门 显示上级部门用
-        $arr_all_dpt = Department::whereIn("status",$arr_status)->orderBy('id',"asc")->get();
+        // 取所有部门 显示上级部门用 只显示有效的，停用的删除的都不要
+        $arr_where_status0['status'] = 0;
+        $arr_all_dpt = Department::where($arr_where_status0)->orderBy('id',"asc")->get();
         
         return view('department.index',compact('department','arr_all_dpt','arr_dpt'));
     }
@@ -164,15 +165,33 @@ class DepartmentController extends Controller
     {
 
     	// 需要增加的逻辑
-    	// 1.此部门不是有效部门的父部门
-    	// 2.词部门下没有员工
+    	// 1.此部门不是有效部门（启用或停用，非删除）的父部门
+    	// 2.此部门下没有员工
+
+
+        $arr_user = Department::find($department->id)->user()->get()->toArray();
+        // dd($arr_user);
+        if(count($arr_user)>0){
+            session()->flash('del_department', '此部门下已有员工，不能删除');
+            return back();
+        }
+
+        $hasChildren = Department::hasChildren($department->id);
+        // dd($hasChildren);
+        if($hasChildren==1){
+            session()->flash('del_department', '此部门已作为有效部门的上级部门，不能删除');
+            return back();
+        }
+
         if($department->delete()){
-	        // return Redirect::back()->with('message', '成功删除用户！');
-	        session()->flash('del_department', '成功删除用户！');
-	    }else{
-	        // return Redirect::back()->withInput()->with('errors','删除用户失败！');
-	        session()->flash('del_department', '删除用户失败！');
-	    }
+            // return Redirect::back()->with('message', '成功删除用户！');
+            session()->flash('del_department', '删除部门成功！');
+        }else{
+            // return Redirect::back()->withInput()->with('errors','删除用户失败！');
+            session()->flash('del_department', '删除部门失败！');
+        } 
+
+        
 	    return back();
     }
 

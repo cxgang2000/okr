@@ -17,6 +17,26 @@ class Department extends Model
 
     public function user()
     {
-        return $this->hasOne('App\Models\User');
+        return $this->hasMany('App\Models\User');
+    }
+
+    // :( 搞不定，自己写吧
+    // public function getchildren()
+    // {
+    //     return $this->belongsToMany('App\Models\Department',"department","id","pid");
+    // }
+
+    public static function hasChildren($id)
+    {
+        $arr_where['pid'] = $id;
+        $arr_status = [0,1];
+        
+        $a = Department::whereIn("status",$arr_status)->where($arr_where)->get(['id','name']);
+        // dd(count($a));
+        if(count($a)>0){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }

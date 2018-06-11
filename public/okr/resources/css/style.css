@@ -25,12 +25,14 @@ h1            { font-family: Calibri, Helvetica, Arial, sans-serif; font-size: 3
   position: absolute; top: -1000px;  /* Remove this line and delete the logo (in the HTML) if you don't want an image as a logo */
 }
 
-h2            { font-size: 26px; padding: 0 0 8px 0; }
+h2            { font-size: 18px; padding: 0 0 8px 0; }
 h3            { font-size: 17px; padding: 0 0 10px 0; }
 h4            { font-size: 16px; padding: 0 0 5px 0; }
 h5            { font-size: 14px; padding: 0 0 5px 0; }
 h6            { font-size: 12px; padding: 0 0 5px 0; }
-
+a:hover{
+    text-decoration:none;
+}
 
 
 
@@ -57,6 +59,73 @@ p {
 .align-right {
     float: right;
 }
+/*login*/
+#login{
+    background:url(../images/loginbg.png)!important;
+    background-repeat:no-repeat !important;
+    background-size:100% 100%!important; 
+    background-attachment: fixed!important;
+}
+.login_cont{
+    width: 620px;
+    height: 430px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 10px;
+    background: rgba(255,255,255,.6);
+    /* overflow: scroll; */
+}
+.login_titles{
+    color: #219DE5;
+    font-weight: bold;
+    font-size: 40px;
+    margin-top: 40px;
+}
+
+.input_cont{
+    padding: 0 20%;
+    margin-top: 10px;
+}
+
+.reset-input{
+    border:none;
+    background: none;
+    border-radius: 0;
+    border-bottom: 1px solid #219EE4;
+    box-shadow: none;
+    padding-left: 60px;
+    height: 50px;
+}
+.reset-input{
+    background: url(../images/loginicon.png) no-repeat left;
+}
+.password{
+    background: url(../images/pasicon.png) no-repeat left;
+}
+.btn-reset{
+    background: none;
+    color: #26C2FC;
+    font-weight: bold;
+    border: 2px solid #26C2FC;
+    margin-top: 45px;
+}
+
+.btn-reset:hover,.btn-reset:link,.btn-reset:active,.btn-reset:focus,.btn-reset:visited{
+    background: none;
+    color: #26C2FC;
+    font-weight: bold;
+    border: 2px solid #26C2FC;
+
+}
+.form-group{
+    margin-top: 20px;
+}
+
+/*login end*/
 
 /************ Button ************/
 .button {
@@ -122,78 +191,17 @@ a.remove-link:hover {
 
 
 /* 公用的中间头部  2018 4 18*/
-.p_rel{
-    position: relative;
-}
-/*block*/
-.in_block{
-    display: inline-block;
-}
-/*字体*/
-.ft_15{
-    font-size: 15px;
-}
-.ft_18{
-    font-size: 18px;
-}
-/*加粗*/
-.ft_w{
-    font-weight: bolder;
-}
-/*颜色*/
-.ft_c{
-    color: #209ee4;
-}
 .c_333{
     color: #333;
-}
-.c_666{
-    color: #666;
 }
 .c_999{
     color: #999;
 }
-
-/*margin*/
-.mg_t16{
-    margin-top: 16px;
-}
-.mg_t36{
-    margin-top: 36px;
-}
-.mg_t24{
-    margin-top: 24px;
-}
-.mg_t48{
-    margin-top: 48px;
-}
-.mg_t95{
-    margin-top: 95px;
-}
-.mg_l96{
-    margin-left: 96px;
-}
-.mg_l16{
-    margin-left: 16px;
-}
-.mg_l32{
-    margin-left: 32px;
-}
-.mg_b40{
-    margin-bottom: 40px;
-}
-
-.mg_f{
-    margin: 32px 0 15px 0;
+.yg_sec{
+    position: relative;
 }
 
 /*padding*/
-.p_l8{
-    padding-left: 8px;
-}
-.p_l16{
-    padding-left: 16px;
-}
 input::-webkit-input-placeholder {
  /* placeholder颜色  */
  color: #bbb!important;         /* placeholder字体大小  */         
@@ -243,7 +251,6 @@ input[type=file] {
     height: 51px;
     line-height: 51px;
 }
-
 .layui-table th{
     font-size: 15px;
     color: #333;
@@ -290,7 +297,9 @@ input[type=file] {
 #iy_manage table tbody tr:hover{
     background: #f5f7fb;
 }
-/*一下的都已经删除了*/
+
+/*一下的 ygokr 样式*/
+
 .layui-table td, .layui-table th{
     padding: 0;
 }
@@ -301,6 +310,10 @@ input[type=file] {
     border: none;
 }
 .models_mid.text-center table tr td input[type="text"]{
+    width: 200px;
+    display: initial;
+}
+.models_mid.text-center table tr td input[type="password"]{
     width: 200px;
     display: initial;
 }
@@ -319,6 +332,26 @@ input[type=file] {
 .rd{
     color: red;
 }
+/*nav*/
+.layui-nav .reset.layui-nav-item a{
+      display: block;
+      padding: 0px 3px;
+      color: #fff;
+      opacity: 1;
+      width: 64px;
+      height: 28px;
+      line-height: 28px;
+      transition: all .3s;
+      -webkit-transition: all .3s;
+      border: 1px solid #fff;
+      border-radius: 2px;
+    }
+    .layui-nav-child{
+      top: 55px;
+    }
+    .layui-nav-child dd{
+      padding: 10px 0;
+    }
 
 /*models*/
 .models{
@@ -339,13 +372,13 @@ input[type=file] {
 .models #layui-layer1{
     z-index: 19891015; width: 666px; height: auto; top: 15%; left: 30%;
 }
-.models .bootstrap-select{
+.models .fzr .bootstrap-select{
     width: 200px!important;
 }
 .models .modes_con{
     position: fixed;
     left: 30%;
-    top: 20%;width: 666px;
+    top: 5%;width: 666px;
     background: #fff;
 }
 .models .layui-table th{
@@ -355,4 +388,289 @@ input[type=file] {
 td .layui-btn-primary{
     border: none;
     color: #209ee4;
+}
+
+.ot_time{
+    width: 160px;
+    display: inline-block;position: relative;
+    margin-left: 20px;
+}
+.ot_time select{
+    position: absolute;left: 0;top: 7px;
+}
+.time_con{
+    margin-bottom: 15px;
+}
+.time_con select{
+    border: none;
+}
+.time_con select:nth-child(n+2){
+    margin-left: 20px;
+}
+.time_con .list{
+    cursor: pointer;
+    width: 70px;
+    height: 28px;
+}
+.time_con .active{
+    border-bottom: 2px solid #209ee4;
+}
+
+.titles{
+    font-size: 18px;
+    color: #209ee4;
+    font-weight: bolder;
+}
+
+/*zthree*/
+.wks{
+    border: 1px solid #bbb;
+    font-size: 12px!important;
+    padding: 1px 4px;
+    color: #bbb!important;
+    cursor: pointer!important;
+}
+.jxz{
+    border: 1px solid #209ee4;
+    font-size: 12px!important;
+    padding: 1px 4px;
+    color: #209ee4!important;
+    cursor: pointer!important;
+}
+.ywc{
+    border: 1px solid #15bc44;
+    font-size: 12px!important;
+    padding: 1px 4px;
+    color: #15bc44!important; 
+    cursor: pointer!important;
+}
+.yyq{
+    border: 1px solid #FD5E64;
+    font-size: 12px!important;
+    padding: 1px 4px;
+    color: #FD5E64!important; 
+    cursor: pointer!important;
+}
+.pf{
+    border: none;
+    cursor: pointer!important;
+    font-size: 12px!important;
+}
+
+.ztree>li>a span{
+    font-size: 18px;
+    font-weight: bolder;
+}
+.ztree>li>ul>li span{
+    font-size: 15px;
+}
+.ztree>li>ul>li>ul>li span{
+    font-size: 12px;
+    color: #666;font-weight: none;
+}
+#my_mb .layui-layer-title{
+    opacity: 1;
+}
+
+/*Object models*/
+.ob_titles{
+    font-weight: bolder;
+    font-size: 15px!important;
+    color: #000;
+}
+.fzr,.mb_cont{
+    width: 90%;
+    margin: 0 auto;
+    text-align: left;
+    margin-bottom: 15px;
+    position: relative;
+}
+.fzr .btn-default,.mb_cont .btn-default{
+    border: none;
+}
+.fzr .caret,.mb_cont .caret{
+    opacity: 0;
+}
+.mb_cont ul li{
+    text-align: left;
+    border: 1px solid #ddd;
+    position: relative;
+}
+.mb_cyr{
+        width: 100%!important;
+}
+.mb_cyr .btn-default{
+    padding-left: 30px;
+}
+
+#res_time,#key_time{
+    border: none;display: inline-block;width: 175px;
+}
+.mb_cont li i{
+    position: absolute;
+    top: 9px;
+    z-index: 99;
+}
+.mb_cont li input{
+        border: none;
+    display: inline-block;
+    padding-left: 30px;
+}
+.mb_cont li textarea{
+    border: none;display: inline-block;width: 100%;
+    height: 50px;padding-left: 30px;
+    padding-top: 10px;
+}
+.c_209{
+    color: #209ee4;
+}
+.pointer{
+    cursor: pointer;
+}
+.mb_cont .dels:hover{
+    color: #FD5E64;
+}
+.tj_zt{
+    color: #209ee4;
+    font-size: 12px!important;
+    cursor: pointer;
+}
+.pl_btn{
+    width: 10%;
+    height: 36px;
+    position: relative;
+    top: -2px;
+}
+.pl_ipt{
+    width: 90%;
+    display: inline;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.pl_cont .pl_list{
+    padding: 5px;
+    border:none;
+    margin-bottom: 5px;
+}
+.pl_list{
+    overflow: hidden;
+}
+.hidden{
+    overflow: hidden;
+}
+.tx_img{
+    width:36px;
+    height:36px;
+    background:#209ee4;
+    text-align: center;
+    line-height: 36px;
+    border-radius: 50%;
+    color: #fff;
+}
+.left_cont{
+    padding-left: 5px;
+}
+.pl_time{
+    font-size: 12px;
+    color: #999;
+    position: absolute;right: 0;
+}
+.pl_list .top,.pl_list .bottom{
+    padding-top: 5px;
+}
+.my_cont{
+    position: relative;
+}
+.my_job{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width:98px;
+    height:88px;
+    background:rgba(238,238,238,1);
+    border-radius:10px;
+}
+.my_job div{
+     margin-top: 25px;
+     line-height: 20px;
+}
+#cy_mb .my_cont{
+    margin: 0;
+    width: 100%;
+}
+
+.pl_btn_zt{
+    cursor: pointer;
+}
+#cy_mb .wks{
+    border:none;
+}
+.bnpf{
+    border:none;
+}
+
+.cir_tile{
+    display: inline-block;
+    width:48px;
+    height:48px;
+    background:rgba(245,124,1,1);
+    border-radius: 50%;
+    line-height: 48px;
+    text-align: center;
+    color: #fff;
+}
+.bj_cont{
+    position: absolute;right: 5px;top: 20px;
+}
+.model_mb_titles,.model_mb_zt{
+    margin-left: 20px;
+}
+.s_color{
+    color: #15BC44;
+    font-size: 15px;
+}
+.f_color{
+    color: #FD5E64;
+    font-size: 15px;
+}
+.bj_btn{
+    color: #333;
+    font-size: 15px;
+}
+.models_del:hover{
+    color: #FD5E64;
+}
+.models_bj:hover{
+    color: #209ee4;
+}
+.mb_cont .ul_no li{
+    border:none;
+    pointer-events: none;
+}
+.layui-layer-btn.bc{
+    background: #209ee4;
+    color: #fff;
+}
+.demoIcon{
+    margin-left:10px;
+}
+.jhxq,.mbxq,.jgxq,.tj_jh,.tj_jg{
+    font-size: 12px!important;
+    cursor: pointer;
+}
+.icon-jiahao{
+    cursor: pointer;
+}
+.jgxq.icon.iconfont.icon-chaxun{
+    color: #209ee4;
+}
+.trees .icon.iconfont{
+    font-size: 18px!important;
+}
+.trees .icon.iconfont.icon-chaxun{
+    margin-left: -5px;
 }

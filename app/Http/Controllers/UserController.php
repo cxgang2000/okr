@@ -82,34 +82,9 @@ class UserController extends Controller
 
     	$arr_status = [0,1];
 
-    	// 计算员工上级 1取所有部门 2取所有员工 2将员工放在部门下 4去掉没有员工的部门
-        $arr_litedpt = array();
-    	$arr_alldpt = Department::select(['id','name'])->whereIn("status",$arr_status)->orderBy('id',"asc")->get()->toArray();
-    	// var_dump($arr_alldpt);die();
-    	$arr_alluser = User::select(['id','name','department_id'])->whereIn("status",$arr_status)->orderBy('id',"desc")->get()->toArray();
-    	// var_dump($arr_alluser);
-    	// die();
-
-    	for ($i=0; $i < count($arr_alldpt); $i++) { 
-    		for ($j=0; $j < count($arr_alluser); $j++) { 
-    			if($arr_alluser[$j]['department_id']==$arr_alldpt[$i]['id']){
-    				$arr_alldpt[$i]['users'][]=$arr_alluser[$j];
-    			}
-    		}
-    	}
-    	// var_dump($arr_alldpt);die();
-    	// var_dump($arr_alldpt[0]['users']);die();
-
-    	for ($i=0; $i < count($arr_alldpt); $i++) { 
-			if(isset($arr_alldpt[$i]['users'])){
-				$arr_litedpt[]=$arr_alldpt[$i];
-			}
-    	}
-
-		// var_dump($arr_litedpt);die();
-		// var_dump($arr_alldpt[2]['users']);die();
-		// die();
-    	// 部门人员取出
+        // 带部门的员工列表
+        $tmpUser = new User;
+    	$arr_allUserDept = $tmpUser->getAllUserDept();
 
     	// 取列表数据
     	$perPage = 5;
@@ -141,7 +116,7 @@ class UserController extends Controller
         $arr_position = $this->arr_position;
 
         // 模板 传参
-        return view('user.index',compact('user','all_dpt','arr_position','arr_litedpt','phoneorname'));
+        return view('user.index',compact('user','all_dpt','arr_position','arr_allUserDept','phoneorname'));
     }
 
     public function destroy(User $user)
@@ -198,15 +173,6 @@ class UserController extends Controller
 			return json_encode($array);
         }
 
-        // 判断是否此部门已经有了leader，有了需要提示不能设置此人为leader
-        $tmpUser = new User;
-    	$hasLeader = $tmpUser->hasLeader($request->department_id,$user->id);
-    	if($hasLeader){
-    		$str_err = "此部门已经有位领导！";
-    		$array = array('msg'=>$str_err,'status'=>0);
-			return json_encode($array);
-    	}
-
         // $data['id'] = $request->id;
         $data['name'] = $request->name;
         $data['phone'] = $request->phone;
@@ -216,6 +182,18 @@ class UserController extends Controller
         $data['isleader'] = $request->isleader;
         $data['pid'] = $request->pid;
         $data['status'] = $request->status;
+
+        // 判断是否此部门已经有了leader，有了需要提示不能设置此人为leader
+        if($data['isleader']=="1"){
+            $tmpUser = new User;
+            $hasLeader = $tmpUser->hasLeader($request->department_id,0);
+            if($hasLeader){
+                $str_err = "此部门已经有位领导！";
+                $array = array('msg'=>$str_err,'status'=>0);
+                return json_encode($array);
+            }
+        }
+        
 
         $user->update($data);
 
@@ -274,6 +252,16 @@ class UserController extends Controller
         $data['status'] = $request->status;
         $data['pwd'] = md5($request->phone);
         
+        // 判断是否此部门已经有了leader，有了需要提示不能设置此人为leader
+        if($data['isleader']=="1"){
+            $tmpUser = new User;
+            $hasLeader = $tmpUser->hasLeader($request->department_id,0);
+            if($hasLeader){
+                $str_err = "此部门已经有位领导！";
+                $array = array('msg'=>$str_err,'status'=>0);
+                return json_encode($array);
+            }
+        }
         
         // var_dump($data);die();
 

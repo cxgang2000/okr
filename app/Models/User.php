@@ -66,4 +66,46 @@ class User extends Model
     	}
 
     }
+
+
+    // 取带部门的员工列表
+    public function getAllUserDept()
+    {
+        $arr_status = [0,1];
+
+        // 计算员工上级 1取所有部门 2取所有员工 2将员工放在部门下 4去掉没有员工的部门
+        $arr_litedpt = array();
+        $arr_alldpt = Department::select(['id','name'])->whereIn("status",$arr_status)->orderBy('id',"asc")->get()->toArray();
+        // var_dump($arr_alldpt);die();
+        $arr_alluser = User::select(['id','name','department_id'])->whereIn("status",$arr_status)->orderBy('id',"desc")->get()->toArray();
+        // var_dump($arr_alluser);
+        // die();
+
+        for ($i=0; $i < count($arr_alldpt); $i++) { 
+            for ($j=0; $j < count($arr_alluser); $j++) { 
+                if($arr_alluser[$j]['department_id']==$arr_alldpt[$i]['id']){
+                    $arr_alldpt[$i]['users'][]=$arr_alluser[$j];
+                }
+            }
+        }
+        // var_dump($arr_alldpt);die();
+        // var_dump($arr_alldpt[0]['users']);die();
+
+        for ($i=0; $i < count($arr_alldpt); $i++) { 
+            if(isset($arr_alldpt[$i]['users'])){
+                $arr_litedpt[]=$arr_alldpt[$i];
+            }
+        }
+
+        // var_dump($arr_litedpt);die();
+        // var_dump($arr_alldpt[2]['users']);die();
+        // die();
+        // 部门人员取出
+
+        return $arr_litedpt;
+
+    }
+        
+    
+
 }

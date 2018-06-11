@@ -11,7 +11,7 @@
 <body id="iy_manage">
      <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-      <div class="layui-logo" style="padding-top: 17px;"><h2 style="color: #fff;">方田OKR管理系统</h2><a href="{{ route('admin.logout') }}">退出</a></div>
+      <div class="layui-logo" style="padding-top: 17px;"><h2 style="color: #fff;">方田OKR管理系统</h2><!--a href="{{ route('admin.logout') }}">退出</a--></div>
       
       </div>
     </div>
@@ -223,7 +223,7 @@
           <select id="pid" name="pid" class="selectpicker bm_ld" data-hide-disabled="true" data-live-search="true">
 			<option value="0">无</option>
             
-          	@foreach ($arr_litedpt as $one)
+          	@foreach ($arr_allUserDept as $one)
             	<optgroup label="{{ $one['name'] }}">
                 @foreach ($one['users'] as $dptuser)
                 	<option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
@@ -462,6 +462,20 @@ $(function(){
   	  //$(".layui-layer-btn0").on("click",submit_user);
 	  //$(".layui-layer-btn0").click(submit_user);
   	  
+	  $("#name").val("");
+	  $("#phone").val("");
+	  $("#email").val("");
+	  //alert($("#pid").val());
+	  $("#pid").val(0);
+	  $('#pid').selectpicker('refresh');
+	  //alert($("#pid").val());
+	  $("#position_id").val(0);
+	  $('#position_id').selectpicker('refresh');
+	  $("#department_id").val(0);
+	  
+	  $(":radio[name='status'][value='0']").prop("checked", "checked");
+	  $("#isleader").prop("checked", "");
+	  
   	  $("#newdiv").fadeIn();
     });
 	

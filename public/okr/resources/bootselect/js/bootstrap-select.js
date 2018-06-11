@@ -263,8 +263,8 @@
 
   // part of this is duplicated in i18n/defaults-en_US.js. Make sure to update both.
   Selectpicker.DEFAULTS = {
-    noneSelectedText: 'Nothing selected',
-    noneResultsText: 'No results matched {0}',
+    noneSelectedText: '选择参与者',
+    noneResultsText: '没有搜索到 {0}',
     countSelectedText: function (numSelected, numTotal) {
       return (numSelected == 1) ? "{0} item selected" : "{0} items selected";
     },
@@ -274,8 +274,8 @@
         (numGroup == 1) ? 'Group limit reached ({n} item max)' : 'Group limit reached ({n} items max)'
       ];
     },
-    selectAllText: 'Select All',
-    deselectAllText: 'Deselect All',
+    selectAllText: '选择全部',
+    deselectAllText: '删除全选',
     doneButton: false,
     doneButtonText: 'Close',
     multipleSeparator: ', ',

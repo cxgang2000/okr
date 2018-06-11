@@ -87,7 +87,7 @@
           
           <tr>
               <td>
-                1
+                {{ $k+1 }}
               </td>
               <td>
                 {{ $one['name'] }}
@@ -326,6 +326,9 @@ $(function(){
   	  submit_url = "{{ route('department.store') }}";
   	  //$(".layui-layer-btn0").on("click",submit_dpt);
   	  
+	  $("#name").val("");
+	  $("#pid").val(0);
+	  
   	  $("#newdiv").fadeIn();
     });
 	
