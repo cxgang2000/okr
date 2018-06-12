@@ -127,7 +127,7 @@ $(document).ready(function(){
           ,range: true
         });
         laydate.render({
-          elem: '#add_jg_time'
+          elem: '#add_jh_time'
           ,range: true
         });
   });

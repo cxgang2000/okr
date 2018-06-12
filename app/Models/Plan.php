@@ -17,4 +17,8 @@ class Plan extends Model
     //     return $this->hasMany('App\Keyresult');
     // }
 
+    // 取参与者
+    public function partake(){
+        return $this->hasMany('App\Models\Partake',"okr_id","id")->select(['user_id','okr_id']);
+    }
 }

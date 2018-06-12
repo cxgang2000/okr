@@ -669,14 +669,12 @@
                         <li>
                           <i class="icon iconfont icon-addusergroup1"></i>
                           <select id="kr_partake_id_u" name="kr_partake_id_u" class="selectpicker mb_cyr" multiple data-live-search="true" data-live-search-placeholder="Search" data-actions-box="true">
-                            
                                 @foreach ($arr_allUserDept as $one)
                                     <optgroup label="{{ $one['name'] }}">
                                     @foreach ($one['users'] as $dptuser)
                                         <option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
                                     @endforeach
                                 @endforeach
-
                           </select>
                         </li>
                         <li>
@@ -812,7 +810,7 @@
                       <ul>
                         <li>
                           <i class="icon iconfont icon-copy1"></i>
-                          <input type="text" class="layui-input" placeholder="输入关键结果名称">
+                          <input id="p_name" name="p_name" type="text" class="layui-input" placeholder="输入计划名称">
                         </li>
                         <li>
                           <i class="icon iconfont icon-calendar1"></i>
@@ -820,59 +818,27 @@
                         </li>
                         <li>
                           <i class="icon iconfont icon-adduser1"></i>
-                          <select class="selectpicker mb_cyr" data-hide-disabled="true" data-live-search="true">
-                                <option>添加负责人</option>
-                                <option>Apple</option>
-                                <option>Orange</option>
-                                <option>Corn</option>
-                                <option>Carrot</option>
-                          </select>
+                          {{ $executor }}
                         </li>
                         <li>
                           <i class="icon iconfont icon-addusergroup1"></i>
-                          <select class="selectpicker mb_cyr" multiple data-live-search="true" data-live-search-placeholder="Search" data-actions-box="true">
-                            <optgroup label="filter1">
-                              <option>option1</option>
-                              <option>option2</option>
-                              <option>option3</option>
-                              <option>option4</option>
-                            </optgroup>
-                            <optgroup label="filter2">
-                              <option>option1</option>
-                              <option>option2</option>
-                              <option>option3</option>
-                              <option>option4</option>
-                            </optgroup>
-                            <optgroup label="filter3">
-                              <option>option1</option>
-                              <option>option2</option>
-                              <option>option3</option>
-                              <option>option4</option>
-                            </optgroup>
+                          <select id="p_partake_id" name="p_partake_id" class="selectpicker mb_cyr" multiple data-live-search="true" data-live-search-placeholder="Search" data-actions-box="true">
+                                @foreach ($arr_allUserDept as $one)
+                                    <optgroup label="{{ $one['name'] }}">
+                                    @foreach ($one['users'] as $dptuser)
+                                        <option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
+                                    @endforeach
+                                @endforeach
                           </select>
                         </li>
                         <li>
                           <i class="icon iconfont icon-edit"></i>
-                          <textarea placeholder="添加描述"></textarea>
+                          <textarea id="p_description" name="p_description" placeholder="添加描述"></textarea>
                         </li>
                       </ul>
                     </div>
-                    <div class="text-right mb_cont">
-                      <button class="layui-btn layui-btn-normal add_bm">添加</button>
-                    </div>
-
-                    <div class="mb_cont">
-                      <table class="layui-table jy_table_layer">
-                        <tr>
-                          <td class="c_209">短信购买费用咨询</td>
-                          <td>2018/12/20 12:00~2018/12/29 18:00</td>
-                          <td>刘贝丨 <span class="pointer" title="钱多,很多人">钱多多…</span></td>
-                          <td class="dels pointer">删除</td>
-                        </tr>
-                      </table>
-                    </div>
                     <div class="layui-layer-btn layui-layer-btn-">
-                      <a class="layui-layer-btn0">保存</a>
+                      <a class="layui-layer-btn0" onclick="new_plan();">保存</a>
                       <a class="layui-layer-btn1">取消</a>
                     </div>
                   </div>
@@ -902,12 +868,12 @@
                       <span class="ob_titles cir_tile">
                         计划
                       </span>
-                      <span class="ob_titles model_mb_titles">
+                      <span class="ob_titles model_mb_titles" id="p_name_u">
                         每天报名人数不低于40人
                       </span>
-                      <span class='ywc model_mb_zt'>已完成</span>
+                      <span class='ywc model_mb_zt' id="p_dateStatus_u">已完成</span>
                       <!-- 评分的颜色两种 一种是正常s_color  一种逾期f_color  -->
-                      <span class="s_color">&nbsp;&nbsp;&nbsp;&nbsp;0.6</span>
+                      &nbsp;&nbsp;&nbsp;&nbsp;<span class="s_color" id="p_score_u">0.6</span>
                       <!-- <span class="f_color">&nbsp;&nbsp;&nbsp;&nbsp;0.6</span> -->
 
                       <!-- 删除编辑 有权改就显示按钮 没有权限就不显示 -->
@@ -918,16 +884,10 @@
                     </div>
                     <div class="mb_cont">
                       <!-- 给ul添加class ul_bj 显示边框 -->
-                      <ul class="ul_no">
+                      <ul class="ul_no" id="p_edit_ul">
                         <li>
                           <i class="icon iconfont icon-adduser1"></i>
-                          <select class="selectpicker mb_cyr" data-hide-disabled="true" data-live-search="true">
-                                <option>添加负责人</option>
-                                <option>Apple</option>
-                                <option>Orange</option>
-                                <option>Corn</option>
-                                <option>Carrot</option>
-                          </select>
+                          <span id="p_executor_id_u">{{ $executor }}</span>
                         </li>
 
                         <li>
@@ -937,35 +897,23 @@
 
                         <li>
                           <i class="icon iconfont icon-addusergroup1"></i>
-                          <select class="selectpicker mb_cyr" multiple data-live-search="true" data-live-search-placeholder="Search" data-actions-box="true">
-                            <optgroup label="filter1">
-                              <option>option1</option>
-                              <option>option2</option>
-                              <option>option3</option>
-                              <option>option4</option>
-                            </optgroup>
-                            <optgroup label="filter2">
-                              <option>option1</option>
-                              <option>option2</option>
-                              <option>option3</option>
-                              <option>option4</option>
-                            </optgroup>
-                            <optgroup label="filter3">
-                              <option>option1</option>
-                              <option>option2</option>
-                              <option>option3</option>
-                              <option>option4</option>
-                            </optgroup>
+                          <select id="p_partake_id_u" name="p_partake_id_u" class="selectpicker mb_cyr" multiple data-live-search="true" data-live-search-placeholder="Search" data-actions-box="true">
+                                @foreach ($arr_allUserDept as $one)
+                                    <optgroup label="{{ $one['name'] }}">
+                                    @foreach ($one['users'] as $dptuser)
+                                        <option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
+                                    @endforeach
+                                @endforeach
                           </select>
                         </li>
                         <li>
                           <i class="icon iconfont icon-edit"></i>
-                          <textarea placeholder="添加描述"  style="resize:none"></textarea>
+                          <textarea id="p_description_u" name="p_description_u" placeholder="添加描述"  style="resize:none"></textarea>
                         </li>
                       </ul>
                     </div>
                     <div class="layui-layer-btn layui-layer-btn-" style="display: none;">
-                      <a class="layui-layer-btn bc">保存</a>
+                      <a class="layui-layer-btn bc" onclick="edit_plan();">保存</a>
                       <a class="layui-layer-btn models_qx">取消</a>
                     </div>
                   </div>
@@ -1147,7 +1095,7 @@
 			  break;
 			case "plan":
 			  nextlevelStatusStr="";
-			  detailStatusStr = "<span class='demoIcon'><span class='jhxq icon iconfont icon-chaxun' title='详情' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='p_detail(this);'></span></span>";
+			  detailStatusStr = "<span class='demoIcon'><span class='jhxq icon iconfont icon-chaxun' title='详情' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_plan(this);'></span></span>";
 			  break;
 		}
 		
@@ -1270,7 +1218,7 @@ function new_objective(){
 	});
 }
 
-// 详情
+// 目标详情
 function detail_objective(btn){
 	flag = $(btn).attr("flag");
 	itemid = $(btn).attr("itemid");
@@ -1403,7 +1351,7 @@ function pop_new_kr(oid){
   $(".add_jg_models").show();
 }
 
-//关键结果新增
+// 关键结果新增
 function new_keyresult(){
   // alert("submit_user");
   var kr_name = $("#kr_name").val();
@@ -1444,7 +1392,7 @@ function new_keyresult(){
   });
 }
 
-// 详情
+// 关键结果详情
 function detail_keyresult(btn){
   flag = $(btn).attr("flag");
   itemid = $(btn).attr("itemid");
@@ -1523,7 +1471,7 @@ function detail_keyresult(btn){
   });
 }
 
-//目标编辑
+// 关键结果编辑
 function edit_keyresult(){
   // alert("submit_user");
   var kr_date = $("#dy_key_time").val();
@@ -1561,6 +1509,169 @@ function edit_keyresult(){
   });
 }
 
+//新增计划弹层
+function pop_new_p(krid){
+  pid=krid;
+  $(".add_jh_models").show();
+}
+
+//计划新增
+function new_plan(){
+  // alert("submit_user");
+  var p_name = $("#p_name").val();
+  var p_date = $("#add_jh_time").val();
+  var p_partake_id = $("#p_partake_id").val();
+  var p_description = $("#p_description").val();
+
+  if (!p_name) {
+    layer.msg("名字不能为空",{time:1000});
+    return false;
+  }
+  if (!p_date) {
+    layer.msg("时间不能为空",{time:1000});
+    return false;
+  }
+  if (!p_partake_id) {
+    layer.msg("参与者不能为空",{time:1000});
+    return false;
+  }
+  
+  ajax_type = 'POST';
+  // submit_url = "{{ route('objective.store') }}";
+  submit_url = "{{ route('plan.store') }}";
+
+  $.ajax({
+    type: ajax_type,
+    url: submit_url,
+    data: { p_name : p_name, p_date : p_date, p_partake_id : p_partake_id, p_description : p_description, pid:pid},
+    dataType: 'json',
+    headers: {
+      'X-CSRF-TOKEN': '{{csrf_token()}}'
+    },
+    success: function(data){
+      console.log(data);
+      layer.msg(data.msg);
+      if(data.status=="1"){window.location.reload();}
+    },
+  });
+}
+
+// 计划详情
+function detail_plan(btn){
+  flag = $(btn).attr("flag");
+  itemid = $(btn).attr("itemid");
+
+  geturl =  "{{ route('plan.detail') }}";
+
+  console.log(geturl);
+  
+  $.ajax({
+    type: 'GET',
+    url: geturl,
+    data: { id : itemid},
+    dataType: 'json',
+    headers: {
+      'X-CSRF-TOKEN': '{{csrf_token()}}'
+    },
+
+    success: function(data){
+      console.log(data);
+      
+      //名称
+      $("#p_name_u").html(data.name);
+      //时间
+      $("#dy_jh_time").val(data.startdate+" - "+data.enddate);
+      //描述
+      $("#p_description_u").val(data.description);
+      //负责人
+      // $("#kr_executor_id_u").html(data.executor['name']);
+      //参与者
+      //$("#o_partake_id_u").val([3,6]);
+      $("#p_partake_id_u").val(data.newpartake);
+      $('#p_partake_id_u').selectpicker('refresh');
+      //状态
+      switch(data.dateStatus)
+      {
+        case 1:
+          //dateStatusStr="<span class='demoIcon'><span class='wks'>未开始</span></span>";
+          $("#p_dateStatus_u").html("未开始");
+          $("#p_dateStatus_u").attr("class","wks model_mb_zt");
+          break;
+        case 2:
+          //dateStatusStr="<span class='demoIcon'><span class='jxz'>进行中</span></span>";
+          $("#p_dateStatus_u").html("进行中");
+          $("#p_dateStatus_u").attr("class","jxz model_mb_zt");
+          break;
+        case 3:
+          //dateStatusStr="<span class='demoIcon'><span class='ywc'>已完成</span></span>";
+          $("#p_dateStatus_u").html("已完成");
+          $("#p_dateStatus_u").attr("class","ywc model_mb_zt");
+          break;
+        case 4:
+          //dateStatusStr="<span class='demoIcon'><span class='yyq'>已逾期</span></span>";
+          $("#p_dateStatus_u").html("已逾期");
+          $("#p_dateStatus_u").attr("class","yyq model_mb_zt");
+          break;
+        default:
+      }
+      //分数
+      
+      if(data.score!=999){
+        $("#p_score_u").html(data.score);
+      }else{
+        $("#p_score_u").html(""); 
+      }
+      
+      ajax_type = 'PATCH';
+      //submit_url = updateurl;
+      
+      // 目标编辑层初始化
+      $("#p_edit_btn").hide();
+      $("#p_edit_ul").addClass("ul_no");
+      
+      $(".jh_mb_models").show();
+        
+    },
+  });
+}
+
+//计划编辑
+function edit_plan(){
+  // alert("submit_user");
+  var p_date = $("#dy_jh_time").val();
+  var p_partake_id = $("#p_partake_id_u").val();
+  var p_description = $("#p_description_u").val();
+  
+  console.log(p_date);
+  console.log(p_partake_id);
+
+  if (!p_date) {
+    layer.msg("时间不能为空",{time:1000});
+    return false;
+  }
+  if (!p_partake_id) {
+    layer.msg("参与者不能为空",{time:1000});
+    return false;
+  }
+  
+  ajax_type = 'POST';
+  submit_url = "{{ route('plan.update') }}";
+
+  $.ajax({
+    type: ajax_type,
+    url: submit_url,
+    data: { p_id : itemid, p_date : p_date, p_partake_id : p_partake_id, p_description : p_description},
+    dataType: 'json',
+    headers: {
+      'X-CSRF-TOKEN': '{{csrf_token()}}'
+    },
+    success: function(data){
+      console.log(data);
+      layer.msg(data.msg);
+      if(data.status=="1"){window.location.reload();}
+    },
+  });
+}
 
 </script>
 <script type="text/javascript" src="/okr/js/main.js"></script></body>

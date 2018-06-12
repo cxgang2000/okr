@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// 后台
+
 // Route::get('/admin/login', 'AdminController@login')->name('admin.login');
 Route::get('/admin/login', 'AdminController@create')->name('admin.login');
 Route::post('/admin/login', 'AdminController@store')->name('admin.login');
@@ -42,6 +44,7 @@ Route::patch('/user/{user}/resetpwd', 'UserController@resetpwd')->name('user.res
 Route::get('/user/test', 'UserController@test')->name('user.test');
 
 
+// 前台
 
 Route::get('/index/login', 'IndexController@create')->name('index.login');
 Route::post('/index/login', 'IndexController@store')->name('index.login');
