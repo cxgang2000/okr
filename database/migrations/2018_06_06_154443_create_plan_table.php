@@ -24,7 +24,7 @@ class CreatePlanTable extends Migration
             $table->integer('executor_id')->comment('执行人')->default(0);
             $table->text('description')->nullable()->comment('描述');
             $table->float('score', 8, 1)->comment('得分')->default(999);
-            $table->dateTime('scoretime')->comment('评分时间');
+            $table->dateTime('scoretime')->comment('评分时间')->nullable($value = true);
             $table->tinyInteger('status')->comment('状态，正常 0、删除 1 ')->default(0);
 
             $table->integer('pid')->comment('上级id')->default(0);
