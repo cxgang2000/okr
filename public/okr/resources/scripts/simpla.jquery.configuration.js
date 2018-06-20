@@ -55,17 +55,17 @@ $(document).ready(function(){
       
 	/*
     /*弹出目标框*/
-	
+	/*
     $("#treeDemo,#myTreeDemo").on("click",".mbxq",function(){
       $(".dy_mb_models").show();
     })
-	
+	*/
     /*弹出计划框*/
-	
+	/*
     $("#treeDemo,#myTreeDemo").on("click",".jhxq",function(){
       $(".jh_mb_models").show();
     })
-	
+	*/
     /*弹出结果框*/
 	/*
     $("#treeDemo,#myTreeDemo").on("click",".jgxq",function(){
@@ -73,11 +73,11 @@ $(document).ready(function(){
     })
 	*/
     /*添加新记过*/
-	
+	/*
      $("#treeDemo,#myTreeDemo").on("click",".tj_jh",function(){
       $(".add_jh_models").show();
     })
-	
+	*/
      /*添加新结果*/
 	 /*
      $("#treeDemo,#myTreeDemo").on("click",".tj_jg",function(){
@@ -92,45 +92,49 @@ $(document).ready(function(){
      })*/
 
  /*end times*/
+ 
+ 	/*
   layui.use('laydate', function(){
         var laydate = layui.laydate;
-        laydate.render({
-          elem: '#test6'
-          ,range: true
-        });
-        laydate.render({
-          elem: '#res_time'
-          ,range: true
-        });
-        laydate.render({
-          elem: '#key_time'
-          ,range: true
-        });
-        laydate.render({
-          elem: '#my_mb_times'
-          ,range: true
-        });
-        laydate.render({
-          elem: '#dy_res_time'
-          ,range: true
-        });
-        laydate.render({
-          elem: '#dy_jh_time'
-          ,range: true
-        });
-        laydate.render({
-          elem: '#dy_key_time'
-          ,range: true
-        });
-        laydate.render({
-          elem: '#add_key_time'
-          ,range: true
-        });
-        laydate.render({
-          elem: '#add_jh_time'
-          ,range: true
-        });
+        //laydate.render({
+        //  elem: '#test6'
+        //  ,range: true
+        //});
+        //laydate.render({
+        //  elem: '#res_time'
+        //  ,range: true
+        //});
+        //laydate.render({
+        //  elem: '#key_time'
+        //  ,range: true
+        //});//页面没有这个
+        //laydate.render({
+        //  elem: '#my_mb_times'
+        //  ,range: true
+        //});
+        //laydate.render({
+        //  elem: '#dy_res_time'
+        //  ,range: true
+        //});//页面没有这个
+        //laydate.render({
+        //  elem: '#dy_jh_time'
+        //  ,range: true
+        //});
+        //laydate.render({
+        //  elem: '#dy_key_time'
+        //  ,range: true
+        //});
+        //laydate.render({
+        //  elem: '#add_key_time'
+        //  ,range: true
+        //});
+        //laydate.render({
+        //  elem: '#add_jh_time'
+        //  ,range: true
+        //});
+		
   });
+  */
 }); 
 
 

@@ -59,59 +59,46 @@ class ObjectiveController extends Controller
 
         // 目标列表
         $perPage = 3;
-
-        // 我负责的
-        if($p1==1){
-            $templateName = "index.iamexecutor";
-
-            $arr_where['executor_id'] = $executor_id;
-            $arr_where['status'] = 0;
-            
-            // 取目标
-            $objective = Objective::where($arr_where)
-                ->where(function ($query) use ($arr_period) {
-                    $query->where(function ($query) use ($arr_period) {
-                                $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
-                            })
-                            ->orWhere(function ($query) use ($arr_period) {
-                                $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
-                                })
-                            ->orWhere(function ($query) use ($arr_period) {
-                                $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
-                            });
-                    })
-                ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
-        }
-
-        // 我参与的
-        if($p1==2){
-            $templateName = "index.iampartake";
-
-            // 我参与的目标id集合
-            $arr_where_partake = [['user_id', '=', $executor_id],['okr_id', '<', '10000000'],];
-            $arr_partake = Partake::where($arr_where_partake)->get(['okr_id'])->toArray();
-            // dd($arr_partake);
-            $arr_where['status'] = 0;
-
-            // 取目标
-             $objective = Objective::where($arr_where)
-                ->whereIn("id",$arr_partake)
-                ->where(function ($query) use ($arr_period) {
-                    $query->where(function ($query) use ($arr_period) {
-                                $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
-                            })
-                            ->orWhere(function ($query) use ($arr_period) {
-                                $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
-                                })
-                            ->orWhere(function ($query) use ($arr_period) {
-                                $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
-                            });
-                    })
-                ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
-        }
-
-
+        $arr_where['executor_id'] = $executor_id;
+        $arr_where['status'] = 0;
         
+        // 取目标
+        $objective = Objective::where($arr_where)
+            ->where(function ($query) use ($arr_period) {
+                $query->where(function ($query) use ($arr_period) {
+                            $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
+                        })
+                        ->orWhere(function ($query) use ($arr_period) {
+                            $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
+                            })
+                        ->orWhere(function ($query) use ($arr_period) {
+                            $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
+                        });
+                })
+
+            // ->where(function ($query) use ($arr_period) {
+            //     $query->whereBetween('startdate', $arr_period)
+            //             ->orWhereBetween('enddate', $arr_period)
+            //             ->orWhere(function ($query) use ($arr_period) {
+            //                 $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
+            //             });
+            //     })
+
+            // ->where(function ($query) use ($arr_period) {
+            //         $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
+            //     })
+            // ->orWhere(function ($query) use ($arr_period) {
+            //         $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
+            //     })
+            // ->orWhere(function ($query) use ($arr_period) {
+            //         $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
+            //     })
+
+            // ->whereRaw(('startdate>=? and startdate<=?') or (('enddate>=? and enddate<=?')), $arr_period)
+
+            // ->whereRaw("(`startdate` <= '2018-06-17' and `startdate` >= '2018-06-11') or (`enddate` <= '2018-06-17' and `enddate` >= '2018-06-11') or (`startdate` <= '2018-06-11' and `enddate` >= '2018-06-17')")
+
+            ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
         // 取下面的关键结果
         $objective->load("keyresults");
         // dd($objective->toArray());
@@ -139,69 +126,38 @@ class ObjectiveController extends Controller
             // $arr_objective[$i]['cj']=1;
             $arr_objective[$i]['flag']="objective";
             // $arr_objective[$i]['open']=false;
-            $arr_objective[$i]['canDel']=0;
-            $arr_objective[$i]['canScore']=0;
-            $arr_objective[$i]['kr_count']="0/0";
+            $arr_objective[$i]['candel']=0;
 
             // 状态标记
             $arr_objective[$i]['dateStatus'] = Objective::getDateStatus($arr_objective[$i]['startdate'],$arr_objective[$i]['enddate'],$arr_objective[$i]['score'],$arr_objective[$i]['scoretime']);
 
             // // 未开始的能删
-            // if($arr_objective[$i]['dateStatus']==1){$arr_objective[$i]['canDel']=1;}
+            // if($arr_objective[$i]['dateStatus']==1){$arr_objective[$i]['candel']=1;}
             // // 没下级的能删
-            // if(count($arr_objective[$i]['keyresults'])==0){$arr_objective[$i]['canDel']=1;}
-            $kr_count = 0;
-            $kr_done_count = 0;
+            // if(count($arr_objective[$i]['keyresults'])==0){$arr_objective[$i]['candel']=1;}
+
             for ($j=0; $j < count($arr_objective[$i]['keyresults']); $j++) {
-                $kr_count++;
                 // $arr_objective[$i]['keyresults'][$j]['cj']=2;
                 $arr_objective[$i]['keyresults'][$j]['flag']="keyresult";
                 // $arr_objective[$i]['keyresults'][$j]['open']=false;
-                $arr_objective[$i]['keyresults'][$j]['plan_count']="0/0";
-                
 
                 // 状态标记
                 $arr_objective[$i]['keyresults'][$j]['dateStatus'] = Objective::getDateStatus($arr_objective[$i]['keyresults'][$j]['startdate'],$arr_objective[$i]['keyresults'][$j]['enddate'],$arr_objective[$i]['keyresults'][$j]['score'],$arr_objective[$i]['keyresults'][$j]['scoretime']);
-
-                if($arr_objective[$i]['keyresults'][$j]['dateStatus']==3 or $arr_objective[$i]['keyresults'][$j]['dateStatus']==4){
-                    $kr_done_count++;
-                }
-                $arr_objective[$i]['kr_count']=$kr_done_count."/".$kr_count;
                
                 // $arr_objective[$i]['keyresults'][$j]['dateStatus'] = 4;
-                $plan_count = 0;
-                $plan_done_count = 0;
-                for ($k=0; $k < count($arr_plan); $k++) {
+
+                for ($k=0; $k < count($arr_plan); $k++) { 
                     if($arr_plan[$k]['pid']==$arr_objective[$i]['keyresults'][$j]['id']){
-                        // echo "add before:".$plan_count;
-                        $plan_count++;
-                        // echo "add after:".$plan_count;
-                        // echo "<br>";
                         // $arr_plan[$k]['cj']=3;
                         $arr_plan[$k]['flag']="plan";
 
                         // 状态标记
                         $arr_plan[$k]['dateStatus'] = Objective::getDateStatus($arr_plan[$k]['startdate'],$arr_plan[$k]['enddate'],$arr_plan[$k]['score'],$arr_plan[$k]['scoretime']);
-                        // echo $arr_plan[$k]['dateStatus'];
-                        if($arr_plan[$k]['dateStatus']==3 or $arr_plan[$k]['dateStatus']==4){
-                            $plan_done_count++;
-                        }
-                        $arr_objective[$i]['keyresults'][$j]['plan_count']=$plan_done_count."/".$plan_count;
-                        
+
                         $arr_objective[$i]['keyresults'][$j]['plans'][]=$arr_plan[$k];
                     }
                 }
-
-                $arr_objective[$i]['keyresults'][$j]['name'] = $arr_objective[$i]['keyresults'][$j]['name'] . "(".$arr_objective[$i]['keyresults'][$j]['plan_count'].")";
             }
-
-            // （进行中的或已逾期未评分的）且（下级完成数==总数的）可以评分
-            if(($arr_objective[$i]['dateStatus']==2 || ($arr_objective[$i]['dateStatus']==4 && $arr_objective[$i]['score']==999)) && ($kr_count==$kr_done_count)){
-                $arr_objective[$i]['canScore']=1;
-            }
-
-            // 改写标题，加入下级完成状态计数
-            $arr_objective[$i]['name'] = $arr_objective[$i]['name'] . "(".$arr_objective[$i]['kr_count'].")";
         }
         // dd($arr_objective);
 
@@ -224,73 +180,15 @@ class ObjectiveController extends Controller
         $tmpUser = new User;
         $arr_allUserDept = $tmpUser->getAllUserDept();
 
-        
+        if($p1==1){$templateName = "index.iamexecutor";}
+        if($p1==2){$templateName = "index.iampartake";}
+
         return view($templateName,compact('arr_allUserDept','json_objective','objective','executor', 'executor_id', 'perioditem', 'period', 'arr_period','p1'));
     }
 
-    // public function iampartake(Request $request)
-    // {
-
-
-    //     $arr_period = array();
-    //     $perioditem = $request->perioditem;
-    //     if($perioditem=="")$perioditem="week";
-    //     $period = $request->period;
-    //     if($period=="")$period=1;
-        
-    //     if($perioditem!="others"){
-    //         $arr_period = $this->getDate($period);
-    //         $arr_period[0] = substr($arr_period[0], 0,10);
-    //         $arr_period[1] = substr($arr_period[1], 0,10);
-    //     }else{
-    //         $arr_period = explode(" - ",$period);
-    //     }
-    //     // dd($arr_period);
-
-    //     // die();
-
-
-    //     $executor_id = session('idUser');
-        
-    //     // 带部门的员工列表
-    //     $tmpUser = new User;
-    //     $arr_allUserDept = $tmpUser->getAllUserDept();
-
-    //     // 目标列表
-    //     $perPage = 10;
-    //     $executor = User::find($executor_id)->toArray()['name'];
-    //     // dd($executor);
-
-
-    //     $arr_where_partake = [['user_id', '=', $executor_id],['okr_id', '<', '10000000'],];
-    //     $arr_partake = Partake::where($arr_where_partake)->get(['okr_id'])->toArray();
-    //     // dd($arr_partake);
-
-
-
-    //     $arr_where['status'] = 0;
-        
-    //     // 取目标
-    //     $objective = Objective::where($arr_where)
-    //         ->whereIn("id",$arr_partake)
-    //         ->where(function ($query) use ($arr_period) {
-    //                 $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
-    //             })
-    //         ->orWhere(function ($query) use ($arr_period) {
-    //                 $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
-    //             })
-    //         ->orWhere(function ($query) use ($arr_period) {
-    //                 $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
-    //             })
-    //         ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
-        
-
-
-    //     dd($objective->toArray());
-    // }
-
-    public function heisexecutor(Request $request,$p1)
+    public function iampartake(Request $request)
     {
+
 
         $arr_period = array();
         $perioditem = $request->perioditem;
@@ -309,183 +207,52 @@ class ObjectiveController extends Controller
 
         // die();
 
-        // 取负责人名字
+
         $executor_id = session('idUser');
-        $executor = User::find($executor_id)->toArray()['name'];
-        // dd($executor);
-
-        // 目标列表
-        $perPage = 3;
-
-        // 我负责的
-        if($p1==1){
-            $templateName = "index.heisexecutor";
-
-            $arr_where['executor_id'] = $executor_id;
-            $arr_where['status'] = 0;
-            
-            // 取目标
-            $objective = Objective::where($arr_where)
-                ->where(function ($query) use ($arr_period) {
-                    $query->where(function ($query) use ($arr_period) {
-                                $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
-                            })
-                            ->orWhere(function ($query) use ($arr_period) {
-                                $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
-                                })
-                            ->orWhere(function ($query) use ($arr_period) {
-                                $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
-                            });
-                    })
-                ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
-        }
-
-        // 我参与的
-        if($p1==2){
-            $templateName = "index.iampartake";
-
-            // 我参与的目标id集合
-            $arr_where_partake = [['user_id', '=', $executor_id],['okr_id', '<', '10000000'],];
-            $arr_partake = Partake::where($arr_where_partake)->get(['okr_id'])->toArray();
-            // dd($arr_partake);
-            $arr_where['status'] = 0;
-
-            // 取目标
-             $objective = Objective::where($arr_where)
-                ->whereIn("id",$arr_partake)
-                ->where(function ($query) use ($arr_period) {
-                    $query->where(function ($query) use ($arr_period) {
-                                $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
-                            })
-                            ->orWhere(function ($query) use ($arr_period) {
-                                $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
-                                })
-                            ->orWhere(function ($query) use ($arr_period) {
-                                $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
-                            });
-                    })
-                ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
-        }
-
-
         
-        // 取下面的关键结果
-        $objective->load("keyresults");
-        // dd($objective->toArray());
-        // $objective = Objective::where($arr_where)->keyresults()->get();
-        // dd($objective->toArray());
-
-        // var_dump($objective->toArray()['data']);
-        // 拼所有的关键结果id
-        $arr_krids = array();
-        $arr_objective = $objective->toArray()['data'];
-        for ($i=0; $i < count($arr_objective); $i++) { 
-            for ($j=0; $j < count($arr_objective[$i]['keyresults']); $j++) { 
-                $arr_krids[] = $arr_objective[$i]['keyresults'][$j]['id'];
-            }
-        }
-        // var_dump($arr_krids);
-        // 取这些关键结果下的计划，有效的status=0
-        $arr_where_plan[] = ['status',0];
-        $arr_plan = Plan::where($arr_where_plan)->whereIn("pid",$arr_krids)->orderBy('id',"desc")->get(['id', 'name', 'startdate', 'enddate', 'score', 'scoretime', 'pid'])->toArray();
-        // dd($arr_plan);die();
-
-        // 拼一起
-        $today = date("Y-m-d");
-        for ($i=0; $i < count($arr_objective); $i++) {
-            // $arr_objective[$i]['cj']=1;
-            $arr_objective[$i]['flag']="objective";
-            // $arr_objective[$i]['open']=false;
-            $arr_objective[$i]['canDel']=0;
-            $arr_objective[$i]['canScore']=0;
-            $arr_objective[$i]['kr_count']="0/0";
-
-            // 状态标记
-            $arr_objective[$i]['dateStatus'] = Objective::getDateStatus($arr_objective[$i]['startdate'],$arr_objective[$i]['enddate'],$arr_objective[$i]['score'],$arr_objective[$i]['scoretime']);
-
-            // // 未开始的能删
-            // if($arr_objective[$i]['dateStatus']==1){$arr_objective[$i]['canDel']=1;}
-            // // 没下级的能删
-            // if(count($arr_objective[$i]['keyresults'])==0){$arr_objective[$i]['canDel']=1;}
-            $kr_count = 0;
-            $kr_done_count = 0;
-            for ($j=0; $j < count($arr_objective[$i]['keyresults']); $j++) {
-                $kr_count++;
-                // $arr_objective[$i]['keyresults'][$j]['cj']=2;
-                $arr_objective[$i]['keyresults'][$j]['flag']="keyresult";
-                // $arr_objective[$i]['keyresults'][$j]['open']=false;
-                $arr_objective[$i]['keyresults'][$j]['plan_count']="0/0";
-                
-
-                // 状态标记
-                $arr_objective[$i]['keyresults'][$j]['dateStatus'] = Objective::getDateStatus($arr_objective[$i]['keyresults'][$j]['startdate'],$arr_objective[$i]['keyresults'][$j]['enddate'],$arr_objective[$i]['keyresults'][$j]['score'],$arr_objective[$i]['keyresults'][$j]['scoretime']);
-
-                if($arr_objective[$i]['keyresults'][$j]['dateStatus']==3 or $arr_objective[$i]['keyresults'][$j]['dateStatus']==4){
-                    $kr_done_count++;
-                }
-                $arr_objective[$i]['kr_count']=$kr_done_count."/".$kr_count;
-               
-                // $arr_objective[$i]['keyresults'][$j]['dateStatus'] = 4;
-                $plan_count = 0;
-                $plan_done_count = 0;
-                for ($k=0; $k < count($arr_plan); $k++) {
-                    if($arr_plan[$k]['pid']==$arr_objective[$i]['keyresults'][$j]['id']){
-                        // echo "add before:".$plan_count;
-                        $plan_count++;
-                        // echo "add after:".$plan_count;
-                        // echo "<br>";
-                        // $arr_plan[$k]['cj']=3;
-                        $arr_plan[$k]['flag']="plan";
-
-                        // 状态标记
-                        $arr_plan[$k]['dateStatus'] = Objective::getDateStatus($arr_plan[$k]['startdate'],$arr_plan[$k]['enddate'],$arr_plan[$k]['score'],$arr_plan[$k]['scoretime']);
-                        // echo $arr_plan[$k]['dateStatus'];
-                        if($arr_plan[$k]['dateStatus']==3 or $arr_plan[$k]['dateStatus']==4){
-                            $plan_done_count++;
-                        }
-                        $arr_objective[$i]['keyresults'][$j]['plan_count']=$plan_done_count."/".$plan_count;
-                        
-                        $arr_objective[$i]['keyresults'][$j]['plans'][]=$arr_plan[$k];
-                    }
-                }
-
-                $arr_objective[$i]['keyresults'][$j]['name'] = $arr_objective[$i]['keyresults'][$j]['name'] . "(".$arr_objective[$i]['keyresults'][$j]['plan_count'].")";
-            }
-
-            // （进行中的或已逾期未评分的）且（下级完成数==总数的）可以评分
-            if(($arr_objective[$i]['dateStatus']==2 || ($arr_objective[$i]['dateStatus']==4 && $arr_objective[$i]['score']==999)) && ($kr_count==$kr_done_count)){
-                $arr_objective[$i]['canScore']=1;
-            }
-
-            // 改写标题，加入下级完成状态计数
-            $arr_objective[$i]['name'] = $arr_objective[$i]['name'] . "(".$arr_objective[$i]['kr_count'].")";
-        }
-        // dd($arr_objective);
-
-        // foreach ($arr_objective as $o) {
-            
-        // }
-
-        // 转换成json前台js用
-        $json_objective = json_encode($arr_objective,JSON_UNESCAPED_UNICODE);
-        // 替换key为要求名字
-        $json_objective = str_replace("keyresults", "children", $json_objective);
-        $json_objective = str_replace("plans", "children", $json_objective);
-        // dd($json_objective);
-
-        // dd($p1);
-
-        // die();
-
         // 带部门的员工列表
         $tmpUser = new User;
         $arr_allUserDept = $tmpUser->getAllUserDept();
 
+        // 目标列表
+        $perPage = 10;
+        $executor = User::find($executor_id)->toArray()['name'];
+        // dd($executor);
+
+
+        $arr_where_partake = [['user_id', '=', $executor_id],['okr_id', '<', '10000000'],];
+        $arr_partake = Partake::where($arr_where_partake)->get(['okr_id'])->toArray();
+        // dd($arr_partake);
+
+
+
+        $arr_where['status'] = 0;
         
-        return view($templateName,compact('arr_allUserDept','json_objective','objective','executor', 'executor_id', 'perioditem', 'period', 'arr_period','p1'));
+        // 取目标
+        $objective = Objective::where($arr_where)
+            ->whereIn("id",$arr_partake)
+            ->where(function ($query) use ($arr_period) {
+                    $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
+                })
+            ->orWhere(function ($query) use ($arr_period) {
+                    $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
+                })
+            ->orWhere(function ($query) use ($arr_period) {
+                    $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
+                })
+            ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
+        
+
+
+        dd($objective->toArray());
+
+
+
+
+
+
+
     }
-
-
 
     public function store(Request $request)
     {
@@ -639,8 +406,8 @@ class ObjectiveController extends Controller
         $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
 
         // 能否删除标记
-        // $item['canDel'] = Objective::ifCandel($item)[0];
-        $item['canDel'] = Objective::ifCandel($item);
+        // $item['candel'] = Objective::ifCandel($item)[0];
+        $item['candel'] = Objective::ifCandel($item);
         
         // dd($item);
         return json_encode($item);
@@ -749,16 +516,16 @@ class ObjectiveController extends Controller
         $item->load("keyresults");
         $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
 
-        $item['canDel'] = Objective::ifCandel($item);
+        $item['candel'] = Objective::ifCandel($item);
         // 不能删就返回
-        if($item['canDel'][0]==0){
-            $array = array('msg'=>$item['canDel'][1],'status'=>0);
+        if($item['candel'][0]==0){
+            $array = array('msg'=>$item['candel'][1],'status'=>0);
             return json_encode($array);
         }
 
         // dd($item);
 
-        unset($item['canDel']);
+        unset($item['candel']);
         unset($item['dateStatus']);
         unset($item['keyresults']);
         

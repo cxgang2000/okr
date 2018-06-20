@@ -47,7 +47,7 @@
     <div id="main-content">
 
       <div class="h2Title">
-        <a href="jy_manage.html" class="nows">部门管理</a>
+        部门管理
       </div>
       <!-- End .clear -->
       <div class="content-box">
@@ -158,7 +158,7 @@
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
-        <form method="POST" name="form1" action="{{ route('department.store') }}">
+        <!--form method="POST" name="form1" action="{{ route('department.store') }}"-->
         {{ csrf_field() }}
         <table class="layui-table jy_table_layer">
         <colgroup>
@@ -206,7 +206,7 @@
         </tr>
         </tbody>
         </table>
-        </form>
+        <!--/form-->
         </div>
       </div>
       <span class="layui-layer-setwin">

@@ -49,9 +49,12 @@ Route::get('/user/test', 'UserController@test')->name('user.test');
 Route::get('/index/login', 'IndexController@create')->name('index.login');
 Route::post('/index/login', 'IndexController@store')->name('index.login');
 Route::get('/index/logout', 'IndexController@logout')->name('index.logout');
+Route::post('/index/changePwd', 'IndexController@changePwd')->name('index.changePwd');
 
 
-Route::get('/objective/mine/executor', 'ObjectiveController@mine_executor')->name('objective.mine_executor');
+Route::get('/objective/iamexecutor/{p1}', 'ObjectiveController@iamexecutor')->name('objective.iamexecutor');
+Route::get('/objective/heisexecutor/{p1}', 'ObjectiveController@heisexecutor')->name('objective.heisexecutor');
+
 
 // 新增
 Route::post('/objective', 'ObjectiveController@store')->name('objective.store');
@@ -76,6 +79,13 @@ Route::get('/plan/detail', 'PlanController@detail')->name('plan.detail');
 Route::post('/objective/update', 'ObjectiveController@update')->name('objective.update');
 Route::post('/keyresult/update', 'KeyresultController@update')->name('keyresult.update');
 Route::post('/plan/update', 'PlanController@update')->name('plan.update');
+
+
+// 删除
+Route::get('/objective/delete', 'ObjectiveController@delete')->name('objective.delete');
+Route::get('/keyresult/delete', 'KeyresultController@delete')->name('keyresult.delete');
+Route::get('/plan/delete', 'PlanController@delete')->name('plan.delete');
+
 
 // Route::resource('users', 'UsersController');
 // 相当于

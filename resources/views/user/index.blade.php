@@ -38,7 +38,7 @@
     <!-- End #sidebar -->
     <div id="main-content">
       <div class="h2Title">
-        <a href="jy_manage.html" class="nows">员工管理</a>
+        员工管理
       </div>
       <!-- End .clear -->
       <div class="content-box">
@@ -85,7 +85,7 @@
           
           <tr>
               <td>
-                1
+                {{ $k+1 }}
               </td>
               <td>
                 {{ $one->name }}

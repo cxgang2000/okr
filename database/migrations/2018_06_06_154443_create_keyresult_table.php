@@ -21,7 +21,7 @@ class CreateKeyresultTable extends Migration
             $table->date('startdate')->comment('开始时间');
             $table->date('enddate')->comment('结束时间');
             //$table->integer('organiser_id')->comment('发起人')->default(0);
-            //$table->integer('executor_id')->comment('执行人')->default(0);
+            $table->integer('executor_id')->comment('执行人')->default(0);
             $table->text('description')->nullable()->comment('描述');
             $table->float('score', 8, 1)->comment('得分')->default(999);
             $table->dateTime('scoretime')->comment('评分时间');

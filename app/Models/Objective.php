@@ -65,4 +65,35 @@ class Objective extends Model
         }
         return $dateStatus;
     }
+
+    // 是否可以删除
+    public static function ifCandel($arr_objective)
+    {
+        $candel = 1;
+        $msg = "";
+
+        // var_dump($arr_objective);
+        // 发布者登录
+        if($arr_objective['organiser_id']!=session("idUser")){
+            $candel = 0;
+            $msg = "不是发起人不能删除";
+            return array($candel,$msg);
+        }
+        // 未开始的能删
+        if($arr_objective['dateStatus']==2 || $arr_objective['dateStatus']==3 || $arr_objective['dateStatus']==4){
+            $candel = 0;
+            $msg = "该状态的不能删除";
+            return array($candel,$msg);
+        }
+        // 没下级的能删
+        // echo "aaaaaaaa:".count($arr_objective['keyresults']);
+        if(count($arr_objective['keyresults'])!=0){
+            $candel = 0;
+            $msg = "有下级的不能删除";
+            return array($candel,$msg);
+        }   
+        
+        return array($candel,$msg);
+        
+    }
 }

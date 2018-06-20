@@ -165,7 +165,7 @@ class PlanController extends Controller
         }
         
         $item = Plan::find($request->id);
-        $item->load("partake");
+        $item->load("partake","keyresult");
         
         // $item->load("partake");
         $item = $item->toArray();
@@ -173,6 +173,9 @@ class PlanController extends Controller
         $item['newpartake'] = array_column($item['partake'],"user_id");
         $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
         
+        // 能否删除标记
+        // $item['candel'] = Objective::ifCandel($item)[0];
+        $item['candel'] = Plan::ifCandel($item);
         
         // dd($item);
         return json_encode($item);
@@ -245,6 +248,70 @@ class PlanController extends Controller
             // Partake::addAll($arr_partake);
 
             $array = array('msg'=>'编辑成功!','status'=>1);
+            return json_encode($array);
+        }
+    }
+
+
+    // 删除
+    public function delete(Request $request)
+    {
+        
+        $rules = [
+            'p_id' => 'required|integer',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        // var_dump($validator);
+        if ($validator->fails()) {
+            // echo "fail";
+            // var_dump($validator->getMessageBag()->toArray());
+            $arr_err = $validator->getMessageBag()->toArray();
+            $str_err = "";
+            foreach ($arr_err as $v) {
+                // echo $value;
+                // var_dump($v);
+                $str_err = $str_err . $v[0]."<br>";
+            }
+            $array = array('msg'=>$str_err,'status'=>0);
+            return json_encode($array);
+        }
+        
+        // 接收数据
+        $data['id'] = $request->p_id;
+
+        $item = Plan::find($data['id']);
+        $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
+        $item['candel'] = Plan::ifCandel($item);
+
+        // 不能删就返回
+        if($item['candel'][0]==0){
+            $array = array('msg'=>$item['candel'][1],'status'=>0);
+            return json_encode($array);
+        }
+
+        // dd($item);
+
+        unset($item['candel']);
+        unset($item['dateStatus']);
+
+        $item->status=1;
+        $item->save();
+        // dd($item);
+
+        if($item===false){
+            $array = array('msg'=>'删除失败!','status'=>0);
+            return json_encode($array);
+        }else{
+
+            // 删不删参与者呢？这是个问题，先不删了吧，万一哪天要恢复呢
+            // 删参与者 增参与者
+            // $arr_where['okr_id'] = $request->o_id; 
+            // $del_num = Partake::where($arr_where)->delete();
+            
+            // DB::table('partake')->insert($arr_partake);
+
+            $array = array('msg'=>'删除成功!','status'=>1);
             return json_encode($array);
         }
     }
