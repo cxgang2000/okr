@@ -165,7 +165,7 @@ class PlanController extends Controller
         }
         
         $item = Plan::find($request->id);
-        $item->load("partake","keyresult");
+        $item->load("partake","keyresult","comments.userName");
         
         // $item->load("partake");
         $item = $item->toArray();
@@ -174,8 +174,8 @@ class PlanController extends Controller
         $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
         
         // 能否删除标记
-        // $item['candel'] = Objective::ifCandel($item)[0];
-        $item['candel'] = Plan::ifCandel($item);
+        // $item['canDel'] = Objective::ifCandel($item)[0];
+        $item['canDel'] = Plan::ifCandel($item);
         
         // dd($item);
         return json_encode($item);
@@ -282,17 +282,17 @@ class PlanController extends Controller
 
         $item = Plan::find($data['id']);
         $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
-        $item['candel'] = Plan::ifCandel($item);
+        $item['canDel'] = Plan::ifCandel($item);
 
         // 不能删就返回
-        if($item['candel'][0]==0){
-            $array = array('msg'=>$item['candel'][1],'status'=>0);
+        if($item['canDel'][0]==0){
+            $array = array('msg'=>$item['canDel'][1],'status'=>0);
             return json_encode($array);
         }
 
         // dd($item);
 
-        unset($item['candel']);
+        unset($item['canDel']);
         unset($item['dateStatus']);
 
         $item->status=1;

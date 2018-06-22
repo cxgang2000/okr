@@ -48,7 +48,8 @@
                 </a>
               </li>
               <li class="treeview">
-                <a href="kj_add.html">
+                <!--a href="{{ route('objective.heisexecutor',"1") }}"-->
+                <a href="#">
                   <i class="fa fa-th"></i> <span>成员目标</span>
                   <!-- <i class="fa fa-angle-right pull-right"></i> -->
                 </a>
@@ -74,15 +75,15 @@
         <!-- End #sidebar -->
         <div id="main-content">
           <div class="h2Title">
-            <!--a href="{{ route('objective.iamexecutor',$p1) }}" class="nows">我的目标</a-->
             我的目标
           </div>
           <!-- End .clear -->
           <div class="content-box">
             <div class="layui-tab">
               <ul class="layui-tab-title">
-                <a href="{{ route('objective.iamexecutor',$p1) }}" class="nows"><li class="layui-this">我负责的</li></a>
-                <a href="{{ route('objective.iamexecutor',"2") }}" class="nows"><li>我参与的</li></a>
+                <!--a href="{{ route('objective.iamexecutor',$p1) }}" class="nows"><li class="layui-this">我负责的</li></a-->
+                <li class="layui-this">我负责的</li>
+                <a href="{{ route('objective.iamexecutor',"2") }}"><li>我参与的</li></a>
               </ul>
               <div class="p_l8 jy_search" style="text-align: right;">
                 <button class="layui-btn layui-btn-normal add_mb" style="width: 80px;height: 33px;" onclick="pop_new_o();">新增目标</button>
@@ -147,116 +148,6 @@
   </div>
   <!-- End #main-content -->
   </div>
-
-
-  <!-- 评论 -->
-  <div class="models pl_models">
-      <div class="modes_con">
-        <div class="layui-layer-content">
-          <div class="models_mid text-center">
-              <div style="margin-top: 20px;">
-                  <!-- 评论 -->
-                  <form>
-                    <div style="padding-top: 10px;" class="mb_cont">
-                      <div class="fzr">
-                        <span class="ob_titles pl_models_titls">
-                          评论
-                        </span>
-                      </div>
-                      <div>
-                        <input type="text" class="layui-input pl_ipt" placeholder="发表评论"><button class="layui-btn layui-btn-normal pl_btn">发表</button>
-                      </div>
-                      <div class="pl_cont">
-                        <ul>
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-          </div>
-          <span class="layui-layer-setwin">
-            <a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;"></a>
-          </span>
-          
-          <span class="layui-layer-resize"></span>
-        </div>    
-    </div>
-  </div>
-  <!-- end -->
-
-
 
   <!-- 新增目标 models -->
   <div class="models mb_models">
@@ -402,93 +293,18 @@
                     </div>
                   </form>
                   <!-- 评论 -->
-
-                    <div style="border-top: 1px solid #ddd;padding-top: 10px;" class="mb_cont">
-                      <div class="fzr">
-                        <span class="ob_titles">
-                          评论
-                        </span>
-                      </div>
-                      <div>
-                        <input type="text" id="o_comment" class="layui-input pl_ipt" placeholder="发表评论"><button id="o_comment_id" okr_id="" class="layui-btn layui-btn-normal pl_btn" onclick="new_comment(this);">发表</button>
-                      </div>
-                      <div class="pl_cont">
-                        <ul>
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
+                  <div style="border-top: 1px solid #ddd;padding-top: 10px;" class="mb_cont">
+                    <div class="fzr">
+                      <span class="ob_titles">
+                        评论
+                      </span>
                     </div>
-
+                    <div>
+                      <input type="text" id="o_comment_input" class="layui-input pl_ipt" placeholder="发表评论"><button id="o_comment_id" okr_id="" class="layui-btn layui-btn-normal pl_btn" onclick="new_comment(this);">发表</button>
+                    </div>
+                    <div class="pl_cont" id="o_comment_showArea">
+                    </div>
+                  </div>
                 </div>
               </div>
           </div>
@@ -530,7 +346,7 @@
                           </li>
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            {{ $executor }}
+                            {{ $executor['name'] }}
                           </li>
                           <li>
                             <i class="icon iconfont icon-addusergroup1"></i>
@@ -599,7 +415,7 @@
                         <ul class="ul_no" id="kr_edit_ul">
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            <span id="kr_executor_id_u">{{ $executor }}</span>
+                            <span id="kr_executor_id_u">{{ $executor['name'] }}</span>
                           </li>
 
                           <li>
@@ -631,93 +447,18 @@
                     </div>
                   </form>
                   <!-- 评论 -->
-                  <form>
-                    <div style="border-top: 1px solid #ddd;padding-top: 10px;" class="mb_cont">
-                      <div class="fzr">
-                        <span class="ob_titles">
-                          评论
-                        </span>
-                      </div>
-                      <div>
-                        <input type="text" class="layui-input pl_ipt" placeholder="发表评论"><button class="layui-btn layui-btn-normal pl_btn">发表</button>
-                      </div>
-                      <div class="pl_cont">
-                        <ul>
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
+                  <div style="border-top: 1px solid #ddd;padding-top: 10px;" class="mb_cont">
+                    <div class="fzr">
+                      <span class="ob_titles">
+                        评论
+                      </span>
                     </div>
-                  </form>
+                    <div>
+                      <input type="text" id="kr_comment_input" class="layui-input pl_ipt" placeholder="发表评论"><button id="kr_comment_id" class="layui-btn layui-btn-normal pl_btn" onclick="new_comment(this);">发表</button>
+                    </div>
+                    <div class="pl_cont" id="kr_comment_showArea">
+                    </div>
+                  </div>
                 </div>
               </div>
           </div>
@@ -759,7 +500,7 @@
                           </li>
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            {{ $executor }}
+                            {{ $executor['name'] }}
                           </li>
                           <li>
                             <i class="icon iconfont icon-addusergroup1"></i>
@@ -828,7 +569,7 @@
                         <ul class="ul_no" id="p_edit_ul">
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            <span id="p_executor_id_u">{{ $executor }}</span>
+                            <span id="p_executor_id_u">{{ $executor['name'] }}</span>
                           </li>
 
                           <li>
@@ -860,93 +601,18 @@
                     </div>
                   </form>
                   <!-- 评论 -->
-                  <form>
-                    <div style="border-top: 1px solid #ddd;padding-top: 10px;" class="mb_cont">
-                      <div class="fzr">
-                        <span class="ob_titles">
-                          评论
-                        </span>
-                      </div>
-                      <div>
-                        <input type="text" class="layui-input pl_ipt" placeholder="发表评论"><button class="layui-btn layui-btn-normal pl_btn">发表</button>
-                      </div>
-                      <div class="pl_cont">
-                        <ul>
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-
-                          <li class="pl_list">
-                            <div>
-                              <div class="left">
-                                <div class="tx_img">
-                                  王
-                                </div>
-                              </div>
-                              <div class="left left_cont">
-                                <div class="top">
-                                    刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
-                                </div>
-                                <div class="bottom">
-                                  该处产品有问题！
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
+                  <div style="border-top: 1px solid #ddd;padding-top: 10px;" class="mb_cont">
+                    <div class="fzr">
+                      <span class="ob_titles">
+                        评论
+                      </span>
                     </div>
-                  </form>
+                    <div>
+                      <input type="text" id="p_comment_input" class="layui-input pl_ipt" placeholder="发表评论"><button id="p_comment_id" class="layui-btn layui-btn-normal pl_btn" onclick="new_comment(this);">发表</button>
+                    </div>
+                    <div class="pl_cont" id="p_comment_showArea">
+                    </div>
+                  </div>
                 </div>
               </div>
           </div>
@@ -1176,7 +842,6 @@
       period = {{ $period }};
 
       initPerild();
-
     })
     
 
@@ -1370,9 +1035,12 @@
     			$("#o_savecancel_div").hide();
     			$("#o_edit_ul").addClass("ul_no");
     			
-    			$(".dy_mb_models").show();
 
           $("#o_comment_id").attr("okr_id",itemid);
+          // 显示评论
+          $("#o_comment_showArea").html(getComment(data.comments));
+
+    			$(".dy_mb_models").show();
 
     		},
     	});
@@ -1604,6 +1272,11 @@
           $("#kr_savecancel_div").hide();
           $("#kr_edit_ul").addClass("ul_no");
           
+
+          $("#kr_comment_id").attr("okr_id",itemid);
+          // 显示评论
+          $("#kr_comment_showArea").html(getComment(data.comments));
+
           $(".key_mb_models").show();
             
         },
@@ -1835,6 +1508,11 @@
           $("#p_savecancel_div").hide();
           $("#p_edit_ul").addClass("ul_no");
           
+          $("#p_comment_id").attr("okr_id",itemid);
+          // 显示评论
+          $("#p_comment_showArea").html(getComment(data.comments));
+
+
           $(".jh_mb_models").show();
             
         },
@@ -1933,8 +1611,7 @@
       });
     }
 
-
-    //目标编辑
+    // 发表评论
     function new_comment(btn){
       // alert("submit_user");
       var okr_id = $(btn).attr("okr_id");
@@ -1944,28 +1621,30 @@
       console.log(btn_id);
 
       if(btn_id=="o_comment_id"){
-        comment = $("#o_comment").val();
+        comment = $("#o_comment_input").val();
+      }
+      if(btn_id=="kr_comment_id"){
+        comment = $("#kr_comment_input").val();
+      }
+      if(btn_id=="p_comment_id"){
+        comment = $("#p_comment_input").val();
       }
       console.log(comment);
       
-      return false;
+      // return false;
 
-      if (!o_date) {
-        layer.msg("时间不能为空",{time:1000});
+      if (!comment) {
+        layer.msg("请输入评论内容",{time:1000});
         return false;
       }
-      if (!o_partake_id) {
-        layer.msg("参与者不能为空",{time:1000});
-        return false;
-      }
-      
+
       ajax_type = 'POST';
-      submit_url = "{{ route('objective.update') }}";
+      submit_url = "{{ route('comment.store') }}";
 
       $.ajax({
         type: ajax_type,
         url: submit_url,
-        data: { o_id : itemid, o_date : o_date, o_partake_id : o_partake_id, o_description : o_description},
+        data: { okr_id : okr_id, comment : comment, },
         dataType: 'json',
         headers: {
           'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -1978,7 +1657,59 @@
       });
     }
 
+
+    function getComment(commentData){
+
+      var str="";
+      for (var i = 0; i < commentData.length; i++) {
+        console.log(commentData[i]['comment']);
+        str+="<ul>";
+        str+="<li class=\"pl_list\">";
+        str+="<div>";
+        str+="<div class=\"left\">";
+        str+="<div class=\"tx_img\">";
+        str+=commentData[i]['user_name']['name'].substring(0,1);
+        str+="</div>";
+        str+="</div>";
+        str+="<div class=\"left left_cont\">";
+        str+="<div class=\"top\">";
+        str+=commentData[i]['user_name']['name']+"<span class=\"pl_time\">&nbsp;&nbsp;"+commentData[i]['created_at']+"</span>";
+        str+="</div>";
+        str+="<div class=\"bottom\">";
+        str+=commentData[i]['comment'];
+        str+="</div>";
+        str+="</div>";
+        str+="</div>";
+        str+="</li>";
+        str+="</ul>";
+      };
+
+      // console.log(str);
+      return str;
+
+      /*
+      str =
+      '<li class="pl_list">
+        <div>
+          <div class="left">
+            <div class="tx_img">
+              王
+            </div>
+          </div>
+          <div class="left left_cont">
+            <div class="top">
+                刘凯<span class="pl_time">&nbsp;&nbsp;2018-5-25&nbsp;12:25:25</span>
+            </div>
+            <div class="bottom">
+              该处产品有问题！
+            </div>
+          </div>
+        </div>
+      </li>';
+      */
+    }
   </script>
+
   <script type="text/javascript" src="/okr/js/main.js"></script>
 
 </body>

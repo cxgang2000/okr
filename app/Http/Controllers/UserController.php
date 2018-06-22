@@ -24,48 +24,48 @@ class UserController extends Controller
         });
     }
 
-	public $arr_position = array(
-		1=>'CEO',
-		2=>'CFO',
-		3=>'COO',
-		4=>'助理',
-		5=>'出纳',
-		6=>'霸道保洁',
-		7=>'牛逼小二',
-		); 
+	// public $arr_position = array(
+	// 	1=>'CEO',
+	// 	2=>'CFO',
+	// 	3=>'COO',
+	// 	4=>'助理',
+	// 	5=>'出纳',
+	// 	6=>'霸道保洁',
+	// 	7=>'牛逼小二',
+	// 	); 
 
-	public $arr_dpt_usr = array(
-		0 => array(
-			'id'=>'1',
-			'name'=>'dpt1',
-			'user'=>array(
-				0 => array(
-					'id'=>1,
-					'name'=>'user1',
-					),
-				1 => array(
-					'id'=>2,
-					'name'=>'user2',
-					),
-				),
-			),
+	// public $arr_dpt_usr = array(
+	// 	0 => array(
+	// 		'id'=>'1',
+	// 		'name'=>'dpt1',
+	// 		'user'=>array(
+	// 			0 => array(
+	// 				'id'=>1,
+	// 				'name'=>'user1',
+	// 				),
+	// 			1 => array(
+	// 				'id'=>2,
+	// 				'name'=>'user2',
+	// 				),
+	// 			),
+	// 		),
 
-		1 => array(
-			'id'=>'2',
-			'name'=>'dpt2',
-			'user'=>array(
-				0 => array(
-					'id'=>3,
-					'name'=>'user3',
-					),
-				1 => array(
-					'id'=>4,
-					'name'=>'user4',
-					),
-				),
-			),
+	// 	1 => array(
+	// 		'id'=>'2',
+	// 		'name'=>'dpt2',
+	// 		'user'=>array(
+	// 			0 => array(
+	// 				'id'=>3,
+	// 				'name'=>'user3',
+	// 				),
+	// 			1 => array(
+	// 				'id'=>4,
+	// 				'name'=>'user4',
+	// 				),
+	// 			),
+	// 		),
 
-		); 
+	// 	); 
 
 	public function index(Request $request)
     {
@@ -113,8 +113,9 @@ class UserController extends Controller
         // var_dump($this->arr_position);die();
 
         // 所有职位
-        $arr_position = $this->arr_position;
-
+        // $arr_position = $this->arr_position;
+        $arr_position = User::$arr_position;
+        
         // 模板 传参
         return view('user.index',compact('user','all_dpt','arr_position','arr_allUserDept','phoneorname'));
     }
@@ -193,7 +194,7 @@ class UserController extends Controller
                 return json_encode($array);
             }
         }
-        
+
 
         $user->update($data);
 

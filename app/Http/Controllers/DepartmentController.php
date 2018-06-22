@@ -276,6 +276,9 @@ class DepartmentController extends Controller
 	        foreach ($arr_err as $v) {
 	        	// echo $value;
 	        	// var_dump($v);
+
+                if($v[0]=="名称 已经存在。"){$v[0]="部门名称重复，请重新输入";}
+
 	        	$str_err = $str_err . $v[0]."<br>";
 	        }
 	        $array = array('msg'=>$str_err,'status'=>0);

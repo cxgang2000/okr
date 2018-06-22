@@ -48,7 +48,11 @@ class Plan extends Model
             return array($candel,$msg);
         }
         
-        return array($candel,$msg);
-        
+        return array($candel,$msg); 
+    }
+
+    // 取评论
+    public function comments(){
+        return $this->hasMany('App\Models\Comment',"okr_id","id")->orderBy('id', 'desc')->select();
     }
 }

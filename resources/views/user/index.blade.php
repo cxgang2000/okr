@@ -111,15 +111,15 @@
               </td>
               <td>
                 @if ($one->status === 1)
-					停用
-				@endif
+        					停用
+        				@endif
                 @if ($one->status === 0)
-					启用
-				@endif
+        					启用
+        				@endif
               </td>
               <td>
                 <a href="javascript:void(0)" class="layui-btn layui-btn-primary layui-btn-sm yg_zt" onclick="editstatus_user('{{ route('user.editstatus' , $one->id ) }}','{{ $one->status }}')">
-                	@if ($one->status === 1)
+                	  @if ($one->status === 1)
                         启用
                     @endif
                     @if ($one->status === 0)
@@ -220,8 +220,8 @@
             //var_dump($arr_litedpt);die();
 			?>
           <span class="rd">*</span>员工上级： 
-          <select id="pid" name="pid" class="selectpicker bm_ld" data-hide-disabled="true" data-live-search="true">
-			<option value="0">无</option>
+          <select id="pid" name="pid" class="selectpicker bm_ld" data-hide-disabled="true" >
+			      <option value="0">无</option>
             
           	@foreach ($arr_allUserDept as $one)
             	<optgroup label="{{ $one['name'] }}">
@@ -310,6 +310,7 @@ function edit_user(geturl,updateurl){
 
 			
 			$(":radio[name='status'][value='" + data.status + "']").prop("checked", "checked");
+      $("#isleader").prop("checked", "")
 			if(data.isleader=="1")$("#isleader").prop("checked", "checked");
 			
 			// $("#editform").attr('action',updateurl);
@@ -351,6 +352,11 @@ function submit_user(){
 		layer.msg("电话不能为空",{time:1000});
 		return false;
 	}
+  if(phone.length != 11)
+  {
+    layer.msg("请输入11位的电话",{time:1000});
+    return false;
+  }
 	if (!email) {
 		layer.msg("邮箱不能为空",{time:1000});
 		return false;

@@ -165,7 +165,7 @@ class KeyresultController extends Controller
         }
         
         $item = Keyresult::find($request->id);
-        $item->load("partake","objective",'plan');
+        $item->load("partake","objective",'plan',"comments.userName");
         // dd($item);
         
         // $item->load("partake");
@@ -176,8 +176,8 @@ class KeyresultController extends Controller
         // $item['']
 
         // 能否删除标记
-        // $item['candel'] = Objective::ifCandel($item)[0];
-        $item['candel'] = Keyresult::ifCandel($item);
+        // $item['canDel'] = Objective::ifCandel($item)[0];
+        $item['canDel'] = Keyresult::ifCandel($item);
         
         // dd($item);
         return json_encode($item);
@@ -287,16 +287,16 @@ class KeyresultController extends Controller
         $item->load("plan");
         $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
 
-        $item['candel'] = Keyresult::ifCandel($item);
+        $item['canDel'] = Keyresult::ifCandel($item);
         // 不能删就返回
-        if($item['candel'][0]==0){
-            $array = array('msg'=>$item['candel'][1],'status'=>0);
+        if($item['canDel'][0]==0){
+            $array = array('msg'=>$item['canDel'][1],'status'=>0);
             return json_encode($array);
         }
 
         // dd($item);
 
-        unset($item['candel']);
+        unset($item['canDel']);
         unset($item['dateStatus']);
         unset($item['plan']);
 

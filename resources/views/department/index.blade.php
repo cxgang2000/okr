@@ -105,12 +105,11 @@
               </td>
               <td>
                 @if ($one['status'] === 1)
-					停用
-				@endif
-                @if ($one['status'] === 0)
-					启用
-				@endif
-                
+        					停用
+        				@endif
+                        @if ($one['status'] === 0)
+        					启用
+        				@endif                
               </td>
               <td>
                 <a href="javascript:void(0)" class="layui-btn layui-btn-primary layui-btn-sm bm_bj" onclick="edit_dpt('{{ route('department.edit',$one['id']) }}','{{ route('department.update',$one['id']) }}')">编辑</a>
@@ -280,8 +279,8 @@ function submit_dpt(){
 	//var status = "bb";
 	
 	//alert(name+" "+pid+" "+status);
-	
-	if (!name) {
+
+	if (name.trim()=="") {
 		layer.msg("名称不能为空",{time:1000});
 		return false;
 	}

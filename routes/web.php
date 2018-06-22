@@ -87,6 +87,9 @@ Route::get('/keyresult/delete', 'KeyresultController@delete')->name('keyresult.d
 Route::get('/plan/delete', 'PlanController@delete')->name('plan.delete');
 
 
+Route::post('/comment', 'CommentController@store')->name('comment.store');
+Route::get('/comment', 'CommentController@index')->name('comment.index');
+
 // Route::resource('users', 'UsersController');
 // 相当于
 // Route::get('/users', 'UsersController@index')->name('users.index');
