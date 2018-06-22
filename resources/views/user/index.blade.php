@@ -29,7 +29,7 @@
       border: 1px solid #fff;
       border-radius: 2px;
     }
-    #pid{
+    #department_id{
       width: 200px;
       display: inline-block;
     }
