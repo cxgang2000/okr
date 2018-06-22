@@ -29,6 +29,10 @@
       border: 1px solid #fff;
       border-radius: 2px;
     }
+    #pid{
+      width: 200px;
+      display: inline-block;
+    }
   </style>
   
 <!--
