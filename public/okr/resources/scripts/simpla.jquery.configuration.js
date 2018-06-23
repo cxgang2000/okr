@@ -33,7 +33,11 @@ $(document).ready(function(){
     })
 
     /*关闭models*/
-    $(".layui-layer-close1,.layui-layer-btn1").on("click",function(){
+    $(".layui-layer-btn1").on("click",function(){
+        $(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().hide();
+    })
+	
+	$(".layui-layer-close1").on("click",function(){
         $(this).parent().parent().parent().hide();
     })
 
@@ -45,7 +49,8 @@ $(document).ready(function(){
 
     /*取消编辑*/
     $(".models_qx").on("click",function(){
-      $(this).parent().hide();
+      //$(this).parent().hide();
+	  $(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().hide();
       $(this).parent().prev().find("ul").addClass("ul_no");
     })
 

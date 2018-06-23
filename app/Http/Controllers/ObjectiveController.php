@@ -159,6 +159,7 @@ class ObjectiveController extends Controller
                 // $arr_objective[$i]['keyresults'][$j]['cj']=2;
                 $arr_objective[$i]['keyresults'][$j]['flag']="keyresult";
                 // $arr_objective[$i]['keyresults'][$j]['open']=false;
+                $arr_objective[$i]['keyresults'][$j]['canScore']=0;
                 $arr_objective[$i]['keyresults'][$j]['plan_count']="0/0";
                 
 
@@ -181,13 +182,20 @@ class ObjectiveController extends Controller
                         // echo "<br>";
                         // $arr_plan[$k]['cj']=3;
                         $arr_plan[$k]['flag']="plan";
-
+                        
                         // 状态标记
                         $arr_plan[$k]['dateStatus'] = Objective::getDateStatus($arr_plan[$k]['startdate'],$arr_plan[$k]['enddate'],$arr_plan[$k]['score'],$arr_plan[$k]['scoretime']);
                         // echo $arr_plan[$k]['dateStatus'];
                         if($arr_plan[$k]['dateStatus']==3 or $arr_plan[$k]['dateStatus']==4){
                             $plan_done_count++;
                         }
+                        // （进行中的或已逾期未评分的）且（下级完成数==总数的）可以评分
+                        if(($arr_plan[$k]['dateStatus']==2 || ($arr_plan[$k]['dateStatus']==4 && $arr_plan[$k]['score']==999))){
+                            $arr_plan[$k]['canScore']=1;
+                        }else{
+                            $arr_plan[$k]['canScore']=0;
+                        }
+
                         $arr_objective[$i]['keyresults'][$j]['plan_count']=$plan_done_count."/".$plan_count;
                         
                         $arr_objective[$i]['keyresults'][$j]['plans'][]=$arr_plan[$k];
@@ -195,6 +203,11 @@ class ObjectiveController extends Controller
                 }
 
                 $arr_objective[$i]['keyresults'][$j]['name'] = $arr_objective[$i]['keyresults'][$j]['name'] . "(".$arr_objective[$i]['keyresults'][$j]['plan_count'].")";
+
+                // （进行中的或已逾期未评分的）且（下级完成数==总数的）可以评分
+                if(($arr_objective[$i]['keyresults'][$j]['dateStatus']==2 || ($arr_objective[$i]['keyresults'][$j]['dateStatus']==4 && $arr_objective[$i]['keyresults'][$j]['score']==999)) && ($plan_count==$plan_done_count)){
+                    $arr_objective[$i]['keyresults'][$j]['canScore']=1;
+                }
             }
 
             // （进行中的或已逾期未评分的）且（下级完成数==总数的）可以评分

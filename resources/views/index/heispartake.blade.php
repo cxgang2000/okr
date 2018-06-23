@@ -15,14 +15,10 @@
         <div class="layui-logo" style="padding-top: 17px;"><h2 style="color: #fff;">方田员工OKR管理系统</h2></div>
           <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item" style="opacity: 0">
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAdCAYAAADLnm6HAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFDNTI5RjQ5NDIyNjExRTg5NEFFOEM2QTY0RTNGOTkzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFDNTI5RjRBNDIyNjExRTg5NEFFOEM2QTY0RTNGOTkzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUM1MjlGNDc0MjI2MTFFODk0QUU4QzZBNjRFM0Y5OTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUM1MjlGNDg0MjI2MTFFODk0QUU4QzZBNjRFM0Y5OTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6SkV3MAAACf0lEQVR42rSXPWgUQRTH985NlFj4gUi0CIkINkoasZAgKVTUwhirYCyiQdBGGwmIpA6H2NgGIbHQ1iZqkSqGoOBntAkRo3KIED8IwkWT0/U38FbG5+ztHLc78IO9Nzfv/25m9r13hSiKAo+xBQ5CF+yBHdAKocxX4RO8hVcwDZPwOdWzCSCBIvTAfViN6h+rsrZHfDl1ksQPwWyU3ZgVn/9pFdQRrIMbcM61WfAansBL2d5vMrdJjqkT9sJuKDh8jMJF+OE6gg0w44h+Di5DW43j0rTJmjmHvxnR+ucImmFKfXERBmqdnwdF8bGofE+J5t8ARhxRbmtAWNPq2N2ROIAOWLEmHkNLhuIxLeI7Hkazw0yULGMF2nMQj2kXjXiUTCI5at3SW/BO3dwB6/mBJJxAktJOeX4jySeQBHXEWnMbVuTZ+B6H8/L5WKC2v9cRtT26LfuYZR+z7N1qzUblr9c+hiJRNFnRfg/yH0vWc5MJ4Itl2JWwIKZq2SuWvWLZq2qNLja2xlezJRPqDSjkeAkD9SZMGEO/OrMLOYoPKq1+YwxVyjSX8kQO4ofVhTeaYTy5X5XcXzAMazIQNul4CKqqVHfpcnzWUTimYW0DwsfhhcPvYFI/0AfLKe9xLTZL3b8OHx3CxveptIbkpEcA5k05DXdhEp7Ch5Sm5Bl0+nREaZlsHzyqoxuahzNy2YNGAtgO456iZbgpN79mPxF6pE7Tpl2Bq7Bezc3DPfgpRWpB2rUF78TssQNlxy9ckparudHX1CcAe/yGUdiaVYIK66hiD+ESPM+yNBY9vvMe+uBA1uKB9dfKNUyJLcE1WM6rOQgT/oDcgSEo592d/BFgALviMtKkFV2wAAAAAElFTkSuQmCC" class="layui-nav-img" style="position: absolute;
-              left: -209px;
-              top: -15px;">     
+                
             </li>
             <li class="layui-nav-item" style="opacity: 0">
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAiCAYAAACnSgJKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFEMzJFMUEyNDIyNjExRTg5OUMyQURCRTgyMzUzRDBBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFEMzJFMUEzNDIyNjExRTg5OUMyQURCRTgyMzUzRDBBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUQzMkUxQTA0MjI2MTFFODk5QzJBREJFODIzNTNEMEEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUQzMkUxQTE0MjI2MTFFODk5QzJBREJFODIzNTNEMEEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz65zRvXAAAB0ElEQVR42uyXv0vDQBTHkyiCOmjASWxxUChFNwc37dKKQxehDkKn/gs661j8B7pIJxeLaxWkLf4FHcQujorg0vqDtoPS+D14keOZNGdz2CUPPpTk3nsf7tKDO9NxHEMxlkAOpMA6iAELDMAjuAMNcAGelDoKeQBJUAEDRy0GlJ8M6j1scAKcgE9ntBB1x9TH02H6LPsMuAQ7HmNiSW/BA3gDc2AVbNGn4XEN9kBPZdmnQN1jJjWQAqbPTEwar3nU1qlv4LKXWGEP5BX+GzJ5qpOjFCTPsIJ3sPlHsYuo+2D9Mn5yC7RYcnZEsUuW9WuR55ecJ5ZDil3KfhOSkypsm8Q1yeNsu1a4XCxFW0qoahK7VKXebXfpLdpxy8CWduCNoTfkfjb5fuQxlnyvWc77xWS5zQbbmuW8ny3LeXxplnv2s4wxRiSP5JH8X2ISbIM19n4DzGv0rLBn4XsV5y4n+ubj+OapgJxdcCg9H4Bnj7xFcC49n4Jq2OtSmp3BCj55BZaXDnNdcpkGXanpC0iwnAS9d6NLdaHlgiKbVR+cgSP67bPxokpfVfksaCpeEJuUr00uWACNAHGD8gzdcvcyuA+uQIeEHToa54ZcIj35FmAA5R0e3RAgbI8AAAAASUVORK5CYII=" class="layui-nav-img" style="position: absolute;
-              left: -130px;
-              top: -15px;">     
+              
             </li>
             <li class="layui-nav-item" style="margin-right: 36px;opacity: 0;">洋河赵坤老师，您好！</li>
             <li class="layui-nav-item dows">
@@ -100,7 +96,7 @@
               <div class="layui-tab my_cont">
                 <ul class="layui-tab-title">
                   <!--a href="{{ route('objective.heisexecutor',$p1) }}" class="nows"><li class="layui-this">成员负责的</li></a-->
-                  <a href="{{ route('objective.heisexecutor',"1") }}" class="nows"><li>成员负责的</li></a>
+                  <a href="javascript:;" onclick="clickTabTitle(1);"  class="nows"><li>成员负责的</li></a>
                   <li class="layui-this">成员参与的</li>
                 </ul>
                 <div class="my_job">
@@ -991,8 +987,11 @@
     window.location.href = url + "?keyword=" + keyword;
   }
 
+  var user_id = "{{ $user_id }}";
+  // 点击部门员工列表中的一个人
   function youClick(user_id){
-    var user_id = user_id;
+    user_id = user_id;
+    // console.log(user_id);
     var keyword = $("#keyword").val();
  
     // if (!keyword) {
@@ -1001,8 +1000,25 @@
     // }
     url = "{{ route('objective.heisexecutor',$p1) }}";
 
+    // 点了某员工
     window.location.href = url + "?keyword=" + keyword + "&user_id=" + user_id;
   }
+
+  function clickTabTitle(flagindex){
+    // var user_id = user_id;
+    var keyword = $("#keyword").val();
+    // alert(user_id);
+    // if (!keyword) {
+    //     layer.msg("请输入条件",{time:1000});
+    //     return false;
+    // }
+    if(flagindex==1)url = "{{ route('objective.heisexecutor',1) }}";
+    if(flagindex==2)url = "{{ route('objective.heisexecutor',2) }}";
+
+    // 点了某员工
+    window.location.href = url + "?keyword=" + keyword + "&user_id=" + user_id;
+  }
+
 
     // 发表评论
     function new_comment(btn){

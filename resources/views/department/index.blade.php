@@ -91,7 +91,7 @@
           
           <tr>
               <td>
-                {{ $k+1 }}
+                {{ ($department->currentPage()-1)*$department->perPage()+$k+1 }}
               </td>
               <td>
                 {{ $one['name'] }}
@@ -161,55 +161,55 @@
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
-        <!--form method="POST" name="form1" action="{{ route('department.store') }}"-->
-        {{ csrf_field() }}
-        <table class="layui-table jy_table_layer">
-        <colgroup>
-        <col width="27">
-        <col width="169">
-        <col width="45">
-        <col width="47">
-        <col width="46">
-        <col width="55">
-        <col width="58">
-        <col width="49">
-        <col width="54">
-        </colgroup>
-        <thead>
-        <tr>
-        <th colspan="2">部门管理</th>
-        </tr> 
-        </thead>
-        <tbody>
-        <tr>
-        <td>
-        <span class="rd">*</span>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称： <input type="text" id="name" name="name" lay-verify="identity" placeholder="填写部门名称" autocomplete="off" class="layui-input bm_name">
-        </td>
-        <td>
-        <span class="rd">*</span>上级部门：
-          <select name="pid" id="pid" class="show-tick form-control sj_bm">
-            <option value="0">无</option>
-            @foreach ($arr_all_dpt as $one)
-            	<option value="{{ $one->id }}">{{ $one->name }}</option>
-            @endforeach
-          </select>
-        </td>
-        </tr>
-        <tr>
-        <td>
-          <span class="rd">*</span>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态： 
-          <div class="rad_c">
-            <input type="radio" name="status" value="0" class="mcr mcr-primary mcr-circle" checked />&nbsp;&nbsp;<label for="qiyong">启用</label>&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="status" value="1" class="mcr mcr-primary mcr-circle" />&nbsp;&nbsp;<label for="tinyong">停用</label>
-          </div>
-        </td>
-        <td>
-          
-        </td> 
-        </tr>
-        </tbody>
-        </table>
-        <!--/form-->
+          <!--form method="POST" name="form1" action="{{ route('department.store') }}"-->
+          {{ csrf_field() }}
+          <table class="layui-table jy_table_layer">
+            <colgroup>
+              <col width="27">
+              <col width="169">
+              <col width="45">
+              <col width="47">
+              <col width="46">
+              <col width="55">
+              <col width="58">
+              <col width="49">
+              <col width="54">
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="2" id="dpt_div_title">部门管理</th>
+              </tr> 
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="rd">*</span>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称： <input type="text" id="name" name="name" lay-verify="identity" placeholder="填写部门名称" autocomplete="off" class="layui-input bm_name">
+                </td>
+                <td>
+                  <span class="rd">*</span>上级部门：
+                  <select name="pid" id="pid" class="show-tick form-control sj_bm">
+                    <option value="0">无</option>
+                      @foreach ($arr_all_dpt as $one)
+                      	<option value="{{ $one->id }}">{{ $one->name }}</option>
+                      @endforeach
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="rd">*</span>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态： 
+                  <div class="rad_c">
+                    <input type="radio" name="status" value="0" class="mcr mcr-primary mcr-circle" checked />&nbsp;&nbsp;<label for="qiyong">启用</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="status" value="1" class="mcr mcr-primary mcr-circle" />&nbsp;&nbsp;<label for="tinyong">停用</label>
+                  </div>
+                </td>
+                <td>
+                  
+                </td> 
+              </tr>
+            </tbody>
+          </table>
+          <!--/form-->
         </div>
       </div>
       <span class="layui-layer-setwin">
@@ -244,6 +244,7 @@ function del_dpt(id){
 	});
 }
 
+var edit_dpt_id="";
 function edit_dpt(geturl,updateurl){
 	//alert(url);return false;
 	$.ajax({
@@ -256,9 +257,12 @@ function edit_dpt(geturl,updateurl){
 		},
 
 		success: function(data){
-			// console.log(data);
+			console.log(data);
+      edit_dpt_id=data.id;
 			$("#name").val(data.name);			
 			$("#pid").val(data.pid);
+      // 部门编辑，在上级部门中置灰被编辑的部门
+      $("#pid option[value="+edit_dpt_id+"]").attr("disabled","disabled");
 			$(":radio[name='status'][value='" + data.status + "']").prop("checked", "checked");
 			
 			// $("#editform").attr('action',updateurl);
@@ -266,7 +270,10 @@ function edit_dpt(geturl,updateurl){
       		ajax_type = 'PATCH';
       		submit_url = updateurl;
 	  		//$(".layui-layer-btn0").on("click",submit_dpt);
-			$("#newdiv").fadeIn();
+			
+      $("#dpt_div_title").html("编辑部门");  
+
+      $("#newdiv").fadeIn();
 			
 		},
 	});
@@ -309,6 +316,7 @@ function submit_dpt(){
 		success: function(data){
 			console.log(data);
 			layer.msg(data.msg);
+      // $("#pid option[value="+edit_dpt_id+"]").attr("disabled","");
 			if(data.status=="1"){window.location.reload();}
 		},
 	});
@@ -329,9 +337,15 @@ $(function(){
   	  submit_url = "{{ route('department.store') }}";
   	  //$(".layui-layer-btn0").on("click",submit_dpt);
   	  
-	  $("#name").val("");
-	  $("#pid").val(0);
+  	  $("#name").val("");
+  	  $("#pid").val(0);
+      // 新增部门，恢复被置灰的上级部门
+      if(edit_dpt_id!=""){
+        $("#pid option[value="+edit_dpt_id+"]").attr("disabled",false);
+      }
 	  
+      $("#dpt_div_title").html("新增部门");
+
   	  $("#newdiv").fadeIn();
     });
 	

@@ -7,7 +7,6 @@
 
 	@include('layouts._index_headerCss')
 
- </HEAD>
 </head>
 <body id="my_mb">
   <div class="layui-layout layui-layout-admin">
@@ -48,8 +47,7 @@
                 </a>
               </li>
               <li class="treeview">
-                <!--a href="{{ route('objective.heisexecutor',"1") }}"-->
-                <a href="#">
+                <a href="{{ route('objective.heisexecutor',"1") }}">
                   <i class="fa fa-th"></i> <span>成员目标</span>
                   <!-- <i class="fa fa-angle-right pull-right"></i> -->
                 </a>

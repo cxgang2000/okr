@@ -89,7 +89,7 @@
           
           <tr>
               <td>
-                {{ $k+1 }}
+                {{ ($user->currentPage()-1)*$user->perPage()+$k+1 }}
               </td>
               <td>
                 {{ $one->name }}
@@ -168,93 +168,90 @@
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
-        <form>
-        <table class="layui-table jy_table_layer">
-        <colgroup>
-        <col width="27">
-        <col width="169">
-        <col width="45">
-        <col width="47">
-        <col width="46">
-        <col width="55">
-        <col width="58">
-        <col width="49">
-        <col width="54">
-        </colgroup>
-        <thead>
-        <tr>
-        <th colspan="2">员工管理</th>
-        </tr> 
-        </thead>
-        <tbody>
-        <tr>
-        <td>
-        <span class="rd">*</span>员工姓名： <input type="text" id="name" name="name" lay-verify="identity" placeholder="填写员工姓名" autocomplete="off" class="layui-input bm_name">
-        </td>
-        <td>
-        <span class="rd">*</span>员工电话：
-          <input type="text" id="phone" name="phone" lay-verify="identity" placeholder="填写员工电话" autocomplete="off" class="layui-input bm_name">
-        </td>
-        </tr>
-        <tr>
-        <td>
-          <span class="rd">*</span>员工邮箱： 
-          <input type="text" id="email" name="email" lay-verify="identity" placeholder="填写员工邮箱" autocomplete="off" class="layui-input bm_name">
-        </td>
-        <td>
-          <span class="rd">*</span>员工岗位： 
-          <select id="position_id" name="position_id" class="selectpicker bm_ld" data-hide-disabled="true" data-live-search="true">
-            @foreach ($arr_position as $key=>$one)
-            	<option value="{{ $key }}">{{ $one }}</option>
-            @endforeach
-          </select>
-        </td> 
-        </tr>
-        <tr>
-        <td>
-          <span class="rd">*</span>员工部门： 
-          <select id="department_id" name="department_id" class="show-tick form-control sj_bm">
-            @foreach ($all_dpt as $one)
-            	<option value="{{ $one->id }}">{{ $one->name }}</option>
-            @endforeach
-          </select>
-        </td>
-        <td>
-        	<?php
-            //var_dump($arr_litedpt);die();
-			?>
-          <span class="rd">*</span>员工上级： 
-          <select id="pid" name="pid" class="selectpicker bm_ld" data-hide-disabled="true" >
-			      <option value="0">无</option>
-            
-          	@foreach ($arr_allUserDept as $one)
-            	<optgroup label="{{ $one['name'] }}">
-                @foreach ($one['users'] as $dptuser)
-                	<option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
-                @endforeach
-            @endforeach
-            
-          </select>
-        </td> 
-        </tr>
-        <tr>
-        <td>
-          <span class="rd">*</span>员工状态： 
-          <div class="rad_c">
-            <input type="radio" name="status" value="0" class="mcr mcr-primary mcr-circle" checked />&nbsp;&nbsp;<label for="qiyong">启用</label>&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="status" value="1" class="mcr mcr-primary mcr-circle" />&nbsp;&nbsp;<label for="tinyong">停用</label>
-          </div>
-        </td>
-        <td>
-          <span class="rd"></span>部门领导： 
-          <div class="rad_c">
-            <input type="checkbox" id="isleader" name="isleader" value="1" class="mcr mcr-primary mcr-circle" />
-          </div>
-        </td>  
-        </tr>
-        </tbody>
-        </table>
-        </form>
+          <form>
+            <table class="layui-table jy_table_layer">
+              <colgroup>
+                <col width="27">
+                <col width="169">
+                <col width="45">
+                <col width="47">
+                <col width="46">
+                <col width="55">
+                <col width="58">
+                <col width="49">
+                <col width="54">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="2" id="user_div_title">员工管理</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="rd">*</span>员工姓名： <input type="text" id="name" name="name" lay-verify="identity" placeholder="填写员工姓名" autocomplete="off" class="layui-input bm_name">
+                  </td>
+                  <td>
+                    <span class="rd">*</span>员工电话：
+                    <input type="text" id="phone" name="phone" lay-verify="identity" placeholder="填写员工电话" autocomplete="off" class="layui-input bm_name">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="rd">*</span>员工邮箱： 
+                    <input type="text" id="email" name="email" lay-verify="identity" placeholder="填写员工邮箱" autocomplete="off" class="layui-input bm_name">
+                  </td>
+                  <td>
+                    <span class="rd">*</span>员工岗位： 
+                    <select id="position_id" name="position_id" class="selectpicker bm_ld" data-hide-disabled="true">
+                      @foreach ($arr_position as $key=>$one)
+                      	<option value="{{ $key }}">{{ $one }}</option>
+                      @endforeach
+                    </select>
+                  </td> 
+                </tr>
+                <tr>
+                  <td>
+                    <span class="rd">*</span>员工部门： 
+                    <select id="department_id" name="department_id" class="show-tick form-control sj_bm">
+                      @foreach ($all_dpt as $one)
+                      	<option value="{{ $one->id }}">{{ $one->name }}</option>
+                      @endforeach
+                    </select>
+                  </td>
+                  <td>
+                    <span class="rd">*</span>员工上级： 
+                    <select id="pid" name="pid" class="selectpicker bm_ld" data-hide-disabled="true" data-live-search="true">
+          			      <option value="0">无</option>
+                      
+                    	@foreach ($arr_allUserDept as $one)
+                      	<optgroup label="{{ $one['name'] }}">
+                          @foreach ($one['users'] as $dptuser)
+                          	<option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
+                          @endforeach
+                      @endforeach
+                      
+                    </select>
+                  </td> 
+                </tr>
+                <tr>
+                  <td>
+                    <span class="rd">*</span>员工状态： 
+                    <div class="rad_c">
+                      <input type="radio" name="status" value="0" class="mcr mcr-primary mcr-circle" checked />&nbsp;&nbsp;<label for="qiyong">启用</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="radio" name="status" value="1" class="mcr mcr-primary mcr-circle" />&nbsp;&nbsp;<label for="tinyong">停用</label>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="rd"></span>部门领导： 
+                    <div class="rad_c">
+                      <input type="checkbox" id="isleader" name="isleader" value="1" class="mcr mcr-primary mcr-circle" />
+                    </div>
+                  </td>  
+                </tr>
+              </tbody>
+            </table>
+          </form>
         </div>
       </div>
       <span class="layui-layer-setwin">
@@ -324,6 +321,7 @@ function edit_user(geturl,updateurl){
 			//$(".layui-layer-btn0").on("click",submit_user);
 			//$(".layui-layer-btn0").click(submit_user);
 			
+      $("#user_div_title").html("编辑员工");  
 			$("#newdiv").fadeIn();
 				
 		},
@@ -470,22 +468,23 @@ $(function(){
   	  ajax_type = 'POST';
   	  submit_url = "{{ route('user.store') }}";
   	  //$(".layui-layer-btn0").on("click",submit_user);
-	  //$(".layui-layer-btn0").click(submit_user);
+  	  //$(".layui-layer-btn0").click(submit_user);
+    	  
+  	  $("#name").val("");
+  	  $("#phone").val("");
+  	  $("#email").val("");
+  	  //alert($("#pid").val());
+  	  $("#pid").val(0);
+  	  $('#pid').selectpicker('refresh');
+  	  //alert($("#pid").val());
+  	  $("#position_id").val(0);
+  	  $('#position_id').selectpicker('refresh');
+  	  $("#department_id").val(0);
   	  
-	  $("#name").val("");
-	  $("#phone").val("");
-	  $("#email").val("");
-	  //alert($("#pid").val());
-	  $("#pid").val(0);
-	  $('#pid').selectpicker('refresh');
-	  //alert($("#pid").val());
-	  $("#position_id").val(0);
-	  $('#position_id').selectpicker('refresh');
-	  $("#department_id").val(0);
+  	  $(":radio[name='status'][value='0']").prop("checked", "checked");
+  	  $("#isleader").prop("checked", "");
 	  
-	  $(":radio[name='status'][value='0']").prop("checked", "checked");
-	  $("#isleader").prop("checked", "");
-	  
+      $("#user_div_title").html("新增员工");  
   	  $("#newdiv").fadeIn();
     });
 	

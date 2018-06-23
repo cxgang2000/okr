@@ -7,7 +7,6 @@
 
 	@include('layouts._index_headerCss')
 
- </HEAD>
 </head>
 <body id="my_mb">
   <div class="layui-layout layui-layout-admin">
@@ -48,8 +47,7 @@
                 </a>
               </li>
               <li class="treeview">
-                <!--a href="{{ route('objective.heisexecutor',"1") }}"-->
-                <a href="#">
+                <a href="{{ route('objective.heisexecutor',"1") }}">
                   <i class="fa fa-th"></i> <span>成员目标</span>
                   <!-- <i class="fa fa-angle-right pull-right"></i> -->
                 </a>
@@ -331,7 +329,7 @@
                     <div>
                       <div class="fzr">
                         <span class="ob_titles">
-                          新增关键结果（K）
+                          新增关键结果（KR）
                         </span>
                       </div>
                       <div class="mb_cont">
@@ -655,7 +653,6 @@
   	function aaaa(treeId, treeNode) {
   		//if (treeNode.parentNode && treeNode.parentNode.id!=2) return;
   		var aObj = $("#" + treeNode.tId + IDMark_A);
-  		
   		dateStatusStr="";
   		switch(treeNode.dateStatus)
   		{
@@ -678,10 +675,11 @@
   		scoreStatusStr="";
   		//进行中的或已逾期未评分的可以评分
   		// if(treeNode.dateStatus==2 || (treeNode.dateStatus==4 && treeNode.score==999)){
+      console.log(treeNode.name + treeNode.canScore);
       if(treeNode.canScore==1){
   			scoreStatusStr = "<span class='demoIcon'><span class='jxz pf' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='score(this);'>评分</span></span>";
   		}else{
-  			//有分数线是分数
+  			//有分数显示分数
   			if(treeNode.score!=999){
   				scoreStatusStr = "<span class='demoIcon'><span>"+treeNode.score+"</span></span>";
   			}

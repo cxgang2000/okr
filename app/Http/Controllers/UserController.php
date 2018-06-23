@@ -80,7 +80,7 @@ class UserController extends Controller
     	// $a = $this->arr_dpt_usr;
     	// var_dump($a);die();
 
-    	$arr_status = [0,1];
+    	// $arr_status = [0,1];
 
         // 带部门的员工列表
         $tmpUser = new User;
@@ -88,7 +88,8 @@ class UserController extends Controller
 
     	// 取列表数据
     	$perPage = 5;
-		$arr_status = [0,1];
+		$arr_status = [0,1];//启用和停用的
+        $arr_where['status'] = 0;//启用的
 		$phoneorname = $request->phoneorname;
 		if (!empty($phoneorname)) {
 		    // die("ppppp");
@@ -108,7 +109,7 @@ class UserController extends Controller
 
 
         // 所有部门
-        $all_dpt = Department::whereIn("status",$arr_status)->orderBy('id',"asc")->get();
+        $all_dpt = Department::where($arr_where)->orderBy('id',"asc")->get();
 
         // var_dump($this->arr_position);die();
 
@@ -187,7 +188,7 @@ class UserController extends Controller
         // 判断是否此部门已经有了leader，有了需要提示不能设置此人为leader
         if($data['isleader']=="1"){
             $tmpUser = new User;
-            $hasLeader = $tmpUser->hasLeader($request->department_id,0);
+            $hasLeader = $tmpUser->hasLeader($request->department_id,$user->id);
             if($hasLeader){
                 $str_err = "此部门已经有位领导！";
                 $array = array('msg'=>$str_err,'status'=>0);

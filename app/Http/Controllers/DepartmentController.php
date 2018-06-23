@@ -121,9 +121,10 @@ class DepartmentController extends Controller
 		$arr_status = [0,1];
         $department = Department::whereIn("status",$arr_status)->orderBy('id',"desc")->paginate($perPage);
         $department->load('pname');
-        // var_dump($department->toArray());die();
+        // var_dump($department);die();
         // $department->load('user');
         // var_dump($department->toArray());die();
+        // dd($department->currentPage);
 
 
         // var_dump($department->toArray()['data']);die();
@@ -277,7 +278,8 @@ class DepartmentController extends Controller
 	        	// echo $value;
 	        	// var_dump($v);
 
-                if($v[0]=="名称 已经存在。"){$v[0]="部门名称重复，请重新输入";}
+                if($v[0]=="名称 已经存在。" || $v[0]=="The name has already been taken."
+                    ){$v[0]="部门名称重复，请重新输入";}
 
 	        	$str_err = $str_err . $v[0]."<br>";
 	        }
