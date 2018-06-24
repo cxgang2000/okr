@@ -94,7 +94,7 @@
                 {{ ($department->currentPage()-1)*$department->perPage()+$k+1 }}
               </td>
               <td>
-                {{ $one['name'] }} {{ $one['name'] }}
+                {{ $one['name'] }}
               </td>
               <td>
               	@if ($one['pid'] == 0)
