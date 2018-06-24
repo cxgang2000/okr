@@ -282,7 +282,7 @@
                           </li>
                           <li>
                             <i class="icon iconfont icon-edit"></i>
-                            <textarea id="o_description_u" name="o_description_u" placeholder="添加描述"  style="resize:none"></textarea>
+                            <textarea id="o_description_u" name="o_description_u" placeholder=""  style="resize:none"></textarea>
                           </li>
                         </ul>
                       </div>
@@ -373,7 +373,7 @@
                           </li>
                           <li>
                             <i class="icon iconfont icon-edit"></i>
-                            <textarea id="kr_description_u" name="kr_description_u" placeholder="添加描述"  style="resize:none"></textarea>
+                            <textarea id="kr_description_u" name="kr_description_u" placeholder=""  style="resize:none"></textarea>
                           </li>
                         </ul>
                       </div>
@@ -464,7 +464,7 @@
                           </li>
                           <li>
                             <i class="icon iconfont icon-edit"></i>
-                            <textarea id="p_description_u" name="p_description_u" placeholder="添加描述"  style="resize:none"></textarea>
+                            <textarea id="p_description_u" name="p_description_u" placeholder=""  style="resize:none"></textarea>
                           </li>
                         </ul>
                       </div>

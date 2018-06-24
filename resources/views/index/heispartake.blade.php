@@ -224,7 +224,7 @@
                           </li>
                           <li>
                             <i class="icon iconfont icon-edit"></i>
-                            <textarea id="o_description_u" name="o_description_u" placeholder="添加描述"  style="resize:none"></textarea>
+                            <textarea id="o_description_u" name="o_description_u" placeholder=""  style="resize:none"></textarea>
                           </li>
                         </ul>
                       </div>
@@ -315,7 +315,7 @@
                           </li>
                           <li>
                             <i class="icon iconfont icon-edit"></i>
-                            <textarea id="kr_description_u" name="kr_description_u" placeholder="添加描述"  style="resize:none"></textarea>
+                            <textarea id="kr_description_u" name="kr_description_u" placeholder=""  style="resize:none"></textarea>
                           </li>
                         </ul>
                       </div>
@@ -406,7 +406,7 @@
                           </li>
                           <li>
                             <i class="icon iconfont icon-edit"></i>
-                            <textarea id="p_description_u" name="p_description_u" placeholder="添加描述"  style="resize:none"></textarea>
+                            <textarea id="p_description_u" name="p_description_u" placeholder=""  style="resize:none"></textarea>
                           </li>
                         </ul>
                       </div>
@@ -637,7 +637,7 @@
           } 
         }
       }
-      
+
   })
 
 
@@ -695,7 +695,7 @@
           //描述
           $("#o_description_u").val(data.description);
           //负责人
-          $("#o_executor_id_u").html(data.executor['name']);
+          $("#o_executor_id_u").val(data.executor['name']);
           //参与者
           //$("#o_partake_id_u").val([3,6]);
           $("#o_partake_id_u").val(data.newpartake);
