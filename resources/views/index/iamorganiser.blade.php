@@ -3,169 +3,227 @@
 <head>
 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>成员目标</title>
-  <!--                       CSS                       -->
+  <title>我的目标</title>
 
-  @include('layouts._index_headerCss')
+	@include('layouts._index_headerCss')
 
 </head>
-<body id="cy_mb">
-     <div class="layui-layout layui-layout-admin">
-      <div class="layui-header">
-        <div class="layui-logo" style="padding-top: 17px;"><h2 style="color: #fff;">方田员工OKR管理系统</h2></div>
-          <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item" style="opacity: 0">
-                
-            </li>
-            <li class="layui-nav-item" style="opacity: 0">
-              
-            </li>
-            <li class="layui-nav-item" style="margin-right: 36px;opacity: 0;">洋河赵坤老师，您好！</li>
-            <li class="layui-nav-item dows">
-              <a href=""><i class="icon iconfont icon-shezhi" style="color: #fff;font-size: 30px;"></i></a>
-              <dl class="layui-nav-child layui-anim layui-anim-upbit">
-                <dd><a href="javascript:void(0)" class="xgmm">修改密码</a></dd>
-                <dd><a href="javascript:void(0)">退出登录</a></dd>
-              </dl>
-            </li>
-          </ul>
-        </div>
+<body id="my_mb">
+  <div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+      <div class="layui-logo" style="padding-top: 17px;"><h2 style="color: #fff;">方田员工OKR管理系统</h2></div>
+        <ul class="layui-nav layui-layout-right">
+          <li class="layui-nav-item" style="opacity: 0">
+             
+          </li>
+          <li class="layui-nav-item" style="opacity: 0">
+            
+          </li>
+          <li class="layui-nav-item" style="margin-right: 36px;opacity: 0;">洋河赵坤老师，您好！</li>
+          <li class="layui-nav-item dows">
+            <a href=""><i class="icon iconfont icon-shezhi" style="color: #fff;font-size: 30px;"></i></a>
+            <dl class="layui-nav-child layui-anim layui-anim-upbit">
+              <dd><a href="javascript:void(0)" class="xgmm">修改密码</a></dd>
+              <dd><a href="{{ route('index.logout') }}">退出登录</a></dd>
+            </dl>
+          </li>
+        </ul>
       </div>
-      <!-- 修改密码 -->
-      @include('layouts._index_changePwd')
+    </div>
+    <!-- 修改密码 -->
+    @include('layouts._index_changePwd')
 
-      <div id="body-wrapper">
-        <!-- Wrapper for the radial gradient background -->
-          <aside class="main-sidebar">
-            <section  class="sidebar">
-              <ul class="sidebar-menu">
-                <li class="header"></li>
-                <li class="treeview">
-                  <a href="{{ route('objective.iamexecutor',"1") }}">
-                    <i class="fa fa-files-o"></i>
-                    <span>我的目标</span>
-                    <!-- <i class="fa fa-angle-right pull-right"></i> -->
-                  </a>
-                </li>
-                <li class="treeview">
-                  <a href="{{ route('objective.heisexecutor',"1") }}">
-                    <i class="fa fa-th"></i> <span>成员目标</span>
-                  </a>
-                    <!-- <i class="fa fa-angle-right pull-right"></i> -->
-                  <!-- <div class="side_content">
-                    <ul>
-                      <li><a href="tk_add.html"><i class="fangkuai"></i>添加题目</a></li>
-                    </ul>
-                  </div> -->
-                </li>
-              </ul>
-            </section>
-          </aside>
-          <style type="text/css">
-            .main-sidebar{
-              position: absolute;
-              top:56px;
-              left: 0;
-              height: 100%;
-              min-height: 100%;
-              width: 230px;
-              z-index: 810;
-              background-color: #fff;
-            }
-          </style>
-          <script>
-            $.sidebarMenu($('.sidebar-menu'))
-          </script>
+    <div id="body-wrapper">
+      <!-- Wrapper for the radial gradient background -->
+        <aside class="main-sidebar">
+          <section  class="sidebar">
+            <ul class="sidebar-menu">
+              <li class="header"></li>
+              <li class="treeview">
+                <a href="{{ route('objective.iamexecutor',$p1) }}">
+                  <i class="fa fa-files-o"></i>
+                  <span>我的目标</span>
+                  <!-- <i class="fa fa-angle-right pull-right"></i> -->
+                </a>
+              </li>
+              <li class="treeview">
+                <a href="{{ route('objective.heisexecutor',"1") }}">
+                  <i class="fa fa-th"></i> <span>成员目标</span>
+                  <!-- <i class="fa fa-angle-right pull-right"></i> -->
+                </a>
+              </li>
+            </ul>
+          </section>
+        </aside>
+        <style type="text/css">
+          .main-sidebar{
+          position: absolute;
+          top:56px;
+          left: 0;
+          height: 100%;
+          min-height: 100%;
+          width: 230px;
+          z-index: 810;
+          background-color: #fff;
+         }
+        </style>
+        <script>
+          $.sidebarMenu($('.sidebar-menu'))
+        </script>
         <!-- End #sidebar -->
-          <div id="main-content">
-            <div class="h2Title">
-              成员目标
-            </div>
-            <!-- End .clear -->
-            <div class="content-box" style="display: flex;">
-              <!-- 公司员工搜索 -->
-              <div style="width: 261px;padding: 0 15px;border-right: 1px solid #ddd;margin-right: 15px;">
-                <div class="yg_sec">
-                  <input type="text" style="width: 230px;" id="keyword" name="keyword" lay-verify="identity" placeholder="员工手机或姓名" autocomplete="off" class="layui-input" value="{{ $keyword }}">
-                  <img src="/okr/resources/images/icons/search.png" class="jy_btn" onclick="keywordSearch();">
-                </div>
-                <div class="trees">
-                  <ul id="ygNameTree" class="ztree"></ul>
-                </div>
+        <div id="main-content">
+          <div class="h2Title">
+            我的目标
+          </div>
+          <!-- End .clear -->
+          <div class="content-box">
+            <div class="layui-tab">
+              <ul class="layui-tab-title">
+                <!--a href="{{ route('objective.iamexecutor',$p1) }}" class="nows"><li class="layui-this">我负责的</li></a-->
+                <li class="layui-this">我发起的</li>
+                <a href="{{ route('objective.iamexecutor',"1") }}"><li>我负责的</li></a>
+                <a href="{{ route('objective.iamexecutor',"2") }}"><li>我参与的</li></a>
+              </ul>
+              <div class="p_l8 jy_search" style="text-align: right;">
+                <button class="layui-btn layui-btn-normal add_mb" style="width: 80px;height: 33px;" onclick="pop_new_o();">新增目标</button>
               </div>
-              <div class="layui-tab my_cont">
-                <ul class="layui-tab-title">
-                  <!--a href="{{ route('objective.heisexecutor',$p1) }}" class="nows"><li class="layui-this">成员负责的</li></a-->
-                  <a href="javascript:;" onclick="clickTabTitle(1);"  class="nows"><li>成员负责的</li></a>
-                  <li class="layui-this">成员参与的</li>
-                </ul>
-                <div class="my_job">
-                  <div class="text-center c_333">{{ $executor['name'] }} <br> <span class="c_999">{{ $executor['position_name'] }}</span></div>
-                </div>
-                <div class="layui-tab-content">
-                  <div class="layui-tab-item layui-show">
-                    <div class="time_con">
-                      <select id="weekperiod" class="list active" onchange="selectPeriod('week',this.value);">
-                        <option value="0">周度</option>
-                        <option value="1">本周</option>
-                        <option value="2">上周</option>
-                        <option value="3">下周</option>
-                      </select>
+              <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                  <div class="time_con">
+                    <select id="weekperiod" class="list active" onchange="selectPeriod('week',this.value);">
+                      <option value="0">周度</option>
+                      <option value="1">本周</option>
+                      <option value="2">上周</option>
+                      <option value="3">下周</option>
+                    </select>
 
-                      <select id="monthperiod" class="list" onchange="selectPeriod('month',this.value);">
-                        <option value="100">月度</option>
-                        <option value="101">一月</option>
-                        <option value="102">二月</option>
-                        <option value="103">三月</option>
-                        <option value="104">四月</option>
-                        <option value="105">五月</option>
-                        <option value="106">六月</option>
-                        <option value="107">七月</option>
-                        <option value="108">八月</option>
-                        <option value="109">九月</option>
-                        <option value="110">十月</option>
-                        <option value="111">十一月</option>
-                        <option value="112">十二月</option>
-                      </select>
+                    <select id="monthperiod" class="list" onchange="selectPeriod('month',this.value);">
+                      <option value="100">月度</option>
+                      <option value="101">一月</option>
+                      <option value="102">二月</option>
+                      <option value="103">三月</option>
+                      <option value="104">四月</option>
+                      <option value="105">五月</option>
+                      <option value="106">六月</option>
+                      <option value="107">七月</option>
+                      <option value="108">八月</option>
+                      <option value="109">九月</option>
+                      <option value="110">十月</option>
+                      <option value="111">十一月</option>
+                      <option value="112">十二月</option>
+                    </select>
 
-                      <select id="seasonperiod" class="list" onchange="selectPeriod('season',this.value);">
-                        <option value="1000">季度</option>
-                        <option value="1001" title="1月-3月">第一季度</option>
-                        <option value="1002" title="3月-6月">第二季度</option>
-                        <option value="1003" title="6月-9月">第三季度</option>
-                        <option value="1004" title="10月-12月">第四季度</option>
-                      </select>
+                    <select id="seasonperiod" class="list" onchange="selectPeriod('season',this.value);">
+                      <option value="1000">季度</option>
+                      <option value="1001" title="1月-3月">第一季度</option>
+                      <option value="1002" title="3月-6月">第二季度</option>
+                      <option value="1003" title="6月-9月">第三季度</option>
+                      <option value="1004" title="10月-12月">第四季度</option>
+                    </select>
 
-                      <div id="othersperiod" class="ot_time list">
-                        <select>
-                          <option value="10000">其他时间</option>
-                        </select>
-                        <input type="text" class="layui-input" id="otherstime" placeholder="其他时间" style="border: none;opacity: 0;" readonly >
-                      </div>
+                    <div id="othersperiod" class="ot_time list">
+                      <select>
+                        <option value="10000">其他时间</option>
+                      </select>
+                      <input type="text" class="layui-input" id="otherstime" placeholder="其他时间" style="border: none;opacity: 0;" readonly >
                     </div>
-                    <div class="trees">
-                      <div class="titles">（{{ $arr_period[0] }}~{{ $arr_period[1] }}）OKR指标
-                      </div>
-                      <ul id="cyfz" class="ztree"></ul>
-                      {!! $objective->appends(array('keyword'=>$keyword,'user_id'=>$user_id,'perioditem'=>$perioditem,'period'=>$period))->render() !!}
+                  </div>
+                  <div class="trees">
+                    <div class="titles">（{{ $arr_period[0] }}~{{ $arr_period[1] }}）OKR指标
                     </div>
+                    <ul id="treeDemo" class="ztree"></ul>
+                    {!! $objective->appends(array('perioditem'=>$perioditem,'period'=>$period))->render() !!}
                   </div>
                 </div>
               </div>
+            </div>
           </div>
 
-        <!-- End Notifications -->
-      <div >
-
-  </div>
+          <!-- End Notifications -->
+        <div >
+      </div>
 
     <!-- End #footer -->
   </div>
   <!-- End #main-content -->
+  </div>
 
+  <!-- 新增目标 models -->
+  <div class="models mb_models">
+      <div class="modes_con">
+        <div class="layui-layer-content">
+          <div class="models_mid text-center">
+              <div style="margin-top: 20px;">
+                <h2>新增目标</h2>
 
-</div>
+                <div>
+                  <form>
+                    <!-- 目标内容 -->
+                    <div>
+                      <div class="fzr">
+                        <span class="ob_titles">
+                          目标内容（O）
+                        </span>
+                      </div>
+                      <div class="mb_cont">
+                        <ul>
+                          <li>
+                            <i class="icon iconfont icon-copy1"></i>
+                            <input id="o_name" name="o_name" type="text" class="layui-input" placeholder="请输入项目名字">
+                          </li>
+                          <li>
+                            <i class="icon iconfont icon-calendar1"></i>
+                            <input type="text" class="layui-input" id="res_time" placeholder="时间" readonly>
+                          </li>
+                          <li>
+                            <i class="icon iconfont icon-adduser1"></i>
+                            <select id="o_executor_id" name="o_executor_id" class="selectpicker mb_cyr" data-hide-disabled="true" data-live-search="true">
+                                  <option>添加负责人</option>
+                                  @foreach ($arr_allUserDept as $one)
+                                      <optgroup label="{{ $one['name'] }}">
+                                      @foreach ($one['users'] as $dptuser)
+                                          <option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
+                                      @endforeach
+                                  @endforeach
+                            </select>
+                          </li>
+                          <li>
+                            <i class="icon iconfont icon-addusergroup1"></i>
+                            <select id="o_partake_id" name="o_partake_id" class="selectpicker mb_cyr" multiple data-live-search="true" data-live-search-placeholder="Search" data-actions-box="true">
+                            
+                            		  @foreach ($arr_allUserDept as $one)
+                                      <optgroup label="{{ $one['name'] }}">
+                                      @foreach ($one['users'] as $dptuser)
+                                          <option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
+                                      @endforeach
+                                  @endforeach
 
+                            </select>
+                          </li>
+                          <li>
+                            <i class="icon iconfont icon-edit"></i>
+                            <textarea id="o_description" name="o_description" placeholder="添加描述"></textarea>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="layui-layer-btn layui-layer-btn-">
+                      <a class="layui-layer-btn0" onclick="new_objective();">保存</a>
+                      <a class="layui-layer-btn1">取消</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+        <span class="layui-layer-setwin">
+          <a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;"></a>
+        </span>
+        
+        <span class="layui-layer-resize"></span>
+    </div>
+  </div>
+  <!-- models end -->
 
   <!-- 目标model 详情 -->
   <div class="models dy_mb_models" style="display: none;">
@@ -201,7 +259,15 @@
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
                             <!-- <span id="o_executor_id_u"></span> -->
-                            <input id="o_executor_id_u" type="text" class="layui-input" readonly value="">
+                            <select id="o_executor_id_u" name="o_executor_id" class="selectpicker mb_cyr" data-hide-disabled="true" data-live-search="true">
+                                  <option>添加负责人</option>
+                                  @foreach ($arr_allUserDept as $one)
+                                      <optgroup label="{{ $one['name'] }}">
+                                      @foreach ($one['users'] as $dptuser)
+                                          <option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
+                                      @endforeach
+                                  @endforeach
+                            </select>
                           </li>
 
                           <li>
@@ -213,7 +279,7 @@
                             <i class="icon iconfont icon-addusergroup1"></i>
                             <select id="o_partake_id_u" name="o_partake_id_u" class="selectpicker mb_cyr" multiple data-live-search="true" data-live-search-placeholder="Search" data-actions-box="true">
                               
-                                  @foreach ($arr_allUserDept as $one)
+                              	  @foreach ($arr_allUserDept as $one)
                                       <optgroup label="{{ $one['name'] }}">
                                       @foreach ($one['users'] as $dptuser)
                                           <option value="{{ $dptuser['id'] }}">{{ $dptuser['name'] }}</option>
@@ -442,131 +508,126 @@
   </div>
 
 
-
-<script type="text/javascript">
-  /*公司职位*/
-  var ygsetting = {
-      view: {
-        addDiyDom: addDiyDoms
-      },
-    };
-  // var ygnames =[
-  //     { name:"财务部", open:true,job:"",
-  //       children: [
-  //         { name:"朱小舟",job:"主管",click:"alert('aaa')",},
-  //         { name:"朱小舟",job:"职员"},
-  //         { name:"朱小舟",job:"职员"}
-  //       ]},
-  // ];
-
-  var ygnames = {!! $json_allUserDept !!};
-
-  function addDiyDoms(treeId, treeNode) {
-      // if (treeNode.parentNode && treeNode.parentNode.id!=2) return;
-      var aObj = $("#" + treeNode.tId + IDMark_A);
-      var job = (typeof(treeNode.position_name) == "undefined") ? ("") : (treeNode.position_name);
-      var editStr = "<span class='demoIcon'><span class='wks'>"+job+"</span></span>";
-      aObj.after(editStr);
-  }
-
-
-
-  /*zthree*/
-  var IDMark_Switch = "_switch",
-    IDMark_Icon = "_ico",
-    IDMark_Span = "_span",
-    IDMark_Input = "_input",
-    IDMark_Check = "_check",
-    IDMark_Edit = "_edit",
-    IDMark_Remove = "_remove",
-    IDMark_Ul = "_ul",
-    IDMark_A = "_a";
-    
-    
-    /*成员负责的*/
-    var cyfzsetting = {
-      view: {
-        addDiyDom: addDiyDom,
-        showIcon: false,
-        fontCss: getFont
-      }
-    };
-
-    var cyfz = {!! $json_objective !!};
+  <script type="text/javascript">
+    /*zthree*/
+    var IDMark_Switch = "_switch",
+      IDMark_Icon = "_ico",
+      IDMark_Span = "_span",
+      IDMark_Input = "_input",
+      IDMark_Check = "_check",
+      IDMark_Edit = "_edit",
+      IDMark_Remove = "_remove",
+      IDMark_Ul = "_ul",
+      IDMark_A = "_a";
+      
+      var setting = {
+        view: {
+          addDiyDom: aaaa,
+          showIcon: false,
+          fontCss: getFont
+        }
+      };
+      
+  	var zNodes = {!! $json_objective !!};
 
     function getFont(treeId, node) {
       return node.font ? node.font : {};
     }
 
-    function addDiyDom(treeId, treeNode) {
-      // if (treeNode.parentNode && treeNode.parentNode.id!=2) return;
-      // var aObj = $("#" + treeNode.tId + IDMark_A);
-      // var name = treeNode.name;
-      // var editStr = "<span class='demoIcon'><span class='pl_btn_zt' data-names='"+name+"'><i class='icon iconfont icon-pinglun'></i>评论</span></span>";
-      //   aObj.after(editStr);
+  	function aaaa(treeId, treeNode) {
+  		//if (treeNode.parentNode && treeNode.parentNode.id!=2) return;
+  		var aObj = $("#" + treeNode.tId + IDMark_A);
+  		dateStatusStr="";
+  		switch(treeNode.dateStatus)
+  		{
+  			case 1:
+  			  dateStatusStr="<span class='demoIcon'><span class='wks'>未开始</span></span>";
+  			  break;
+  			case 2:
+  			  dateStatusStr="<span class='demoIcon'><span class='jxz'>进行中</span></span>";
+  			  break;
+  			case 3:
+  			  dateStatusStr="<span class='demoIcon'><span class='ywc'>已完成</span></span>";
+  			  break;
+  			case 4:
+  			  dateStatusStr="<span class='demoIcon'><span class='yyq'>已逾期</span></span>";
+  			  break;
+  			default:
+  		}
+  		
+  		console.log(treeNode.id+" "+treeNode.dateStatus+" "+treeNode.score);
+  		scoreStatusStr="";
+  		//进行中的或已逾期未评分的可以评分
+  		// if(treeNode.dateStatus==2 || (treeNode.dateStatus==4 && treeNode.score==999)){
+      console.log(treeNode.name + treeNode.canScore);
+      if(treeNode.canScore==1){
+  			// scoreStatusStr = "<span class='demoIcon'><span class='jxz pf' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='score(this);'>评分</span></span>";
+  		}else{
+  			//有分数显示分数
+  			if(treeNode.score!=999){
+  				scoreStatusStr = "<span class='demoIcon'><span>"+treeNode.score+"</span></span>";
+  			}
+  		}
+  		
+  		// 新增下一级按钮，未开始1 进行中2 可以新增下一级
+  		nextlevelStatusStr="";
+  		detailStatusStr="";
+  		switch(treeNode.flag)
+  		{
+  			case "objective":
+          // if(treeNode.dateStatus==1 || treeNode.dateStatus==2){
+          //   nextlevelStatusStr="<span class='demoIcon'><span title='添加KR' class='icon iconfont icon-jiahao tj_jg' onclick='pop_new_kr("+treeNode.id+")'></span></span>";
+          // }
+  			  detailStatusStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-chaxun' title='详情' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_objective(this);'></span></span>";
+  			  break;
+  			case "keyresult":
+        //   if(treeNode.dateStatus==1 || treeNode.dateStatus==2){
+  			   // nextlevelStatusStr="<span class='demoIcon'><span title='添加计划' class='icon iconfont icon-jiahao tj_jh' onclick='pop_new_p("+treeNode.id+")'></span></span>";
+        //   }
+  			  detailStatusStr = "<span class='demoIcon'><span class='jgxq icon iconfont icon-chaxun' title='详情' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_keyresult(this);'></span></span>";
+  			  break;
+  			case "plan":
+  			  nextlevelStatusStr="";
+  			  detailStatusStr = "<span class='demoIcon'><span class='jhxq icon iconfont icon-chaxun' title='详情' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_plan(this);'></span></span>";
+  			  break;
+  		}
+  		
+  		aObj.after(dateStatusStr + scoreStatusStr + nextlevelStatusStr + detailStatusStr);
 
-      var aObj = $("#" + treeNode.tId + IDMark_A);
-      
-      dateStatusStr="";
-      switch(treeNode.dateStatus)
-      {
-        case 1:
-          dateStatusStr="<span class='demoIcon'><span class='wks'>未开始</span></span>";
-          break;
-        case 2:
-          dateStatusStr="<span class='demoIcon'><span class='jxz'>进行中</span></span>";
-          break;
-        case 3:
-          dateStatusStr="<span class='demoIcon'><span class='ywc'>已完成</span></span>";
-          break;
-        case 4:
-          dateStatusStr="<span class='demoIcon'><span class='yyq'>已逾期</span></span>";
-          break;
-        default:
-      }
-      
-      console.log(treeNode.id+" "+treeNode.dateStatus+" "+treeNode.score);
-      scoreStatusStr="";
-      //进行中的或已逾期未评分的可以评分
-      // if(treeNode.dateStatus==2 || (treeNode.dateStatus==4 && treeNode.score==999)){
-      //  scoreStatusStr = "<span class='demoIcon'><span class='jxz pf' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='score(this);'>评分</span></span>";
-      // }else{
-        //有分数线是分数
-        if(treeNode.score!=999){
-          scoreStatusStr = "<span class='demoIcon'><span>"+treeNode.score+"</span></span>";
-        }
-      // }
-      
-      
-      nextlevelStatusStr="";
-      detailStatusStr="";
-      switch(treeNode.flag)
-      {
-        case "objective":
-          // nextlevelStatusStr="<span class='demoIcon'><span title='添加KR' class='icon iconfont icon-jiahao tj_jg' onclick='pop_new_kr("+treeNode.id+")'></span></span>";
-          detailStatusStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-chaxun' title='详情' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_objective(this);'></span></span>";
-          break;
-        case "keyresult":
-          // nextlevelStatusStr="<span class='demoIcon'><span title='添加计划' class='icon iconfont icon-jiahao tj_jh' onclick='pop_new_p("+treeNode.id+")'></span></span>";
-          detailStatusStr = "<span class='demoIcon'><span class='jgxq icon iconfont icon-chaxun' title='详情' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_keyresult(this);'></span></span>";
-          break;
-        case "plan":
-          // nextlevelStatusStr="";
-          detailStatusStr = "<span class='demoIcon'><span class='jhxq icon iconfont icon-chaxun' title='详情' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_plan(this);'></span></span>";
-          break;
-      }
-      
-      aObj.after(dateStatusStr + scoreStatusStr + nextlevelStatusStr + detailStatusStr);
-    }
+  	}
 
+    var perioditem;
+    var period;
+    $(function(){
+      $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+     
+      $("#my_mb .treeview a:contains('我的目标')").parent().addClass('active');
+      // console.log("2:"+laydate);
+      // laydate(res_time);
+      /*新增目标*/
+      // $(".add_mb").on("click",function(laydate){
 
+      //   $("#o_executor_id").val({{ $executor_id }});
+      //   $('#o_executor_id').selectpicker('refresh');
 
-    $(document).ready(function(){
-      /*员工名称*/
-      $.fn.zTree.init($("#ygNameTree"), ygsetting, ygnames);
-      
-      /*员工负责的*/
-      $.fn.zTree.init($("#cyfz"), cyfzsetting, cyfz);
+      //   console.log("1:"+laydate);
+      //   res_time.max = "2018-06-27";
+      //   res_time.min = "2018-06-17";
+
+      //   // laydate(res_time);
+
+      //   $(".mb_models").fadeIn();
+      // })
+
+      /*切换不同的日器选择*/
+      // $(".time_con .list").on("click",function(){
+      //   $(this).addClass("active").siblings(".active").removeClass("active");
+      // })
+      //日期确定
+      // $(".laydate-btns-confirm").on("click",function(){
+
+      // })
+
 
       var laydate = layui.laydate;
       var otherstime = laydate.render({
@@ -579,34 +640,12 @@
                       selectPeriod('others',value);
                     }
           });
-    
-    });
 
-
-  var perioditem;
-  var period;
-  $(function(){
-      $("#cy_mb .treeview a:contains('成员目标')").parent().addClass('active');
-
-
-      var laydate = layui.laydate;
-      var otherstime = laydate.render({
-              elem: '#otherstime',
-              range:true,
-              //min:'2018-06-17',
-              //max:'2018-06-27',
-              done: function(value, date, endDate) {
-                      console.log(value);
-                      selectPeriod('others',value);
-                    }
+      // 目标新增时间
+      res_time_laydate = laydate.render({
+           elem: '#res_time',
+           range: true,
           });
-
-      // 定位日期段所属项目和具体选择的日期段
-      perioditem = "{{ $perioditem }}";
-      period = {{ $period }};
-
-      initPerild();
-
       // 目标编辑时间
       dy_res_time_laydate = laydate.render({
            elem: '#dy_res_time',
@@ -619,14 +658,31 @@
            range: true,
           });
       // console.log(dy_key_time_laydate);
+      // 关键结果新增时间
+      add_key_time_laydate = laydate.render({
+           elem: '#add_key_time',
+           range: true,
+          });
 
+      // 计划新增时间
+      add_jh_time_laydate = laydate.render({
+           elem: '#add_jh_time',
+           range: true,
+          });
       // 计划编辑时间
       dy_jh_time_laydate = laydate.render({
            elem: '#dy_jh_time',
            range: true,
           });
-  })
 
+
+      // 定位日期段所属项目和具体选择的日期段
+      perioditem = "{{ $perioditem }}";
+      period = {{ $period }};
+
+      initPerild();
+    })
+    
 
     // 初始化日期选择
     function initPerild(){
@@ -645,121 +701,259 @@
         if (period>1000 && period<10000){$("#seasonperiod").val(period);}
     }
 
+    // 日期选择确定
+    function selectPeriod(selectedperioditem,selectedperiod){
+      console.log(selectedperioditem + " " +selectedperiod);
+      window.location.href = "{{ route('objective.iamexecutor',$p1) }}" + "?perioditem=" + selectedperioditem + "&period=" + selectedperiod;
+    }
+
+
+    //新增目标弹层
+    function pop_new_o(){
+      $("#o_executor_id").val({{ $executor_id }});
+      $('#o_executor_id').selectpicker('refresh');
+
+      // console.log("1:"+laydate);
+      // res_time.max = "2018-06-27";
+      // res_time.min = "2018-06-17";
+
+      // laydate(res_time);
+
+      $(".mb_models").fadeIn();
+    }
+
+    //目标新增
+    function new_objective(){
+    	// alert("submit_user");
+    	var o_name = $("#o_name").val();
+    	var o_date = $("#res_time").val();
+    	var o_executor_id = $("#o_executor_id").val();
+    	var o_partake_id = $("#o_partake_id").val();
+    	var o_description = $("#o_description").val();
+    	
+    	console.log(o_date);
+    	console.log(o_executor_id);
+    	console.log(o_partake_id);
+
+    	if (!o_name) {
+    		layer.msg("名字不能为空",{time:1000});
+    		return false;
+    	}
+    	if (!o_date) {
+    		layer.msg("时间不能为空",{time:1000});
+    		return false;
+    	}
+    	if (!o_executor_id) {
+    		layer.msg("负责人不能为空",{time:1000});
+    		return false;
+    	}
+    	if (!o_partake_id) {
+    		layer.msg("参与者不能为空",{time:1000});
+    		return false;
+    	}
+    	
+    	ajax_type = 'POST';
+      submit_url = "{{ route('objective.store') }}";
+      // submit_url = "{{ route('keyresult.store') }}";
+
+    	$.ajax({
+    		type: ajax_type,
+    		url: submit_url,
+    		//data: { name : name, pid : pid, status : status,'_token': "{{csrf_token()}}"},
+    		data: { o_name : o_name, o_date : o_date, o_executor_id : o_executor_id, o_partake_id : o_partake_id, o_description : o_description},
+    		dataType: 'json',
+    		headers: {
+    			'X-CSRF-TOKEN': '{{csrf_token()}}'
+    		},
+    		success: function(data){
+    			console.log(data);
+    			layer.msg(data.msg);
+    			if(data.status=="1"){window.location.reload();}
+    		},
+    	});
+    }
+
     // 目标详情
     function detail_objective(btn){
-      flag = $(btn).attr("flag");
-      itemid = $(btn).attr("itemid");
-      switch(flag)
-      {
-        case "objective":
-          geturl =  "{{ route('objective.detail') }}";
-          break;
-        case "keyresult":
-          geturl =  "{{ route('keyresult.detail') }}";
-          break;
-        case "plan":
-          geturl =  "{{ route('plan.detail') }}";
-          break;
-      }
-      console.log(geturl);
-      
-      $.ajax({
-        type: 'GET',
-        url: geturl,
-        data: { id : itemid},
-        dataType: 'json',
-        headers: {
-          'X-CSRF-TOKEN': '{{csrf_token()}}'
-        },
+    	flag = $(btn).attr("flag");
+    	itemid = $(btn).attr("itemid");
+    	switch(flag)
+    	{
+    		case "objective":
+    		  geturl =  "{{ route('objective.detail') }}";
+    		  break;
+    		case "keyresult":
+    		  geturl =  "{{ route('keyresult.detail') }}";
+    		  break;
+    		case "plan":
+    		  geturl =  "{{ route('plan.detail') }}";
+    		  break;
+    	}
+    	console.log(geturl);
+    	
+    	$.ajax({
+    		type: 'GET',
+    		url: geturl,
+    		data: { id : itemid},
+    		dataType: 'json',
+    		headers: {
+    			'X-CSRF-TOKEN': '{{csrf_token()}}'
+    		},
 
-        success: function(data){
-          console.log(data);
-          
-          //名称
-          $("#o_name_u").html(data.name);
-          //时间
-          $("#dy_res_time").val(data.startdate+" - "+data.enddate);
-          //描述
-          $("#o_description_u").val(data.description);
-          //负责人
-          $("#o_executor_id_u").html(data.executor['name']);
-          //参与者
-          //$("#o_partake_id_u").val([3,6]);
-          $("#o_partake_id_u").val(data.newpartake);
-          $('#o_partake_id_u').selectpicker('refresh');
-          //状态
-          switch(data.dateStatus)
-          {
-            case 1:
-              //dateStatusStr="<span class='demoIcon'><span class='wks'>未开始</span></span>";
-              $("#o_dateStatus_u").html("未开始");
-              $("#o_dateStatus_u").attr("class","wks model_mb_zt");
-              break;
-            case 2:
-              //dateStatusStr="<span class='demoIcon'><span class='jxz'>进行中</span></span>";
-              $("#o_dateStatus_u").html("进行中");
-              $("#o_dateStatus_u").attr("class","jxz model_mb_zt");
-              break;
-            case 3:
-              //dateStatusStr="<span class='demoIcon'><span class='ywc'>已完成</span></span>";
-              $("#o_dateStatus_u").html("已完成");
-              $("#o_dateStatus_u").attr("class","ywc model_mb_zt");
-              break;
-            case 4:
-              //dateStatusStr="<span class='demoIcon'><span class='yyq'>已逾期</span></span>";
-              $("#o_dateStatus_u").html("已逾期");
-              $("#o_dateStatus_u").attr("class","yyq model_mb_zt");
-              break;
-            default:
-          }
-          //分数
-          
-          if(data.score!=999){
-            $("#o_score_u").html(data.score);
+    		success: function(data){
+    			console.log(data);
+    			
+    			//名称
+    			$("#o_name_u").html(data.name);
+    			//时间
+    			$("#dy_res_time").val(data.startdate+" - "+data.enddate);
+    			//描述
+    			$("#o_description_u").val(data.description);
+    			//负责人
+    			// $("#o_executor_id_u").html(data.executor['name']);
+          $("#o_executor_id_u").val(data.executor_id);
+          $('#o_executor_id_u').selectpicker('refresh');
+    			//参与者
+    			//$("#o_partake_id_u").val([3,6]);
+    			$("#o_partake_id_u").val(data.newpartake);
+    			$('#o_partake_id_u').selectpicker('refresh');
+    			//状态
+    			switch(data.dateStatus)
+    			{
+    				case 1:
+    				  //dateStatusStr="<span class='demoIcon'><span class='wks'>未开始</span></span>";
+    				  $("#o_dateStatus_u").html("未开始");
+    				  $("#o_dateStatus_u").attr("class","wks model_mb_zt");
+    				  break;
+    				case 2:
+    				  //dateStatusStr="<span class='demoIcon'><span class='jxz'>进行中</span></span>";
+    				  $("#o_dateStatus_u").html("进行中");
+    				  $("#o_dateStatus_u").attr("class","jxz model_mb_zt");
+    				  break;
+    				case 3:
+    				  //dateStatusStr="<span class='demoIcon'><span class='ywc'>已完成</span></span>";
+    				  $("#o_dateStatus_u").html("已完成");
+    				  $("#o_dateStatus_u").attr("class","ywc model_mb_zt");
+    				  break;
+    				case 4:
+    				  //dateStatusStr="<span class='demoIcon'><span class='yyq'>已逾期</span></span>";
+    				  $("#o_dateStatus_u").html("已逾期");
+    				  $("#o_dateStatus_u").attr("class","yyq model_mb_zt");
+    				  break;
+    				default:
+    			}
+    			//分数
+    			
+    			if(data.score!=999){
+    				$("#o_score_u").html(data.score);
+    			}else{
+    				$("#o_score_u").html("");	
+    			}
+
+          // 删除按钮
+          $("#o_del_btn").show();
+          if(data.canDel['0']==0){
+            $("#o_del_btn").hide();
           }else{
-            $("#o_score_u").html(""); 
+            // $("#o_del_btn").click("delete_objective("+itemid+")");
+            // // $("#o_del_btn").attr("href","delete_objective("+itemid+")");
+            // console.log($("#o_del_btn").click());
+
+            // $("#o_del_btn").click("delete_objective()");
+            del_o_id = itemid;
           }
 
-          // // 删除按钮
-          // $("#o_del_btn").show();
-          // if(data.canDel['0']==0){
-          //   $("#o_del_btn").hide();
-          // }else{
-          //   // $("#o_del_btn").click("delete_objective("+itemid+")");
-          //   // // $("#o_del_btn").attr("href","delete_objective("+itemid+")");
-          //   // console.log($("#o_del_btn").click());
-
-          //   // $("#o_del_btn").click("delete_objective()");
-          //   del_o_id = itemid;
-          // }
-
-          // // 编辑按钮
-          // $("#o_edit_btn").show();
-          // if(data.dateStatus==3 || data.dateStatus==4){
-          //   $("#o_edit_btn").hide();
-          // }
+          // 编辑按钮
+          $("#o_edit_btn").show();
+          if(data.dateStatus==3 || data.dateStatus==4){
+            $("#o_edit_btn").hide();
+          }
           
-          ajax_type = 'PATCH';
-          //submit_url = updateurl;
-          
-          // 删除按钮 编辑按钮 隐藏
-          $("#o_del_btn").hide();
-          $("#o_edit_btn").hide();
-
-          // 目标编辑层初始化
-          $("#o_savecancel_div").hide();
-          $("#o_edit_ul").addClass("ul_no");
-          
+    			ajax_type = 'PATCH';
+    			//submit_url = updateurl;
+    			
+    			// 目标编辑层初始化
+    			$("#o_savecancel_div").hide();
+    			$("#o_edit_ul").addClass("ul_no");
+    			
 
           $("#o_comment_id").attr("okr_id",itemid);
           // 显示评论
           $("#o_comment_showArea").html(getComment(data.comments));
 
-          $(".dy_mb_models").show();
+    			$(".dy_mb_models").show();
 
+    		},
+    	});
+    }
+
+    //目标编辑
+    function edit_objective(){
+      // alert("submit_user");
+      var o_executor_id = $("#o_executor_id_u").val();
+      var o_date = $("#dy_res_time").val();
+      var o_partake_id = $("#o_partake_id_u").val();
+      var o_description = $("#o_description_u").val();
+      
+      console.log(o_date);
+      console.log(o_partake_id);
+
+      if (!o_executor_id) {
+        layer.msg("负责人不能为空",{time:1000});
+        return false;
+      }
+      if (!o_date) {
+        layer.msg("时间不能为空",{time:1000});
+        return false;
+      }
+      if (!o_partake_id) {
+        layer.msg("参与者不能为空",{time:1000});
+        return false;
+      }
+      
+      ajax_type = 'POST';
+      submit_url = "{{ route('objective.update') }}";
+
+      $.ajax({
+        type: ajax_type,
+        url: submit_url,
+        data: { o_id : itemid, o_executor_id : o_executor_id, o_date : o_date, o_partake_id : o_partake_id, o_description : o_description},
+        dataType: 'json',
+        headers: {
+          'X-CSRF-TOKEN': '{{csrf_token()}}'
+        },
+        success: function(data){
+          console.log(data);
+          layer.msg(data.msg);
+          if(data.status=="1"){window.location.reload();}
         },
       });
     }
+
+    //目标删除
+    function delete_objective(oid){
+      // alert(oid);
+      // return false;
+      ajax_type = 'GET';
+      submit_url = "{{ route('objective.delete') }}";
+
+      $.ajax({
+        type: ajax_type,
+        url: submit_url,
+        data: { o_id : oid,},
+        dataType: 'json',
+        headers: {
+          'X-CSRF-TOKEN': '{{csrf_token()}}'
+        },
+        success: function(data){
+          console.log(data);
+          layer.msg(data.msg);
+          if(data.status=="1"){del_o_id = "";window.location.reload();}
+        },
+      });
+    }
+
+    var pid="";
 
     // 关键结果详情
     function detail_keyresult(btn){
@@ -832,19 +1026,19 @@
             $("#kr_score_u").html(""); 
           }
 
-          // // 删除按钮
-          // $("#kr_del_btn").show();
-          // if(data.canDel['0']==0){
-          //   $("#kr_del_btn").hide();
-          // }else{
-          //   del_kr_id = itemid;
-          // }
+          // 删除按钮
+          $("#kr_del_btn").show();
+          if(data.canDel['0']==0){
+            $("#kr_del_btn").hide();
+          }else{
+            del_kr_id = itemid;
+          }
           
-          // // 编辑按钮
-          // $("#kr_edit_btn").show();
-          // if(data.dateStatus==3 || data.dateStatus==4){
-          //   $("#kr_edit_btn").hide();
-          // }
+          // 编辑按钮
+          $("#kr_edit_btn").show();
+          if(data.dateStatus==3 || data.dateStatus==4){
+            $("#kr_edit_btn").hide();
+          }
 
           ajax_type = 'PATCH';
           //submit_url = updateurl;
@@ -853,9 +1047,6 @@
           $("#kr_savecancel_div").hide();
           $("#kr_edit_ul").addClass("ul_no");
           
-          // 删除按钮 编辑按钮 隐藏
-          $("#kr_del_btn").hide();
-          $("#kr_edit_btn").hide();
 
           $("#kr_comment_id").attr("okr_id",itemid);
           // 显示评论
@@ -937,19 +1128,19 @@
             $("#p_score_u").html(""); 
           }
 
-          // // 删除按钮
-          // $("#plan_del_btn").show();
-          // if(data.canDel['0']==0){
-          //   $("#plan_del_btn").hide();
-          // }else{
-          //   del_plan_id = itemid;
-          // }
+          // 删除按钮
+          $("#plan_del_btn").show();
+          if(data.canDel['0']==0){
+            $("#plan_del_btn").hide();
+          }else{
+            del_plan_id = itemid;
+          }
           
-          // // 编辑按钮
-          // $("#plan_edit_btn").show();
-          // if(data.dateStatus==3 || data.dateStatus==4){
-          //   $("#plan_edit_btn").hide();
-          // }
+          // 编辑按钮
+          $("#plan_edit_btn").show();
+          if(data.dateStatus==3 || data.dateStatus==4){
+            $("#plan_edit_btn").hide();
+          }
           
           ajax_type = 'PATCH';
           //submit_url = updateurl;
@@ -957,71 +1148,48 @@
           // 目标编辑层初始化
           $("#p_savecancel_div").hide();
           $("#p_edit_ul").addClass("ul_no");
-
-          // 删除按钮 编辑按钮 隐藏
-          $("#plan_del_btn").hide();
-          $("#plan_edit_btn").hide();
-
+          
           $("#p_comment_id").attr("okr_id",itemid);
           // 显示评论
           $("#p_comment_showArea").html(getComment(data.comments));
-          
+
+
           $(".jh_mb_models").show();
             
         },
       });
     }
 
-  // 日期选择确定
-  function selectPeriod(selectedperioditem,selectedperiod){
-    console.log(selectedperioditem + " " +selectedperiod);
-    window.location.href = "{{ route('objective.heisexecutor',$p1) }}" + "?keyword={{ $keyword }}&user_id={{ $user_id }}" +  "&perioditem=" + selectedperioditem + "&period=" + selectedperiod;
-  }
+    // 修改密码
+    function changePwd(){
 
-  function keywordSearch(){
-    var keyword = $("#keyword").val();
+      oldpwd = $("#oldpwd").val();
+      newpwd = $("#newpwd").val();
 
-    if (!keyword) {
-        layer.msg("请输入条件",{time:1000});
+      if (!oldpwd) {
+        layer.msg("原始密码不能为空",{time:1000});
         return false;
+      }
+      if (!newpwd) {
+        layer.msg("新密码不能为空",{time:1000});
+        return false;
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "{{ route('index.changePwd') }}",
+        data: { oldpwd : oldpwd,newpwd : newpwd},
+        dataType: 'json',
+        headers: {
+          'X-CSRF-TOKEN': '{{csrf_token()}}'
+        },
+        success: function(data){
+          console.log(data);
+          layer.msg(data.msg);
+          if(data.status=="1"){window.location.reload();}
+        },
+      });
     }
-    url = "{{ route('objective.heisexecutor',$p1) }}";
-
-    window.location.href = url + "?keyword=" + keyword;
-  }
-
-  var user_id = "{{ $user_id }}";
-  // 点击部门员工列表中的一个人
-  function youClick(user_id){
-    user_id = user_id;
-    // console.log(user_id);
-    var keyword = $("#keyword").val();
- 
-    // if (!keyword) {
-    //     layer.msg("请输入条件",{time:1000});
-    //     return false;
-    // }
-    url = "{{ route('objective.heisexecutor',$p1) }}";
-
-    // 点了某员工
-    window.location.href = url + "?keyword=" + keyword + "&user_id=" + user_id;
-  }
-
-  function clickTabTitle(flagindex){
-    // var user_id = user_id;
-    var keyword = $("#keyword").val();
-    // alert(user_id);
-    // if (!keyword) {
-    //     layer.msg("请输入条件",{time:1000});
-    //     return false;
-    // }
-    if(flagindex==1)url = "{{ route('objective.heisexecutor',1) }}";
-    if(flagindex==2)url = "{{ route('objective.heisexecutor',2) }}";
-
-    // 点了某员工
-    window.location.href = url + "?keyword=" + keyword + "&user_id=" + user_id;
-  }
-
 
     // 发表评论
     function new_comment(btn){
@@ -1069,7 +1237,8 @@
       });
     }
 
-  function getComment(commentData){
+
+    function getComment(commentData){
 
       var str="";
       for (var i = 0; i < commentData.length; i++) {
@@ -1118,9 +1287,11 @@
         </div>
       </li>';
       */
-  }
+    }
+  </script>
 
-</script>
-<script type="text/javascript" src="/okr/js/main.js"></script>
+  <script type="text/javascript" src="/okr/js/main.js"></script>
 
+</body>
+<!-- Download From www.exet.tk-->
 </html>

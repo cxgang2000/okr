@@ -201,7 +201,8 @@
                         <ul class="ul_no" id="o_edit_ul">
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            <span id="o_executor_id_u"></span>
+                            <!-- <span id="o_executor_id_u"></span> -->
+                            <input id="o_executor_id_u" type="text" class="layui-input" readonly value="">
                           </li>
 
                           <li>
@@ -293,7 +294,8 @@
                         <ul class="ul_no" id="kr_edit_ul">
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            <span id="kr_executor_id_u">{{ $executor['name'] }}</span>
+                            <!-- <span id="kr_executor_id_u">{{ $executor['name'] }}</span> -->
+                            <input id="kr_executor_id_u" type="text" class="layui-input" readonly value="{{ $executor['name'] }}">
                           </li>
 
                           <li>
@@ -383,7 +385,8 @@
                         <ul class="ul_no" id="p_edit_ul">
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            <span id="p_executor_id_u">{{ $executor['name'] }}</span>
+                            <!-- <span id="p_executor_id_u">{{ $executor['name'] }}</span> -->
+                            <input id="p_executor_id_u" type="text" class="layui-input" readonly value="{{ $executor['name'] }}">
                           </li>
 
                           <li>

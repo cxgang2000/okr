@@ -112,7 +112,28 @@ class ObjectiveController extends Controller
                 ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
         }
 
+        // 我发起的
+        if($p1==3){
+            $templateName = "index.iamorganiser";
 
+            $arr_where['organiser_id'] = $executor_id;
+            $arr_where['status'] = 0;
+            
+            // 取目标
+            $objective = Objective::where($arr_where)
+                ->where(function ($query) use ($arr_period) {
+                    $query->where(function ($query) use ($arr_period) {
+                                $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
+                            })
+                            ->orWhere(function ($query) use ($arr_period) {
+                                $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
+                                })
+                            ->orWhere(function ($query) use ($arr_period) {
+                                $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
+                            });
+                    })
+                ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
+        }
         
         // 取下面的关键结果
         $objective->load("keyresults");
@@ -403,7 +424,7 @@ class ObjectiveController extends Controller
                         })
                     ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
             }
-            
+
             // 取下面的关键结果
             $objective->load("keyresults");
             // dd($objective->toArray());

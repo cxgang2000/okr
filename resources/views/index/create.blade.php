@@ -3,7 +3,7 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>方田网申登陆页</title>
+	<title>方田OKR系统</title>
 	<link rel="stylesheet" href="/okr/resources/layer/css/layui.css" type="text/css" media="screen" />
 
 	<link rel="stylesheet" href="/okr/resources/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" />
@@ -21,7 +21,7 @@
 
 <body id="login">
 	<div class="login_cont">
-		<h2 class="text-center login_titles">方田OKR管理后台</h2>
+		<h2 class="text-center login_titles">方田OKR系统</h2>
 
 		<div class="input_cont">
 			<div class="form_cont">

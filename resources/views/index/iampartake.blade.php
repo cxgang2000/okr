@@ -150,7 +150,7 @@
 
   <!-- 新增目标 models -->
   <div class="models mb_models">
-      <div class="modes_con" style="height: 800px;overflow: scroll;">
+      <div class="modes_con">
         <div class="layui-layer-content">
           <div class="models_mid text-center">
               <div style="margin-top: 20px;">
@@ -259,7 +259,8 @@
                         <ul class="ul_no" id="o_edit_ul">
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            <span id="o_executor_id_u"></span>
+                            <!-- <span id="o_executor_id_u"></span> -->
+                            <input id="o_executor_id_u" type="text" class="layui-input" readonly value="">
                           </li>
 
                           <li>
@@ -351,7 +352,8 @@
                         <ul class="ul_no" id="kr_edit_ul">
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            <span id="kr_executor_id_u">{{ $executor['name'] }}</span>
+                            <!-- <span id="kr_executor_id_u">{{ $executor['name'] }}</span> -->
+                            <input id="kr_executor_id_u" type="text" class="layui-input" readonly value="{{ $executor['name'] }}">
                           </li>
 
                           <li>
@@ -441,7 +443,8 @@
                         <ul class="ul_no" id="p_edit_ul">
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
-                            <span id="p_executor_id_u">{{ $executor['name'] }}</span>
+                            <!-- <span id="p_executor_id_u">{{ $executor['name'] }}</span> -->
+                            <input id="p_executor_id_u" type="text" class="layui-input" readonly value="{{ $executor['name'] }}">
                           </li>
 
                           <li>
@@ -758,7 +761,7 @@
           //描述
           $("#o_description_u").val(data.description);
           //负责人
-          $("#o_executor_id_u").html(data.executor['name']);
+          $("#o_executor_id_u").val(data.executor['name']);
           //参与者
           //$("#o_partake_id_u").val([3,6]);
           $("#o_partake_id_u").val(data.newpartake);
