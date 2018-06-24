@@ -593,6 +593,7 @@
       var otherstime = laydate.render({
               elem: '#otherstime',
               range:true,
+              btns: ['confirm'],
               //min:'2018-06-17',
               //max:'2018-06-27',
               done: function(value, date, endDate) {
@@ -625,6 +626,18 @@
            elem: '#dy_jh_time',
            range: true,
           });
+
+      // 打开当前员工的部门
+      var user_id = '{{ $user_id }}';
+      for (var i=0;i<ygnames.length;i++) {
+        for (var r=0;r<ygnames[i].children.length;r++) {
+          if (user_id == ygnames[i].children[r].id) {
+            ygnames[i].open="true";
+            $.fn.zTree.init($("#ygNameTree"), ygsetting, ygnames);
+          } 
+        }
+      }
+      
   })
 
 
@@ -975,16 +988,17 @@
   // 日期选择确定
   function selectPeriod(selectedperioditem,selectedperiod){
     console.log(selectedperioditem + " " +selectedperiod);
+    if(selectedperiod==0 || selectedperiod==100 || selectedperiod==1000 || selectedperiod==10000){return false;}
     window.location.href = "{{ route('objective.heisexecutor',$p1) }}" + "?keyword={{ $keyword }}&user_id={{ $user_id }}" +  "&perioditem=" + selectedperioditem + "&period=" + selectedperiod;
   }
 
   function keywordSearch(){
     var keyword = $("#keyword").val();
 
-    if (!keyword) {
-        layer.msg("请输入条件",{time:1000});
-        return false;
-    }
+    // if (!keyword) {
+    //     layer.msg("请输入条件",{time:1000});
+    //     return false;
+    // }
     url = "{{ route('objective.heisexecutor',$p1) }}";
 
     window.location.href = url + "?keyword=" + keyword;

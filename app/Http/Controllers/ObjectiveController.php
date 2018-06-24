@@ -60,7 +60,7 @@ class ObjectiveController extends Controller
         // dd($executor);
 
         // 目标列表
-        $perPage = 3;
+        $perPage = 10;
 
         // 我负责的
         if($p1==1){
@@ -367,7 +367,7 @@ class ObjectiveController extends Controller
         if($p1==2){$templateName = "index.heispartake";}
 
         // 目标列表
-        $perPage = 3;
+        $perPage = 10;
 
         if($user_id!=""){
 

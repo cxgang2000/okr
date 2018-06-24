@@ -244,7 +244,7 @@ input[type=file] {
 
 .content-box{
     background: #fff;
-    padding: 32px 16px 16px 0;
+    padding: 15px 16px 16px 0;
 }
 .clss_type{
     padding-right: 8px;
@@ -263,6 +263,7 @@ input[type=file] {
 }
 .jy_search{
     position: relative;
+    margin-left: 15px;
 }
 .jy_btn{
     position: absolute;
@@ -673,4 +674,17 @@ td .layui-btn-primary{
 }
 .trees .icon.iconfont.icon-chaxun{
     margin-left: -5px;
+}
+.mb_cont .fzr{
+    width: 100%;
+}
+.mb_cont{
+    border-top: 1px solid #eee!important;
+    padding-top: 10px;
+}
+.ty td{
+    color: #999;
+}
+.bootstrap-select.btn-group .dropdown-menu li{
+    border:none;
 }

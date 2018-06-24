@@ -155,7 +155,6 @@
           <div class="models_mid text-center">
               <div style="margin-top: 20px;">
                 <h2>新增目标</h2>
-
                 <div>
                   <form>
                     <!-- 目标内容 -->
@@ -206,10 +205,10 @@
                           </li>
                         </ul>
                       </div>
-                    </div>
-                    <div class="layui-layer-btn layui-layer-btn-">
-                      <a class="layui-layer-btn0" onclick="new_objective();">保存</a>
-                      <a class="layui-layer-btn1">取消</a>
+                      <div class="layui-layer-btn layui-layer-btn-">
+                        <a class="layui-layer-btn0" onclick="new_objective();">保存</a>
+                        <a class="layui-layer-btn1">取消</a>
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -633,6 +632,7 @@
       var otherstime = laydate.render({
               elem: '#otherstime',
               range:true,
+              btns: ['confirm'],
               //min:'2018-06-17',
               //max:'2018-06-27',
               done: function(value, date, endDate) {
@@ -704,6 +704,7 @@
     // 日期选择确定
     function selectPeriod(selectedperioditem,selectedperiod){
       console.log(selectedperioditem + " " +selectedperiod);
+      if(selectedperiod==0 || selectedperiod==100 || selectedperiod==1000 || selectedperiod==10000){return false;}
       window.location.href = "{{ route('objective.iamexecutor',$p1) }}" + "?perioditem=" + selectedperioditem + "&period=" + selectedperiod;
     }
 

@@ -87,7 +87,7 @@
           
           @foreach ($user as $k=>$one)
           
-          <tr>
+          <tr @if ($one['status'] === 1)class="ty"@endif >
               <td>
                 {{ ($user->currentPage()-1)*$user->perPage()+$k+1 }}
               </td>

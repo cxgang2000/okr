@@ -89,12 +89,12 @@
           
           @foreach ($arr_dpt as $k=>$one)
           
-          <tr>
+          <tr @if ($one['status'] === 1)class="ty"@endif >
               <td>
                 {{ ($department->currentPage()-1)*$department->perPage()+$k+1 }}
               </td>
               <td>
-                {{ $one['name'] }}
+                {{ $one['name'] }} {{ $one['name'] }}
               </td>
               <td>
               	@if ($one['pid'] == 0)
@@ -102,7 +102,6 @@
                 @else
                 	{{ $one['pname']['name'] }}
                 @endif
-                
               </td>
               <td>
                 {{ $one['leader'] }}
@@ -111,7 +110,7 @@
                 @if ($one['status'] === 1)
         					停用
         				@endif
-                        @if ($one['status'] === 0)
+                @if ($one['status'] === 0)
         					启用
         				@endif                
               </td>
@@ -124,8 +123,7 @@
                     {{ method_field('DELETE') }}
                     <!--button type="submit" class="btn btn-sm btn-danger delete-btn">删除</button-->
                   </form>
-                
-                
+
               </td>
           </tr>
           
