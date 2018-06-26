@@ -79,6 +79,7 @@
           <div class="content-box">
             <div class="layui-tab">
               <ul class="layui-tab-title">
+                <a href="{{ route('objective.iamexecutor',"3") }}"><li>我发起的</li></a>
                 <a href="{{ route('objective.iamexecutor',"1") }}"><li>我负责的</li></a>
                 <!--a href="{{ route('objective.iamexecutor',$p1) }}" class="nows"><li class="layui-this">我参与的</li></a-->
                 <li class="layui-this">我参与的</li>

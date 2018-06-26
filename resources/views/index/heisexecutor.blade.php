@@ -634,12 +634,22 @@
         for (var r=0;r<ygnames[i].children.length;r++) {
           if (user_id == ygnames[i].children[r].id) {
             ygnames[i].open="true";
+            // ygnames[i].children[r].view.fontCss = {color:"red"};
             $.fn.zTree.init($("#ygNameTree"), ygsetting, ygnames);
           } 
         }
       }
 
-
+      // 给刚点击的人加样式
+      function setFontCss(treeId, treeNode) {
+        return treeNode.id == user_id ? {color:"#209ee4"} : {};
+      };
+      var setting = {
+        view: {
+          fontCss: setFontCss
+        }
+      };
+      $.fn.zTree.init($("#ygNameTree"), setting, ygnames);
   })
 
 

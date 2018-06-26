@@ -30,7 +30,7 @@ class AdminController extends Controller
         // var_dump($admin);
         if(count($admin)==0){
             // return 0;
-            $array = array('msg'=>'用户未找到，登录失败!','status'=>0);
+            $array = array('msg'=>'用户名或密码错误，请重新输入！','status'=>0);
             return json_encode($array);
         }else{
             // return 1;

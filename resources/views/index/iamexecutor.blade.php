@@ -80,6 +80,7 @@
             <div class="layui-tab">
               <ul class="layui-tab-title">
                 <!--a href="{{ route('objective.iamexecutor',$p1) }}" class="nows"><li class="layui-this">我负责的</li></a-->
+                <a href="{{ route('objective.iamexecutor',"3") }}"><li>我发起的</li></a>
                 <li class="layui-this">我负责的</li>
                 <a href="{{ route('objective.iamexecutor',"2") }}"><li>我参与的</li></a>
               </ul>
@@ -259,7 +260,8 @@
                           <li>
                             <i class="icon iconfont icon-adduser1"></i>
                             <!-- <span id="o_executor_id_u"></span> -->
-                            <input id="o_executor_id_u" type="text" class="layui-input" readonly value="">
+                            <input id="o_executor_id_u" type="hidden" class="layui-input" readonly value="">
+                            <input id="o_executor_name" type="text" class="layui-input" readonly value="">
                           </li>
 
                           <li>
@@ -975,7 +977,9 @@
     			//描述
     			$("#o_description_u").val(data.description);
     			//负责人
-    			$("#o_executor_id_u").val(data.executor['name']);
+    			$("#o_executor_id_u").val(data.executor['id']);
+          $("#o_executor_name").val(data.executor['name']);
+          
     			//参与者
     			//$("#o_partake_id_u").val([3,6]);
     			$("#o_partake_id_u").val(data.newpartake);
@@ -1055,6 +1059,7 @@
       // alert("submit_user");
       var o_date = $("#dy_res_time").val();
       var o_partake_id = $("#o_partake_id_u").val();
+      var o_executor_id = $("#o_executor_id_u").val();
       var o_description = $("#o_description_u").val();
       
       console.log(o_date);
@@ -1075,7 +1080,7 @@
       $.ajax({
         type: ajax_type,
         url: submit_url,
-        data: { o_id : itemid, o_date : o_date, o_partake_id : o_partake_id, o_description : o_description},
+        data: { o_id : itemid, o_executor_id : o_executor_id, o_date : o_date, o_partake_id : o_partake_id, o_description : o_description},
         dataType: 'json',
         headers: {
           'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -1130,6 +1135,8 @@
 
           $("#kr_name").val("");
           $("#add_key_time").val("");
+          // 初始化关键结果时间为目标时间
+          // $("#add_key_time").val(data.startdate+" - "+data.enddate);
           $("#kr_partake_id").val("");
           $("#kr_description").val("");
 

@@ -733,8 +733,10 @@ class ObjectiveController extends Controller
     public function update(Request $request)
     {
         
+        // dd($request);
         $rules = [
             'o_id' => 'required|integer',
+            'o_executor_id' => 'required|integer',
             'o_date' => 'required|',
             'o_partake_id' => 'required|',
             
@@ -758,15 +760,16 @@ class ObjectiveController extends Controller
         
         // 接收数据
         $data['id'] = $request->o_id;
+        $data['executor_id'] = $request->o_executor_id;
         $arr_date = explode(" - ", $request->o_date);
         $data['startdate'] = $arr_date[0];
         $data['enddate'] = $arr_date[1];
         $data['description'] = $request->o_description;
         $arr_partake_id = $request->o_partake_id;
-
-
+        // dd($data);
         $item = Objective::find($data['id']);
         // dd($item);
+        $item->executor_id=$data['executor_id'];
         $item->startdate=$data['startdate'];
         $item->enddate=$data['enddate'];
         $item->description=$data['description'];

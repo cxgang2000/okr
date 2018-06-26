@@ -33,6 +33,9 @@
       width: 200px;
       display: inline-block;
     }
+    .bootstrap-select.btn-group .dropdown-menu.inner{
+      padding-bottom: 25px;
+    }
   </style>
 
   <div id="body-wrapper">
