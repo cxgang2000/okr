@@ -91,8 +91,8 @@
   }
 
   $(document).ready(function(){
-    /*员工名称*/
-    // $.fn.zTree.init($("#ygNameTree"), ygsetting, ygnames);
+      /*员工名称*/
+      // $.fn.zTree.init($("#ygNameTree"), ygsetting, ygnames);
 
       // 给刚点击的人加样式
       function setFontCss(treeId, treeNode) {
@@ -100,6 +100,7 @@
       };
       var setting = {
         view: {
+          addDiyDom: addDiyDoms,
           fontCss: setFontCss,
           showLine: false,
         }
