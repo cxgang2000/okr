@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-use App\Models\Plan;
+use App\Models\Stateindex;
 
 use Illuminate\Support\Facades\DB;
 
 use Validator;
 
-class PlanController extends Controller
+class StateindexController extends Controller
 {
 
     // public function __construct()
@@ -32,7 +32,8 @@ class PlanController extends Controller
         $rules = [
             'durationflag' => 'required|',
             'duration' => 'required|',
-            'p_description' => 'required|',
+            's_description' => 'required|',
+            's_state' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -56,20 +57,21 @@ class PlanController extends Controller
         if($data['durationflag']==0 || $data['durationflag']==1){$duration = date("Y").$duration;}
         $data['duration'] = $duration;   
         $data['organiser_id'] = session('idUser'); 
-        $data['description'] = $request->p_description;
+        $data['description'] = $request->s_description;
+        $data['state'] = $request->s_state;
 
         // var_dump($data);
         // var_dump($arr_partake_id);
         // die();
 
-        $plan = Plan::create($data);
+        $stateindex = Stateindex::create($data);
         // var_dump($objective->id);die();
         // return;
-        if($plan===false){
-            $array = array('msg'=>'新增未来四周计划失败!','status'=>0);
+        if($stateindex===false){
+            $array = array('msg'=>'新增状态指标失败!','status'=>0);
             return json_encode($array);
         }else{
-            $array = array('msg'=>'新增未来四周计划成功!','status'=>1);
+            $array = array('msg'=>'新增状态指标成功!','status'=>1);
             return json_encode($array);
         }
     }
@@ -97,7 +99,7 @@ class PlanController extends Controller
             return json_encode($array);
         }
         
-        $item = Plan::find($request->id);
+        $item = Stateindex::find($request->id);
         $item->load("comments.userName");
 
         $item = $item->toArray();
@@ -112,7 +114,8 @@ class PlanController extends Controller
 
         $rules = [
             'id' => 'required|integer',
-            'p_description' => 'required|',
+            's_description' => 'required|',
+            's_state' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -133,11 +136,13 @@ class PlanController extends Controller
         
         // 接收数据
         $data['id'] = $request->id;
-        $data['description'] = $request->p_description;
-        
-        $item = Plan::find($data['id']);
+        $data['description'] = $request->s_description;
+        $data['state'] = $request->s_state;
+        // dd($data);
+        $item = Stateindex::find($data['id']);
         // dd($item);
         $item->description=$data['description'];
+        $item->state=$data['state'];
         
         $item->save();
         // dd($item);
@@ -178,7 +183,7 @@ class PlanController extends Controller
         // 接收数据
         $data['id'] = $request->id;
 
-        $item = Plan::find($data['id']);
+        $item = Stateindex::find($data['id']);
         
         // $item['canDel'] = Keyresult::ifCandel($item);
         // // 不能删就返回

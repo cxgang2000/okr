@@ -56,10 +56,23 @@ Route::get('/objective/iamexecutor/{p1}', 'ObjectiveController@iamexecutor')->na
 Route::get('/objective/heisexecutor/{p1}', 'ObjectiveController@heisexecutor')->name('objective.heisexecutor');
 
 
+Route::get('/objective/mine/', 'ObjectiveController@mine')->name('objective.mine');
+Route::get('/objective/others/', 'ObjectiveController@others')->name('objective.others');
+
+// 信心指数编辑
+// Route::post('/confidentindex', 'ConfidentindexController@store')->name('confidentindex.store');
+
+
 // 新增
 Route::post('/objective', 'ObjectiveController@store')->name('objective.store');
 Route::post('/keyresult', 'KeyresultController@store')->name('keyresult.store');
+Route::post('/keyresult/updateConfidentindex/', 'KeyresultController@updateConfidentindex')->name('keyresult.updateConfidentindex');
+
 Route::post('/plan', 'PlanController@store')->name('plan.store');
+
+Route::post('/mission', 'MissionController@store')->name('mission.store');
+Route::post('/stateindex', 'StateindexController@store')->name('stateindex.store');
+
 
 // 评分
 // Route::patch('/objective/{objective}/score', 'ObjectiveController@score')->name('objective.score');
@@ -67,12 +80,15 @@ Route::post('/plan', 'PlanController@store')->name('plan.store');
 // Route::patch('/plan/{plan}/score', 'PlanController@score')->name('plan.score');
 Route::post('/objective/score', 'ObjectiveController@score')->name('objective.score');
 Route::post('/keyresult/score', 'KeyresultController@score')->name('keyresult.score');
-Route::post('/plan/score', 'PlanController@score')->name('plan.score');
+// Route::post('/plan/score', 'PlanController@score')->name('plan.score');
 
 // 详细
 Route::get('/objective/detail', 'ObjectiveController@detail')->name('objective.detail');
 Route::get('/keyresult/detail', 'KeyresultController@detail')->name('keyresult.detail');
 Route::get('/plan/detail', 'PlanController@detail')->name('plan.detail');
+
+Route::get('/mission/detail', 'MissionController@detail')->name('mission.detail');
+Route::get('/stateindex/detail', 'StateindexController@detail')->name('stateindex.detail');
 
 
 // 更新
@@ -80,11 +96,17 @@ Route::post('/objective/update', 'ObjectiveController@update')->name('objective.
 Route::post('/keyresult/update', 'KeyresultController@update')->name('keyresult.update');
 Route::post('/plan/update', 'PlanController@update')->name('plan.update');
 
+Route::post('/mission/update', 'MissionController@update')->name('mission.update');
+Route::post('/stateindex/update', 'StateindexController@update')->name('stateindex.update');
 
 // 删除
 Route::get('/objective/delete', 'ObjectiveController@delete')->name('objective.delete');
 Route::get('/keyresult/delete', 'KeyresultController@delete')->name('keyresult.delete');
 Route::get('/plan/delete', 'PlanController@delete')->name('plan.delete');
+
+Route::get('/mission/delete', 'MissionController@delete')->name('mission.delete');
+Route::get('/stateindex/delete', 'StateindexController@delete')->name('stateindex.delete');
+
 
 
 Route::post('/comment', 'CommentController@store')->name('comment.store');

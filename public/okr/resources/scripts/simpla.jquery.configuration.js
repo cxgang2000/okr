@@ -33,115 +33,83 @@ $(document).ready(function(){
     })
 
     /*关闭models*/
-    $(".layui-layer-btn1").on("click",function(){
-        $(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().hide();
-    })
-	
-	$(".layui-layer-close1").on("click",function(){
+    $(".layui-layer-close1,.layui-layer-btn1").on("click",function(){
         $(this).parent().parent().parent().hide();
-    })
-
-    /*model点击编辑显示边框*/
-    $(".models_bj").on("click",function(){
-      $(this).parent().parent().next().find("ul").removeClass("ul_no");
-      $(this).parent().parent().next().next().show();
-    })
-
-    /*取消编辑*/
+    });
     $(".models_qx").on("click",function(){
-      //$(this).parent().hide();
-	  $(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().hide();
-      $(this).parent().prev().find("ul").addClass("ul_no");
-    })
+        $(this).parent().parent().parent().parent().parent().parent().hide();
+    });
 
-    /*ztree 赋值*/
+    /*评分model*/
+    $(".ztree").on("click",".pf",function(){
+        $(".dafen_models").show();
+    })
+    /*评论model*/
+    //$(".ztree").on("click",".icon-pinglun",function(){
+    //    $(".pl_models").show();
+    //})
+    /*删除model*/
+    //$(".ztree").on("click",".icon-laji",function(){
+        /*判断如果是直接删除就直接show 否则就间接show 以随机数代替*/
+    //    var nums =Math.ceil(Math.random()*10);
+    //    if (nums > 5 ) {
+            /*直接删*/
+    //        $(".zjsc_models").show();
+    //    }else{
+            /*不能删*/
+    //        $(".bnsc_models").show();
+    //    } 
+    //})
 
-    /*点击不同 展示不同编辑框*/
-      
-	/*
-    /*弹出目标框*/
-	/*
-    $("#treeDemo,#myTreeDemo").on("click",".mbxq",function(){
-      $(".dy_mb_models").show();
+    /*新增mb*/
+    $(".xzmb").on("click",function(){
+        $(".tj_mb").show();
     })
-	*/
-    /*弹出计划框*/
-	/*
-    $("#treeDemo,#myTreeDemo").on("click",".jhxq",function(){
-      $(".jh_mb_models").show();
+    /*新增kr*/
+    //$(".ztree").on("click",".tj_jh,.xq",function(){
+    //    $(".tj_jg").show();
+    //})
+    /*信心指数*/
+    //$(".ztree").on("click",".xxzs",function(){
+    //    $(".tj_xxzs").show();
+    //})
+    /*添加未来计划*/
+    $(".wl_jh").on("click",function(){
+        $(".tj_jh").show();
     })
-	*/
-    /*弹出结果框*/
-	/*
-    $("#treeDemo,#myTreeDemo").on("click",".jgxq",function(){
-      $(".key_mb_models").show();
+    /*添加关注任务*/
+    $(".tj_gz_icon").on("click",function(){
+        $(".tj_gz").show();
     })
-	*/
-    /*添加新记过*/
-	/*
-     $("#treeDemo,#myTreeDemo").on("click",".tj_jh",function(){
-      $(".add_jh_models").show();
+    /*添加状态*/
+    $(".tj_zt_icon").on("click",function(){
+        $(".tj_ztzb").show();
     })
-	*/
-     /*添加新结果*/
-	 /*
-     $("#treeDemo,#myTreeDemo").on("click",".tj_jg",function(){
-      $(".add_jg_models").show();
+    /*删除*/
+    $(".this_cz .icon-laji").on("click",function(){
+        /*直接删*/
+        $(".zjsc_models").show();
     })
-	*/
-
-     /*鼠标*/
-     /*$(".node_name").hover(function(){
-      alert(1245)
-      $(this).parent().find(".demoIcon").show();
-     })*/
-
- /*end times*/
- 
- 	/*
-  layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        //laydate.render({
-        //  elem: '#test6'
-        //  ,range: true
-        //});
-        //laydate.render({
-        //  elem: '#res_time'
-        //  ,range: true
-        //});
-        //laydate.render({
-        //  elem: '#key_time'
-        //  ,range: true
-        //});//页面没有这个
-        //laydate.render({
-        //  elem: '#my_mb_times'
-        //  ,range: true
-        //});
-        //laydate.render({
-        //  elem: '#dy_res_time'
-        //  ,range: true
-        //});//页面没有这个
-        //laydate.render({
-        //  elem: '#dy_jh_time'
-        //  ,range: true
-        //});
-        //laydate.render({
-        //  elem: '#dy_key_time'
-        //  ,range: true
-        //});
-        //laydate.render({
-        //  elem: '#add_key_time'
-        //  ,range: true
-        //});
-        //laydate.render({
-        //  elem: '#add_jh_time'
-        //  ,range: true
-        //});
-		
-  });
-  */
+    /*评论*/
+    //$("#cy_mb .icon-pinglun").on("click",function(){
+    //    $(".pl_models").show();
+    //})
+	
+	/*隐藏*/
+    $(".ycl_nav").on("click",function(){
+        if ($(".main-sidebar").is(":hidden")) {
+            $(".main-sidebar").show();
+            $("#main-content").css("margin-left","200px");
+        }else{
+            $(".main-sidebar").hide();
+            $("#main-content").css("margin","0");
+        }
+        
+    })
+    /*select 切换*/
+    $(".time_con .list").on("click",function(){
+        $(this).addClass("active").siblings(".active").removeClass("active");
+    })
 }); 
-
-
 
  

@@ -8,10 +8,10 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Department;
 use App\Models\Objective;
-use App\Models\Partake;
 
 use App\Models\Keyresult;
-use App\Models\Plan;
+use App\Models\Confidentindex;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -36,9 +36,7 @@ class KeyresultController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'kr_name' => 'required|',
-            'kr_date' => 'required|',
-            'kr_partake_id' => 'required|',
+            'kr_description' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -57,20 +55,10 @@ class KeyresultController extends Controller
             return json_encode($array);
         }
 
-
-        $data['name'] = $request->kr_name;
-        $data['executor_id'] = session("idUser");
-
-        $arr_date = explode(" - ", $request->kr_date);
-        $data['startdate'] = $arr_date[0];
-        $data['enddate'] = $arr_date[1];
         
         $data['description'] = $request->kr_description;
-
         $data['pid'] = $request->pid;
 
-        $arr_partake_id = $request->kr_partake_id;
-        
         // var_dump($data);
         // var_dump($arr_partake_id);
         // die();
@@ -83,12 +71,24 @@ class KeyresultController extends Controller
             return json_encode($array);
         }else{
 
-            foreach ($arr_partake_id as $v) {
-               $arr_partake[] = ['okr_id'=>$keyresult->id,'user_id'=>$v,'created_at'=>date("Y-m-d H:i:s")];
-            }
-            // var_dump($arr_partake);
+            $data = array();
+            $data['okr_id'] = $keyresult->id;
+            $data['oldconfidentindex'] = "5/10";
+            $data['newconfidentindex'] = "5/10";
+            $data['description'] = "创建关键结果。";
+            // var_dump($data);
+            $confidentindex = Confidentindex::create($data);
+
+
+            // $data = array();
+            // $data['okr_id'] = $keyresult->id;
+            // $data['oldconfidentindex'] = "5/10";
+            // $data['newconfidentindex'] = "5/10";
+            // $data['description'] = "创建关键结果。";
             
-            DB::table('partake')->insert($arr_partake);
+            // DB::table('confidentindex')->insert($data);
+
+
 
             $array = array('msg'=>'新增关键结果成功!','status'=>1);
             return json_encode($array);
@@ -165,20 +165,9 @@ class KeyresultController extends Controller
         }
         
         $item = Keyresult::find($request->id);
-        $item->load("partake","objective",'plan',"comments.userName");
-        // dd($item);
-        
-        // $item->load("partake");
-        $item = $item->toArray();
-        // dd($item);
-        $item['newpartake'] = array_column($item['partake'],"user_id");
-        $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
-        // $item['']
+        $item->load("comments.userName","confidentindex");
 
-        // 能否删除标记
-        // $item['canDel'] = Objective::ifCandel($item)[0];
-        $item['canDel'] = Keyresult::ifCandel($item);
-        
+        $item = $item->toArray();
         // dd($item);
         return json_encode($item);
     }
@@ -190,9 +179,7 @@ class KeyresultController extends Controller
         
         $rules = [
             'kr_id' => 'required|integer',
-            'kr_date' => 'required|',
-            'kr_partake_id' => 'required|',
-            
+            'kr_description' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -213,20 +200,57 @@ class KeyresultController extends Controller
         
         // 接收数据
         $data['id'] = $request->kr_id;
-        $arr_date = explode(" - ", $request->kr_date);
-        $data['startdate'] = $arr_date[0];
-        $data['enddate'] = $arr_date[1];
         $data['description'] = $request->kr_description;
-        $arr_partake_id = $request->kr_partake_id;
-
-
+       
         $item = Keyresult::find($data['id']);
         // dd($item);
-        $item->startdate=$data['startdate'];
-        $item->enddate=$data['enddate'];
         $item->description=$data['description'];
 
-        // $arr_partake_id = $request->o_partake_id;
+        $item->save();
+        // dd($item);
+
+        if($item===false){
+            $array = array('msg'=>'编辑失败!','status'=>0);
+            return json_encode($array);
+        }else{
+            $array = array('msg'=>'编辑成功!','status'=>1);
+            return json_encode($array);
+        }
+    }
+
+    // 更新信心指数
+    public function updateConfidentindex(Request $request)
+    {
+        
+        $rules = [
+            'okr_id' => 'required|',
+            'oldconfidentindex' => 'required|',
+            'newconfidentindex' => 'required|',
+            'description' => 'required|',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        // var_dump($validator);
+        if ($validator->fails()) {
+            // echo "fail";
+            // var_dump($validator->getMessageBag()->toArray());
+            $arr_err = $validator->getMessageBag()->toArray();
+            $str_err = "";
+            foreach ($arr_err as $v) {
+                // echo $value;
+                // var_dump($v);
+                $str_err = $str_err . $v[0]."<br>";
+            }
+            $array = array('msg'=>$str_err,'status'=>0);
+            return json_encode($array);
+        }
+        
+        // 接收数据
+        $data['id'] = $request->okr_id;
+        
+        $item = Keyresult::find($data['id']);
+        // dd($item);
+        $item->confidentindex=$request->newconfidentindex;
 
         $item->save();
         // dd($item);
@@ -236,18 +260,13 @@ class KeyresultController extends Controller
             return json_encode($array);
         }else{
 
-            // 删参与者 增参与者
-            $arr_where['okr_id'] = $request->kr_id; 
-            $del_num = Partake::where($arr_where)->delete();
-
-            foreach ($arr_partake_id as $v) {
-               $arr_partake[] = ['okr_id'=>$data['id'],'user_id'=>$v,'created_at'=>date("Y-m-d H:i:s")];
-            }
-            // var_dump($arr_partake);
-            
-            DB::table('partake')->insert($arr_partake);
-
-            // Partake::addAll($arr_partake);
+            $data = array();
+            $data['okr_id'] = $request->okr_id;
+            $data['oldconfidentindex'] = $request->oldconfidentindex;
+            $data['newconfidentindex'] = $request->newconfidentindex;
+            $data['description'] = $request->description;
+            // var_dump($data);
+            $confidentindex = Confidentindex::create($data);
 
 
             $array = array('msg'=>'编辑成功!','status'=>1);
@@ -255,13 +274,12 @@ class KeyresultController extends Controller
         }
     }
 
-
     // 删除
     public function delete(Request $request)
     {
         
         $rules = [
-            'kr_id' => 'required|integer',
+            'id' => 'required|integer',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -281,24 +299,18 @@ class KeyresultController extends Controller
         }
         
         // 接收数据
-        $data['id'] = $request->kr_id;
+        $data['id'] = $request->id;
 
         $item = Keyresult::find($data['id']);
-        $item->load("plan");
-        $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
-
-        $item['canDel'] = Keyresult::ifCandel($item);
-        // 不能删就返回
-        if($item['canDel'][0]==0){
-            $array = array('msg'=>$item['canDel'][1],'status'=>0);
-            return json_encode($array);
-        }
+        
+        // $item['canDel'] = Keyresult::ifCandel($item);
+        // // 不能删就返回
+        // if($item['canDel'][0]==0){
+        //     $array = array('msg'=>$item['canDel'][1],'status'=>0);
+        //     return json_encode($array);
+        // }
 
         // dd($item);
-
-        unset($item['canDel']);
-        unset($item['dateStatus']);
-        unset($item['plan']);
 
         $item->status=1;
         $item->save();
@@ -308,14 +320,6 @@ class KeyresultController extends Controller
             $array = array('msg'=>'删除失败!','status'=>0);
             return json_encode($array);
         }else{
-
-            // 删不删参与者呢？这是个问题，先不删了吧，万一哪天要恢复呢
-            // 删参与者 增参与者
-            // $arr_where['okr_id'] = $request->o_id; 
-            // $del_num = Partake::where($arr_where)->delete();
-            
-            // DB::table('partake')->insert($arr_partake);
-
             $array = array('msg'=>'删除成功!','status'=>1);
             return json_encode($array);
         }

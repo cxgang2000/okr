@@ -9,7 +9,7 @@ class Keyresult extends Model
     //
     protected $table = 'keyresult';
 
-    protected $fillable=['name','startdate','enddate','executor_id','description','score','status','pid']; 
+    protected $fillable=['description','score','status','confidentindex','pid']; 
 
 
     public function plan()
@@ -70,4 +70,12 @@ class Keyresult extends Model
     public function comments(){
         return $this->hasMany('App\Models\Comment',"okr_id","id")->orderBy('id', 'desc')->select();
     }
+
+
+    // 取信心指数
+    public function confidentindex(){
+        return $this->hasMany('App\Models\Confidentindex',"okr_id","id")->orderBy('id', 'desc')->select();
+    }
+
+
 }

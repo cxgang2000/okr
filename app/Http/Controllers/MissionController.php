@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-use App\Models\Plan;
+use App\Models\Mission;
 
 use Illuminate\Support\Facades\DB;
 
 use Validator;
 
-class PlanController extends Controller
+class MissionController extends Controller
 {
 
     // public function __construct()
@@ -32,7 +32,8 @@ class PlanController extends Controller
         $rules = [
             'durationflag' => 'required|',
             'duration' => 'required|',
-            'p_description' => 'required|',
+            'm_description' => 'required|',
+            'm_importance' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -56,20 +57,21 @@ class PlanController extends Controller
         if($data['durationflag']==0 || $data['durationflag']==1){$duration = date("Y").$duration;}
         $data['duration'] = $duration;   
         $data['organiser_id'] = session('idUser'); 
-        $data['description'] = $request->p_description;
+        $data['description'] = $request->m_description;
+        $data['importance'] = $request->m_importance;
 
         // var_dump($data);
         // var_dump($arr_partake_id);
         // die();
 
-        $plan = Plan::create($data);
+        $mission = Mission::create($data);
         // var_dump($objective->id);die();
         // return;
-        if($plan===false){
-            $array = array('msg'=>'新增未来四周计划失败!','status'=>0);
+        if($mission===false){
+            $array = array('msg'=>'新增本周关注的任务失败!','status'=>0);
             return json_encode($array);
         }else{
-            $array = array('msg'=>'新增未来四周计划成功!','status'=>1);
+            $array = array('msg'=>'新增本周关注的任务结果成功!','status'=>1);
             return json_encode($array);
         }
     }
@@ -97,7 +99,7 @@ class PlanController extends Controller
             return json_encode($array);
         }
         
-        $item = Plan::find($request->id);
+        $item = Mission::find($request->id);
         $item->load("comments.userName");
 
         $item = $item->toArray();
@@ -112,7 +114,8 @@ class PlanController extends Controller
 
         $rules = [
             'id' => 'required|integer',
-            'p_description' => 'required|',
+            'm_description' => 'required|',
+            'm_importance' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -133,11 +136,13 @@ class PlanController extends Controller
         
         // 接收数据
         $data['id'] = $request->id;
-        $data['description'] = $request->p_description;
+        $data['description'] = $request->m_description;
+        $data['importance'] = $request->m_importance;
         
-        $item = Plan::find($data['id']);
+        $item = Mission::find($data['id']);
         // dd($item);
         $item->description=$data['description'];
+        $item->importance=$data['importance'];
         
         $item->save();
         // dd($item);
@@ -178,7 +183,7 @@ class PlanController extends Controller
         // 接收数据
         $data['id'] = $request->id;
 
-        $item = Plan::find($data['id']);
+        $item = Mission::find($data['id']);
         
         // $item['canDel'] = Keyresult::ifCandel($item);
         // // 不能删就返回

@@ -5,15 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-use App\Models\User;
-use App\Models\Comment;
-
-
-use Illuminate\Support\Facades\DB;
 
 use Validator;
 
-class CommentController extends Controller
+class ConfidentindexController extends Controller
 {
 
     public function __construct()
@@ -33,7 +28,9 @@ class CommentController extends Controller
     {
         $rules = [
             'okr_id' => 'required|',
-            'comment' => 'required|',
+            'oldconfidentindex' => 'required|',
+            'newconfidentindex' => 'required|',
+            'description' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -52,23 +49,24 @@ class CommentController extends Controller
             return json_encode($array);
         }
 
-        $data['comment'] = $request->comment;
-        $data['user_id'] = session("idUser");
-        $data['okr_id'] = $request->okr_id;
+        $data['okr_id'] = $request->id;
+        $data['oldconfidentindex'] = $request->oldconfidentindex;
+        $data['newconfidentindex'] = $request->newconfidentindex;
+        $data['description'] = $request->description;
         
         // dd($data);
         // var_dump($data);
         // var_dump($arr_partake_id);
         // die();
 
-        $comment = Comment::create($data);
+        $confidentindex = Confidentindex::create($data);
         // var_dump($objective->id);die();
         // return;
         if($comment===false){
-            $array = array('msg'=>'发表评论失败!','status'=>0);
+            $array = array('msg'=>'信心指数编辑失败!','status'=>0);
             return json_encode($array);
         }else{
-            $array = array('msg'=>'发表评论成功!','status'=>1);
+            $array = array('msg'=>'信心指数编辑成功!','status'=>1);
             return json_encode($array);
         }
     }
@@ -95,17 +93,10 @@ class CommentController extends Controller
             return json_encode($array);
         }
 
-        $arr_where['okr_id'] = $request->okr_id;
-        // var_dump($arr_where);
-        $comment = Comment::where($arr_where)->orderBy("id","desc")->get();
-        $comment->load('userName');
-        $arr_comment = $comment->toArray();
-        // dd($arr_comment);
+        $arr_where[] = ["okr_id",$request->okr_id];
+        $arr_comment = Comment::where($arr_where)->orderBy("id desc")->select();
+        dd($arr_comment->toArray());
 
-        // dd($comment);
-        
-        $array = array('comments'=>$arr_comment,'status'=>1);
-        return json_encode($array);
     }
    
 

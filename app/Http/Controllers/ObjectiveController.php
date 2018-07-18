@@ -8,9 +8,9 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Department;
 use App\Models\Objective;
-use App\Models\Partake;
-
+use App\Models\Mission;
 use App\Models\Plan;
+use App\Models\Stateindex;
 
 use Illuminate\Support\Facades\DB;
 
@@ -31,8 +31,8 @@ class ObjectiveController extends Controller
         });
     }
 
-	
-	public function iamexecutor(Request $request,$p1)
+    
+    public function iamexecutor(Request $request,$p1)
     {
 
         $arr_period = array();
@@ -264,66 +264,267 @@ class ObjectiveController extends Controller
         return view($templateName,compact('arr_allUserDept', 'json_objective', 'objective', 'executor', 'executor_id', 'perioditem', 'period', 'arr_period','p1'));
     }
 
-    // public function iampartake(Request $request)
-    // {
+    public function mine(Request $request)
+    {
 
+        $durationflag = $request->durationflag;
+        if ($durationflag=="") {$durationflag=0;}
+        $duration = $request->duration;
+        if ($duration=="") {$duration=date("m");}
+        // dd($duration);
 
-    //     $arr_period = array();
-    //     $perioditem = $request->perioditem;
-    //     if($perioditem=="")$perioditem="week";
-    //     $period = $request->period;
-    //     if($period=="")$period=1;
-        
-    //     if($perioditem!="others"){
-    //         $arr_period = $this->getDate($period);
-    //         $arr_period[0] = substr($arr_period[0], 0,10);
-    //         $arr_period[1] = substr($arr_period[1], 0,10);
-    //     }else{
-    //         $arr_period = explode(" - ",$period);
-    //     }
-    //     // dd($arr_period);
+        $arr_where['durationflag'] = $durationflag;
+        if($arr_where['durationflag']==0 || $arr_where['durationflag']==1){
+            $duration1 = date("Y").$duration;
+        }else{
+            $duration1 = $duration;
+        }
+        $arr_where['duration'] = $duration1;
+        $arr_where['organiser_id'] = session('idUser');
 
-    //     // die();
+        $arr_where['status'] = 0;
 
-
-    //     $executor_id = session('idUser');
-        
-    //     // 带部门的员工列表
-    //     $tmpUser = new User;
-    //     $arr_allUserDept = $tmpUser->getAllUserDept();
-
-    //     // 目标列表
-    //     $perPage = 10;
-    //     $executor = User::find($executor_id)->toArray()['name'];
-    //     // dd($executor);
-
-
-    //     $arr_where_partake = [['user_id', '=', $executor_id],['okr_id', '<', '10000000'],];
-    //     $arr_partake = Partake::where($arr_where_partake)->get(['okr_id'])->toArray();
-    //     // dd($arr_partake);
-
-
-
-    //     $arr_where['status'] = 0;
-        
-    //     // 取目标
-    //     $objective = Objective::where($arr_where)
-    //         ->whereIn("id",$arr_partake)
-    //         ->where(function ($query) use ($arr_period) {
-    //                 $query->where('startdate', '<=', $arr_period[1])->where('startdate', '>=', $arr_period[0]);
-    //             })
-    //         ->orWhere(function ($query) use ($arr_period) {
-    //                 $query->where('enddate', '<=', $arr_period[1])->where('enddate', '>=', $arr_period[0]);
-    //             })
-    //         ->orWhere(function ($query) use ($arr_period) {
-    //                 $query->where('startdate', '<=', $arr_period[0])->where('enddate', '>=', $arr_period[1]);
-    //             })
-    //         ->orderBy('id',"desc")->select('id','name', 'startdate', 'enddate', 'score', 'scoretime')->paginate($perPage);
+        // var_dump($arr_where);
+        $json_objective = $this->getObject($arr_where);
+        $arr_mission = $this->getMission($arr_where);
+        $arr_plan = $this->getPlan($arr_where);
+        $arr_stateindex = $this->getStateindex($arr_where);
         
 
+        return view('index.mine',compact('durationflag', 'duration', 'json_objective','arr_mission','arr_plan','arr_stateindex'));
+    }
 
-    //     dd($objective->toArray());
-    // }
+    private function getObject($arr_where){
+        // 取目标
+        $objective = Objective::where($arr_where)->get();
+        // var_dump($objective);
+
+        // 取下面的关键结果
+        $objective->load("keyresults");
+        $arr_objective=$objective->toArray();
+        
+        // dd($arr_objective);
+
+        for ($i=0; $i < count($arr_objective); $i++) {
+            // $arr_objective[$i]['cj']=1;
+            $arr_objective[$i]['flag']="objective";
+            // $arr_objective[$i]['open']=false;
+            $arr_objective[$i]['canDel']=0;
+            $arr_objective[$i]['kr_count']="0/0";
+
+            // // 未开始的能删
+            // if($arr_objective[$i]['dateStatus']==1){$arr_objective[$i]['canDel']=1;}
+            // // 没下级的能删
+            // if(count($arr_objective[$i]['keyresults'])==0){$arr_objective[$i]['canDel']=1;}
+            $kr_count = 0;
+            $kr_done_count = 0;
+            for ($j=0; $j < count($arr_objective[$i]['keyresults']); $j++) {
+                $kr_count++;
+                // $arr_objective[$i]['keyresults'][$j]['cj']=2;
+                $arr_objective[$i]['keyresults'][$j]['flag']="keyresult";
+                // $arr_objective[$i]['keyresults'][$j]['open']=false;
+                $arr_objective[$i]['keyresults'][$j]['canDel']=0;
+                if($arr_objective[$i]['keyresults'][$j]['score']==999){
+                    $arr_objective[$i]['keyresults'][$j]['canDel']=1;
+                }else{
+                    $kr_done_count++;
+                }
+
+                // if($arr_objective[$i]['keyresults'][$j]['score']!=999){
+                //     $score = $arr_objective[$i]['keyresults'][$j]['score']."分 / ";
+                // }else{
+                //     $score = "";
+                // }
+                $number = "KR".($j+1).":";
+                $arr_objective[$i]['keyresults'][$j]['name'] = $number.$arr_objective[$i]['keyresults'][$j]['description'];
+
+            }
+            $arr_objective[$i]['kr_count']=$kr_done_count."/".$kr_count;
+
+            // 没有关键结果，就可以删除
+            if($kr_count==0){
+                $arr_objective[$i]['canDel']=1;
+            }
+
+            // 改写标题，加入得分、序号等
+            // if($arr_objective[$i]['score']!=999){
+            //     $score = $arr_objective[$i]['score']."分 / ";
+            // }else{
+            //     $score = "";
+            // }
+            $number = "O".($i+1).":";
+            $arr_objective[$i]['name'] = $number.$arr_objective[$i]['description'] . "(".$arr_objective[$i]['kr_count'].")";
+        }
+        // dd($arr_objective);
+
+        // foreach ($arr_objective as $o) {
+            
+        // }
+
+        // 转换成json前台js用
+        $json_objective = json_encode($arr_objective,JSON_UNESCAPED_UNICODE);
+        // 替换key为要求名字
+        $json_objective = str_replace("keyresults", "children", $json_objective);
+        // dd($json_objective);
+
+        return $json_objective;
+    }
+
+    private function getMission($arr_where){
+        // 取目标
+        $mission = Mission::where($arr_where)->get();
+        // var_dump($mission);
+        // dd($mission);
+
+        $arr_mission=$mission->toArray();
+        // dd($arr_mission);
+
+        return $arr_mission;
+    }
+
+    private function getPlan($arr_where){
+        // 取目标
+        $plan = Plan::where($arr_where)->get();
+        // var_dump($mission);
+        // dd($mission);
+
+        $arr_plan=$plan->toArray();
+        // dd($arr_mission);
+
+        return $arr_plan;
+    }
+
+    private function getStateindex($arr_where){
+        // 取目标
+        $stateindex = Stateindex::where($arr_where)->get();
+        // var_dump($mission);
+        // dd($mission);
+
+        $arr_stateindex=$stateindex->toArray();
+        // dd($arr_mission);
+
+        return $arr_stateindex;
+    }
+
+    public function others(Request $request)
+    {
+
+        $myId = session('idUser');
+        $othersId=$request->othersId;
+        // 初始化成员数组
+        $arr_others = array();
+        $arr_others['id'] = "";
+        $arr_others['name'] = "";
+        $arr_others['position_name'] = "";
+        
+        // 如果没有接收到成员id，找部门负责人id
+        if($othersId==""){
+            $user = User::getLeaderIdByUserId($myId);
+            // var_dump($user);
+            // die();
+            if(count($user)>0){
+                $u = $user[0];
+                // $othersId=$u->id;
+                // dd($u);
+                // $arr_others=$u->toArray();不行报错
+                $arr_others['id']=$u->id;
+                $arr_others['name']=$u->name;
+                $arr_others['position_id']=$u->position_id;
+                // var_dump($arr_others);die();
+                $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
+                // var_dump($arr_others);die();
+            }         
+        }else{
+            $arr_others = User::find($othersId)->toArray();
+            // var_dump($arr_others);die();
+            $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
+        }
+
+        // var_dump($arr_others);die();
+
+        // 员工搜索
+        $keyword = $request->keyword;
+        $tmpUser = new User;
+        $arr_allUserDept = $tmpUser->getAllUserDept($keyword);
+        // dd($arr_allUserDept);
+        for ($i=0; $i < count($arr_allUserDept); $i++) { 
+            for ($j=0; $j < count($arr_allUserDept[$i]['users']); $j++) {
+                $arr_allUserDept[$i]['users'][$j]['click'] = "youClick('".$arr_allUserDept[$i]['users'][$j]['id']."')";
+            }
+        }
+        // dd($arr_allUserDept);
+        $json_allUserDept = json_encode($arr_allUserDept,JSON_UNESCAPED_UNICODE);
+        // 替换key为要求名字
+        $json_allUserDept = str_replace("users", "children", $json_allUserDept);
+        // dd($json_allUserDept);
+        
+        // 我的okr搜索条件
+        // 时间维度
+        $my_perioditem = $request->my_perioditem;
+        // 具体数据
+        $my_period = $request->my_period;
+        // 没有就默认月度    
+        if($my_perioditem==""){$my_perioditem = "month";}
+        // 没有就默认当前月
+        if($my_period==""){$my_period = date("m");}
+        // 如果是月度或季度，加上年 如01月，变成201801，如一季度 变成20181
+        if($my_perioditem=="month" || $my_perioditem=="season"){
+            $duration1 = date("Y").$my_period;
+        }else{
+            $duration1 = $my_period;
+        }
+        // 拼条件
+        $my_arr_where['duration'] = $duration1;
+        $my_arr_where['organiser_id'] = $myId;
+        $my_arr_where['status'] = 0;
+        // var_dump($my_arr_where);
+
+        // 按条件查询四象限数据
+        $my_all['json_objective'] = $this->getObject($my_arr_where);
+        $my_all['arr_mission'] = $this->getMission($my_arr_where);
+        $my_all['arr_plan'] = $this->getPlan($my_arr_where);
+        $my_all['arr_stateindex'] = $this->getStateindex($my_arr_where);
+
+        // var_dump($my_all);
+        // others条件     
+        $others_perioditem = $request->others_perioditem;
+        $others_period = $request->others_period;
+        if($others_perioditem==""){$others_perioditem = "month";}
+        if($others_period==""){$others_period = date("m");}
+
+        if($others_perioditem=="month" || $others_perioditem=="season"){
+            $duration1 = date("Y").$others_period;
+        }else{
+            $duration1 = $others_period;
+        }
+        $others_arr_where['duration'] = $duration1;
+        $others_arr_where['organiser_id'] = $arr_others['id'];
+        $others_arr_where['status'] = 0;
+        // var_dump($others_arr_where);
+
+        if($arr_others['id']==""){
+            $others_all['json_objective'] = '';
+            $others_all['arr_mission'] = array();
+            $others_all['arr_plan'] = array();
+            $others_all['arr_stateindex'] = array();
+        }else{
+            $others_all['json_objective'] = $this->getObject($others_arr_where);
+            $others_all['arr_mission'] = $this->getMission($others_arr_where);
+            $others_all['arr_plan'] = $this->getPlan($others_arr_where);
+            $others_all['arr_stateindex'] = $this->getStateindex($others_arr_where);
+        }
+        
+        // var_dump($others_all);
+        // die();
+
+        
+
+
+        // $user = User::getLeaderIdByUserId($myId);
+
+        return view('index.others',compact('json_allUserDept', 'my_perioditem','my_period','others_perioditem','others_period','keyword','arr_others','my_all','others_all'));
+    }
+
 
     public function heisexecutor(Request $request,$p1)
     {
@@ -578,10 +779,9 @@ class ObjectiveController extends Controller
         // ]);
 
         $rules = [
-            'o_name' => 'required|',
-            'o_date' => 'required|',
-            'o_executor_id' => 'required|integer',
-            'o_partake_id' => 'required|',
+            'durationflag' => 'required|',
+            'duration' => 'required|',
+            'o_description' => 'required|',
             
         ];
 
@@ -601,21 +801,15 @@ class ObjectiveController extends Controller
             return json_encode($array);
         }
 
-        $data['name'] = $request->o_name;
-        $data['organiser_id'] = session('idUser');
-        $data['executor_id'] = $request->o_executor_id;
-
-        $arr_date = explode(" - ", $request->o_date);
-        $data['startdate'] = $arr_date[0];
-        $data['enddate'] = $arr_date[1];
-        
+        $data['durationflag'] = $request->durationflag;
+        $duration = $request->duration;
+        if($data['durationflag']==0 || $data['durationflag']==1){$duration = date("Y").$duration;}
+        $data['duration'] = $duration;   
+        $data['organiser_id'] = session('idUser');        
         $data['description'] = $request->o_description;
 
-        $arr_partake_id = $request->o_partake_id;
-
-        
         // var_dump($data);
-        // var_dump($arr_partake_id);
+        // // var_dump($arr_partake_id);
         // die();
 
         $objective = Objective::create($data);
@@ -626,17 +820,8 @@ class ObjectiveController extends Controller
             $array = array('msg'=>'新增目标失败!','status'=>0);
             return json_encode($array);
         }else{
-
-            foreach ($arr_partake_id as $v) {
-               $arr_partake[] = ['okr_id'=>$objective->id,'user_id'=>$v,'created_at'=>date("Y-m-d H:i:s")];
-            }
-            // var_dump($arr_partake);
-            
-            DB::table('partake')->insert($arr_partake);
-
             $array = array('msg'=>'新增目标成功!','status'=>1);
-            return json_encode($array);
-            
+            return json_encode($array);            
         }
     }
 
@@ -644,6 +829,8 @@ class ObjectiveController extends Controller
     // 评分
     public function score(Request $request)
     {
+        
+        // dd($request);
         $rules = [
             'id' => 'required|integer',
             'score' => 'required|',
@@ -709,21 +896,8 @@ class ObjectiveController extends Controller
             return json_encode($array);
         }
         
-        $item = Objective::find($request->id);
-        $item->load("keyresults","executor","partake","comments.userName");
-        
-        // $item->load("partake");
-        $item = $item->toArray();
-        // dd($item);
-        $item['newpartake'] = array_column($item['partake'],"user_id");
-        
-        // 状态标记
-        $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
+        $item = Objective::find($request->id)->toArray();
 
-        // 能否删除标记
-        // $item['canDel'] = Objective::ifCandel($item)[0];
-        $item['canDel'] = Objective::ifCandel($item);
-        
         // dd($item);
         return json_encode($item);
     }
@@ -736,9 +910,7 @@ class ObjectiveController extends Controller
         // dd($request);
         $rules = [
             'o_id' => 'required|integer',
-            'o_executor_id' => 'required|integer',
-            'o_date' => 'required|',
-            'o_partake_id' => 'required|',
+            'o_description' => 'required|',
             
         ];
 
@@ -760,18 +932,11 @@ class ObjectiveController extends Controller
         
         // 接收数据
         $data['id'] = $request->o_id;
-        $data['executor_id'] = $request->o_executor_id;
-        $arr_date = explode(" - ", $request->o_date);
-        $data['startdate'] = $arr_date[0];
-        $data['enddate'] = $arr_date[1];
         $data['description'] = $request->o_description;
-        $arr_partake_id = $request->o_partake_id;
+        
         // dd($data);
         $item = Objective::find($data['id']);
         // dd($item);
-        $item->executor_id=$data['executor_id'];
-        $item->startdate=$data['startdate'];
-        $item->enddate=$data['enddate'];
         $item->description=$data['description'];
 
         // $arr_partake_id = $request->o_partake_id;
@@ -783,21 +948,6 @@ class ObjectiveController extends Controller
             $array = array('msg'=>'编辑失败!','status'=>0);
             return json_encode($array);
         }else{
-
-            // 删参与者 增参与者
-            $arr_where['okr_id'] = $request->o_id; 
-            $del_num = Partake::where($arr_where)->delete();
-
-            foreach ($arr_partake_id as $v) {
-               $arr_partake[] = ['okr_id'=>$data['id'],'user_id'=>$v,'created_at'=>date("Y-m-d H:i:s")];
-            }
-            // var_dump($arr_partake);
-            
-            DB::table('partake')->insert($arr_partake);
-
-            // Partake::addAll($arr_partake);
-
-
             $array = array('msg'=>'编辑成功!','status'=>1);
             return json_encode($array);
         }
@@ -808,7 +958,7 @@ class ObjectiveController extends Controller
     {
         
         $rules = [
-            'o_id' => 'required|integer',
+            'id' => 'required|integer',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -828,26 +978,18 @@ class ObjectiveController extends Controller
         }
         
         // 接收数据
-        $data['id'] = $request->o_id;
+        $data['id'] = $request->id;
 
         $item = Objective::find($data['id']);
-        $item->load("keyresults");
-        $item['dateStatus'] = Objective::getDateStatus($item['startdate'],$item['enddate'],$item['score'],$item['scoretime']);
-
-        $item['canDel'] = Objective::ifCandel($item);
-        // 不能删就返回
-        if($item['canDel'][0]==0){
-            $array = array('msg'=>$item['canDel'][1],'status'=>0);
-            return json_encode($array);
-        }
+        
+        // $item['canDel'] = Objective::ifCandel($item);
+        // // 不能删就返回
+        // if($item['canDel'][0]==0){
+        //     $array = array('msg'=>$item['canDel'][1],'status'=>0);
+        //     return json_encode($array);
+        // }
 
         // dd($item);
-
-        unset($item['canDel']);
-        unset($item['dateStatus']);
-        unset($item['keyresults']);
-        
-        
 
         $item->status=1;
         $item->save();
@@ -857,14 +999,6 @@ class ObjectiveController extends Controller
             $array = array('msg'=>'删除失败!','status'=>0);
             return json_encode($array);
         }else{
-
-            // 删不删参与者呢？这是个问题，先不删了吧，万一哪天要恢复呢
-            // 删参与者 增参与者
-            // $arr_where['okr_id'] = $request->o_id; 
-            // $del_num = Partake::where($arr_where)->delete();
-            
-            // DB::table('partake')->insert($arr_partake);
-
             $array = array('msg'=>'删除成功!','status'=>1);
             return json_encode($array);
         }

@@ -170,7 +170,7 @@ a.remove-link:hover {
 /************ Layout ************/
 
 #main-content {
-    margin: 0 0 0 200px;
+    margin: 0 0 0 245px;
 }
 
 .column-left {
@@ -233,6 +233,7 @@ input[type=file] {
     height: 32px;
     font-size: 15px;
     line-height: 32px;
+    margin-left: -16px;
     padding-left: 16px;
 }
 .h2Title a{
@@ -247,7 +248,7 @@ input[type=file] {
 
 .content-box{
     background: #fff;
-    padding: 16px 16px 16px 16px;
+    padding: 32px 16px 16px 16px;
     margin-right: 15px;
 }
 .clss_type{
@@ -271,7 +272,7 @@ input[type=file] {
 .jy_btn{
     position: absolute;
     top:10px;
-    right: 15px;
+    right: 45px;
     cursor: pointer;
 }
 .con_down{
@@ -845,28 +846,6 @@ top: 2px;
     border-radius: 2px;
     color: #fff;
 }
-#my_mb .layui-col-xs6 > div,#cy_mb .lp .layui-col-xs6 > div,#cy_mb .rp .layui-col-xs6 > div{
+#my_mb .layui-col-xs6 > div{
     border:1px solid #a8dfff;
-}
-#my_mb .layui-tab-content{
-    background: #fff;
-}
-#cy_mb .contains .ztree{
-    margin-top: 0;
-}
-.main-sidebar{
-  position: absolute;
-  top:56px;
-  left: 0;
-  height: 100%;
-  min-height: 100%;
-  width: 190px;
-  z-index: 810;
-  background-color: #fff;
- }
- .pl_list div .left{
-    width: 6%;
- }
-.pl_list div .left_cont{
-    width: 92%;
 }

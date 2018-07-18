@@ -38,7 +38,7 @@ class IndexController extends Controller
             // return 1;
             session(['idUser' => $user[0]['id']]);
             //是不是也可以把user数组直接方session里
-            $array = array('msg'=>route("objective.iamexecutor","1"),'status'=>1);
+            $array = array('msg'=>route("objective.mine"),'status'=>1);
             return json_encode($array);
         }
     }

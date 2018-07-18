@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Plan extends Model
+class Stateindex extends Model
 {
-    protected $table = 'plan';
+    protected $table = 'stateindex';
 
-    protected $fillable=['durationflag','duration','organiser_id','description','status']; 
+    protected $fillable=['durationflag','duration','organiser_id','description','state','status']; 
 
 
     // 取评论

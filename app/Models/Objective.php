@@ -9,14 +9,14 @@ class Objective extends Model
     //
     protected $table = 'objective';
 
-    protected $fillable=['name','startdate','enddate','organiser_id','executor_id','description','score','status']; 
+    protected $fillable=['durationflag','duration','organiser_id','description','score','status']; 
 
 
     public function keyresults()
     {
         // return $this->hasMany('App\Models\Keyresult','pid');
         $arr_where['status'] = 0; 
-        return $this->hasMany('App\Models\Keyresult','pid')->where($arr_where)->select('id', 'name', 'startdate', 'enddate', 'score', 'scoretime', 'pid')->orderBy('id','desc');
+        return $this->hasMany('App\Models\Keyresult','pid')->where($arr_where)->select('id', 'description', 'score', 'confidentindex', 'scoretime', 'pid')->orderBy('id','asc');
     }
 
 

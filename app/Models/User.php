@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Department;
+use Illuminate\Support\Facades\DB;
 
 class User extends Model
 {
@@ -126,7 +127,7 @@ class User extends Model
             ->get()
             ->toArray();
         }else{
-            $arr_alluser = User::select(['id','name','department_id','position_id'])->where($arr_where)
+            $arr_alluser = User::select(['id','id as userid','name','department_id','position_id'])->where($arr_where)
                 ->orderBy('id',"desc")
                 ->get()->toArray();
         }
@@ -172,6 +173,12 @@ class User extends Model
 
         // dd($arr_litedpt);
 
+        // for ($i=0; $i < count($arr_litedpt); $i++) { 
+        //     $arr_litedpt[$i]['dptid'] = $arr_litedpt[$i]['id'];
+        //     unset($arr_litedpt[$i]['id']);
+        // }
+        // dd($arr_litedpt);
+
         return $arr_litedpt;
     }
     
@@ -183,4 +190,12 @@ class User extends Model
         return $user;
     }
 
+
+    public static function getLeaderIdByUserId($userid)
+    {
+
+        $user = DB::select('select * from user where isleader=1 and department_id=( SELECT department_id FROM `user` WHERE id=:id )', [':id'=>$userid]);
+
+        return $user;
+    }
 }

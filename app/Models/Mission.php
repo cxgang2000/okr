@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Plan extends Model
+class Mission extends Model
 {
-    protected $table = 'plan';
+    protected $table = 'mission';
 
-    protected $fillable=['durationflag','duration','organiser_id','description','status']; 
+    protected $fillable=['durationflag','duration','organiser_id','description','importance','status']; 
 
 
     // 取评论
