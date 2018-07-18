@@ -75,7 +75,8 @@
       /*公司职位*/
   var ygsetting = {
       view: {
-        addDiyDom: addDiyDoms
+        addDiyDom: addDiyDoms,
+        showLine: false,
       },
     };
   
@@ -99,7 +100,8 @@
       };
       var setting = {
         view: {
-          fontCss: setFontCss
+          fontCss: setFontCss,
+          showLine: false,
         }
       };
       $.fn.zTree.init($("#ygNameTree"), setting, ygnames);
@@ -212,7 +214,7 @@
               <div class="layui-col-xs6">
                 <div>
                   <div class="titles">
-                    my本周关注的任务（P1必须做，P2应该做）
+                    本<span id="my_span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
                   </div>
                   <div class="contains">
                     <ul>
@@ -232,7 +234,7 @@
               <div class="layui-col-xs6">
                 <div>
                   <div class="titles">
-                    my目标
+                    目标
                   </div>
                   <div class="contains">
                     <ul id="my_tree" class="ztree">
@@ -247,7 +249,7 @@
               <div class="layui-col-xs6">
                 <div>
                   <div class="titles">
-                    others本周关注的任务（P1必须做，P2应该做）
+                    本<span id="others_span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
                   </div>
                   <div class="contains">
                     <ul>
@@ -267,7 +269,7 @@
               <div class="layui-col-xs6">
                 <div>
                   <div class="titles">
-                    others目标
+                    目标
                   </div>
                   <div class="contains">
                     <ul id="others_tree" class="ztree">
@@ -284,7 +286,7 @@
               <div class="layui-col-xs6">
                 <div>
                   <div class="titles">
-                    my未来四周计划
+                    未来四<span id="my_span_plan_duration">周</span>计划
                   </div>
                   <div class="contains">
                     <ul>
@@ -305,7 +307,7 @@
               <div class="layui-col-xs6">
                 <div>
                   <div class="titles">
-                    my状态指标
+                    状态指标
                   </div>
                   <div class="contains">
                     <div class="text-right">
@@ -356,7 +358,7 @@
               <div class="layui-col-xs6">
                 <div>
                   <div class="titles">
-                    others未来四周计划
+                    未来四<span id="others_span_plan_duration">周</span>计划
                   </div>
                   <div class="contains">
                     <ul>
@@ -377,7 +379,7 @@
               <div class="layui-col-xs6">
                 <div>
                   <div class="titles">
-                    others状态指标
+                    状态指标
                   </div>
                   <div class="contains">
                     <div class="text-right">
@@ -518,7 +520,8 @@
       view: {
         addDiyDom: addDiyDom,
         showIcon: false,
-        fontCss: getFont
+        fontCss: getFont,
+        showLine: false,
       }
     };
     // var settings = {
@@ -602,17 +605,23 @@
         if (my_perioditem=="month"){
           $("#my_monthperiod").addClass("active");
           $("#my_monthperiod").val(my_period);
-          $("#my_period_show").html($("#my_monthperiod").find("option:selected").text()); 
+          $("#my_period_show").html($("#my_monthperiod").find("option:selected").text());
+          $("#my_span_misson_duration").html("周");
+          $("#my_span_plan_duration").html("周");   
         }
         if (my_perioditem=="season"){
           $("#my_seasonperiod").addClass("active");
           $("#my_seasonperiod").val(my_period);
           $("#my_period_show").html($("#my_seasonperiod").find("option:selected").text());
+          $("#my_span_misson_duration").html("月");
+          $("#my_span_plan_duration").html("月");
         }
         if (my_perioditem=="year"){
           $("#my_yearperiod").addClass("active");
           $("#my_yearperiod").val(my_period);
           $("#my_period_show").html($("#my_yearperiod").find("option:selected").text());
+          $("#my_span_misson_duration").html("季度");
+          $("#my_span_plan_duration").html("季度");
         }
 
 
@@ -629,16 +638,22 @@
           $("#others_monthperiod").addClass("active");
           $("#others_monthperiod").val(others_period);
           $("#others_period_show").html($("#others_monthperiod").find("option:selected").text());
+          $("#others_span_misson_duration").html("周");
+          $("#others_span_plan_duration").html("周"); 
         }
         if (others_perioditem=="season"){
           $("#others_seasonperiod").addClass("active");
           $("#others_seasonperiod").val(others_period);
           $("#others_period_show").html($("#others_seasonperiod").find("option:selected").text());
+          $("#others_span_misson_duration").html("月");
+          $("#others_span_plan_duration").html("月");
         }
         if (others_perioditem=="year"){
           $("#others_yearperiod").addClass("active");
           $("#others_yearperiod").val(others_period);
           $("#others_period_show").html($("#others_yearperiod").find("option:selected").text());
+          $("#others_span_misson_duration").html("季度");
+          $("#others_span_plan_duration").html("季度");
         }
     }
 

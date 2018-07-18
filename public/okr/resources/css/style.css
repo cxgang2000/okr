@@ -741,7 +741,7 @@ background: #209ee4;
 color: #fff;
 padding: 0 10px;
 cursor: pointer;
-right: 0;
+right: 3px;
 top: 2px;
 }
 .layui-badge-dot{
@@ -854,6 +854,9 @@ top: 2px;
 #cy_mb .contains .ztree{
     margin-top: 0;
 }
+#my_mb .contains .ztree{
+    margin-top: -10px;
+}
 .main-sidebar{
   position: absolute;
   top:56px;
@@ -869,4 +872,10 @@ top: 2px;
  }
 .pl_list div .left_cont{
     width: 92%;
+}
+.layui-col-xs6 .contains .text-right{
+    margin-right: 10px;
+}
+.ztree li span.button.noline_open {
+    background-position: -90px -72px;
 }

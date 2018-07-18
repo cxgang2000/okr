@@ -146,10 +146,6 @@
                 <ul class="layui-tab-title">
                   <li id="duration-2-2018" onclick="setDuration('2018');">2018</li>
                 </ul>
-                <div class="layui-tab-content">
-                  <!-- 1y 2018年 目标值ztree不一样顾就没有写太多 以一月份为例-->
-
-                </div>
               </div>
             </div>
           </div>
@@ -166,7 +162,7 @@
                 <div class="layui-col-xs6">
                   <div>
                     <div class="titles">
-                      本周关注的任务（P1必须做，P2应该做）
+                      本<span id="span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
                       <span class="lf_icon tj_gz_icon">+</span>
                     </div>
                     <div class="contains">
@@ -177,7 +173,7 @@
                           P{{ $mission['importance']  }}：{{ $mission['description']  }}
                           <div class="this_cz">
                             <i class="icon iconfont icon-bianji bz_rw"  flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);"></i>
-                            <i class="icon iconfont icon-laji" description="{{ $mission['description']  }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);"></i>
+                            <i class="icon iconfont icon-laji" description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);"></i>
                           </div>
                         </li>
                         @endforeach
@@ -202,7 +198,7 @@
                 <div class="layui-col-xs6">
                   <div>
                     <div class="titles">
-                      未来四周计划
+                      未来四<span id="span_plan_duration">周</span>计划
                       <span class="lf_icon wl_jh">+</span>
                     </div>
                     <div class="contains">
@@ -852,7 +848,8 @@
       view: {
         addDiyDom: addDiyDom,
         showIcon: false,
-        fontCss: getFont
+        fontCss: getFont,
+        showLine: false,
       }
     };
     // var settings = {
@@ -956,16 +953,22 @@
     {
       $("#duration-div-0").addClass("layui-show");
       $("#duration-0-"+duration).addClass("layui-this");
+      $("#span_misson_duration").html("周");
+      $("#span_plan_duration").html("周");      
     }
     if(durationflag==1)
     {
       $("#duration-div-1").addClass("layui-show");
       $("#duration-1-"+duration).addClass("layui-this");
+      $("#span_misson_duration").html("月");
+      $("#span_plan_duration").html("月");
     }
     if(durationflag==2)
     {
       $("#duration-div-2").addClass("layui-show");
       $("#duration-2-"+duration).addClass("layui-this");
+      $("#span_misson_duration").html("季度");
+      $("#span_plan_duration").html("季度");
     }
 
     $("#my_period_show").html($("#duration-"+durationflag+"-"+duration).html());
