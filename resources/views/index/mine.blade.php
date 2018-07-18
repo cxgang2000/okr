@@ -430,7 +430,7 @@
           <form>
             <!-- 目标内容 -->
             <div class="dafen_titles com_titles">
-              添加关键结果(Key Result)
+              添加关键结果(Key Results)
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label">关键结果：</label>
@@ -462,7 +462,7 @@
           <form>
             <!-- 目标内容 -->
             <div class="dafen_titles com_titles">
-              编辑关键结果(Key Result)
+              编辑关键结果(Key Results)
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label">关键结果：</label>
@@ -494,7 +494,7 @@
           <form>
             <!-- 目标内容 -->
             <div class="dafen_titles com_titles">
-              添加目标(Object)
+              添加目标(Objective)
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label">我的目标：</label>
@@ -526,7 +526,7 @@
           <form>
             <!-- 目标内容 -->
             <div class="dafen_titles com_titles">
-              编辑目标(Object)
+              编辑目标(Objective)
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label">我的目标：</label>
