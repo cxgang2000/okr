@@ -926,7 +926,7 @@
 
     $(function(){
       $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-      $.fn.zTree.init($("#myTreeDemo"), settings, zNodes);
+      // $.fn.zTree.init($("#myTreeDemo"), setting, zNodes);
 
       $("#my_mb .treeview a:contains('我的目标')").parent().addClass('active');
       $(".yg_sec").hide();
