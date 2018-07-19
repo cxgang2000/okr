@@ -410,7 +410,7 @@ class ObjectiveController extends Controller
     {
 
         $myId = session('idUser');
-        $othersId=$request->othersId;
+        $othersId = $request->othersId;
         // 初始化成员数组
         $arr_others = array();
         $arr_others['id'] = "";
@@ -418,22 +418,33 @@ class ObjectiveController extends Controller
         $arr_others['position_name'] = "";
         
         // 如果没有接收到成员id，找部门负责人id
+        // 20180719 修改为找直接上级id
         if($othersId==""){
-            $user = User::getLeaderIdByUserId($myId);
-            // var_dump($user);
-            // die();
-            if(count($user)>0){
-                $u = $user[0];
-                // $othersId=$u->id;
-                // dd($u);
-                // $arr_others=$u->toArray();不行报错
-                $arr_others['id']=$u->id;
-                $arr_others['name']=$u->name;
-                $arr_others['position_id']=$u->position_id;
+            // $user = User::getLeaderIdByUserId($myId);
+            // // var_dump($user);
+            // // die();
+            // if(count($user)>0){
+            //     $u = $user[0];
+            //     // $othersId=$u->id;
+            //     // dd($u);
+            //     // $arr_others=$u->toArray();不行报错
+            //     $arr_others['id']=$u->id;
+            //     $arr_others['name']=$u->name;
+            //     $arr_others['position_id']=$u->position_id;
+            //     // var_dump($arr_others);die();
+            //     $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
+            //     // var_dump($arr_others);die();
+
+            $arr_my = User::find($myId);
+            if($arr_my->pid!=""){
+                $arr_others = User::find($arr_my->pid)->toArray();
+                $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
+            }else{
+                $othersId = $myId;
+                $arr_others = User::find($othersId)->toArray();
                 // var_dump($arr_others);die();
                 $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
-                // var_dump($arr_others);die();
-            }         
+            }        
         }else{
             $arr_others = User::find($othersId)->toArray();
             // var_dump($arr_others);die();

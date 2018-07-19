@@ -100,11 +100,12 @@ p {
     padding-left: 60px;
     height: 50px;
 }
-.reset-input{
-    background: url(../images/loginicon.png) no-repeat left;
+#login form .form-group{
+    position: relative;
 }
-.password{
-    background: url(../images/pasicon.png) no-repeat left;
+.login_icon{
+    position: absolute;
+    bottom: 0;
 }
 .btn-reset{
     background: none;
@@ -405,9 +406,7 @@ td .layui-btn-primary{
 .time_con{
     margin-bottom: 15px;
 }
-.time_con select{
-    border: none;
-}
+
 .time_con select:nth-child(n+2){
     margin-left: 20px;
 }
@@ -416,8 +415,14 @@ td .layui-btn-primary{
     width: 70px;
     height: 28px;
 }
+
+.time_con select{
+    border: 0px solid #ddd;
+}
+
 .time_con .active{
-    border-bottom: 2px solid #209ee4;
+    border: 1px solid #209ee4;
+    border-radius: 5px;
 }
 
 
@@ -718,7 +723,7 @@ td .layui-btn-primary{
     cursor: pointer;
 }
 .contains{
-    padding: 20px 0 20px 12px;
+    padding: 10px 0 20px 12px;
 }
 .contains ul li{
     margin-bottom: 12px;
@@ -826,7 +831,7 @@ top: 2px;
 #cy_mb .contains ul{
     margin-top: 12px;
 }
-#cy_mb .contains .ztree{
+#cy_mb .contains .ztree,#my_mb .contains .ztree{
     overflow: scroll;
 }
 .layui-tab-content {
@@ -876,6 +881,15 @@ top: 2px;
 .layui-col-xs6 .contains .text-right{
     margin-right: 10px;
 }
+
 .ztree li span.button.noline_open {
     background-position: -90px -72px;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+#score{
+    position: relative;
+    top: 0;
 }

@@ -28,9 +28,11 @@
 				<form name="form1" method="post" action="{{ route('index.login') }}">
                 {{ csrf_field() }}
 					<div class="form-group">
+						<img src="/okr/resources/images/loginicon.png" class="login_icon" />
 						<input type="email" class="form-control reset-input" id="name" placeholder="请输入账户">
 					</div>
 					<div class="form-group">
+						<img src="/okr/resources/images/pasicon.png" class="login_icon" />
 						<input type="password" class="form-control reset-input password" id="password" placeholder="请输入密码">
 					</div>
 					<button type="button" class="btn btn-lg btn-block btn-reset sub">登录</button>

@@ -342,9 +342,9 @@
                         @endswitch
 
                         {{ $stateindex['description']  }}
-                        <div class="this_cz">
+                        <!--div class="this_cz">
                           <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $stateindex['id'] }}" onclick="pop_comment_div(this,'{{ $stateindex['description'] }}')"></span>
-                        </div>
+                        </div-->
                       </li>
                       @endforeach
                      
@@ -414,9 +414,9 @@
                         @endswitch
 
                         {{ $stateindex['description']  }}
-                        <div class="this_cz">
+                        <!--div class="this_cz">
                           <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $stateindex['id'] }}" onclick="pop_comment_div(this,'{{ $stateindex['description'] }}')"></span>
-                        </div>
+                        </div-->
                       </li>
                       @endforeach
 

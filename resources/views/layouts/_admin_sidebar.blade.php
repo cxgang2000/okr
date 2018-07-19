@@ -24,16 +24,7 @@
             </section>
         </aside>
         <style type="text/css">
-            .main-sidebar{
-                position: absolute;
-                top:56px;
-                left: 0;
-                height: 100%;
-                min-height: 100%;
-                width: 230px;
-                z-index: 810;
-                background-color: #fff;
-            }
+
         </style>
         <script>
             $.sidebarMenu($('.sidebar-menu'))
