@@ -880,6 +880,20 @@
     var zNodes = {!! $json_objective !!};
 
 
+function html_encode(str) 
+{ 
+var s = ""; 
+if (str.length == 0) return ""; 
+s = str.replace(/&/g, "&gt;"); 
+s = s.replace(/</g, "&lt;"); 
+s = s.replace(/>/g, "&gt;"); 
+s = s.replace(/ /g, "&nbsp;"); 
+s = s.replace(/\'/g, "&#39;"); 
+s = s.replace(/\"/g, "&quot;"); 
+s = s.replace(/\n/g, "<br>"); 
+return s; 
+}
+
     function getFont(treeId, node) {
       return node.font ? node.font : {};
     }
@@ -895,20 +909,22 @@
           dafen = "<span class='df_bj'>"+treeNode.score+"</span>";
           aObj.before(dafen);
         }
-
+        //alert(treeNode.name);
+        //alert(html_encode(treeNode.name));
+        
         scoreStr = "<span class='demoIcon'><span class='pf' title='评分' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_score_div(this);'>评分</span></span>";
         addkrStr = "<span class='demoIcon'><span title='添加KR' class='icon iconfont icon-jiahao tj_jh' onclick='pop_new_kr("+treeNode.id+")'></span></span>";
         if(treeNode.score==999){
           delStr = "";
           editStr = "<span class='demoIcon'><span class='icon iconfont icon-bianji xq' title='编辑' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_objective(this);'></span></span>";
           if(treeNode.canDel==1){
-            delStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-laji del' title='删除' description="+treeNode.name+" flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_del_div(this);'></span></span>";
+            delStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-laji del' title='删除' description="+html_encode(treeNode.name)+" flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_del_div(this);'></span></span>";
           }
         }else{
           editStr = "";
           delStr = "";
         }        
-        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+treeNode.description+"');></span></span>";
+        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
         aObj.after(scoreStr + addkrStr + editStr + delStr + commentStr);
       }
 
@@ -927,13 +943,13 @@
           delStr = "";
           editStr = "<span class='demoIcon'><span class='icon iconfont icon-bianji xq' title='编辑' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_keyresult(this);'></span></span>";
           if(treeNode.canDel==1){
-            delStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-laji del' title='删除' description="+treeNode.name+" flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_del_div(this);'></span></span>";
+            delStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-laji del' title='删除' description="+html_encode(treeNode.name)+" flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_del_div(this);'></span></span>";
           }
         }else{
           editStr = "";
           delStr = "";
         }        
-        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+treeNode.description+"');></span></span>";
+        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
         aObj.after(scoreStr + confidentindexStr + editStr + delStr + commentStr);
       }
     }

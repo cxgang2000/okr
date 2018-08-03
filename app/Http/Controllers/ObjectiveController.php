@@ -312,6 +312,8 @@ class ObjectiveController extends Controller
             $arr_objective[$i]['canDel']=0;
             $arr_objective[$i]['kr_count']="0/0";
 
+            // $arr_objective[$i]['description']=htmlspecialchars_decode($arr_objective[$i]['description'],ENT_QUOTES);
+
             // // 未开始的能删
             // if($arr_objective[$i]['dateStatus']==1){$arr_objective[$i]['canDel']=1;}
             // // 没下级的能删
