@@ -348,8 +348,15 @@ class ObjectiveController extends Controller
         // 取上级领导的相关
         $myId = session('idUser');
         $arr_my = User::find($myId);
+        // dd($arr_my);
         // if($arr_my->pid!=""){
-        $arr_others = User::find($arr_my->pid)->toArray();
+
+        if($arr_my->pid=="0"){
+            $pid = $myId;
+        }else{
+            $pid = $arr_my->pid;
+        }
+        $arr_others = User::find($pid)->toArray();
         $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
         // dd($arr_others);
 
@@ -384,11 +391,13 @@ class ObjectiveController extends Controller
             // var_dump($others_all['arr_mission']);
             // dd("aa");
             $others_all['arr_plan'] = $this->getPlan($others_arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
-            }
-
-
+        }
         // dd($others_all);
 
+
+
+
+        
 
         return view('index.mine33
             ',compact('durationflag', 'duration', 'weekdate', 'json_objective','arr_mission','arr_plan','arr_stateindex','arr_weekSatrtAndEnd','others_all','arr_others'));
