@@ -1220,7 +1220,7 @@
 
     }
     function hide_gz(str){
-      return false;
+      // return false;
       tmpid = "gz_"+str;
       objDiv = $("#"+tmpid+""); 
       $(objDiv).css("display", "none"); 
