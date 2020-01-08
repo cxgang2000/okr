@@ -55,8 +55,8 @@ class StateindexController extends Controller
 
         $data['durationflag'] = $request->durationflag;
         $duration = $request->duration;
-        // if($data['durationflag']==0 || $data['durationflag']==1){$duration = date("Y").$duration;}
-        if($data['durationflag']==3){$duration = date("Y").$duration;}
+        if($data['durationflag']==0 || $data['durationflag']==1){$duration = date("Y").$duration;}
+        // if($data['durationflag']==3){$duration = date("Y").$duration;}
         $data['duration'] = $duration;   
         $data['organiser_id'] = session('idUser'); 
         $data['description'] = $request->s_description;
@@ -261,6 +261,8 @@ class StateindexController extends Controller
     {
         $durationflag = $request->durationflag;
         $duration = $request->duration;
+        $userid = $request->userid;
+        if($userid=="")$userid=session('idUser');
         if($durationflag=='' || $duration==''){die('参数错误');}
 
         $arr_where['durationflag'] = $durationflag;
@@ -270,7 +272,7 @@ class StateindexController extends Controller
             $duration1 = $duration;
         }
         $arr_where['duration'] = $duration1;
-        $arr_where['organiser_id'] = session('idUser');
+        $arr_where['organiser_id'] = $userid;
 
         // var_dump($arr_where);die();
         $arr_stateindex = Stateindex::where($arr_where)->get()->toArray();

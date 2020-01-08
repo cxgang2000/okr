@@ -69,9 +69,10 @@
 
             <div class="content">
               <div class="title m-b-md">
-                    OKR
+                    OKR____
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="{{ asset('public/js/app.js') }}?{{ time() }}"></script>>
     </body>
 </html>

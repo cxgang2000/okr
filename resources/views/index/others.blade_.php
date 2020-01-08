@@ -79,28 +79,19 @@
                 <div class="layui-col-xs12 rp">
                   <div class="time_con">
 
-                    <!--select id="others_halfyearperiod" class="list" onchange="selectOthersPeriod('3',this.value);">
+                    <select id="others_halfyearperiod" class="list" onchange="selectOthersPeriod('3',this.value);">
                       <option value="1000">半年度</option>
                       <option value="001" title="上半年（1月～6月）">上半年</option>
                       <option value="002" title="下半年（7月～12月）">下半年</option>
-                    </select-->
-
-                    <select id="others_seasonperiod" class="list" onchange="selectOthersPeriod('1',this.value);">
-                      <option value="1000">季度</option>
-                      <option value="1" title="春季(3-5)">春季(3-5)</option>
-                      <option value="2" title="暑假(6-8)">暑假(6-8)</option>
-                      <option value="3" title="秋季(9-11)">秋季(9-11)</option>
-                      <option value="4" title="寒假(12-2)">寒假(12-2)</option>
                     </select>
 
                     <select id="others_yearperiod" class="list" onchange="selectOthersPeriod('2',this.value);">
                       <option value="10000">年度</option>
                       <option value="2018">2018</option>
                       <option value="2019">2019</option>
-                      <option value="2020">2020</option>
                     </select>
                     
-                    <input name="others_weekdate" type="text" id="others_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" /><input class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;margin-left: 10px;" name="datesearch" type="button" value="搜索" onclick="selectOthersPeriod(my_perioditem,my_period);"/>
+                    <input name="others_weekdate" type="text" id="others_weekdate" class="layui-smallinput" /><input name="datesearch" type="button" value="搜索" onclick="selectMyPeriod(my_perioditem,my_period);"/>
 
                     </div>
                     <div class="okr_mb">
@@ -115,12 +106,10 @@
                     <div class="layui-col-xs6">
                       <div>
                         <div class="titles">
-                          本<span id="others_span_misson_duration">周</span>关注的任务 ({{ substr($arr_others_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_others_weekSatrtAndEnd[1],5,5) }})
+                          本<span id="others_span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
                           <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$others_weekdate,'userid'=>$othersId])}}" target="_blank"><span>操作历史</span></a>
                         </div>
                         <div class="contains">
-                        	<div style="float:right;">（P1必须做，P2应该做）</div>
-                        	<br>
                           <ul>
 
                             @foreach ($others_all['arr_mission'] as $mission)
@@ -229,12 +218,10 @@
                 <div class="layui-col-xs12 lp">
                   <div class="time_con">
 
-                    <select id="my_seasonperiod" class="list" onchange="selectMyPeriod('1',this.value);">
-                      <option value="1000">季度</option>
-                      <option value="1" title="春季(3-5)">春季(3-5)</option>
-                      <option value="2" title="暑假(6-8)">暑假(6-8)</option>
-                      <option value="3" title="秋季(9-11)">秋季(9-11)</option>
-                      <option value="4" title="寒假(12-2)">寒假(12-2)</option>
+                    <select id="my_halfyearperiod" class="list" onchange="selectMyPeriod('3',this.value);">
+                      <option value="1000">半年度</option>
+                      <option value="001" title="上半年（1月～6月）">上半年</option>
+                      <option value="002" title="下半年（7月～12月）">下半年</option>
                     </select>
 
                     <select id="my_yearperiod" class="list" onchange="selectMyPeriod('2',this.value);">
@@ -243,7 +230,7 @@
                       <option value="2019">2019</option>
                     </select>
                     
-                    <input name="my_weekdate" type="text" id="my_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" /><input class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;margin-left: 10px;" name="datesearch" type="button" value="搜索" onclick="selectMyPeriod(my_perioditem,my_period);"/>
+                    <input name="my_weekdate" type="text" id="my_weekdate" class="layui-smallinput" /><input name="datesearch" type="button" value="搜索" onclick="selectMyPeriod(my_perioditem,my_period);"/>
                     
                   </div>
                   <div class="okr_mb">
@@ -255,12 +242,10 @@
                     <div class="layui-col-xs6">
                       <div>
                         <div class="titles">
-                          本<span id="my_span_misson_duration">周</span>关注的任务 ({{ substr($arr_my_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_my_weekSatrtAndEnd[1],5,5) }})
+                          本<span id="my_span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
                           <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate])}}" target="_blank"><span>操作历史</span></a>
                         </div>
                         <div class="contains">
-                        	<div style="float:right;">（P1必须做，P2应该做）</div>
-                        	<br>
                           <ul>
 
                             @foreach ($my_all['arr_mission'] as $mission)
@@ -300,7 +285,7 @@
                         <div class="contains">
                           <ul>
                           
-							              @foreach ($my_all['arr_plan'] as $plan)
+							@foreach ($my_all['arr_plan'] as $plan)
                               <li>
                                 {{ $plan['description']  }}
                                 <div class="this_cz">
@@ -356,6 +341,7 @@
                               </div-->
                             </li>
                             @endforeach
+                           
                           </ul>
                         </div>
                       </div>
@@ -396,7 +382,7 @@
 <!-- end -->
 
 <!-- 评论 -->
-<div id="tj_pl" class="models pl_models" style="display: none;">
+<div class="models pl_models" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -674,15 +660,6 @@
       $.fn.zTree.init($("#others_tree"), setting, others_zNodes);
 
       $("#cy_mb .treeview a:contains('成员目标')").parent().addClass('active');
-
-      document.onkeydown = function(e){  
-        var ev = document.all ? window.event : e;
-        if(ev.keyCode==13) {// 如（ev.ctrlKey && ev.keyCode==13）为ctrl+Center 触发
-            if($('#tj_pl').css('display')=="block"){new_comment();}
-
-            return false;
-        }
-      }
     })
 
     function html_encode(str) { 
@@ -704,22 +681,22 @@
     others_period = "{{ $others_period }}";
     othersId = "{{ $arr_others['id'] }}";
 	
-    my_weekdate = "{{ $my_weekdate }}";
+	my_weekdate = "{{ $my_weekdate }}";
     others_weekdate = "{{ $others_weekdate }}";
 
     // 初始化日期选择
     function initPerild(){
 
-        $("#my_seasonperiod").removeClass("active");
-        $("#my_seasonperiod").val(1000);
+        $("#my_halfyearperiod").removeClass("active");
+        $("#my_halfyearperiod").val(1000);
         $("#my_yearperiod").removeClass("active");
         $("#my_yearperiod").val(10000);
 
         // $("#"+my_perioditem+"period").addClass("active");
-        if (my_perioditem=="1"){
-          $("#my_seasonperiod").addClass("active");
-          $("#my_seasonperiod").val(my_period);
-          $("#my_period_show").html($("#my_seasonperiod").find("option:selected").text());
+        if (my_perioditem=="3"){
+          $("#my_halfyearperiod").addClass("active");
+          $("#my_halfyearperiod").val(my_period);
+          $("#my_period_show").html($("#my_halfyearperiod").find("option:selected").text());
           $("#my_span_misson_duration").html("月");
           $("#my_span_plan_duration").html("月");
         }
@@ -731,18 +708,17 @@
           $("#my_span_plan_duration").html("季度");
         }
 
-        $("#others_seasonperiod").removeClass("active");
-        $("#others_seasonperiod").val(1000);
+        $("#others_halfyearperiod").removeClass("active");
+        $("#others_halfyearperiod").val(1000);
         $("#others_yearperiod").removeClass("active");
         $("#others_yearperiod").val(10000);
         
         $("#"+others_perioditem+"period").addClass("active");
 
-        if (others_perioditem=="1"){
-          $("#others_seasonperiod").addClass("active");
-          console.log("others_period="+others_period);
-          $("#others_seasonperiod").val(others_period);
-          $("#others_period_show").html($("#others_seasonperiod").find("option:selected").text());
+        if (others_perioditem=="3"){
+          $("#others_halfyearperiod").addClass("active");
+          $("#others_halfyearperiod").val(others_period);
+          $("#others_period_show").html($("#others_halfyearperiod").find("option:selected").text());
           $("#others_span_misson_duration").html("月");
           $("#others_span_plan_duration").html("月");
         }
@@ -756,30 +732,15 @@
     }
 
     initPerild();
-
-    // 确定当前的季节
-    function which_season(){
-      var now   = new Date();
-      var month = now.getMonth()+1;
-      if(month<10){month="0"+month;}
-
-      if(month=="03" || month=="04" || month=="05"){season = "1";}
-      if(month=="06" || month=="07" || month=="08"){season = "2";}
-      if(month=="09" || month=="10" || month=="11"){season = "3";}
-      if(month=="12" || month=="01" || month=="02"){season = "4";}
-      return season;
-    }
-
-
     // 我的日期选择确定
     function selectMyPeriod(selectedperioditem,selectedperiod){
       console.log(selectedperioditem + " " +selectedperiod);
 
       my_perioditem=selectedperioditem;
       my_period=selectedperiod;
-
-      my_weekdate = $("#my_weekdate").val();
-      others_weekdate = $("#others_weekdate").val();
+	
+	  my_weekdate = $("#my_weekdate").val();
+	  others_weekdate = $("#others_weekdate").val();
 	  
       
       if(selectedperiod==1000 || selectedperiod==10000){return false;}
@@ -793,8 +754,8 @@
       others_perioditem=selectedperioditem;
       others_period=selectedperiod;
 	  
-      my_weekdate = $("#my_weekdate").val();
-      others_weekdate = $("#others_weekdate").val();
+	  my_weekdate = $("#my_weekdate").val();
+	  others_weekdate = $("#others_weekdate").val();
 
       if(selectedperiod==1000 || selectedperiod==10000){return false;}
       window.location.href = "{{ route('objective.others') }}" + "?keyword={{ $keyword }}&othersId="  + othersId +  "&my_perioditem=" + my_perioditem + "&my_period=" + my_period + "&my_weekdate=" + my_weekdate +  "&others_perioditem=" + others_perioditem + "&others_period=" + others_period + "&others_weekdate=" + others_weekdate;
@@ -809,8 +770,8 @@
       // }
       url = "{{ route('objective.others') }}";
 	  
-      my_weekdate = $("#my_weekdate").val();
-      others_weekdate = $("#others_weekdate").val();
+	  my_weekdate = $("#my_weekdate").val();
+	  others_weekdate = $("#others_weekdate").val();
 
       window.location.href = "{{ route('objective.others') }}" + "?keyword="+keyword+"&othersId="  + othersId +  "&my_perioditem=" + my_perioditem + "&my_period=" + my_period + "&my_weekdate=" + my_weekdate +  "&others_perioditem=" + others_perioditem + "&others_period=" + others_period + "&others_weekdate=" + others_weekdate;
     }
@@ -827,8 +788,8 @@
       othersId = userid;
       // 点了某员工
 	  
-      my_weekdate = $("#my_weekdate").val();
-      others_weekdate = $("#others_weekdate").val();
+	  my_weekdate = $("#my_weekdate").val();
+	  others_weekdate = $("#others_weekdate").val();
 	  
       window.location.href = "{{ route('objective.others') }}" + "?keyword="+keyword+"&othersId="  + othersId +  "&my_perioditem=" + my_perioditem + "&my_period=" + my_period + "&my_weekdate=" + my_weekdate +  "&others_perioditem=" + others_perioditem + "&others_period=" + others_period + "&others_weekdate=" + others_weekdate;
     }
@@ -1034,31 +995,31 @@
       window.location.href = "{{ route('index.logout') }}";
     }
 	
-  	layui.use('laydate', function(){
-  	  var laydate = layui.laydate;
-  	  
-  	  //执行一个laydate实例
-  	  laydate.render({
-  		elem: '#my_weekdate' //指定元素
-  	  });
-  	  laydate.render({
-  		elem: '#others_weekdate' //指定元素
-  	  });
-  	});
-  	
-  	if(my_weekdate==""){
-  		$("#my_weekdate").val(getNowFormatDate());
-  	}else{
-  		$("#my_weekdate").val(my_weekdate);
-  	}
-  	
-  	if(others_weekdate==""){
-  		$("#others_weekdate").val(getNowFormatDate());
-  	}else{
-  		$("#others_weekdate").val(others_weekdate);
-  	}
+	layui.use('laydate', function(){
+	  var laydate = layui.laydate;
+	  
+	  //执行一个laydate实例
+	  laydate.render({
+		elem: '#my_weekdate' //指定元素
+	  });
+	  laydate.render({
+		elem: '#others_weekdate' //指定元素
+	  });
+	});
 	
-	  function getNowFormatDate() {
+	if(my_weekdate==""){
+		$("#my_weekdate").val(getNowFormatDate());
+	}else{
+		$("#my_weekdate").val(my_weekdate);
+	}
+	
+	if(others_weekdate==""){
+		$("#others_weekdate").val(getNowFormatDate());
+	}else{
+		$("#others_weekdate").val(others_weekdate);
+	}
+	
+	function getNowFormatDate() {
         var date = new Date();
         var seperator1 = "-";
         var year = date.getFullYear();

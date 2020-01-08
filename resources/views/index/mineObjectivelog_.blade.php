@@ -5,12 +5,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>我的目标 操作历史</title>
   <!--                       CSS                       -->
-  @include('layouts._index_headerCss')
+
+  
+
  </HEAD>
 </head>
 <body id="my_mb">
 
-<table width="971" border="1" class="layui-table">
+<table width="971" border="1">
   <tr>
     <td width="310">时间</td>
     <td width="109">任务</td>

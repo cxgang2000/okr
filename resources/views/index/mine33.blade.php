@@ -11,7 +11,7 @@
  </HEAD>
 </head>
 <body id="my_mb">
-     <div class="layui-layout layui-layout-admin">
+  <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
       <div class="layui-logo" style="padding-top: 17px;"><h2 style="color: #fff;">方田员工OKR管理系统</h2></div>
       <ul class="layui-nav layui-layout-left">
@@ -62,6 +62,7 @@
 
       <!-- End #sidebar -->
       <div id="main-content">
+
         <div class="h2Title">
           我的目标
         </div>
@@ -69,9 +70,9 @@
         <div class="content-box">
           <div class="layui-tab">
             <ul class="layui-tab-title">
-              <!--li id="duration-0" onclick="setDurationFlag(0);">月度</li>
-              <li id="duration-1" onclick="setDurationFlag(1);">季度</li-->
-              <li id="duration-3" onclick="setDurationFlag(3);">半年</li>
+              <!--li id="duration-0" onclick="setDurationFlag(0);">月度</li-->
+              <li id="duration-1" onclick="setDurationFlag(1);">季度</li>
+              <!--li id="duration-3" onclick="setDurationFlag(3);">半年</li-->
               <li id="duration-2" onclick="setDurationFlag(2);">年度</li>
             </ul>
             <div class="layui-tab-content">
@@ -92,35 +93,189 @@
                     <li id="duration-0-12" onclick="setDuration('12');">十二月</li>
                   </ul>
                 </div>
-              </div>
+              </div-->
               <div id="duration-div-1" class="layui-tab-item">
                 <div class="layui-tab">
                   <ul class="layui-tab-title">
-                    <li id="duration-1-1" onclick="setDuration('1');">第一季度</li>
-                    <li id="duration-1-2" onclick="setDuration('2');">第二季度</li>
-                    <li id="duration-1-3" onclick="setDuration('3');">第三季度</li>
-                    <li id="duration-1-4" onclick="setDuration('4');">第四季度</li>
-                  </ul>
-                </div>
-              </div-->
-              <div id="duration-div-3" class="layui-tab-item">
-                <div class="layui-tab">
-                  <ul class="layui-tab-title">
-                    <li id="duration-3-001" onclick="setDuration('001');">上半年（1月～6月）</li>
-                    <li id="duration-3-002" onclick="setDuration('002');">上半年（7月～12月）</li>
+                    <li id="duration-1-1" onclick="setDuration('1');">春季(3-5)</li>
+                    <li id="duration-1-2" onclick="setDuration('2');">暑假(6-8)</li>
+                    <li id="duration-1-3" onclick="setDuration('3');">秋季(9-11)</li>
+                    <li id="duration-1-4" onclick="setDuration('4');">寒假(12-2)</li>
                   </ul>
                 </div>
               </div>
+              <!--div id="duration-div-3" class="layui-tab-item">
+                <div class="layui-tab">
+                  <ul class="layui-tab-title">
+                    <li id="duration-3-001" onclick="setDuration('001');">上半年（1月～6月）</li>
+                    <li id="duration-3-002" onclick="setDuration('002');">下半年（7月～12月）</li>
+                  </ul>
+                </div>
+              </div-->
               <div id="duration-div-2" class="layui-tab-item">
                 <div class="layui-tab">
                   <ul class="layui-tab-title">
                     <li id="duration-2-2018" onclick="setDuration('2018');">2018</li>
                     <li id="duration-2-2019" onclick="setDuration('2019');">2019</li>
+                    <li id="duration-2-2020" onclick="setDuration('2020');">2020</li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+
+
+          <div class="layui-row layui-col-space5">
+              <div class="layui-col-xs12 rp">
+                
+                  <div class="okr_mb">
+                    部门的OKR（<span id="others_period_show"></span>）
+                  </div>
+
+              </div>
+              <div class="layui-col-xs12 rp">
+                <div class="layui-row layui-col-space5">
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        本<span id="others_span_misson_duration">周</span>关注的任务 ({{ substr($arr_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_weekSatrtAndEnd[1],5,5) }})
+                        <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate,'userid'=>$arr_others['id']])}}" target="_blank"><span>操作历史</span></a>
+                      </div>
+                      <div class="contains">
+                        <div style="float:right;">（P1必须做，P2应该做）</div>
+                        <br>
+                        <ul>
+
+                          @foreach ($others_all['arr_mission'] as $mission)
+                            <li>P{{ $mission['importance']  }}：{{ $mission['description']  }}
+                              <div class="this_cz">
+                                <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $mission['id'] }}" onclick="pop_comment_div(this,'{{ $mission['description'] }}')"></span>
+                              </div>
+                            </li>
+                          @endforeach
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        目标
+                        <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration,'userid'=>$arr_others['id']])}}" target="_blank"><span>操作历史</span></a>
+                      </div>
+                      <div class="contains">
+                        <ul id="others_tree" class="ztree">
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="layui-col-xs12 rp">
+                <div class="layui-row layui-col-space5">
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        未来四<span id="others_span_plan_duration">周</span>计划
+                        <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate,'userid'=>$arr_others['id']])}}" target="_blank"><span>操作历史</span></a>
+                      </div>
+                      <div class="contains">
+                        <ul>
+                          
+                          @foreach ($others_all['arr_plan'] as $plan)
+                            <li>
+                              {{ $plan['description']  }}
+                              <div class="this_cz">
+                                <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $plan['id'] }}" onclick="pop_comment_div(this,'{{ $plan['description'] }}')"></span>
+                              </div>
+                            </li>
+                          @endforeach
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        状态指标
+                        <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration,'userid'=>$arr_others['id']])}}" target="_blank"><span>操作历史</span></a>
+                      </div>
+                      <div class="contains">
+                        <div class="text-right">
+                          <span class="layui-badge-dot layui-bg-green"></span>优秀
+                          <span class="layui-badge-dot layui-bg-cyan"></span>良好
+                          <span class="layui-badge-dot layui-bg-blue"></span>一般
+                          <span class="layui-badge-dot layui-bg-gray"></span>差
+                        </div>
+                        <ul>
+                          
+                          @foreach ($others_all['arr_stateindex'] as $stateindex)
+                          <li>
+
+                            @switch($stateindex['state'])
+                                @case(1)
+                                    <span class="layui-badge-dot layui-bg-green"></span>
+                                    @break
+
+                                @case(2)
+                                   <span class="layui-badge-dot layui-bg-cyan"></span>
+                                    @break
+
+                                @case(3)
+                                    <span class="layui-badge-dot layui-bg-blue"></span>
+                                    @break
+
+                                @case(4)
+                                    <span class="layui-badge-dot layui-bg-gray"></span>
+                                    @break
+
+                            @endswitch
+
+                            {{ $stateindex['description']  }}
+                            <!--div class="this_cz">
+                              <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $stateindex['id'] }}" onclick="pop_comment_div(this,'{{ $stateindex['description'] }}')"></span>
+                            </div-->
+                          </li>
+                          @endforeach
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <!-- 具体内容div -->
           <div class="layui-tab-content" >
@@ -128,29 +283,41 @@
             <div class="okr_mb">
               我的OKR（<span id="my_period_show"></span>）
             </div>
-            <div class="okr_mb">
-              <input name="weekdate" type="text" id="weekdate" class="layui-input" /><input name="datesearch" type="button" value="搜索" onclick="setDurationFlag(durationflag);"/>
+            <div>
+              <input style="width: 200px;display: inline-block;" name="weekdate" type="text" id="weekdate" class="layui-smallinput layui-input" /><input name="datesearch" type="button" value="搜索" class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;
+    margin-left: 10px;" onclick="setDurationFlag(durationflag);"/>
             </div>
             <div class="layui-tab-item layui-show">
                 <div class="layui-row layui-col-space5">
                   <div class="layui-col-xs6">
                     <div>
                       <div class="titles">
-                        本<span id="span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
+                        本<span id="span_misson_duration">周</span>关注的任务 ({{ substr($arr_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_weekSatrtAndEnd[1],5,5) }})
                         
                         <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate])}}" target="_blank"><span>操作历史</span></a>
                         
                         <span class="lf_icon tj_gz_icon">+</span>
                       </div>
                       <div class="contains">
+                      	<div style="float:right;">（P1必须做，P2应该做）</div>
+                        <br>
                         <ul>
 
                           @foreach ($arr_mission as $mission)
                           <li>
                             P{{ $mission['importance']  }}：{{ $mission['description']  }}
-                            <div class="this_cz">
+                            <!--div class="this_cz">
                               <i class="icon iconfont icon-bianji bz_rw"  flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);"></i>
                               <i class="icon iconfont icon-laji" description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);"></i>
+                            </div-->
+                            <div class="this_cz" onmouseover="show_gz('{{ $mission['id']  }}');" onmouseout= "hide_gz('{{ $mission['id']  }}');">
+                              ...
+                            </div>
+                            <div id="gz_{{ $mission['id']  }}" style="position:absolute;display:none;border:1px solid silver;background:silver;">
+
+                                <span flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);" style="cursor: pointer;">编辑</span>
+                                <br>
+                                <span description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
                             </div>
                           </li>
                           @endforeach
@@ -177,7 +344,6 @@
                     <div>
                       <div class="titles">
                         未来四<span id="span_plan_duration">周</span>计划
-                        
                         <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate])}}" target="_blank"><span>操作历史</span></a>
                         
                         <span class="lf_icon wl_jh">+</span>
@@ -186,9 +352,9 @@
                       <div class="contains">
                         <ul>
 
-                          @foreach ($arr_plan as $plan)
+                          @foreach ($arr_plan as $key=>$plan)
                           <li>
-                            {{ $plan['description']  }}
+                            {{ $plan['description']  }}{{ $key+1 }}
                             <div class="this_cz">
                               <i class="icon iconfont icon-bianji wl_sz" flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);"></i>    
                               <i class="icon iconfont icon-laji" description="{{ $plan['description']  }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);"></i>
@@ -357,7 +523,7 @@
 <!-- end -->
 
 <!-- 添加未来计划 -->
-<div class="models com_models tj_jh" style="display: none;">
+<div class="models com_models tj_jh" id="tj_jh" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -389,7 +555,7 @@
 <!-- end -->
 
 <!-- 编辑未来计划 -->
-<div class="models com_models bj_jh" style="display: none;">
+<div class="models com_models bj_jh" id="bj_jh" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -421,7 +587,7 @@
 <!-- end -->
 
 <!-- 添加关键结果 -->
-<div class="models com_models tj_jg" style="display: none;">
+<div class="models com_models tj_jg" id="tj_jg" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -453,7 +619,7 @@
 <!-- end -->
 
 <!-- 编辑关键结果 -->
-<div class="models com_models bj_jg" style="display: none;">
+<div class="models com_models bj_jg" id="bj_jg" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -485,7 +651,7 @@
 <!-- end -->
 
 <!-- 添加目标 -->
-<div class="models com_models tj_mb" style="display: none;">
+<div class="models com_models tj_mb" id="tj_mb" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -517,7 +683,7 @@
 <!-- end -->
 
 <!-- 修改目标 -->
-<div class="models com_models bj_mb" style="display: none;">
+<div class="models com_models bj_mb" id="bj_mb" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -549,7 +715,7 @@
 <!-- end -->
 
 <!-- 添加关注的任务 -->
-<div class="models com_models tj_gz" style="display: none;">
+<div class="models com_models tj_gz" id="tj_gz" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -561,7 +727,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">
                 <select class="sel_model" id="m_importance">
-                  <option value="0">重要程度</option>
+                  <!--option value="0">重要程度</option-->
                   <option value="1" title="必须要做">P1</option>
                   <option value="2" title="应该要做">P2</option>
                 </select>
@@ -569,6 +735,18 @@
               <div class="layui-input-block">
                 <input id="m_description" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="输入本周关注的任务" class="layui-input">
               </div>
+            </div>
+            <div>
+              未来四周计划
+              @foreach ($arr_plan as $key=>$plan)
+              <li>
+
+                {{ $key+1 }} . {{ $plan['description']  }}{{ $key+1 }}
+                <input name="" type="button" value="选择" onclick='set_m_description("{{ $plan['description']  }}")'/>
+
+              </li>
+              <br>
+              @endforeach
             </div>
             <div class="layui-layer-btn layui-layer-btn- dafen_btn">
               <a class="layui-layer-btn models_qx">取消</a>
@@ -587,7 +765,7 @@
 <!-- end -->
 
 <!-- 编辑关注的任务 -->
-<div class="models com_models bj_gz" style="display: none;">
+<div class="models com_models bj_gz" id="bj_gz" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -599,7 +777,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">
                 <select class="sel_model" id="m_importance_u">
-                  <option value="0">重要程度</option>
+                  <!--option value="0">重要程度</option-->
                   <option value="1" title="必须要做">P1</option>
                   <option value="2" title="应该要做">P2</option>
                 </select>
@@ -625,7 +803,7 @@
 <!-- end -->
 
 <!-- 添加状态指标 -->
-<div class="models com_models tj_ztzb" style="display: none;">
+<div class="models com_models tj_ztzb" id="tj_ztzb" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -637,7 +815,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">
                 <select class="sel_model" id=s_state>
-                  <option value="0">状态</option>
+                  <!--option value="0">状态</option-->
                   <option value="1" title="优秀">优秀</option>
                   <option value="2" title="良好">良好</option>
                   <option value="3" title="一般">一般</option>
@@ -665,7 +843,7 @@
 <!-- end -->
 
 <!-- 编辑状态指标 -->
-<div class="models com_models bj_ztzb" style="display: none;">
+<div class="models com_models bj_ztzb" id="bj_ztzb" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -677,7 +855,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">
                 <select class="sel_model" id="s_state_u">
-                  <option value="0">状态</option>
+                  <!--option value="0">状态</option-->
                   <option value="1" title="优秀">优秀</option>
                   <option value="2" title="良好">良好</option>
                   <option value="3" title="一般">一般</option>
@@ -690,7 +868,7 @@
             </div>
             <div class="layui-layer-btn layui-layer-btn- dafen_btn">
               <a class="layui-layer-btn models_qx">取消</a>
-              <a class="layui-btn layui-btn-normal" onclick="edit_stateindex();">保存</a>
+              <a class="layui-btn layui-btn-normal" onclick="edit_stateindex();" >保存</a>
             </div>
           </form>
         </div>
@@ -705,7 +883,7 @@
 <!-- end -->
 
 <!-- 信心指数 -->
-<div class="models com_models tj_xxzs" style="display: none;">
+<div class="models com_models tj_xxzs" id="tj_xxzs" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -756,7 +934,7 @@
 <!-- end -->
 
 <!-- 修改记录 -->
-<div class="models com_models xxzs_jl" style="display: none;">
+<div class="models com_models xxzs_jl" id="xxzs_jl" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -797,7 +975,7 @@
 <!-- end -->
 
 <!-- 评论 -->
-<div class="models pl_models" style="display: none;">
+<div id="tj_pl" class="models pl_models" style="display: none;">
     <div class="modes_con">
       <div class="layui-layer-content">
         <div class="models_mid text-center">
@@ -894,7 +1072,23 @@
     //   }
     // };
     /* */
+
+    var Otherssetting = {
+      view: {
+        addDiyDom: addDiyDomOther,
+        showIcon: false,
+        fontCss: getFont,
+        showLine: false,
+        dblClickExpand: false,
+      },
+      callback: {
+        onClick: onClick,
+      }
+    };
+
     var zNodes = {!! $json_objective !!};
+    console.log(zNodes);
+    var others_zNodes = {!! $others_all['json_objective'] !!};
 
     function onClick(e,treeId, treeNode) {
       var zTree = $.fn.zTree.getZTreeObj(treeId);
@@ -912,6 +1106,11 @@
         s = s.replace(/\"/g, "&quot;"); 
         s = s.replace(/\n/g, "<br>"); 
         return s; 
+    }
+
+    function set_m_description(str){
+      // str = html_encode1(str);
+      $('#m_description').val(str);
     }
 
     function getFont(treeId, node) {
@@ -974,9 +1173,78 @@
       }
     }
 
+    function addDiyDomOther(treeId, treeNode) {
+      if (treeNode.parentNode && treeNode.parentNode.id!=2) return;
+      var aObj = $("#" + treeNode.tId + IDMark_A);
+
+      if (treeNode.flag == "objective") {
+
+        if(treeNode.score==999){
+          
+        }else{
+          dafen = "<span class='df_bj'>"+treeNode.score+"</span>";
+          aObj.before(dafen);
+        }
+        // commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' onclick='pop_comment_div("+treeNode.id+");'></span></span>";
+        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
+        aObj.after(commentStr);
+      }
+
+      if (treeNode.flag == "keyresult") {
+        
+        if(treeNode.score==999){
+          
+        }else{
+          dafen = "<span class='df_bj'>"+treeNode.score+"</span>";
+          aObj.before(dafen);
+        }
+
+        
+        confidentindexStr = "<span class='demoIcon'><span class='xxzs' flag="+treeNode.flag+" itemid="+treeNode.id+" confidentindex='"+treeNode.confidentindex+"' onclick='pop_confidentindex_div(this);'>（"+treeNode.confidentindex+"）</span></span>";
+             
+        // commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论'></span></span>";
+        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
+        aObj.after(confidentindexStr + commentStr);
+      }
+    }
+
+    // 显示关注...隐藏层
+    function show_gz(str){
+
+      tmpid = "gz_"+str;
+
+      objDiv = $("#"+tmpid+""); 
+      $(objDiv).css("display","block"); 
+      // $(objDiv).css("left", event.clientX-210); 
+      // $(objDiv).css("top", event.clientY-77); 
+
+    }
+    function hide_gz(str){
+      return false;
+      tmpid = "gz_"+str;
+      objDiv = $("#"+tmpid+""); 
+      $(objDiv).css("display", "none"); 
+    }
+
+    function openFirstTreenode(){
+        // 获取树对象
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        /* 获取所有树节点 */
+        var nodes = treeObj.transformToArray(treeObj.getNodes());
+        // 关闭所有节点
+        for (var i = 0, length_1 = nodes.length; i < length_1; i++) {
+            treeObj.expandNode(nodes[i], false);//第二个参数为false证明是折叠
+        }
+        //展开第一级节点
+        treeObj.expandNode(nodes[3], true);//第二个参数为true证明是展开
+    }
+
     $(function(){
       $.fn.zTree.init($("#treeDemo"), setting, zNodes);
       // $.fn.zTree.init($("#myTreeDemo"), setting, zNodes);
+      $.fn.zTree.init($("#others_tree"), Otherssetting, others_zNodes);
+
+      openFirstTreenode();
 
       $("#my_mb .treeview a:contains('我的目标')").parent().addClass('active');
       $(".yg_sec").hide();
@@ -992,13 +1260,41 @@
        //日期确定
        $(".laydate-btns-confirm").on("click",function(){
 
-       }) 
+       })
+
+      document.onkeydown = function(e){  
+        var ev = document.all ? window.event : e;
+        if(ev.keyCode==13) {// 如（ev.ctrlKey && ev.keyCode==13）为ctrl+Center 触发
+            // alert("huiche");
+            if($('#tj_gz').css('display')=="block"){new_mission();}
+            if($('#bj_gz').css('display')=="block"){edit_mission();}
+
+            if($('#tj_jh').css('display')=="block"){new_plan();}
+            if($('#bj_jh').css('display')=="block"){edit_plan();}
+
+            if($('#tj_ztzb').css('display')=="block"){new_stateindex();}
+            if($('#bj_ztzb').css('display')=="block"){edit_stateindex();}
+
+            if($('#tj_mb').css('display')=="block"){new_objective();}
+            if($('#bj_mb').css('display')=="block"){edit_objective();}
+
+            if($('#tj_jg').css('display')=="block"){new_keyresult();}
+            if($('#bj_jg').css('display')=="block"){edit_keyresult();}
+
+            if($('#tj_xxzs').css('display')=="block"){edit_confidentindex();}
+
+            if($('#tj_pl').css('display')=="block"){new_comment();}
+
+            return false;
+        }
+      }
+
     })
 
 
     durationflag = '{{ $durationflag }}';
     duration = '{{ $duration }}';
-	weekdate = '{{ $weekdate }}';
+	  weekdate = '{{ $weekdate }}';
 	
 	
     init_durationFlag();
@@ -1010,29 +1306,30 @@
     //   $("#span_misson_duration").html("周");
     //   $("#span_plan_duration").html("周");      
     // }
-    // if(durationflag==1)
-    // {
-    //   $("#duration-div-1").addClass("layui-show");
-    //   $("#duration-1-"+duration).addClass("layui-this");
-    //   $("#span_misson_duration").html("月");
-    //   $("#span_plan_duration").html("月");
-    // }
-    if(durationflag==3)
+    if(durationflag==1)
     {
-      $("#duration-div-3").addClass("layui-show");
-      $("#duration-3-"+duration).addClass("layui-this");
+      $("#duration-div-1").addClass("layui-show");
+      $("#duration-1-"+duration).addClass("layui-this");
       // $("#span_misson_duration").html("月");
       // $("#span_plan_duration").html("月");
     }
+    // if(durationflag==3)
+    // {
+    //   $("#duration-div-3").addClass("layui-show");
+    //   $("#duration-3-"+duration).addClass("layui-this");
+    //   // $("#span_misson_duration").html("月");
+    //   // $("#span_plan_duration").html("月");
+    // }
     if(durationflag==2)
     {
       $("#duration-div-2").addClass("layui-show");
       $("#duration-2-"+duration).addClass("layui-this");
-      $("#span_misson_duration").html("季度");
-      $("#span_plan_duration").html("季度");
+      //$("#span_misson_duration").html("季度");
+      //$("#span_plan_duration").html("季度");
     }
 
     $("#my_period_show").html($("#duration-"+durationflag+"-"+duration).html());
+    $("#others_period_show").html($("#duration-"+durationflag+"-"+duration).html());
     
     // 初始化月度层
     function init_durationFlag0(){
@@ -1063,7 +1360,7 @@
       $("#duration-div-1").removeClass("layui-show");
     }
 
-    // 初始化季度层
+    // 初始化半年度层
     function init_durationFlag3(){
       //alert("init_durationFlag3");
       $("#duration-3-001").removeClass("layui-this");
@@ -1071,7 +1368,7 @@
       $("#duration-div-3").removeClass("layui-show");
     }
 
-    // 初始化季度层
+    // 初始化年层
     function init_durationFlag2(){
       $("#duration-2-2018").removeClass("layui-this");
       $("#duration-div-2").removeClass("layui-show");
@@ -1080,15 +1377,29 @@
     // 初始化月度季度年度显示层
     function init_durationFlag(){
       // $("#duration-0").removeClass("layui-this");
-      // $("#duration-1").removeClass("layui-this");
-      $("#duration-3").removeClass("layui-this");
+      $("#duration-1").removeClass("layui-this");
+      // $("#duration-3").removeClass("layui-this");
       $("#duration-2").removeClass("layui-this");
 
       // $("#duration-div-0").removeClass("layui-show");
-      // $("#duration-div-1").removeClass("layui-show");
-      $("#duration-div-3").removeClass("layui-show");
+      $("#duration-div-1").removeClass("layui-show");
+      // $("#duration-div-3").removeClass("layui-show");
       $("#duration-div-2").removeClass("layui-show");
     }
+
+    // 确定当前的季节
+    function which_season(){
+      var now   = new Date();
+      var month = now.getMonth()+1;
+      if(month<10){month="0"+month;}
+
+      if(month=="03" || month=="04" || month=="05"){season = "1";}
+      if(month=="06" || month=="07" || month=="08"){season = "2";}
+      if(month=="09" || month=="10" || month=="11"){season = "3";}
+      if(month=="12" || month=="01" || month=="02"){season = "4";}
+      return season;
+    }
+
 
     function setDurationFlag(index){
 		// alert(index);
@@ -1098,42 +1409,47 @@
 
       durationflag = index;
       
+      // var now   = new Date();
+      // var month = now.getMonth()+1;
+      // if(month<10){month="0"+month;}
+
+      // if(month=="03" || month=="04" || month=="05"){season = "1";}
+      // if(month=="06" || month=="07" || month=="08"){season = "2";}
+      // if(month=="09" || month=="10" || month=="11"){season = "3";}
+      // if(month=="12" || month=="01" || month=="02"){season = "4";}
+      
+      season = which_season();
+      // season = "1";
+      // alert(season);
+
+      // if(month=="01" || month=="02" || month=="03" || month=="04" || month=="05" || month=="06"){halfyear = "001";}
+      // if(month=="07" || month=="08" || month=="09" || month=="10" || month=="11" || month=="12"){halfyear = "002";}
+
       var now   = new Date();
-      var month = now.getMonth()+1;
-      if(month<10){month="0"+month;}
-
-      if(month=="01" || month=="02" || month=="03"){season = "1";}
-      if(month=="04" || month=="05" || month=="06"){season = "2";}
-      if(month=="07" || month=="08" || month=="09"){season = "3";}
-      if(month=="10" || month=="11" || month=="12"){season = "4";}
-
-      if(month=="01" || month=="02" || month=="03" || month=="04" || month=="05" || month=="06"){halfyear = "001";}
-      if(month=="07" || month=="08" || month=="09" || month=="10" || month=="11" || month=="12"){halfyear = "002";}
-
       var year  = now.getFullYear();
-      console.log(month + " "+season+" "+year);
+      // console.log(month + " "+season+" "+year);
 
-      if(index==0){
-        duration = month;
-        init_durationFlag0();
-        $("#duration-0-"+duration).addClass("layui-this");
-      }
+      // if(index==0){
+      //   duration = month;
+      //   init_durationFlag0();
+      //   $("#duration-0-"+duration).addClass("layui-this");
+      // }
       if(index==1){
         duration = season;
         init_durationFlag1();
         $("#duration-1-"+duration).addClass("layui-this");
       }
-      if(index==3){
-        duration = halfyear;
-        init_durationFlag3();
-        $("#duration-3-"+duration).addClass("layui-this");
-      }
+      // if(index==3){
+      //   duration = halfyear;
+      //   init_durationFlag3();
+      //   $("#duration-3-"+duration).addClass("layui-this");
+      // }
       if(index==2){
         duration = year;
         $("#duration-2-"+duration).addClass("layui-this");
       }
       
-	  weekdate = $("#weekdate").val();
+	    weekdate = $("#weekdate").val();
       console.log("durationflag="+durationflag+" duration="+duration);
       window.location.href = "{{ route('objective.mine') }}" + "?durationflag=" + durationflag + "&duration=" + duration + "&weekdate=" + weekdate;
     }
@@ -1141,23 +1457,24 @@
     function setDuration(index){
 
       duration = index;
-      if(duration=="01" || duration=="02" || duration=="03" || duration=="04" || duration=="05" || duration=="06" || duration=="07" || duration=="08" || duration=="09" || duration=="10" || duration=="11" || duration=="12"){
-        durationflag = "0";
-      }
+      // if(duration=="01" || duration=="02" || duration=="03" || duration=="04" || duration=="05" || duration=="06" || duration=="07" || duration=="08" || duration=="09" || duration=="10" || duration=="11" || duration=="12"){
+      //   durationflag = "0";
+      // }
       if(duration=="1" || duration=="2" || duration=="3" || duration=="4"){
         durationflag = "1";
       }
-      if(duration=="001" || duration=="002"){
-        durationflag = "3";
-      }
-      if(duration=="2018"){
+      // if(duration=="001" || duration=="002"){
+      //   durationflag = "3";
+      // }
+      if(parseInt(duration)>=2018){
         durationflag = "2";
       }
+      // alert('durationflag='+durationflag);
       
-	  weekdate = $("#weekdate").val();
-      console.log("durationflag="+durationflag+" duration"+index);
-      window.location.href = "{{ route('objective.mine') }}" + "?durationflag=" + durationflag + "&duration=" + duration + "&weekdate=" + weekdate;
-    }
+  	  weekdate = $("#weekdate").val();
+        console.log("durationflag="+durationflag+" duration"+index);
+        window.location.href = "{{ route('objective.mine') }}" + "?durationflag=" + durationflag + "&duration=" + duration + "&weekdate=" + weekdate;
+      }
 
     // 评分
     function pop_score_div(btn){
@@ -2004,22 +2321,22 @@
       window.location.href = "{{ route('index.logout') }}";
     }
 
-	layui.use('laydate', function(){
-	  var laydate = layui.laydate;
-	  
-	  //执行一个laydate实例
-	  laydate.render({
-		elem: '#weekdate' //指定元素
-	  });
-	});
+  	layui.use('laydate', function(){
+  	  var laydate = layui.laydate;
+  	  
+  	  //执行一个laydate实例
+  	  laydate.render({
+  		elem: '#weekdate' //指定元素
+  	  });
+  	});
+  	
+  	if(weekdate==""){
+  		$("#weekdate").val(getNowFormatDate());
+  	}else{
+  		$("#weekdate").val(weekdate);
+  	}
 	
-	if(weekdate==""){
-		$("#weekdate").val(getNowFormatDate());
-	}else{
-		$("#weekdate").val(weekdate);
-	}
-	
-	function getNowFormatDate() {
+	  function getNowFormatDate() {
         var date = new Date();
         var seperator1 = "-";
         var year = date.getFullYear();

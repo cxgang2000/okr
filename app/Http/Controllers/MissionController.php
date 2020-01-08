@@ -56,7 +56,8 @@ class MissionController extends Controller
 
         $data['durationflag'] = $request->durationflag;
         $duration = $request->duration;
-        if($data['durationflag']==3){$duration = date("Y").$duration;}
+        // if($data['durationflag']==3){$duration = date("Y").$duration;}
+        if($data['durationflag']==1){$duration = date("Y").$duration;}        
         $data['duration'] = $duration;   
         $data['organiser_id'] = session('idUser'); 
         $data['description'] = $request->m_description;
@@ -259,22 +260,16 @@ class MissionController extends Controller
     public function missionlog(Request $request)
     {
         $weekdate = $request->weekdate;
+        $userid = $request->userid;
+        if($userid=="")$userid=session('idUser');
         if($weekdate==''){die('参数错误');}
 
-        $sdefaultDate = $weekdate;
-        //$first =1 表示每周星期一为开始日期 0表示每周日为开始日期
-        $first=1;
-        //获取当前周的第几天 周日是 0 周一到周六是 1 - 6
-        $w=date('w',strtotime($sdefaultDate));
-        //获取本周开始日期，如果$w是0，则表示周日，减去 6 天
-        $week_start=date('Y-m-d',strtotime("$sdefaultDate -".($w ? $w - $first : 6).' days'))." 00:00:00";
-        //本周结束日期
-        $week_end=date('Y-m-d',strtotime("$week_start +7 days"))." 00:00:00";
+        $arr_weekSatrtAndEnd = $this->getWeekStartAndEnd($weekdate);
 
-        $arr_where['organiser_id'] = session('idUser');
+        $arr_where['organiser_id'] = $userid;
 
         // var_dump($arr_where);die();
-        $arr_mission = Mission::where($arr_where)->whereDate('created_at', '>=', $week_start)->whereDate('created_at', '<', $week_end)->get()->toArray();
+        $arr_mission = Mission::where($arr_where)->whereDate('created_at', '>=', $arr_weekSatrtAndEnd[0])->whereDate('created_at', '<=', $arr_weekSatrtAndEnd[1])->get()->toArray();
         $ids = array_column($arr_mission, 'id');
         $str_ids = implode($ids, ",");
         // var_dump($str_ids);die();
@@ -283,5 +278,19 @@ class MissionController extends Controller
         // var_dump($arr_objective);die();
 
         return view('index.mineObjectivelog',compact('arr_log'));
+    }
+
+    private function getWeekStartAndEnd($weekdate){
+        $sdefaultDate = $weekdate;
+        //$first =1 表示每周星期一为开始日期 0表示每周日为开始日期
+        $first=1;
+        //获取当前周的第几天 周日是 0 周一到周六是 1 - 6
+        $w=date('w',strtotime($sdefaultDate));
+        //获取本周开始日期，如果$w是0，则表示周日，减去 6 天
+        $week_start=date('Y-m-d',strtotime("$sdefaultDate -".($w ? $w - $first : 6).' days'))." 00:00:00";
+        //本周结束日期
+        $week_end=date('Y-m-d',strtotime("$week_start +6 days"))." 23:59:59";
+        // dd([$week_start,$week_end]);
+        return([$week_start,$week_end]);
     }
 }

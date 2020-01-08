@@ -265,16 +265,7 @@ class ObjectiveController extends Controller
         return view($templateName,compact('arr_allUserDept', 'json_objective', 'objective', 'executor', 'executor_id', 'perioditem', 'period', 'arr_period','p1'));
     }
 
-    // 我的okr
-    public function mine(Request $request)
-    {
-
-        $durationflag = $request->durationflag;
-        if ($durationflag=="") {$durationflag=3;}
-        $duration = $request->duration;
-        $weekdate = $request->weekdate;
-        if($weekdate=="")$weekdate=date("Y-m-d");
-
+    private function getWeekStartAndEnd($weekdate){
         $sdefaultDate = $weekdate;
         //$first =1 表示每周星期一为开始日期 0表示每周日为开始日期
         $first=1;
@@ -283,27 +274,58 @@ class ObjectiveController extends Controller
         //获取本周开始日期，如果$w是0，则表示周日，减去 6 天
         $week_start=date('Y-m-d',strtotime("$sdefaultDate -".($w ? $w - $first : 6).' days'))." 00:00:00";
         //本周结束日期
-        $week_end=date('Y-m-d',strtotime("$week_start +7 days"))." 00:00:00";
-        // echo "$week_start"." $week_end";
-        // die();
+        $week_end=date('Y-m-d',strtotime("$week_start +6 days"))." 23:59:59";
+        // dd([$week_start,$week_end]);
+        return([$week_start,$week_end]);
+    }
+
+    // 我的okr
+    public function mine(Request $request)
+    {
+
+        $durationflag = $request->durationflag;
+        if ($durationflag=="") {$durationflag=1;}//默认打开季度
+        $duration = $request->duration;
+        $weekdate = $request->weekdate;
+        if($weekdate=="")$weekdate=date("Y-m-d");
+        $arr_weekSatrtAndEnd = $this->getWeekStartAndEnd($weekdate);
         
         // echo ($duration);
+
+        // 季度下面的标签
         if ($duration=="") {
             // $month=date("m");
             // dd(date("m")<"7");
-            if(date("m")<"7")$duration="001";
-            if(date("m")>="7")$duration="002";
+            // if(date("m")<"7")$duration="001";
+            // if(date("m")>="7")$duration="002";
+            // 半年度的默认
+
+            // 季度的默认
+            if(date("m")>="3" and date("m")<="5")$duration="1";
+            if(date("m")>="6" and date("m")<="8")$duration="2";
+            if(date("m")>="9" and date("m")<="11")$duration="3";
+            if(date("m")=="12" or date("m")=="1" or date("m")=="2")$duration="4";
         }
         // dd($duration);
         
 
         $arr_where['durationflag'] = $durationflag;
-        if($arr_where['durationflag']==3){
+        // if($arr_where['durationflag']==3){
+        //     $duration1 = date("Y").$duration;
+        // }else{
+        //     $duration1 = $duration;
+        // }
+        if($arr_where['durationflag']==1){
             $duration1 = date("Y").$duration;
         }else{
             $duration1 = $duration;
         }
         $arr_where['duration'] = $duration1;
+
+        // echo $arr_where['$arr_where'];
+        // var_dump($arr_where);
+        // die();
+
         $arr_where['organiser_id'] = session('idUser');
         $arr_where['status'] = 0;
 
@@ -311,15 +333,68 @@ class ObjectiveController extends Controller
         $json_objective = $this->getObject($arr_where);
         $arr_stateindex = $this->getStateindex($arr_where);
 
+
+        // 取目标和去计划与duration无关，只和人与星期有关
         $arr_where = array();
         $arr_where['status'] = 0;
         $arr_where['organiser_id'] = session('idUser');
+        // dd($arr_where);
 
-        $arr_mission = $this->getMission($arr_where,$week_start,$week_end);
-        $arr_plan = $this->getPlan($arr_where,$week_start,$week_end);
-        
+        $arr_mission = $this->getMission($arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
+        $arr_plan = $this->getPlan($arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
 
-        return view('index.mine',compact('durationflag', 'duration', 'weekdate', 'json_objective','arr_mission','arr_plan','arr_stateindex'));
+
+
+        // 取上级领导的相关
+        $myId = session('idUser');
+        $arr_my = User::find($myId);
+        // if($arr_my->pid!=""){
+        $arr_others = User::find($arr_my->pid)->toArray();
+        $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
+        // dd($arr_others);
+
+        $others_arr_where['duration'] = $duration1;
+        $others_arr_where['organiser_id'] = $arr_others['id'];
+        $others_arr_where['status'] = 0;
+        // var_dump($others_arr_where);
+        // dd("aaaa");
+
+        if($arr_others['id']==""){
+
+            $others_all['json_objective'] = '';
+            $others_all['arr_mission'] = array();
+            $others_all['arr_plan'] = array();
+            $others_all['arr_stateindex'] = array();
+        }else{
+
+
+            $others_all['json_objective'] = $this->getObject($others_arr_where);
+            $others_all['arr_stateindex'] = $this->getStateindex($others_arr_where);
+
+            // $others_all['arr_mission'] = $this->getMission($others_arr_where);
+            // $others_all['arr_plan'] = $this->getPlan($others_arr_where);
+
+            $others_arr_where = array();
+            $others_arr_where['status'] = 0;
+            $others_arr_where['organiser_id'] = $arr_others['id'];
+            // dd($others_arr_where);\
+            // var_dump($others_arr_where);
+
+            $others_all['arr_mission'] = $this->getMission($others_arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
+            // var_dump($others_all['arr_mission']);
+            // dd("aa");
+            $others_all['arr_plan'] = $this->getPlan($others_arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
+            }
+
+
+        // dd($others_all);
+
+
+
+
+
+        return view('index.mine33
+            ',compact('durationflag', 'duration', 'weekdate', 'json_objective','arr_mission','arr_plan','arr_stateindex','arr_weekSatrtAndEnd','others_all','arr_others'));
     }
 
     // 取符合条件的O
@@ -327,6 +402,7 @@ class ObjectiveController extends Controller
         // 取目标
         $objective = Objective::where($arr_where)->get();
         // var_dump($objective);
+        // var_dump($arr_where);
         // dd($objective);
 
         // 取下面的关键结果
@@ -412,6 +488,7 @@ class ObjectiveController extends Controller
         
         // var_dump($mission);
         // dd($mission);
+        // dd($arr_where);
 
         $arr_mission=$mission->toArray();
         // dd($arr_mission);
@@ -427,7 +504,7 @@ class ObjectiveController extends Controller
         // dd($mission);
 
         $arr_plan=$plan->toArray();
-        // dd($arr_mission);
+        // dd($arr_plan);
 
         return $arr_plan;
     }
@@ -444,9 +521,19 @@ class ObjectiveController extends Controller
         return $arr_stateindex;
     }
 
+    // 确定当前的季节
+    private function which_season(){
+        $month = date("m");
+        if($month=="03" || $month=="04" || $month=="05"){$season = "1";}
+        if($month=="06" || $month=="07" || $month=="08"){$season = "2";}
+        if($month=="09" || $month=="10" || $month=="11"){$season = "3";}
+        if($month=="12" || $month=="01" || $month=="02"){$season = "4";}
+        return $season;
+    }
+
     public function others(Request $request)
     {
-
+        // dd($request);
         $myId = session('idUser');
         $othersId = $request->othersId;
         // 初始化成员数组
@@ -521,65 +608,100 @@ class ObjectiveController extends Controller
         // 具体数据
         $my_period = $request->my_period;
         // 没有就默认月度    
-        if($my_perioditem==""){$my_perioditem = "month";}
+        if($my_perioditem==""){$my_perioditem = "1";}
         // 没有就默认当前月
-        if($my_period==""){$my_period = date("m");}
+        if($my_period==""){$my_period = $this->which_season();}
         // 如果是月度或季度，加上年 如01月，变成201801，如一季度 变成20181
-        if($my_perioditem=="month" || $my_perioditem=="season"){
+        if($my_perioditem=="1"){
             $duration1 = date("Y").$my_period;
         }else{
             $duration1 = $my_period;
         }
+
+        $my_weekdate = $request->my_weekdate;
+        if($my_weekdate=="")$my_weekdate=date("Y-m-d");
+        $arr_my_weekSatrtAndEnd = $this->getWeekStartAndEnd($my_weekdate);
+        // dd($arr_weekSatrtAndEnd);
+        // var_dump($arr_weekSatrtAndEnd);
         // 拼条件
         $my_arr_where['duration'] = $duration1;
         $my_arr_where['organiser_id'] = $myId;
         $my_arr_where['status'] = 0;
         // var_dump($my_arr_where);
+        // dd($my_arr_where);
 
         // 按条件查询四象限数据
         $my_all['json_objective'] = $this->getObject($my_arr_where);
-        $my_all['arr_mission'] = $this->getMission($my_arr_where);
-        $my_all['arr_plan'] = $this->getPlan($my_arr_where);
         $my_all['arr_stateindex'] = $this->getStateindex($my_arr_where);
+
+        $my_arr_where = array();
+        $my_arr_where['status'] = 0;
+        $my_arr_where['organiser_id'] = $myId;
+        // var_dump($my_arr_where);
+        // dd($my_arr_where);
+
+        $my_all['arr_mission'] = $this->getMission($my_arr_where,$arr_my_weekSatrtAndEnd[0],$arr_my_weekSatrtAndEnd[1]);
+        // var_dump($my_all['arr_mission']);
+        $my_all['arr_plan'] = $this->getPlan($my_arr_where,$arr_my_weekSatrtAndEnd[0],$arr_my_weekSatrtAndEnd[1]);
 
         // var_dump($my_all);
         // others条件     
         $others_perioditem = $request->others_perioditem;
         $others_period = $request->others_period;
-        if($others_perioditem==""){$others_perioditem = "month";}
-        if($others_period==""){$others_period = date("m");}
+        if($others_perioditem==""){$others_perioditem = "1";}
+        if($others_period==""){$others_period = $this->which_season();}
 
-        if($others_perioditem=="month" || $others_perioditem=="season"){
+        if($others_perioditem=="1"){
             $duration1 = date("Y").$others_period;
         }else{
             $duration1 = $others_period;
         }
+        $others_weekdate = $request->others_weekdate;
+        if($others_weekdate=="")$others_weekdate=date("Y-m-d");
+        $arr_others_weekSatrtAndEnd = $this->getWeekStartAndEnd($others_weekdate);
+        // var_dump($arr_weekSatrtAndEnd);
+
         $others_arr_where['duration'] = $duration1;
         $others_arr_where['organiser_id'] = $arr_others['id'];
         $others_arr_where['status'] = 0;
         // var_dump($others_arr_where);
+        // dd("aaaa");
 
         if($arr_others['id']==""){
+
             $others_all['json_objective'] = '';
             $others_all['arr_mission'] = array();
             $others_all['arr_plan'] = array();
             $others_all['arr_stateindex'] = array();
         }else{
+
+
             $others_all['json_objective'] = $this->getObject($others_arr_where);
-            $others_all['arr_mission'] = $this->getMission($others_arr_where);
-            $others_all['arr_plan'] = $this->getPlan($others_arr_where);
             $others_all['arr_stateindex'] = $this->getStateindex($others_arr_where);
-        }
+
+            // $others_all['arr_mission'] = $this->getMission($others_arr_where);
+            // $others_all['arr_plan'] = $this->getPlan($others_arr_where);
+
+            $others_arr_where = array();
+            $others_arr_where['status'] = 0;
+            $others_arr_where['organiser_id'] = $arr_others['id'];
+            // dd($others_arr_where);\
+            // var_dump($others_arr_where);
+
+            $others_all['arr_mission'] = $this->getMission($others_arr_where,$arr_others_weekSatrtAndEnd[0],$arr_others_weekSatrtAndEnd[1]);
+            // var_dump($others_all['arr_mission']);
+            // dd("aa");
+            $others_all['arr_plan'] = $this->getPlan($others_arr_where,$arr_others_weekSatrtAndEnd[0],$arr_others_weekSatrtAndEnd[1]);
+            }
         
         // var_dump($others_all);
-        // die();
+        // die("aaaaaaaa");
 
-        
 
 
         // $user = User::getLeaderIdByUserId($myId);
 
-        return view('index.others',compact('json_allUserDept', 'my_perioditem','my_period','others_perioditem','others_period','keyword','arr_others','my_all','others_all'));
+        return view('index.others',compact('json_allUserDept', 'my_perioditem', 'my_period',  'my_weekdate', 'others_perioditem', 'othersId', 'others_period', 'others_weekdate', 'keyword', 'arr_others', 'my_all', 'others_all','arr_my_weekSatrtAndEnd','arr_others_weekSatrtAndEnd'));
     }
 
     public function heisexecutor(Request $request,$p1)
@@ -860,8 +982,8 @@ class ObjectiveController extends Controller
 
         $data['durationflag'] = $request->durationflag;
         $duration = $request->duration;
-        // if($data['durationflag']==0 || $data['durationflag']==1){$duration = date("Y").$duration;}
-        if($data['durationflag']==3){$duration = date("Y").$duration;}
+        if($data['durationflag']==0 || $data['durationflag']==1){$duration = date("Y").$duration;}
+        // if($data['durationflag']==3){$duration = date("Y").$duration;}
         
         $data['duration'] = $duration;   
         $data['organiser_id'] = session('idUser');        
@@ -1248,16 +1370,18 @@ class ObjectiveController extends Controller
     {
         $durationflag = $request->durationflag;
         $duration = $request->duration;
+        $userid = $request->userid;
+        if($userid=="")$userid=session('idUser');
         if($durationflag=='' || $duration==''){die('参数错误');}
 
         $arr_where['durationflag'] = $durationflag;
-        if($arr_where['durationflag']==3){
+        if($arr_where['durationflag']==1){
             $duration1 = date("Y").$duration;
         }else{
             $duration1 = $duration;
         }
         $arr_where['duration'] = $duration1;
-        $arr_where['organiser_id'] = session('idUser');
+        $arr_where['organiser_id'] = $userid;
 
         // var_dump($arr_where);die();
         $arr_objective = Objective::where($arr_where)->get()->toArray();
