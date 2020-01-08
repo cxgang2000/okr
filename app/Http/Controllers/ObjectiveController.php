@@ -390,10 +390,6 @@ class ObjectiveController extends Controller
         // dd($others_all);
 
 
-
-
-
-
         return view('index.mine33
             ',compact('durationflag', 'duration', 'weekdate', 'json_objective','arr_mission','arr_plan','arr_stateindex','arr_weekSatrtAndEnd','others_all','arr_others'));
     }
