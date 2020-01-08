@@ -240,8 +240,8 @@
                         <span class="ob_titles cir_tile">
                           目标
                         </span>
-                        <span class="ob_titles model_mb_titles" id="o_name_u">
-                          每天报名人数不低于40人
+                        <span id="o_name_span" class="ob_titles model_mb_titles ul_no">
+                          <input type="text" id="o_name_u" value="每天报名人数不低于40人" class="it_css">
                         </span>
                         <span class='wks model_mb_zt' id="o_dateStatus_u">已完成</span>
                         <!-- 评分的颜色两种 一种是正常s_color  一种逾期f_color  -->
@@ -288,7 +288,7 @@
                         </ul>
                       </div>
                       <div id="o_savecancel_div" class="layui-layer-btn layui-layer-btn-" style="display: none;">
-                        <a class="layui-layer-btn bc" onclick="edit_objective();">保存</a>
+                        <a class="layui-layer-btn bc" onclick="save_objective();">保存</a>
                         <a class="layui-layer-btn models_qx">取消</a>
                       </div>
                     </div>
@@ -757,7 +757,7 @@
           console.log(data);
           
           //名称
-          $("#o_name_u").html(data.name);
+          $("#o_name_u").val(data.name);
           //时间
           $("#dy_res_time").val(data.startdate+" - "+data.enddate);
           //描述
@@ -830,8 +830,8 @@
           // 目标编辑层初始化
           $("#o_savecancel_div").hide();
           $("#o_edit_ul").addClass("ul_no");
-          
-
+          $("#o_name_span").addClass("ul_no");
+ 
           $("#o_comment_id").attr("okr_id",itemid);
           // 显示评论
           $("#o_comment_showArea").html(getComment(data.comments));

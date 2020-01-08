@@ -29,255 +29,236 @@
   @include('layouts._index_changePwd')
 
   <div id="body-wrapper">
-    <!-- Wrapper for the radial gradient background -->
-     <aside class="main-sidebar">
-    <section  class="sidebar">
-      <ul class="sidebar-menu">
-        <li class="header"></li>
-        <li class="treeview">
-          <a href="{{ route('objective.mine') }}">
-            <i class="icon iconfont icon-jiaoseguanli"></i>
-            <span>我的目标</span>
-            <!-- <i class="fa fa-angle-right pull-right"></i> -->
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="{{ route('objective.others') }}">
-            <i class="icon iconfont icon-zizhanghaoguanli"></i> <span>成员目标</span>
-            <!-- <i class="fa fa-angle-right pull-right"></i> -->
-          </a>
-        </li>
-      </ul>
-      <!--div class="yg_sec">
-            <form>
-              <input type="text" name="identity" lay-verify="identity" placeholder="员工手机、姓名" autocomplete="off" class="layui-input">
-              <img src="/okr/resources/images/icons/search.png" class="jy_btn">
-            </form>
-      </div>
-      <div class="trees">
-        <ul id="ygNameTree" class="ztree"></ul>
-      </div-->
-    </section>
-  </aside>
-  <style type="text/css">
-
-</style>
-
-<script>
-      /*公司职位*/
-  // var ygsetting = {
-  //     view: {
-  //       addDiyDom: addDiyDoms
-  //     },
-  //   };
-
-  // var ygnames =[
-  //     { name:"财务部",job:"财务",
-  //       children: [
-  //         { name:"0",job:"主管"},
-  //         { name:"1",job:"职员"},
-  //         { name:"2",job:"职员"}
-  //       ]},
-  // ];
-
-  // function addDiyDoms(treeId, treeNode) {
-  //     if (treeNode.parentNode && treeNode.parentNode.id!=2) return;
-  //     var aObj = $("#" + treeNode.tId + IDMark_A);
-  //     var job = treeNode.job;
-  //       var editStr = "<span class='demoIcon'><span class='wks'>"+job+"</span></span>";
-  //       aObj.after(editStr);
-  // }
-
-  // $(document).ready(function(){
-  //   /*员工名称*/
-  //   $.fn.zTree.init($("#ygNameTree"), ygsetting, ygnames);
-  // });
-
-  // $.sidebarMenu($('.sidebar-menu'))
-</script>
-
-
-    <!-- End #sidebar -->
-    <div id="main-content">
-      <div class="h2Title">
-        我的目标
-      </div>
-      <!-- End .clear -->
-      <div class="content-box">
-        <div class="layui-tab">
-          <ul class="layui-tab-title">
-            <li id="duration-0" onclick="setDurationFlag(0);">月度</li>
-            <li id="duration-1" onclick="setDurationFlag(1);">季度</li>
-            <li id="duration-2" onclick="setDurationFlag(2);">年度</li>
+      <!-- Wrapper for the radial gradient background -->
+      <aside class="main-sidebar">
+        <section  class="sidebar">
+          <ul class="sidebar-menu">
+            <li class="header"></li>
+            <li class="treeview">
+              <a href="{{ route('objective.mine') }}">
+                <i class="icon iconfont icon-jiaoseguanli"></i>
+                <span>我的目标</span>
+                <!-- <i class="fa fa-angle-right pull-right"></i> -->
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="{{ route('objective.others') }}">
+                <i class="icon iconfont icon-zizhanghaoguanli"></i> <span>成员目标</span>
+                <!-- <i class="fa fa-angle-right pull-right"></i> -->
+              </a>
+            </li>
           </ul>
-          <div class="layui-tab-content">
-            <div id="duration-div-0" class="layui-tab-item layui-show">
-              <div class="layui-tab">
-                <ul  class="layui-tab-title">
-                  <li id="duration-0-01" onclick="setDuration('01');">一月</li>
-                  <li id="duration-0-02" onclick="setDuration('02');">二月</li>
-                  <li id="duration-0-03" onclick="setDuration('03');">三月</li>
-                  <li id="duration-0-04" onclick="setDuration('04');">四月</li>
-                  <li id="duration-0-05" onclick="setDuration('05');">五月</li>
-                  <li id="duration-0-06" onclick="setDuration('06');">六月</li>
-                  <li id="duration-0-07" onclick="setDuration('07');">七月</li>
-                  <li id="duration-0-08" onclick="setDuration('08');">八月</li>
-                  <li id="duration-0-09" onclick="setDuration('09');">九月</li>
-                  <li id="duration-0-10" onclick="setDuration('10');">十月</li>
-                  <li id="duration-0-11" onclick="setDuration('11');">十一月</li>
-                  <li id="duration-0-12" onclick="setDuration('12');">十二月</li>
-                </ul>
-                
-              </div>
-            </div>
-            <div id="duration-div-1" class="layui-tab-item">
-              <div class="layui-tab">
-                <ul class="layui-tab-title">
-                  <li id="duration-1-1" onclick="setDuration('1');">第一季度</li>
-                  <li id="duration-1-2" onclick="setDuration('2');">第二季度</li>
-                  <li id="duration-1-3" onclick="setDuration('3');">第三季度</li>
-                  <li id="duration-1-4" onclick="setDuration('4');">第四季度</li>
-                </ul>
-
-              </div>
-            </div>
-            <div id="duration-div-2" class="layui-tab-item">
-              <div class="layui-tab">
-                <ul class="layui-tab-title">
-                  <li id="duration-2-2018" onclick="setDuration('2018');">2018</li>
-                </ul>
-              </div>
-            </div>
+          <!--div class="yg_sec">
+                <form>
+                  <input type="text" name="identity" lay-verify="identity" placeholder="员工手机、姓名" autocomplete="off" class="layui-input">
+                  <img src="/okr/resources/images/icons/search.png" class="jy_btn">
+                </form>
           </div>
+          <div class="trees">
+            <ul id="ygNameTree" class="ztree"></ul>
+          </div-->
+        </section>
+      </aside>
+
+      <!-- End #sidebar -->
+      <div id="main-content">
+        <div class="h2Title">
+          我的目标
         </div>
-
-        <!-- 具体内容div -->
-        <div class="layui-tab-content" >
-          <!-- 1y 每个月份 目标值ztree不一样顾就没有写太多 以一月份为例-->
-          <div class="okr_mb">
-            我的OKR（<span id="my_period_show"></span>）
-          </div>
-          <div class="layui-tab-item layui-show">
-              <div class="layui-row layui-col-space5">
-                <div class="layui-col-xs6">
-                  <div>
-                    <div class="titles">
-                      本<span id="span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
-                      <span class="lf_icon tj_gz_icon">+</span>
-                    </div>
-                    <div class="contains">
-                      <ul>
-
-                        @foreach ($arr_mission as $mission)
-                        <li>
-                          P{{ $mission['importance']  }}：{{ $mission['description']  }}
-                          <div class="this_cz">
-                            <i class="icon iconfont icon-bianji bz_rw"  flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);"></i>
-                            <i class="icon iconfont icon-laji" description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);"></i>
-                          </div>
-                        </li>
-                        @endforeach
-
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="layui-col-xs6">
-                  <div>
-                    <div class="titles">
-                      目标
-                      <span class="lf_icon xzmb">新增目标</span>
-                    </div>
-                    <div class="contains">
-                      <ul id="treeDemo" class="ztree"></ul>
-                    </div>
-                  </div>
+        <!-- End .clear -->
+        <div class="content-box">
+          <div class="layui-tab">
+            <ul class="layui-tab-title">
+              <!--li id="duration-0" onclick="setDurationFlag(0);">月度</li>
+              <li id="duration-1" onclick="setDurationFlag(1);">季度</li-->
+              <li id="duration-3" onclick="setDurationFlag(3);">半年</li>
+              <li id="duration-2" onclick="setDurationFlag(2);">年度</li>
+            </ul>
+            <div class="layui-tab-content">
+              <!--div id="duration-div-0" class="layui-tab-item layui-show">
+                <div class="layui-tab">
+                  <ul  class="layui-tab-title">
+                    <li id="duration-0-01" onclick="setDuration('01');">一月</li>
+                    <li id="duration-0-02" onclick="setDuration('02');">二月</li>
+                    <li id="duration-0-03" onclick="setDuration('03');">三月</li>
+                    <li id="duration-0-04" onclick="setDuration('04');">四月</li>
+                    <li id="duration-0-05" onclick="setDuration('05');">五月</li>
+                    <li id="duration-0-06" onclick="setDuration('06');">六月</li>
+                    <li id="duration-0-07" onclick="setDuration('07');">七月</li>
+                    <li id="duration-0-08" onclick="setDuration('08');">八月</li>
+                    <li id="duration-0-09" onclick="setDuration('09');">九月</li>
+                    <li id="duration-0-10" onclick="setDuration('10');">十月</li>
+                    <li id="duration-0-11" onclick="setDuration('11');">十一月</li>
+                    <li id="duration-0-12" onclick="setDuration('12');">十二月</li>
+                  </ul>
                 </div>
               </div>
-              <div class="layui-row layui-col-space5">
-                <div class="layui-col-xs6">
-                  <div>
-                    <div class="titles">
-                      未来四<span id="span_plan_duration">周</span>计划
-                      <span class="lf_icon wl_jh">+</span>
-                    </div>
-                    <div class="contains">
-                      <ul>
-
-                        @foreach ($arr_plan as $plan)
-                        <li>
-                          {{ $plan['description']  }}
-                          <div class="this_cz">
-                            <i class="icon iconfont icon-bianji wl_sz" flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);"></i>    
-                            <i class="icon iconfont icon-laji" description="{{ $plan['description']  }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);"></i>
-                          </div>
-                        </li>
-                        @endforeach
-
-                      </ul>
-                    </div>
-                  </div>
+              <div id="duration-div-1" class="layui-tab-item">
+                <div class="layui-tab">
+                  <ul class="layui-tab-title">
+                    <li id="duration-1-1" onclick="setDuration('1');">第一季度</li>
+                    <li id="duration-1-2" onclick="setDuration('2');">第二季度</li>
+                    <li id="duration-1-3" onclick="setDuration('3');">第三季度</li>
+                    <li id="duration-1-4" onclick="setDuration('4');">第四季度</li>
+                  </ul>
                 </div>
-                <div class="layui-col-xs6">
-                  <div>
-                    <div class="titles">
-                      状态指标
-                      <span class="lf_icon tj_zt_icon">+</span>
-                    </div>
-                    <div class="contains">
-                      <div class="text-right">
-                        <span class="layui-badge-dot layui-bg-green"></span>优秀
-                        <span class="layui-badge-dot layui-bg-cyan"></span>良好
-                        <span class="layui-badge-dot layui-bg-blue"></span>一般
-                        <span class="layui-badge-dot layui-bg-gray"></span>差
+              </div-->
+              <div id="duration-div-3" class="layui-tab-item">
+                <div class="layui-tab">
+                  <ul class="layui-tab-title">
+                    <li id="duration-3-001" onclick="setDuration('001');">上半年（1月～6月）</li>
+                    <li id="duration-3-002" onclick="setDuration('002');">上半年（7月～12月）</li>
+                  </ul>
+                </div>
+              </div>
+              <div id="duration-div-2" class="layui-tab-item">
+                <div class="layui-tab">
+                  <ul class="layui-tab-title">
+                    <li id="duration-2-2018" onclick="setDuration('2018');">2018</li>
+                    <li id="duration-2-2019" onclick="setDuration('2019');">2019</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 具体内容div -->
+          <div class="layui-tab-content" >
+            <!-- 1y 每个月份 目标值ztree不一样顾就没有写太多 以一月份为例-->
+            <div class="okr_mb">
+              我的OKR（<span id="my_period_show"></span>）
+            </div>
+            <div class="okr_mb">
+              <input name="weekdate" type="text" id="weekdate" class="layui-input" /><input name="datesearch" type="button" value="搜索" onclick="setDurationFlag(durationflag);"/>
+            </div>
+            <div class="layui-tab-item layui-show">
+                <div class="layui-row layui-col-space5">
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        本<span id="span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
+                        
+                        <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate])}}" target="_blank"><span>操作历史</span></a>
+                        
+                        <span class="lf_icon tj_gz_icon">+</span>
                       </div>
-                      <ul>
+                      <div class="contains">
+                        <ul>
 
-                        @foreach ($arr_stateindex as $stateindex)
-                        <li>
+                          @foreach ($arr_mission as $mission)
+                          <li>
+                            P{{ $mission['importance']  }}：{{ $mission['description']  }}
+                            <div class="this_cz">
+                              <i class="icon iconfont icon-bianji bz_rw"  flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);"></i>
+                              <i class="icon iconfont icon-laji" description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);"></i>
+                            </div>
+                          </li>
+                          @endforeach
 
-                          @switch($stateindex['state'])
-                              @case(1)
-                                  <span class="layui-badge-dot layui-bg-green"></span>
-                                  @break
-
-                              @case(2)
-                                 <span class="layui-badge-dot layui-bg-cyan"></span>
-                                  @break
-
-                              @case(3)
-                                  <span class="layui-badge-dot layui-bg-blue"></span>
-                                  @break
-
-                              @case(4)
-                                  <span class="layui-badge-dot layui-bg-gray"></span>
-                                  @break
-
-                          @endswitch
-
-                          {{ $stateindex['description']  }}
-                          <div class="this_cz">
-                            <i class="icon iconfont icon-bianji wl_sz" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="detail_stateindex(this);"></i>    
-                            <i class="icon iconfont icon-laji" description="{{ $stateindex['description'] }}" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="pop_del_div(this);"></i>
-                          </div>
-                        </li>
-                        @endforeach
-
-                      </ul>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        目标
+                        <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><span>操作历史</span></a>
+                        <span class="lf_icon xzmb">新增目标</span>
+                      </div>
+                      <div class="contains">
+                        <ul id="treeDemo" class="ztree"></ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+                <div class="layui-row layui-col-space5">
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        未来四<span id="span_plan_duration">周</span>计划
+                        
+                        <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate])}}" target="_blank"><span>操作历史</span></a>
+                        
+                        <span class="lf_icon wl_jh">+</span>
+                      </div>
+                      
+                      <div class="contains">
+                        <ul>
+
+                          @foreach ($arr_plan as $plan)
+                          <li>
+                            {{ $plan['description']  }}
+                            <div class="this_cz">
+                              <i class="icon iconfont icon-bianji wl_sz" flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);"></i>    
+                              <i class="icon iconfont icon-laji" description="{{ $plan['description']  }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);"></i>
+                            </div>
+                          </li>
+                          @endforeach
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        状态指标
+                        <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><span>操作历史</span></a>
+                        <span class="lf_icon tj_zt_icon">+</span>
+                      </div>
+                      <div class="contains">
+                        <div class="text-right">
+                          <span class="layui-badge-dot layui-bg-green"></span>优秀
+                          <span class="layui-badge-dot layui-bg-cyan"></span>良好
+                          <span class="layui-badge-dot layui-bg-blue"></span>一般
+                          <span class="layui-badge-dot layui-bg-gray"></span>差
+                        </div>
+                        <ul>
+
+                          @foreach ($arr_stateindex as $stateindex)
+                          <li>
+
+                            @switch($stateindex['state'])
+                                @case(1)
+                                    <span class="layui-badge-dot layui-bg-green"></span>
+                                    @break
+
+                                @case(2)
+                                   <span class="layui-badge-dot layui-bg-cyan"></span>
+                                    @break
+
+                                @case(3)
+                                    <span class="layui-badge-dot layui-bg-blue"></span>
+                                    @break
+
+                                @case(4)
+                                    <span class="layui-badge-dot layui-bg-gray"></span>
+                                    @break
+
+                            @endswitch
+
+                            {{ $stateindex['description']  }}
+                            <div class="this_cz">
+                              <i class="icon iconfont icon-bianji wl_sz" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="detail_stateindex(this);"></i>    
+                              <i class="icon iconfont icon-laji" description="{{ $stateindex['description'] }}" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="pop_del_div(this);"></i>
+                            </div>
+                          </li>
+                          @endforeach
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
           </div>
-        </div>
 
-    </div>
-
+      </div>
     <!-- End Notifications -->
     <!-- End #footer -->
   </div>
   <!-- End #main-content -->
-</div>
 
 <!-- 打分 -->
 <div class="models dafen_models" style="display: none;">
@@ -848,6 +829,38 @@
 </div>
 <!-- end -->
 
+<script>
+  /*公司职位*/
+  // var ygsetting = {
+  //     view: {
+  //       addDiyDom: addDiyDoms
+  //     },
+  //   };
+
+  // var ygnames =[
+  //     { name:"财务部",job:"财务",
+  //       children: [
+  //         { name:"0",job:"主管"},
+  //         { name:"1",job:"职员"},
+  //         { name:"2",job:"职员"}
+  //       ]},
+  // ];
+
+  // function addDiyDoms(treeId, treeNode) {
+  //     if (treeNode.parentNode && treeNode.parentNode.id!=2) return;
+  //     var aObj = $("#" + treeNode.tId + IDMark_A);
+  //     var job = treeNode.job;
+  //       var editStr = "<span class='demoIcon'><span class='wks'>"+job+"</span></span>";
+  //       aObj.after(editStr);
+  // }
+
+  // $(document).ready(function(){
+  //   /*员工名称*/
+  //   $.fn.zTree.init($("#ygNameTree"), ygsetting, ygnames);
+  // });
+
+  // $.sidebarMenu($('.sidebar-menu'))
+</script>
 
 <script type="text/javascript">
   /*zthree*/
@@ -867,6 +880,10 @@
         showIcon: false,
         fontCss: getFont,
         showLine: false,
+        dblClickExpand: false,
+      },
+      callback: {
+        onClick: onClick,
       }
     };
     // var settings = {
@@ -879,20 +896,23 @@
     /* */
     var zNodes = {!! $json_objective !!};
 
-
-function html_encode(str) 
-{ 
-var s = ""; 
-if (str.length == 0) return ""; 
-s = str.replace(/&/g, "&gt;"); 
-s = s.replace(/</g, "&lt;"); 
-s = s.replace(/>/g, "&gt;"); 
-s = s.replace(/ /g, "&nbsp;"); 
-s = s.replace(/\'/g, "&#39;"); 
-s = s.replace(/\"/g, "&quot;"); 
-s = s.replace(/\n/g, "<br>"); 
-return s; 
-}
+    function onClick(e,treeId, treeNode) {
+      var zTree = $.fn.zTree.getZTreeObj(treeId);
+      zTree.expandNode(treeNode);
+    }
+    
+    function html_encode(str) { 
+        var s = ""; 
+        if (str.length == 0) return ""; 
+        s = str.replace(/&/g, "&gt;"); 
+        s = s.replace(/</g, "&lt;"); 
+        s = s.replace(/>/g, "&gt;"); 
+        s = s.replace(/ /g, "&nbsp;"); 
+        s = s.replace(/\'/g, "&#39;"); 
+        s = s.replace(/\"/g, "&quot;"); 
+        s = s.replace(/\n/g, "<br>"); 
+        return s; 
+    }
 
     function getFont(treeId, node) {
       return node.font ? node.font : {};
@@ -913,7 +933,7 @@ return s;
         //alert(html_encode(treeNode.name));
         
         scoreStr = "<span class='demoIcon'><span class='pf' title='评分' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_score_div(this);'>评分</span></span>";
-        addkrStr = "<span class='demoIcon'><span title='添加KR' class='icon iconfont icon-jiahao tj_jh' onclick='pop_new_kr("+treeNode.id+")'></span></span>";
+        addkrStr = "<span class='demoIcon'><span title='添加KR' onclick='pop_new_kr("+treeNode.id+")'>加KR</span></span>";
         if(treeNode.score==999){
           delStr = "";
           editStr = "<span class='demoIcon'><span class='icon iconfont icon-bianji xq' title='编辑' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_objective(this);'></span></span>";
@@ -925,7 +945,7 @@ return s;
           delStr = "";
         }        
         commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
-        aObj.after(scoreStr + addkrStr + editStr + delStr + commentStr);
+        aObj.after(scoreStr + editStr + delStr + commentStr + addkrStr);
       }
 
       if (treeNode.flag == "keyresult") {
@@ -978,23 +998,31 @@ return s;
 
     durationflag = '{{ $durationflag }}';
     duration = '{{ $duration }}';
-
-
+	weekdate = '{{ $weekdate }}';
+	
+	
     init_durationFlag();
     $("#duration-"+durationflag).addClass("layui-this");
-    if(durationflag==0)
+    // if(durationflag==0)
+    // {
+    //   $("#duration-div-0").addClass("layui-show");
+    //   $("#duration-0-"+duration).addClass("layui-this");
+    //   $("#span_misson_duration").html("周");
+    //   $("#span_plan_duration").html("周");      
+    // }
+    // if(durationflag==1)
+    // {
+    //   $("#duration-div-1").addClass("layui-show");
+    //   $("#duration-1-"+duration).addClass("layui-this");
+    //   $("#span_misson_duration").html("月");
+    //   $("#span_plan_duration").html("月");
+    // }
+    if(durationflag==3)
     {
-      $("#duration-div-0").addClass("layui-show");
-      $("#duration-0-"+duration).addClass("layui-this");
-      $("#span_misson_duration").html("周");
-      $("#span_plan_duration").html("周");      
-    }
-    if(durationflag==1)
-    {
-      $("#duration-div-1").addClass("layui-show");
-      $("#duration-1-"+duration).addClass("layui-this");
-      $("#span_misson_duration").html("月");
-      $("#span_plan_duration").html("月");
+      $("#duration-div-3").addClass("layui-show");
+      $("#duration-3-"+duration).addClass("layui-this");
+      // $("#span_misson_duration").html("月");
+      // $("#span_plan_duration").html("月");
     }
     if(durationflag==2)
     {
@@ -1036,6 +1064,14 @@ return s;
     }
 
     // 初始化季度层
+    function init_durationFlag3(){
+      //alert("init_durationFlag3");
+      $("#duration-3-001").removeClass("layui-this");
+      $("#duration-3-002").removeClass("layui-this");
+      $("#duration-div-3").removeClass("layui-show");
+    }
+
+    // 初始化季度层
     function init_durationFlag2(){
       $("#duration-2-2018").removeClass("layui-this");
       $("#duration-div-2").removeClass("layui-show");
@@ -1043,17 +1079,19 @@ return s;
 
     // 初始化月度季度年度显示层
     function init_durationFlag(){
-      $("#duration-0").removeClass("layui-this");
-      $("#duration-1").removeClass("layui-this");
+      // $("#duration-0").removeClass("layui-this");
+      // $("#duration-1").removeClass("layui-this");
+      $("#duration-3").removeClass("layui-this");
       $("#duration-2").removeClass("layui-this");
 
-      $("#duration-div-0").removeClass("layui-show");
-      $("#duration-div-1").removeClass("layui-show");
+      // $("#duration-div-0").removeClass("layui-show");
+      // $("#duration-div-1").removeClass("layui-show");
+      $("#duration-div-3").removeClass("layui-show");
       $("#duration-div-2").removeClass("layui-show");
     }
 
     function setDurationFlag(index){
-
+		// alert(index);
       // init_durationFlag();
       
       // $("#duration-"+index).addClass("layui-this");
@@ -1069,6 +1107,9 @@ return s;
       if(month=="07" || month=="08" || month=="09"){season = "3";}
       if(month=="10" || month=="11" || month=="12"){season = "4";}
 
+      if(month=="01" || month=="02" || month=="03" || month=="04" || month=="05" || month=="06"){halfyear = "001";}
+      if(month=="07" || month=="08" || month=="09" || month=="10" || month=="11" || month=="12"){halfyear = "002";}
+
       var year  = now.getFullYear();
       console.log(month + " "+season+" "+year);
 
@@ -1082,13 +1123,19 @@ return s;
         init_durationFlag1();
         $("#duration-1-"+duration).addClass("layui-this");
       }
+      if(index==3){
+        duration = halfyear;
+        init_durationFlag3();
+        $("#duration-3-"+duration).addClass("layui-this");
+      }
       if(index==2){
         duration = year;
         $("#duration-2-"+duration).addClass("layui-this");
       }
       
+	  weekdate = $("#weekdate").val();
       console.log("durationflag="+durationflag+" duration="+duration);
-      window.location.href = "{{ route('objective.mine') }}" + "?durationflag=" + durationflag + "&duration=" + duration;
+      window.location.href = "{{ route('objective.mine') }}" + "?durationflag=" + durationflag + "&duration=" + duration + "&weekdate=" + weekdate;
     }
 
     function setDuration(index){
@@ -1099,13 +1146,17 @@ return s;
       }
       if(duration=="1" || duration=="2" || duration=="3" || duration=="4"){
         durationflag = "1";
-      }      
+      }
+      if(duration=="001" || duration=="002"){
+        durationflag = "3";
+      }
       if(duration=="2018"){
         durationflag = "2";
       }
       
+	  weekdate = $("#weekdate").val();
       console.log("durationflag="+durationflag+" duration"+index);
-      window.location.href = "{{ route('objective.mine') }}" + "?durationflag=" + durationflag + "&duration=" + duration;
+      window.location.href = "{{ route('objective.mine') }}" + "?durationflag=" + durationflag + "&duration=" + duration + "&weekdate=" + weekdate;
     }
 
     // 评分
@@ -1951,6 +2002,37 @@ return s;
 
     function logout(){
       window.location.href = "{{ route('index.logout') }}";
+    }
+
+	layui.use('laydate', function(){
+	  var laydate = layui.laydate;
+	  
+	  //执行一个laydate实例
+	  laydate.render({
+		elem: '#weekdate' //指定元素
+	  });
+	});
+	
+	if(weekdate==""){
+		$("#weekdate").val(getNowFormatDate());
+	}else{
+		$("#weekdate").val(weekdate);
+	}
+	
+	function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
     }
 </script>
 <script type="text/javascript" src="/okr/js/main.js"></script>

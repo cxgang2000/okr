@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 use App\Models\Stateindex;
+use App\Models\Stateindexlog;
 
 use Illuminate\Support\Facades\DB;
 
@@ -54,7 +55,8 @@ class StateindexController extends Controller
 
         $data['durationflag'] = $request->durationflag;
         $duration = $request->duration;
-        if($data['durationflag']==0 || $data['durationflag']==1){$duration = date("Y").$duration;}
+        // if($data['durationflag']==0 || $data['durationflag']==1){$duration = date("Y").$duration;}
+        if($data['durationflag']==3){$duration = date("Y").$duration;}
         $data['duration'] = $duration;   
         $data['organiser_id'] = session('idUser'); 
         $data['description'] = $request->s_description;
@@ -71,9 +73,40 @@ class StateindexController extends Controller
             $array = array('msg'=>'新增状态指标失败!','status'=>0);
             return json_encode($array);
         }else{
+
+            $itemid = $stateindex->id;
+            $type = 0;
+            $descbefore = "";
+            $descafter = $data['description'];
+
+            $this->setLog($type,$itemid,$descbefore,$descafter);
+
             $array = array('msg'=>'新增状态指标成功!','status'=>1);
             return json_encode($array);
         }
+    }
+
+    // 加log
+    private function setLog($type,$itemid,$descbefore,$descafter){
+        $data['type'] = $type;
+        $data['itemid'] = $itemid;
+        $data['descbefore'] = $descbefore;
+        $data['descafter'] = $descafter;
+        $data['created_at'] = date("Y-m-d H:i:s");
+
+        // $data = [
+        // 'type' => $type,
+        // 'oid' => $oid,
+        // 'descbefore' => $descbefore,
+        // 'descafter' => $descafter,
+        // ];
+        
+        DB::table('stateindexlogs')->insert($data);
+        // Objectivelog::create($data);
+
+        // $now = date("Y-m-d H:i:s");
+        // $sql = "INSERT INTO `objectivelogs` (`id`, `oid`, `type`, `descbefore`, `descafter`, `created_at`, `updated_at`) VALUES (NULL, '".$oid."', '".$type."', '".$descbefore."', '".$descafter."', '".$now."', NULL)";
+        // DB::insert($sql);
     }
 
     // 详情
@@ -107,7 +140,6 @@ class StateindexController extends Controller
         return $item;
     }
 
-
     // 更新
     public function update(Request $request)
     {
@@ -140,6 +172,7 @@ class StateindexController extends Controller
         $data['state'] = $request->s_state;
         // dd($data);
         $item = Stateindex::find($data['id']);
+        $descbefore = $item->description;
         // dd($item);
         $item->description=$data['description'];
         $item->state=$data['state'];
@@ -151,6 +184,13 @@ class StateindexController extends Controller
             $array = array('msg'=>'编辑失败!','status'=>0);
             return json_encode($array);
         }else{
+
+            $itemid = $data['id'];
+            $type = 2;
+            $descafter = $data['description'];
+
+            $this->setLog($type,$itemid,$descbefore,$descafter);
+
             $array = array('msg'=>'编辑成功!','status'=>1);
             return json_encode($array);
         }
@@ -202,8 +242,45 @@ class StateindexController extends Controller
             $array = array('msg'=>'删除失败!','status'=>0);
             return json_encode($array);
         }else{
+
+            $itemid = $data['id'];
+            $type = 1;
+            $descbefore = $item->description;
+            $descafter = "";
+
+            $this->setLog($type,$itemid,$descbefore,$descafter);
+
+
             $array = array('msg'=>'删除成功!','status'=>1);
             return json_encode($array);
         }
+    }
+
+    // 操作历史
+    public function stateindexlog(Request $request)
+    {
+        $durationflag = $request->durationflag;
+        $duration = $request->duration;
+        if($durationflag=='' || $duration==''){die('参数错误');}
+
+        $arr_where['durationflag'] = $durationflag;
+        if($arr_where['durationflag']==3){
+            $duration1 = date("Y").$duration;
+        }else{
+            $duration1 = $duration;
+        }
+        $arr_where['duration'] = $duration1;
+        $arr_where['organiser_id'] = session('idUser');
+
+        // var_dump($arr_where);die();
+        $arr_stateindex = Stateindex::where($arr_where)->get()->toArray();
+        $ids = array_column($arr_stateindex, 'id');
+        $str_ids = implode($ids, ",");
+        // var_dump($str_ids);die();
+
+        $arr_log = Stateindexlog::whereIn("itemid",$ids)->get()->toArray();
+        // var_dump($arr_objective);die();
+
+        return view('index.mineObjectivelog',compact('arr_log'));
     }
 }

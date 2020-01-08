@@ -182,6 +182,80 @@ class User extends Model
         return $arr_litedpt;
     }
     
+    // 取带部门的员工列表
+    public function getAllUserDept1($keyword="")
+    {
+        // $arr_status = [0,1];
+        $arr_where['status'] = 0;
+
+        // 计算员工上级 1取所有部门 2取所有员工 2将员工放在部门下 4去掉没有员工的部门
+        $arr_litedpt = array();
+        // $arr_alldpt = Department::select(['id','name'])->whereIn("status",$arr_status)->orderBy('id',"asc")->get()->toArray();
+        $arr_alldpt = Department::select(['id','name','pId'])->where($arr_where)->orderBy('id',"asc")->get()->toArray();
+        
+        // return $arr_alldpt;
+        // var_dump($arr_alldpt);die();
+        
+        if($keyword!=""){
+            $arr_alluser = User::select(['id as userid','name','department_id as pId','position_id'])
+            ->where($arr_where)
+            ->where(function ($query) use ($keyword) {
+                $query->where('name', 'like', "%{$keyword}%")
+                        ->orWhere('phone', 'like', "%{$keyword}%");
+                })
+            ->orderBy('id',"desc")
+            ->get()
+            ->toArray();
+        }else{
+            $arr_alluser = User::select(['id as userid','name','department_id as pId','position_id'])->where($arr_where)
+                ->orderBy('id',"desc")
+                ->get()->toArray();
+        }
+        
+        // var_dump($arr_alluser);
+        // die();
+        // dd($this->arr_position);
+        $arr_position = $this::$arr_position;
+        // var_dump($arr_position);
+
+        // 取职位
+        for ($j=0; $j < count($arr_alluser); $j++) {
+            // echo $arr_alluser[$j]['position_id'];
+            // echo "<br>";
+            $arr_alluser[$j]['position_name']=$arr_position[$arr_alluser[$j]['position_id']];
+            $arr_alluser[$j]['id']=$arr_alluser[$j]['pId']."_".$arr_alluser[$j]['userid'];
+            // $arr_alluser[$j]['id']=$arr_alluser[$j]['pId']+$arr_alluser[$j]['userid'];
+            
+        }
+        // dd($arr_alluser);
+
+        // // 取部门
+        // for ($i=0; $i < count($arr_alldpt); $i++) { 
+        //     for ($j=0; $j < count($arr_alluser); $j++) {
+        //         if($arr_alluser[$j]['department_id']==$arr_alldpt[$i]['id']){
+        //             $arr_alldpt[$i]['users'][]=$arr_alluser[$j];
+        //         }
+        //     }
+        //     // $arr_alluser[$j]['position_name'] = $arr_position[$arr_alluser[$j]['position_id']];
+        //     // echo $arr_alldpt[$i]['position_id'];
+        // }
+        // // var_dump($arr_alldpt);die();
+        // // var_dump($arr_alldpt[0]['users']);die();
+
+        // // 去掉没有员工的部门
+        // for ($i=0; $i < count($arr_alldpt); $i++) { 
+        //     if(isset($arr_alldpt[$i]['users'])){
+        //         $arr_litedpt[]=$arr_alldpt[$i];
+        //     }
+        // }
+
+        $arr_litedpt = array_merge($arr_alldpt,$arr_alluser);
+        // dd($arr_litedpt);
+        // var_dump($arr_litedpt);
+        // die();
+
+        return $arr_litedpt;
+    }
 
     public static function findUser($user_id)
     {

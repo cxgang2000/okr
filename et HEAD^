@@ -1,0 +1,155 @@
+[33mcommit 637c3a73139dd0adbd4ade007bdd7e6d781b0437[m
+Author: root <cxgang2000@163.com>
+Date:   Fri Aug 3 11:38:11 2018 +0800
+
+    modify_20180803_jsbug
+
+[33mcommit a9f08d4b9ea1a4e003ec1b7f7dcd537907818589[m
+Author: root <cxgang2000@163.com>
+Date:   Thu Jul 19 14:44:20 2018 +0800
+
+    modify_20180719
+
+[33mcommit c3f4ee8fdeccbcbd56021864e48114d711ae52fc[m
+Author: root <cxgang2000@163.com>
+Date:   Wed Jul 18 18:11:02 2018 +0800
+
+    mine_template_modify_20180718
+
+[33mcommit 509ad5a4d3e7f7039810cbf69563e06d4e4d9afe[m
+Author: root <cxgang2000@163.com>
+Date:   Wed Jul 18 18:02:54 2018 +0800
+
+    mine_template_modify_20180718
+
+[33mcommit 3f14e82b24985d8e146870acf2233118acfcc207[m
+Author: root <cxgang2000@163.com>
+Date:   Wed Jul 18 16:19:51 2018 +0800
+
+    mine_template_modify_20180718
+
+[33mcommit f2034d6f8f867cb4d6b110f3e443bb7604ceb24b[m
+Author: root <cxgang2000@163.com>
+Date:   Wed Jul 18 12:50:59 2018 +0800
+
+    mine_template_modify_20180718
+
+[33mcommit 89fe66ea40c54a3ac3198771d5441cd2601e3c3d[m
+Author: root <cxgang2000@163.com>
+Date:   Wed Jul 18 12:27:34 2018 +0800
+
+    index_modify_20180718
+
+[33mcommit 5d79e0a188d94cc31098cee4e536f9734713ec02[m
+Author: vagrant <vagrant@homestead>
+Date:   Tue Jun 26 07:19:54 2018 +0000
+
+    20180626_add_user_option
+
+[33mcommit 5dbaeddd598901181b11dd93b09ab62de3edb8b2[m
+Author: vagrant <vagrant@homestead>
+Date:   Tue Jun 26 04:44:59 2018 +0000
+
+    20180626_add_iamorganiser_and_modify_somebug
+
+[33mcommit 58b92f6238f3d789ffdf69ee8f7ffcd314e8fa20[m
+Author: vagrant <vagrant@homestead>
+Date:   Sun Jun 24 15:38:02 2018 +0000
+
+    20180624_modify_pagebug
+
+[33mcommit 572e0f1de3f658f2f6824c338e56cc855b2ecded[m
+Author: vagrant <vagrant@homestead>
+Date:   Sun Jun 24 15:20:52 2018 +0000
+
+    20180624_modify_timezone
+
+[33mcommit 083462f50ff5bd27e6e8b681352affdba6c3e4b9[m
+Author: vagrant <vagrant@homestead>
+Date:   Sun Jun 24 15:13:01 2018 +0000
+
+    20180624_modify_bug
+
+[33mcommit 28cc7861aae51405c6b97df2d771b2c01a5ebe54[m
+Author: vagrant <vagrant@homestead>
+Date:   Sun Jun 24 15:09:09 2018 +0000
+
+    20180624_modify_bug
+
+[33mcommit 2e789552d75aa30f4811de93dd3543974068ce16[m
+Author: vagrant <vagrant@homestead>
+Date:   Sun Jun 24 07:27:02 2018 +0000
+
+    20180624_modify_index_executor_display
+
+[33mcommit 6ba4cedd762da6f217282df3cd8bee54cb7e3a00[m
+Author: vagrant <vagrant@homestead>
+Date:   Sat Jun 23 15:42:53 2018 +0000
+
+    20180623_bug_and_index_about_heis
+
+[33mcommit 005c8c1c085502b3b4bdee74e86000006737954b[m
+Author: vagrant <vagrant@homestead>
+Date:   Fri Jun 22 08:04:20 2018 +0000
+
+    index_20180622
+
+[33mcommit d65c810f07edcb8abf85f747546192f3dec41f3a[m
+Author: vagrant <vagrant@homestead>
+Date:   Fri Jun 22 07:57:12 2018 +0000
+
+    index_20180622
+
+[33mcommit eb66616f63ed9345c02a079a39ac409b7c76b116[m
+Author: vagrant <vagrant@homestead>
+Date:   Fri Jun 22 07:31:56 2018 +0000
+
+    index_20180622_addCommentAndAdminBug
+
+[33mcommit 6d0ccb2c858b80f3c6486718d55816b40de6cf0a[m
+Author: vagrant <vagrant@homestead>
+Date:   Wed Jun 20 02:53:54 2018 +0000
+
+    index_20180620_migratechange
+
+[33mcommit 25619aec1cc58798d446398b5cb86b70c315dd59[m
+Author: vagrant <vagrant@homestead>
+Date:   Wed Jun 20 02:02:57 2018 +0000
+
+    index_20180620
+
+[33mcommit 27426fa43ca1e2b166bf6a4df2ab09b2d943874e[m
+Author: vagrant <vagrant@homestead>
+Date:   Tue Jun 12 03:14:51 2018 +0000
+
+    admin update 20180612
+
+[33mcommit d48c6173adc3b616e5d92ce8455550c6cdd53822[m
+Author: vagrant <vagrant@homestead>
+Date:   Mon Jun 11 07:58:58 2018 +0000
+
+    admin update 20180611
+
+[33mcommit 520ddbeb7e16c449651c57ced95b1bb49ec36f62[m
+Author: vagrant <vagrant@homestead>
+Date:   Wed Jun 6 08:23:23 2018 +0000
+
+    admin part_20180606
+
+[33mcommit 2ecfdb056b919ae3e75ce23cdccbd7f26a4194b2[m
+Author: vagrant <vagrant@homestead>
+Date:   Wed Jun 6 05:38:09 2018 +0000
+
+    admin part
+
+[33mcommit ad3e8c36e5e366e721fe447df507848a5968f57e[m
+Author: vagrant <vagrant@homestead>
+Date:   Wed Jun 6 02:58:40 2018 +0000
+
+    admin part
+
+[33mcommit 2e853efc15e3c25b0409092df23b445905777d7b[m
+Author: vagrant <vagrant@homestead>
+Date:   Mon May 28 13:40:39 2018 +0000
+
+    Initial commit

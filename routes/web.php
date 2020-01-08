@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'IndexController@create');
 // 后台
 
 // Route::get('/admin/login', 'AdminController@login')->name('admin.login');
@@ -58,6 +58,12 @@ Route::get('/objective/heisexecutor/{p1}', 'ObjectiveController@heisexecutor')->
 
 Route::get('/objective/mine/', 'ObjectiveController@mine')->name('objective.mine');
 Route::get('/objective/others/', 'ObjectiveController@others')->name('objective.others');
+
+Route::get('/objectivelog/', 'ObjectiveController@mineObjectivelog')->name('objective.mineObjectivelog');
+Route::get('/stateindexlog/', 'StateindexController@stateindexlog')->name('stateindex.stateindexlog');
+Route::get('/missionlog/', 'MissionController@missionlog')->name('mission.missionlog');
+Route::get('/planlog/', 'PlanController@planlog')->name('plan.planlog');
+
 
 // 信心指数编辑
 // Route::post('/confidentindex', 'ConfidentindexController@store')->name('confidentindex.store');

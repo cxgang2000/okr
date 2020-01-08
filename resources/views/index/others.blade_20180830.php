@@ -73,303 +73,303 @@
           成员目标
         </div>
         <!-- End .clear -->
+        <div class="content-box">
+          <div class="layui-row layui-col-space5">
+            <div class="layui-col-xs6 lp">
+              <div class="time_con">
+                <select id="my_monthperiod" class="list" onchange="selectMyPeriod('month',this.value);">
+                  <option value="100">月度</option>
+                  <option value="01">一月</option>
+                  <option value="02">二月</option>
+                  <option value="03">三月</option>
+                  <option value="04">四月</option>
+                  <option value="05">五月</option>
+                  <option value="06">六月</option>
+                  <option value="07">七月</option>
+                  <option value="08">八月</option>
+                  <option value="09">九月</option>
+                  <option value="10">十月</option>
+                  <option value="11">十一月</option>
+                  <option value="12">十二月</option>
+                </select>
 
-          <div class="content-box">
-            <div class="layui-row layui-col-space5">
-                <div class="layui-col-xs12 rp">
-                  <div class="time_con">
+                <select id="my_seasonperiod" class="list" onchange="selectMyPeriod('season',this.value);">
+                  <option value="1000">季度</option>
+                  <option value="1" title="1月-3月">第一季度</option>
+                  <option value="2" title="3月-6月">第二季度</option>
+                  <option value="3" title="6月-9月">第三季度</option>
+                  <option value="4" title="10月-12月">第四季度</option>
+                </select>
 
-                    <select id="others_monthperiod" class="list" onchange="selectOthersPeriod('month',this.value);">
-                      <option value="100">月度</option>
-                      <option value="01">一月</option>
-                      <option value="02">二月</option>
-                      <option value="03">三月</option>
-                      <option value="04">四月</option>
-                      <option value="05">五月</option>
-                      <option value="06">六月</option>
-                      <option value="07">七月</option>
-                      <option value="08">八月</option>
-                      <option value="09">九月</option>
-                      <option value="10">十月</option>
-                      <option value="11">十一月</option>
-                      <option value="12">十二月</option>
-                    </select>
-
-                    <select id="others_seasonperiod" class="list" onchange="selectOthersPeriod('season',this.value);">
-                      <option value="1000">季度</option>
-                      <option value="1" title="1月-3月">第一季度</option>
-                      <option value="2" title="3月-6月">第二季度</option>
-                      <option value="3" title="6月-9月">第三季度</option>
-                      <option value="4" title="10月-12月">第四季度</option>
-                    </select>
-
-                    <select id="others_yearperiod" class="list" onchange="selectOthersPeriod('year',this.value);">
-                      <option value="10000">年度</option>
-                      <option value="2018">2018</option>
-                    </select>
-
-                    </div>
-                    <div class="okr_mb">
-                      {{ $arr_others['name'] }}的OKR（<span id="others_period_show"></span>）
-                    </div>
-                    <div class="my_job">
-                      <div class="text-center c_333">{{ $arr_others['name'] }} <br> <span class="c_999">{{ $arr_others['position_name'] }}</span></div>
-                    </div>
-                </div>
-                <div class="layui-col-xs12 rp">
-                  <div class="layui-row layui-col-space5">
-                    <div class="layui-col-xs6">
-                      <div>
-                        <div class="titles">
-                          本<span id="others_span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
-                        </div>
-                        <div class="contains">
-                          <ul>
-
-                            @foreach ($others_all['arr_mission'] as $mission)
-                              <li>P{{ $mission['importance']  }}：{{ $mission['description']  }}
-                                <div class="this_cz">
-                                  <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $mission['id'] }}" onclick="pop_comment_div(this,'{{ $mission['description'] }}')"></span>
-                                </div>
-                              </li>
-                            @endforeach
-
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="layui-col-xs6">
-                      <div>
-                        <div class="titles">
-                          目标
-                        </div>
-                        <div class="contains">
-                          <ul id="others_tree" class="ztree">
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="layui-col-xs12 rp">
-                  <div class="layui-row layui-col-space5">
-                    <div class="layui-col-xs6">
-                      <div>
-                        <div class="titles">
-                          未来四<span id="others_span_plan_duration">周</span>计划
-                        </div>
-                        <div class="contains">
-                          <ul>
-                            
-                            @foreach ($others_all['arr_plan'] as $plan)
-                              <li>
-                                {{ $plan['description']  }}
-                                <div class="this_cz">
-                                  <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $plan['id'] }}" onclick="pop_comment_div(this,'{{ $plan['description'] }}')"></span>
-                                </div>
-                              </li>
-                            @endforeach
-
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="layui-col-xs6">
-                      <div>
-                        <div class="titles">
-                          状态指标
-                        </div>
-                        <div class="contains">
-                          <div class="text-right">
-                            <span class="layui-badge-dot layui-bg-green"></span>优秀
-                            <span class="layui-badge-dot layui-bg-cyan"></span>良好
-                            <span class="layui-badge-dot layui-bg-blue"></span>一般
-                            <span class="layui-badge-dot layui-bg-gray"></span>差
-                          </div>
-                          <ul>
-                            
-                            @foreach ($others_all['arr_stateindex'] as $stateindex)
-                            <li>
-
-                              @switch($stateindex['state'])
-                                  @case(1)
-                                      <span class="layui-badge-dot layui-bg-green"></span>
-                                      @break
-
-                                  @case(2)
-                                     <span class="layui-badge-dot layui-bg-cyan"></span>
-                                      @break
-
-                                  @case(3)
-                                      <span class="layui-badge-dot layui-bg-blue"></span>
-                                      @break
-
-                                  @case(4)
-                                      <span class="layui-badge-dot layui-bg-gray"></span>
-                                      @break
-
-                              @endswitch
-
-                              {{ $stateindex['description']  }}
-                              <!--div class="this_cz">
-                                <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $stateindex['id'] }}" onclick="pop_comment_div(this,'{{ $stateindex['description'] }}')"></span>
-                              </div-->
-                            </li>
-                            @endforeach
-
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <select id="my_yearperiod" class="list" onchange="selectMyPeriod('year',this.value);">
+                  <option value="10000">年度</option>
+                  <option value="2018">2018</option>
+                </select>
+              </div>
+              <div class="okr_mb">
+                我的OKR（<span id="my_period_show"></span>）
+              </div>
             </div>
+            <div class="layui-col-xs6 rp">
+              <div class="time_con">
 
-            <div class="layui-row layui-col-space5">
-                <div class="layui-col-xs12 lp">
-                  <div class="time_con">
-                    <select id="my_monthperiod" class="list" onchange="selectMyPeriod('month',this.value);">
-                      <option value="100">月度</option>
-                      <option value="01">一月</option>
-                      <option value="02">二月</option>
-                      <option value="03">三月</option>
-                      <option value="04">四月</option>
-                      <option value="05">五月</option>
-                      <option value="06">六月</option>
-                      <option value="07">七月</option>
-                      <option value="08">八月</option>
-                      <option value="09">九月</option>
-                      <option value="10">十月</option>
-                      <option value="11">十一月</option>
-                      <option value="12">十二月</option>
-                    </select>
+                <select id="others_monthperiod" class="list" onchange="selectOthersPeriod('month',this.value);">
+                  <option value="100">月度</option>
+                  <option value="01">一月</option>
+                  <option value="02">二月</option>
+                  <option value="03">三月</option>
+                  <option value="04">四月</option>
+                  <option value="05">五月</option>
+                  <option value="06">六月</option>
+                  <option value="07">七月</option>
+                  <option value="08">八月</option>
+                  <option value="09">九月</option>
+                  <option value="10">十月</option>
+                  <option value="11">十一月</option>
+                  <option value="12">十二月</option>
+                </select>
 
-                    <select id="my_seasonperiod" class="list" onchange="selectMyPeriod('season',this.value);">
-                      <option value="1000">季度</option>
-                      <option value="1" title="1月-3月">第一季度</option>
-                      <option value="2" title="3月-6月">第二季度</option>
-                      <option value="3" title="6月-9月">第三季度</option>
-                      <option value="4" title="10月-12月">第四季度</option>
-                    </select>
+                <select id="others_seasonperiod" class="list" onchange="selectOthersPeriod('season',this.value);">
+                  <option value="1000">季度</option>
+                  <option value="1" title="1月-3月">第一季度</option>
+                  <option value="2" title="3月-6月">第二季度</option>
+                  <option value="3" title="6月-9月">第三季度</option>
+                  <option value="4" title="10月-12月">第四季度</option>
+                </select>
 
-                    <select id="my_yearperiod" class="list" onchange="selectMyPeriod('year',this.value);">
-                      <option value="10000">年度</option>
-                      <option value="2018">2018</option>
-                    </select>
-                  </div>
-                  <div class="okr_mb">
-                    我的OKR（<span id="my_period_show"></span>）
-                  </div>
+                <select id="others_yearperiod" class="list" onchange="selectOthersPeriod('year',this.value);">
+                  <option value="10000">年度</option>
+                  <option value="2018">2018</option>
+                </select>
+
                 </div>
-                <div class="layui-col-xs12 lp">
-                  <div class="layui-row layui-col-space5">
-                    <div class="layui-col-xs6">
-                      <div>
-                        <div class="titles">
-                          本<span id="my_span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
-                        </div>
-                        <div class="contains">
-                          <ul>
-
-                            @foreach ($my_all['arr_mission'] as $mission)
-                              <li>P{{ $mission['importance'] }}：{{ $mission['description'] }}
-                                <div class="this_cz">
-                                  <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $mission['id'] }}" onclick="pop_comment_div(this,'{{ $mission['description'] }}')"></span>
-                                </div>
-                              </li>
-                            @endforeach
-
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="layui-col-xs6">
-                      <div>
-                        <div class="titles">
-                          目标
-                        </div>
-                        <div class="contains">
-                          <ul id="my_tree" class="ztree">
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="okr_mb">
+                  {{ $arr_others['name'] }}的OKR（<span id="others_period_show"></span>）
                 </div>
-                <div class="layui-col-xs12 lp">
-                  <div class="layui-row layui-col-space5">
-                    <div class="layui-col-xs6">
-                      <div>
-                        <div class="titles">
-                          未来四<span id="my_span_plan_duration">周</span>计划
-                        </div>
-                        <div class="contains">
-                          <ul>
-
-                            @foreach ($my_all['arr_plan'] as $plan)
-                              <li>
-                                {{ $plan['description']  }}
-                                <div class="this_cz">
-                                  <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $plan['id'] }}" onclick="pop_comment_div(this,'{{ $plan['description'] }}')"></span>
-                                </div>
-                              </li>
-                            @endforeach                      
-                            
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="layui-col-xs6">
-                      <div>
-                        <div class="titles">
-                          状态指标
-                        </div>
-                        <div class="contains">
-                          <div class="text-right">
-                            <span class="layui-badge-dot layui-bg-green"></span>优秀
-                            <span class="layui-badge-dot layui-bg-cyan"></span>良好
-                            <span class="layui-badge-dot layui-bg-blue"></span>一般
-                            <span class="layui-badge-dot layui-bg-gray"></span>差
-                          </div>
-                          <ul>
-
-                            @foreach ($my_all['arr_stateindex'] as $stateindex)
-                            <li>
-
-                              @switch($stateindex['state'])
-                                  @case(1)
-                                      <span class="layui-badge-dot layui-bg-green"></span>
-                                      @break
-
-                                  @case(2)
-                                     <span class="layui-badge-dot layui-bg-cyan"></span>
-                                      @break
-
-                                  @case(3)
-                                      <span class="layui-badge-dot layui-bg-blue"></span>
-                                      @break
-
-                                  @case(4)
-                                      <span class="layui-badge-dot layui-bg-gray"></span>
-                                      @break
-
-                              @endswitch
-
-                              {{ $stateindex['description']  }}
-                              <!--div class="this_cz">
-                                <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $stateindex['id'] }}" onclick="pop_comment_div(this,'{{ $stateindex['description'] }}')"></span>
-                              </div-->
-                            </li>
-                            @endforeach
-                           
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="my_job">
+                  <div class="text-center c_333">{{ $arr_others['name'] }} <br> <span class="c_999">{{ $arr_others['position_name'] }}</span></div>
                 </div>
             </div>
           </div>
+          <div class="layui-row layui-col-space5">
+            <div class="layui-col-xs6 lp">
+              <div class="layui-row layui-col-space5">
+                <div class="layui-col-xs6">
+                  <div>
+                    <div class="titles">
+                      本<span id="my_span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
+                    </div>
+                    <div class="contains">
+                      <ul>
+
+                        @foreach ($my_all['arr_mission'] as $mission)
+                          <li>P{{ $mission['importance'] }}：{{ $mission['description'] }}
+                            <div class="this_cz">
+                              <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $mission['id'] }}" onclick="pop_comment_div(this,'{{ $mission['description'] }}')"></span>
+                            </div>
+                          </li>
+                        @endforeach
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="layui-col-xs6">
+                  <div>
+                    <div class="titles">
+                      目标
+                    </div>
+                    <div class="contains">
+                      <ul id="my_tree" class="ztree">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-xs6 rp">
+              <div class="layui-row layui-col-space5">
+                <div class="layui-col-xs6">
+                  <div>
+                    <div class="titles">
+                      本<span id="others_span_misson_duration">周</span>关注的任务（P1必须做，P2应该做）
+                    </div>
+                    <div class="contains">
+                      <ul>
+
+                        @foreach ($others_all['arr_mission'] as $mission)
+                          <li>P{{ $mission['importance']  }}：{{ $mission['description']  }}
+                            <div class="this_cz">
+                              <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $mission['id'] }}" onclick="pop_comment_div(this,'{{ $mission['description'] }}')"></span>
+                            </div>
+                          </li>
+                        @endforeach
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="layui-col-xs6">
+                  <div>
+                    <div class="titles">
+                      目标
+                    </div>
+                    <div class="contains">
+                      <ul id="others_tree" class="ztree">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="layui-row layui-col-space5">
+            <div class="layui-col-xs6 lp">
+              <div class="layui-row layui-col-space5">
+                <div class="layui-col-xs6">
+                  <div>
+                    <div class="titles">
+                      未来四<span id="my_span_plan_duration">周</span>计划
+                    </div>
+                    <div class="contains">
+                      <ul>
+
+                        @foreach ($my_all['arr_plan'] as $plan)
+                          <li>
+                            {{ $plan['description']  }}
+                            <div class="this_cz">
+                              <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $plan['id'] }}" onclick="pop_comment_div(this,'{{ $plan['description'] }}')"></span>
+                            </div>
+                          </li>
+                        @endforeach                      
+                        
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="layui-col-xs6">
+                  <div>
+                    <div class="titles">
+                      状态指标
+                    </div>
+                    <div class="contains">
+                      <div class="text-right">
+                        <span class="layui-badge-dot layui-bg-green"></span>优秀
+                        <span class="layui-badge-dot layui-bg-cyan"></span>良好
+                        <span class="layui-badge-dot layui-bg-blue"></span>一般
+                        <span class="layui-badge-dot layui-bg-gray"></span>差
+                      </div>
+                      <ul>
+
+                        @foreach ($my_all['arr_stateindex'] as $stateindex)
+                        <li>
+
+                          @switch($stateindex['state'])
+                              @case(1)
+                                  <span class="layui-badge-dot layui-bg-green"></span>
+                                  @break
+
+                              @case(2)
+                                 <span class="layui-badge-dot layui-bg-cyan"></span>
+                                  @break
+
+                              @case(3)
+                                  <span class="layui-badge-dot layui-bg-blue"></span>
+                                  @break
+
+                              @case(4)
+                                  <span class="layui-badge-dot layui-bg-gray"></span>
+                                  @break
+
+                          @endswitch
+
+                          {{ $stateindex['description']  }}
+                          <!--div class="this_cz">
+                            <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $stateindex['id'] }}" onclick="pop_comment_div(this,'{{ $stateindex['description'] }}')"></span>
+                          </div-->
+                        </li>
+                        @endforeach
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-xs6 rp">
+              <div class="layui-row layui-col-space5">
+                <div class="layui-col-xs6">
+                  <div>
+                    <div class="titles">
+                      未来四<span id="others_span_plan_duration">周</span>计划
+                    </div>
+                    <div class="contains">
+                      <ul>
+                        
+                        @foreach ($others_all['arr_plan'] as $plan)
+                          <li>
+                            {{ $plan['description']  }}
+                            <div class="this_cz">
+                              <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $plan['id'] }}" onclick="pop_comment_div(this,'{{ $plan['description'] }}')"></span>
+                            </div>
+                          </li>
+                        @endforeach
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="layui-col-xs6">
+                  <div>
+                    <div class="titles">
+                      状态指标
+                    </div>
+                    <div class="contains">
+                      <div class="text-right">
+                        <span class="layui-badge-dot layui-bg-green"></span>优秀
+                        <span class="layui-badge-dot layui-bg-cyan"></span>良好
+                        <span class="layui-badge-dot layui-bg-blue"></span>一般
+                        <span class="layui-badge-dot layui-bg-gray"></span>差
+                      </div>
+                      <ul>
+                        
+                        @foreach ($others_all['arr_stateindex'] as $stateindex)
+                        <li>
+
+                          @switch($stateindex['state'])
+                              @case(1)
+                                  <span class="layui-badge-dot layui-bg-green"></span>
+                                  @break
+
+                              @case(2)
+                                 <span class="layui-badge-dot layui-bg-cyan"></span>
+                                  @break
+
+                              @case(3)
+                                  <span class="layui-badge-dot layui-bg-blue"></span>
+                                  @break
+
+                              @case(4)
+                                  <span class="layui-badge-dot layui-bg-gray"></span>
+                                  @break
+
+                          @endswitch
+
+                          {{ $stateindex['description']  }}
+                          <!--div class="this_cz">
+                            <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $stateindex['id'] }}" onclick="pop_comment_div(this,'{{ $stateindex['description'] }}')"></span>
+                          </div-->
+                        </li>
+                        @endforeach
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
         
   </div>
@@ -492,32 +492,7 @@
 
       // fontCss: { 'color': 'blue', 'font-family': '微软雅黑' };
       // return {color:"#209ee4"};
-    };
-
-    var YGsetting = {
-      view: {
-        addDiyDom: addDiyDoms,
-        selectedMulti: false,
-        fontCss: setFontCss,
-        dblClickExpand: false,
-        showLine: false,
-      },
-      data: {
-        // key: {
-        //   title:"t"
-        // },
-        simpleData: {
-          enable: true
-        }
-      },
-      callback: {
-        onClick: onClick
-        // beforeClick: beforeClick,
-        // beforeCollapse: beforeCollapse,
-        // beforeExpand: beforeExpand,
-        // onCollapse: onCollapse,
-        // onExpand: onExpand
-      }
+      
     };
 
     $(document).ready(function(){
@@ -547,7 +522,35 @@
         //   }
         // }
 
+        var YGsetting = {
+          view: {
+            addDiyDom: addDiyDoms,
+            selectedMulti: false,
+            fontCss: setFontCss,
 
+            showLine: false,
+          },
+          data: {
+            // key: {
+            //   title:"t"
+            // },
+            simpleData: {
+              enable: true
+            }
+          },
+          callback: {
+            // beforeClick: beforeClick,
+            // beforeCollapse: beforeCollapse,
+            // beforeExpand: beforeExpand,
+            // onCollapse: onCollapse,
+            // onExpand: onExpand
+          }
+          // view: {
+          //   addDiyDom: addDiyDoms,
+          //   showLine: false,
+          //   fontCss: setFontCss,
+          // },
+        };
 
         $.fn.zTree.init($("#ygNameTree"), YGsetting, YGzNodes);
 
@@ -557,7 +560,9 @@
         // // zTree_Menu.selectNode(node,true);//指定选中ID的节点
         // zTree_Menu.expandNode(node, true, false);//指定选中ID节点展
 
-        // if($("#keyword").val()!="")openAllTreenode();
+
+        if($("#keyword").val()!="")openAllTreenode();
+
 
         if(othersId!=""){
           for (var i=0;i<YGzNodes.length;i++) {
@@ -572,6 +577,7 @@
           // zTree_Menu.selectNode(node,true);//指定选中ID的节点
           zTree_Menu.expandNode(node, true, false);//指定选中ID节点展
         }
+
 
     });
     $.sidebarMenu($('.sidebar-menu'));
@@ -593,11 +599,6 @@
         }
 
     }
-
-    function onClick(e,treeId, treeNode) {
-      var zTree = $.fn.zTree.getZTreeObj(treeId);
-      zTree.expandNode(treeNode);
-    }
 </script>
 
 <script type="text/javascript">
@@ -618,10 +619,6 @@
         showIcon: false,
         fontCss: getFont,
         showLine: false,
-        dblClickExpand: false,
-      },
-      callback: {
-        onClick: onClick,
       }
     };
     // var settings = {
@@ -653,7 +650,7 @@
           aObj.before(dafen);
         }
         // commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' onclick='pop_comment_div("+treeNode.id+");'></span></span>";
-        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
+        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+treeNode.description+"');></span></span>";
         aObj.after(commentStr);
       }
 
@@ -670,7 +667,7 @@
         confidentindexStr = "<span class='demoIcon'><span class='xxzs' flag="+treeNode.flag+" itemid="+treeNode.id+" confidentindex='"+treeNode.confidentindex+"' onclick='pop_confidentindex_div(this);'>（"+treeNode.confidentindex+"）</span></span>";
              
         // commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论'></span></span>";
-        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
+        commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+treeNode.description+"');></span></span>";
         aObj.after(confidentindexStr + commentStr);
       }
     }
@@ -682,18 +679,6 @@
       $("#cy_mb .treeview a:contains('成员目标')").parent().addClass('active');
     })
 
-    function html_encode(str) { 
-        var s = ""; 
-        if (str.length == 0) return ""; 
-        s = str.replace(/&/g, "&gt;"); 
-        s = s.replace(/</g, "&lt;"); 
-        s = s.replace(/>/g, "&gt;"); 
-        s = s.replace(/ /g, "&nbsp;"); 
-        s = s.replace(/\'/g, "&#39;"); 
-        s = s.replace(/\"/g, "&quot;"); 
-        s = s.replace(/\n/g, "<br>"); 
-        return s; 
-    }
 
     my_perioditem = "{{ $my_perioditem }}";
     my_period = "{{ $my_period }}";

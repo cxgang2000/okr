@@ -238,8 +238,8 @@
                         <span class="ob_titles cir_tile">
                           目标
                         </span>
-                        <span class="ob_titles model_mb_titles" id="o_name_u">
-                          每天报名人数不低于40人
+                        <span id="o_name_span" class="ob_titles model_mb_titles ul_no">
+                          <input type="text" id="o_name_u" value="每天报名人数不低于40人" class="it_css">
                         </span>
                         <span class='wks model_mb_zt' id="o_dateStatus_u">已完成</span>
                         <!-- 评分的颜色两种 一种是正常s_color  一种逾期f_color  -->
@@ -805,7 +805,7 @@
     			console.log(data);
     			
     			//名称
-    			$("#o_name_u").html(data.name);
+    			$("#o_name_u").val(data.name);
     			//时间
     			$("#dy_res_time").val(data.startdate+" - "+data.enddate);
     			//描述
@@ -876,7 +876,7 @@
     			// 目标编辑层初始化
     			$("#o_savecancel_div").hide();
     			$("#o_edit_ul").addClass("ul_no");
-    			
+    			$("#o_name_span").addClass("ul_no");
 
           $("#o_comment_id").attr("okr_id",itemid);
           // 显示评论
@@ -891,6 +891,7 @@
     //目标编辑
     function edit_objective(){
       // alert("submit_user");
+      var o_name = $("#o_name_u").val();
       var o_executor_id = $("#o_executor_id_u").val();
       var o_date = $("#dy_res_time").val();
       var o_partake_id = $("#o_partake_id_u").val();
@@ -899,6 +900,10 @@
       console.log(o_date);
       console.log(o_partake_id);
 
+      if (!o_name) {
+        layer.msg("名字不能为空",{time:1000});
+        return false;
+      }
       if (!o_executor_id) {
         layer.msg("负责人不能为空",{time:1000});
         return false;
@@ -918,7 +923,7 @@
       $.ajax({
         type: ajax_type,
         url: submit_url,
-        data: { o_id : itemid, o_executor_id : o_executor_id, o_date : o_date, o_partake_id : o_partake_id, o_description : o_description},
+        data: { o_id : itemid, o_name : o_name, o_executor_id : o_executor_id, o_date : o_date, o_partake_id : o_partake_id, o_description : o_description},
         dataType: 'json',
         headers: {
           'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -1044,6 +1049,10 @@
           ajax_type = 'PATCH';
           //submit_url = updateurl;
           
+          // 删除按钮 编辑按钮 隐藏
+          $("#kr_del_btn").hide();
+          $("#kr_edit_btn").hide();
+
           // 目标编辑层初始化
           $("#kr_savecancel_div").hide();
           $("#kr_edit_ul").addClass("ul_no");
@@ -1149,7 +1158,11 @@
           // 目标编辑层初始化
           $("#p_savecancel_div").hide();
           $("#p_edit_ul").addClass("ul_no");
-          
+
+          // 删除按钮 编辑按钮 隐藏
+          $("#plan_del_btn").hide();
+          $("#plan_edit_btn").hide();
+
           $("#p_comment_id").attr("okr_id",itemid);
           // 显示评论
           $("#p_comment_showArea").html(getComment(data.comments));

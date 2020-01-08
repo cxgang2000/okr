@@ -240,8 +240,8 @@
                         <span class="ob_titles cir_tile">
                           目标
                         </span>
-                        <span class="ob_titles model_mb_titles" id="o_name_u">
-                          每天报名人数不低于40人
+                        <span id="o_name_span" class="ob_titles model_mb_titles ul_no">
+                          <input type="text" id="o_name_u" value="每天报名人数不低于40人" class="it_css">
                         </span>
                         <span class='wks model_mb_zt' id="o_dateStatus_u">已完成</span>
                         <!-- 评分的颜色两种 一种是正常s_color  一种逾期f_color  -->
@@ -251,7 +251,7 @@
                         <!-- 删除编辑 有权改就显示按钮 没有权限就不显示 -->
                         <span class="bj_cont">
                           <a id="o_del_btn" href="javascript:void(0)" class="bj_btn models_del" onClick="delete_objective(del_o_id);">删除</a>
-                          <a id="o_edit_btn" href="javascript:void(0)" class="bj_btn models_bj">编辑</a>
+                          <a id="o_edit_btn" href="javascript:void(0)" class="bj_btn models_bj_o" onClick="edit_objective(this);">编辑</a>
                         </span>
                       </div>
                       <div class="mb_cont">
@@ -289,7 +289,7 @@
                         </ul>
                       </div>
                       <div id="o_savecancel_div" class="layui-layer-btn layui-layer-btn-" style="display: none;">
-                        <a class="layui-layer-btn bc" onclick="edit_objective();">保存</a>
+                        <a class="layui-layer-btn bc" onclick="save_objective();">保存</a>
                         <a class="layui-layer-btn models_qx">取消</a>
                       </div>
                     </div>
@@ -971,7 +971,7 @@
     			console.log(data);
     			
     			//名称
-    			$("#o_name_u").html(data.name);
+    			$("#o_name_u").val(data.name);
     			//时间
     			$("#dy_res_time").val(data.startdate+" - "+data.enddate);
     			//描述
@@ -1042,7 +1042,7 @@
     			// 目标编辑层初始化
     			$("#o_savecancel_div").hide();
     			$("#o_edit_ul").addClass("ul_no");
-    			
+    			$("#o_name_span").addClass("ul_no");
 
           $("#o_comment_id").attr("okr_id",itemid);
           // 显示评论
@@ -1055,8 +1055,9 @@
     }
 
     //目标编辑
-    function edit_objective(){
+    function save_objective(){
       // alert("submit_user");
+      var o_name = $("#o_name_u").val();
       var o_date = $("#dy_res_time").val();
       var o_partake_id = $("#o_partake_id_u").val();
       var o_executor_id = $("#o_executor_id_u").val();
@@ -1065,6 +1066,10 @@
       console.log(o_date);
       console.log(o_partake_id);
 
+      if (!o_name) {
+        layer.msg("名字不能为空",{time:1000});
+        return false;
+      }
       if (!o_date) {
         layer.msg("时间不能为空",{time:1000});
         return false;
@@ -1080,7 +1085,7 @@
       $.ajax({
         type: ajax_type,
         url: submit_url,
-        data: { o_id : itemid, o_executor_id : o_executor_id, o_date : o_date, o_partake_id : o_partake_id, o_description : o_description},
+        data: { o_id : itemid, o_name : o_name, o_executor_id : o_executor_id, o_date : o_date, o_partake_id : o_partake_id, o_description : o_description},
         dataType: 'json',
         headers: {
           'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -1114,6 +1119,14 @@
           if(data.status=="1"){del_o_id = "";window.location.reload();}
         },
       });
+    }
+
+    // 点击目标编辑按钮
+    function edit_objective(btn){
+      alert(1);
+      // $(btn).parent().prev().prev().prev().removeClass("ul_no");
+      $(btn).parent().parent().next().find("ul").removeClass("ul_no");
+      $(btn).parent().parent().next().next().show();
     }
 
     var pid="";
