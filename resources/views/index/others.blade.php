@@ -720,15 +720,15 @@
           $("#my_seasonperiod").addClass("active");
           $("#my_seasonperiod").val(my_period);
           $("#my_period_show").html($("#my_seasonperiod").find("option:selected").text());
-          $("#my_span_misson_duration").html("月");
-          $("#my_span_plan_duration").html("月");
+          // $("#my_span_misson_duration").html("月");
+          // $("#my_span_plan_duration").html("月");
         }
         if (my_perioditem=="2"){
           $("#my_yearperiod").addClass("active");
           $("#my_yearperiod").val(my_period);
           $("#my_period_show").html($("#my_yearperiod").find("option:selected").text());
-          $("#my_span_misson_duration").html("季度");
-          $("#my_span_plan_duration").html("季度");
+          // $("#my_span_misson_duration").html("季度");
+          // $("#my_span_plan_duration").html("季度");
         }
 
         $("#others_seasonperiod").removeClass("active");
@@ -742,16 +742,16 @@
           $("#others_seasonperiod").addClass("active");
           console.log("others_period="+others_period);
           $("#others_seasonperiod").val(others_period);
-          $("#others_period_show").html($("#others_seasonperiod").find("option:selected").text());
-          $("#others_span_misson_duration").html("月");
-          $("#others_span_plan_duration").html("月");
+          // $("#others_period_show").html($("#others_seasonperiod").find("option:selected").text());
+          // $("#others_span_misson_duration").html("月");
+          // $("#others_span_plan_duration").html("月");
         }
         if (others_perioditem=="2"){
           $("#others_yearperiod").addClass("active");
           $("#others_yearperiod").val(others_period);
           $("#others_period_show").html($("#others_yearperiod").find("option:selected").text());
-          $("#others_span_misson_duration").html("季度");
-          $("#others_span_plan_duration").html("季度");
+          // $("#others_span_misson_duration").html("季度");
+          // $("#others_span_plan_duration").html("季度");
         }
     }
 
