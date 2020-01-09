@@ -68,7 +68,7 @@
         </div>
         <!-- End .clear -->
         <div class="content-box">
-          
+
           <div class="layui-tab">
             <ul class="layui-tab-title">
               <!--li id="duration-0" onclick="setDurationFlag(0);">月度</li-->
@@ -130,19 +130,19 @@
 
 
 
-
-
-
-
-
           <div class="layui-row layui-col-space5">
-              <div class="layui-col-xs12 rp">
-                
-                  <div class="okr_mb">
-                    部门的OKR（<span id="others_period_show"></span>）
-                  </div>
+            <div class="layui-col-xs12 rp">
+              
+                <div class="okr_mb">
+                  部门的OKR（<span id="others_period_show"></span>）
+                  <span class="extend" onclick="toggleElem()">
+                    <i id="leaderArea">↑</i>
+                  </span>
+                </div>
 
-              </div>
+            </div>
+
+            <div class="parent-elem">
               <div class="layui-col-xs12 rp">
                 <div class="layui-row layui-col-space5">
                   <div class="layui-col-xs6">
@@ -256,22 +256,8 @@
                   </div>
                 </div>
               </div>
+            </div>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -285,8 +271,9 @@
               我的OKR（<span id="my_period_show"></span>）
             </div>
             <div>
-              <input style="width: 200px;display: inline-block;" name="weekdate" type="text" id="weekdate" class="layui-smallinput layui-input" /><input name="datesearch" type="button" value="搜索" class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;
-                 margin-left: 10px;" onclick="setDurationFlag(durationflag);"/>
+              <input style="width: 200px;display: inline-block;" name="weekdate" type="text" id="weekdate" class="layui-smallinput layui-input" />
+              <!--input name="datesearch" type="button" value="搜索" class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;
+                 margin-left: 10px;" onclick="setDurationFlag(durationflag);"/-->
             </div>
             <div class="layui-tab-item layui-show">
                 <div class="layui-row layui-col-space5">
@@ -311,15 +298,16 @@
                               <i class="icon iconfont icon-bianji bz_rw"  flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);"></i>
                               <i class="icon iconfont icon-laji" description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);"></i>
                             </div-->
-                            <div class="this_cz" onmouseover="show_gz('{{ $mission['id']  }}');" onmouseout= "hide_gz('{{ $mission['id']  }}');">
-                              ...
-                            </div>
-                            <div id="gz_{{ $mission['id']  }}" style="position:absolute;display:none;border:1px solid silver;background:silver;">
 
+                            <div class="this_cz right" style="position: relative;" onmouseover="show_gz('{{ $mission['id']  }}');" onmouseout= "hide_gz('{{ $mission['id']  }}');">
+                              ...
+                              <div class="pop" id="gz_{{ $mission['id']  }}">
                                 <span flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);" style="cursor: pointer;">编辑</span>
                                 <br>
                                 <span description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
+                              </div>
                             </div>
+
                           </li>
                           @endforeach
 
@@ -356,10 +344,23 @@
                           @foreach ($arr_plan as $key=>$plan)
                           <li>
                             {{ $plan['description']  }}{{ $key+1 }}
-                            <div class="this_cz">
+
+
+                            <!--div class="this_cz">
                               <i class="icon iconfont icon-bianji wl_sz" flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);"></i>    
                               <i class="icon iconfont icon-laji" description="{{ $plan['description']  }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);"></i>
+                            </div-->
+
+                            <div class="this_cz right" style="position: relative;" onmouseover="show_gz('{{ $plan['id']  }}');" onmouseout= "hide_gz('{{ $plan['id']  }}');">
+                              ...
+                              <div class="pop" id="gz_{{ $plan['id']  }}">
+                                <span flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);" style="cursor: pointer;">编辑</span>
+                                <br>
+                                <span description="{{ $plan['description'] }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
+                              </div>
                             </div>
+
+
                           </li>
                           @endforeach
 
@@ -406,10 +407,24 @@
                             @endswitch
 
                             {{ $stateindex['description']  }}
-                            <div class="this_cz">
+
+
+                            <!--div class="this_cz">
                               <i class="icon iconfont icon-bianji wl_sz" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="detail_stateindex(this);"></i>    
                               <i class="icon iconfont icon-laji" description="{{ $stateindex['description'] }}" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="pop_del_div(this);"></i>
+                            </div-->
+
+
+                            <div class="this_cz right" style="position: relative;" onmouseover="show_gz('{{ $stateindex['id']  }}');" onmouseout= "hide_gz('{{ $stateindex['id']  }}');">
+                              ...
+                              <div class="pop" id="gz_{{ $stateindex['id']  }}">
+                                <span flag="stateindex" itemid="{{ $stateindex['id']  }}" onclick="detail_stateindex(this);" style="cursor: pointer;">编辑</span>
+                                <br>
+                                <span description="{{ $stateindex['description'] }}" flag="stateindex" itemid="{{ $stateindex['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
+                              </div>
                             </div>
+
+
                           </li>
                           @endforeach
 
@@ -737,10 +752,12 @@
                 <input id="m_description" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="输入本周关注的任务" class="layui-input">
               </div>
             </div>
-            <div>
-              未来四周计划
+
+            <div style="text-align: left;padding-left: 16px;">
+              <span class="plan-title">未来四周计划</span >
+
               @foreach ($arr_plan as $key=>$plan)
-              <li>
+              <li class="plan-item">
 
                 {{ $key+1 }} . {{ $plan['description']  }}{{ $key+1 }}
                 <input name="" type="button" value="选择" onclick='set_m_description("{{ $plan['description']  }}")'/>
@@ -749,6 +766,7 @@
               <br>
               @endforeach
             </div>
+
             <div class="layui-layer-btn layui-layer-btn- dafen_btn">
               <a class="layui-layer-btn models_qx">取消</a>
               <a class="layui-btn layui-btn-normal" onclick="new_mission();">保存</a>
@@ -919,6 +937,32 @@
               <a class="layui-btn layui-btn-normal" onclick="edit_confidentindex();">保存</a>
             </div>
             <div class="layui-form-item" id="confidentindexLog">
+               
+            </div>
+          </form>
+
+        </div>
+      </div>
+      <span class="layui-layer-setwin">
+        <a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;"></a>
+      </span>
+      
+      <span class="layui-layer-resize"></span>
+  </div>
+</div>
+<!-- end -->
+
+<!-- 信心指数 其他人的 只能看 -->
+<div class="models com_models tj_xxzsview" style="display: none;">
+    <div class="modes_con">
+      <div class="layui-layer-content">
+        <div class="models_mid text-center">
+          <form>
+            <!-- 目标内容 -->
+            <div class="dafen_titles com_titles">
+              信心指数
+            </div>
+            <div class="layui-form-item" id="confidentindexLog_view">
                
             </div>
           </form>
@@ -1118,9 +1162,11 @@
       return node.font ? node.font : {};
     }
 
+    // 填充目标树
     function addDiyDom(treeId, treeNode) {
       if (treeNode.parentNode && treeNode.parentNode.id!=2) return;
       var aObj = $("#" + treeNode.tId + IDMark_A);
+      
       if (treeNode.flag == "objective") {
 
         if(treeNode.score==999){
@@ -1133,20 +1179,49 @@
         //alert(html_encode(treeNode.name));
         
         scoreStr = "<span class='demoIcon'><span class='pf' title='评分' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_score_div(this);'>评分</span></span>";
+
+        scoreStr = "<span title='评分' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_score_div(this);'>评分</span>";
+
         addkrStr = "<span class='demoIcon'><span title='添加KR' onclick='pop_new_kr("+treeNode.id+")'>加KR</span></span>";
+
+        addkrStr = "<span title='添加KR' onclick='pop_new_kr("+treeNode.id+")'>加KR</span>";
+
         if(treeNode.score==999){
           delStr = "";
           editStr = "<span class='demoIcon'><span class='icon iconfont icon-bianji xq' title='编辑' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_objective(this);'></span></span>";
+
+          editStr = "<span title='编辑' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_objective(this);'>编辑</span>";
+
           if(treeNode.canDel==1){
             delStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-laji del' title='删除' description="+html_encode(treeNode.name)+" flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_del_div(this);'></span></span>";
+
+            delStr = "<span title='删除' description="+html_encode(treeNode.name)+" flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_del_div(this);'>删除</span>";
           }
         }else{
           editStr = "";
           delStr = "";
         }        
         commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
-        aObj.after(scoreStr + editStr + delStr + commentStr + addkrStr);
+
+        commentStr = "<span title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');>评论</span>";
+
+        // aObj.after(scoreStr + editStr + delStr + commentStr + addkrStr);
+
+
+        a = '<div class="this_cz " style="position: relative;" onmouseover="show_gz('+treeNode.id+');" onmouseout= "hide_gz('+treeNode.id+');">';
+        b = '...';
+        c = ' <div class="pop" id="gz_'+treeNode.id+'">';
+
+        d = '  </div>';
+        e = '</div>';
+
+
+        aObj.after(a+b+c + scoreStr + editStr + delStr + commentStr + addkrStr +d+e);
+
       }
+
+          
+
 
       if (treeNode.flag == "keyresult") {
         
@@ -1158,22 +1233,48 @@
         }
 
         scoreStr = "<span class='demoIcon'><span class='pf' title='评分' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_score_div(this);'>评分</span></span>";
+
+        scoreStr = "<span title='评分' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_score_div(this);'>评分</span>";
+
         confidentindexStr = "<span class='demoIcon'><span class='xxzs' flag="+treeNode.flag+" itemid="+treeNode.id+" confidentindex='"+treeNode.confidentindex+"' onclick='pop_confidentindex_div(this);'>（"+treeNode.confidentindex+"）</span></span>";
+
+        // confidentindexStr = "<span flag="+treeNode.flag+" itemid="+treeNode.id+" confidentindex='"+treeNode.confidentindex+"' onclick='pop_confidentindex_div(this);'>（"+treeNode.confidentindex+"）</span>";
+
         if(treeNode.score==999){
           delStr = "";
           editStr = "<span class='demoIcon'><span class='icon iconfont icon-bianji xq' title='编辑' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_keyresult(this);'></span></span>";
+
+          editStr = "<span title='编辑' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='detail_keyresult(this);'>编辑</span>";
+
           if(treeNode.canDel==1){
             delStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-laji del' title='删除' description="+html_encode(treeNode.name)+" flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_del_div(this);'></span></span>";
+
+            delStr = "<span title='删除' description="+html_encode(treeNode.name)+" flag="+treeNode.flag+" itemid="+treeNode.id+" onclick='pop_del_div(this);'>删除</span>";
+
           }
         }else{
           editStr = "";
           delStr = "";
         }        
         commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
-        aObj.after(scoreStr + confidentindexStr + editStr + delStr + commentStr);
+
+        commentStr = "<span title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');>评论</span>";
+
+        // aObj.after(scoreStr + confidentindexStr + editStr + delStr + commentStr);
+
+        a = '<div class="this_cz " style="position: relative;" onmouseover="show_gz('+treeNode.id+');" onmouseout= "hide_gz('+treeNode.id+');">';
+        b = '...';
+        c = ' <div class="pop" id="gz_'+treeNode.id+'">';
+
+        d = '  </div>';
+        e = '</div>';
+
+        aObj.after(confidentindexStr  + a+b+c + scoreStr + editStr + delStr + commentStr +d+e);
+        
       }
     }
 
+    // 填充部门目标树
     function addDiyDomOther(treeId, treeNode) {
       if (treeNode.parentNode && treeNode.parentNode.id!=2) return;
       var aObj = $("#" + treeNode.tId + IDMark_A);
@@ -1201,7 +1302,7 @@
         }
 
         
-        confidentindexStr = "<span class='demoIcon'><span class='xxzs' flag="+treeNode.flag+" itemid="+treeNode.id+" confidentindex='"+treeNode.confidentindex+"' onclick='pop_confidentindex_div(this);'>（"+treeNode.confidentindex+"）</span></span>";
+        confidentindexStr = "<span class='demoIcon'><span class='xxzs' flag="+treeNode.flag+" itemid="+treeNode.id+" confidentindex='"+treeNode.confidentindex+"' onclick='pop_confidentindex_div_view(this);'>（"+treeNode.confidentindex+"）</span></span>";
              
         // commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论'></span></span>";
         commentStr = "<span class='demoIcon'><span class='mbxq icon iconfont icon-pinglun pl' title='评论' flag="+treeNode.flag+" itemid="+treeNode.id+" onclick=pop_comment_div(this,'"+html_encode(treeNode.description)+"');></span></span>";
@@ -1225,6 +1326,20 @@
       tmpid = "gz_"+str;
       objDiv = $("#"+tmpid+""); 
       $(objDiv).css("display", "none"); 
+    }
+
+    function toggleElem() {
+      // id="leaderArea">↑↓
+
+      console.log($("#leaderArea").html()); 
+
+      if($("#leaderArea").html()=="↑"){
+        $("#leaderArea").html("↓");
+      }else{
+        $("#leaderArea").html("↑");
+      }
+
+      $('.parent-elem').toggle('normal', null, 'blind')
     }
 
     function openFirstTreenode(){
@@ -1514,7 +1629,7 @@
 
     // 评分
     function setscore(){
-      
+      if(cansubmit == 0){return false;}
       var score=$("#score").val();
       if (score=="-1") {
         layer.msg("请选择分数",{time:1000});
@@ -1532,6 +1647,7 @@
       }
       console.log(submit_url);
       // alert(submit_url);return false;
+      cansubmit = 0;
       $.ajax({
         type: "POST",
         url: submit_url,
@@ -1551,6 +1667,7 @@
     //目标新增
     function new_objective(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var o_description = $("#o_description").val();
       
       console.log(o_description);
@@ -1564,7 +1681,7 @@
       ajax_type = 'POST';
       submit_url = "{{ route('objective.store') }}";
       // submit_url = "{{ route('keyresult.store') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -1622,6 +1739,7 @@
     //目标编辑
     function edit_objective(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var o_description = $("#o_description_u").val();
       
       console.log(o_description);
@@ -1633,7 +1751,7 @@
       
       ajax_type = 'POST';
       submit_url = "{{ route('objective.update') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -1662,6 +1780,7 @@
     // 关键结果新增
     function new_keyresult(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var kr_description = $("#kr_description").val();
 
       if (kr_description.trim()=="") {
@@ -1672,7 +1791,7 @@
       ajax_type = 'POST';
       // submit_url = "{{ route('objective.store') }}";
       submit_url = "{{ route('keyresult.store') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -1761,6 +1880,7 @@
     // 关键结果编辑
     function edit_keyresult(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var kr_description = $("#kr_description_u").val();
 
       if (kr_description.trim()=="") {
@@ -1770,7 +1890,7 @@
 
       ajax_type = 'POST';
       submit_url = "{{ route('keyresult.update') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -1867,9 +1987,34 @@
       });
     }
 
+    //新增修改信心指数层
+    function pop_confidentindex_div_view(btn){
+      flag = $(btn).attr("flag");
+      itemid = $(btn).attr("itemid");
+
+      $.ajax({
+        type: 'GET',
+        url: '{{ route('keyresult.detail') }}',
+        data: { id : itemid,},
+        dataType: 'json',
+        headers: {
+          'X-CSRF-TOKEN': '{{csrf_token()}}'
+        },
+        success: function(data){
+          console.log(data);
+
+          // 显示信心指数
+          $("#confidentindexLog_view").html(getConfidentindex(data.confidentindex));
+
+          $(".tj_xxzsview").show();
+        },
+      });
+    }
+
     // 信心指数编辑
     function edit_confidentindex(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var oldconfidentindex = $("#oldconfidentindex").val();
       var newconfidentindex = $("#newconfidentindex").val()
       var description = $("#description").val();
@@ -1885,7 +2030,7 @@
 
       ajax_type = 'POST';
       submit_url = "{{ route('keyresult.updateConfidentindex') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -1944,6 +2089,7 @@
     // 关注任务新增
     function new_mission(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var m_description = $("#m_description").val();
       var m_importance = $("#m_importance").val();
 
@@ -1960,7 +2106,7 @@
       ajax_type = 'POST';
       // submit_url = "{{ route('objective.store') }}";
       submit_url = "{{ route('mission.store') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -2014,6 +2160,7 @@
     // 关注任务编辑
     function edit_mission(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var m_description = $("#m_description_u").val();
       var m_importance = $("#m_importance_u").val();
       
@@ -2028,7 +2175,7 @@
 
       ajax_type = 'POST';
       submit_url = "{{ route('mission.update') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -2038,7 +2185,7 @@
           'X-CSRF-TOKEN': '{{csrf_token()}}'
         },
         success: function(data){
-          console.log(data);
+          // console.log(data);
           layer.msg(data.msg);
           if(data.status=="1"){window.location.reload();}
         },
@@ -2049,6 +2196,7 @@
     // 未来四周计划新增
     function new_plan(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var p_description = $("#p_description").val();
 
       if (p_description.trim()=="") {
@@ -2059,7 +2207,7 @@
       ajax_type = 'POST';
       // submit_url = "{{ route('objective.store') }}";
       submit_url = "{{ route('plan.store') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -2112,6 +2260,7 @@
     // 未来四周计划编辑
     function edit_plan(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var p_description = $("#p_description_u").val();
 
       if (p_description.trim()=="") {
@@ -2122,6 +2271,7 @@
       ajax_type = 'POST';
       submit_url = "{{ route('plan.update') }}";
 
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -2142,6 +2292,7 @@
     // 状态指标新增
     function new_stateindex(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
       var s_description = $("#s_description").val();
       var s_state = $("#s_state").val();
 
@@ -2157,7 +2308,7 @@
       ajax_type = 'POST';
       // submit_url = "{{ route('objective.store') }}";
       submit_url = "{{ route('stateindex.store') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -2211,6 +2362,8 @@
     // 状态指标编辑
     function edit_stateindex(){
       // alert("submit_user");
+      if(cansubmit == 0){return false;}
+
       var s_description = $("#s_description_u").val();
       var s_state = $("#s_state_u").val();
 
@@ -2225,7 +2378,7 @@
 
       ajax_type = 'POST';
       submit_url = "{{ route('stateindex.update') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -2322,12 +2475,20 @@
       */
     }
 
+    // 可以提交标志 防止重复提交
+    cansubmit = 1;
+
     // 发表评论
     function new_comment(){
 
+      if(cansubmit == 0){
+        // console.log("repeat submit");
+        return false;
+      }
+
       comment = $("#comment_input").val();
      
-      console.log(comment);
+      // console.log(comment);
       
       // return false;
 
@@ -2338,7 +2499,7 @@
 
       ajax_type = 'POST';
       submit_url = "{{ route('comment.store') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -2348,7 +2509,7 @@
           'X-CSRF-TOKEN': '{{csrf_token()}}'
         },
         success: function(data){
-          console.log(data);
+          // console.log(data);
           layer.msg(data.msg);
           if(data.status=="1"){
             // window.location.reload();
@@ -2362,11 +2523,12 @@
                 'X-CSRF-TOKEN': '{{csrf_token()}}'
               },
               success: function(data){
-                console.log(data);
+                // console.log(data);
                 if(data.status=="1"){
                   $("#comment_input").val('');
                   $("#comment_showArea").html(getComment(data.comments));
                   // $(".pl_models").show();
+                  cansubmit = 1;
                 }
               },
             });
@@ -2385,7 +2547,11 @@
   	  
   	  //执行一个laydate实例
   	  laydate.render({
-  		elem: '#weekdate' //指定元素
+  		  elem: '#weekdate' //指定元素
+        ,done: function(value, date, endDate){
+            setDurationFlag(durationflag);
+          }
+
   	  });
   	});
   	

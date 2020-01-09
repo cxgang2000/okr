@@ -266,7 +266,7 @@ class StateindexController extends Controller
         if($durationflag=='' || $duration==''){die('参数错误');}
 
         $arr_where['durationflag'] = $durationflag;
-        if($arr_where['durationflag']==3){
+        if($arr_where['durationflag']==1){
             $duration1 = date("Y").$duration;
         }else{
             $duration1 = $duration;
@@ -276,6 +276,7 @@ class StateindexController extends Controller
 
         // var_dump($arr_where);die();
         $arr_stateindex = Stateindex::where($arr_where)->get()->toArray();
+        // dd($arr_stateindex);
         $ids = array_column($arr_stateindex, 'id');
         $str_ids = implode($ids, ",");
         // var_dump($str_ids);die();

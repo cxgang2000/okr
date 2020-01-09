@@ -100,7 +100,8 @@
                       <option value="2020">2020</option>
                     </select>
                     
-                    <input name="others_weekdate" type="text" id="others_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" /><input class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;margin-left: 10px;" name="datesearch" type="button" value="搜索" onclick="selectOthersPeriod(my_perioditem,my_period);"/>
+                    <input name="others_weekdate" type="text" id="others_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" />
+                      <!--input class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;margin-left: 10px;" name="datesearch" type="button" value="搜索" onclick="selectOthersPeriod(others_perioditem,others_period);"/-->
 
                     </div>
                     <div class="okr_mb">
@@ -262,7 +263,8 @@
                       <option value="2020">2020</option>
                     </select>
                     
-                    <input name="my_weekdate" type="text" id="my_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" /><input class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;margin-left: 10px;" name="datesearch" type="button" value="搜索" onclick="selectMyPeriod(my_perioditem,my_period);"/>
+                    <input name="my_weekdate" type="text" id="my_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" />
+                    <!--input class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;margin-left: 10px;" name="datesearch" type="button" value="搜索" onclick="selectMyPeriod(my_perioditem,my_period);"/-->
                     
                   </div>
 
@@ -948,7 +950,6 @@
       return season;
     }
 
-
     // 我的日期选择确定
     function selectMyPeriod(selectedperioditem,selectedperiod){
       console.log(selectedperioditem + " " +selectedperiod);
@@ -1156,7 +1157,7 @@
 
     // 发表评论
     function new_comment(){
-
+      if(cansubmit == 0){return false;}
       comment = $("#comment_input").val();
      
       console.log(comment);
@@ -1170,7 +1171,7 @@
 
       ajax_type = 'POST';
       submit_url = "{{ route('comment.store') }}";
-
+      cansubmit = 0;
       $.ajax({
         type: ajax_type,
         url: submit_url,
@@ -1217,10 +1218,16 @@
   	  
   	  //执行一个laydate实例
   	  laydate.render({
-  		elem: '#my_weekdate' //指定元素
+  		  elem: '#my_weekdate' //指定元素
+        ,done: function(value, date, endDate){
+            selectMyPeriod(my_perioditem,my_period);
+          }
   	  });
   	  laydate.render({
-  		elem: '#others_weekdate' //指定元素
+  		  elem: '#others_weekdate' //指定元素
+        ,done: function(value, date, endDate){
+            selectOthersPeriod(others_perioditem,others_period)
+          }
   	  });
   	});
   	
