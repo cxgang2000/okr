@@ -68,6 +68,7 @@
         </div>
         <!-- End .clear -->
         <div class="content-box">
+          
           <div class="layui-tab">
             <ul class="layui-tab-title">
               <!--li id="duration-0" onclick="setDurationFlag(0);">月度</li-->
@@ -285,7 +286,7 @@
             </div>
             <div>
               <input style="width: 200px;display: inline-block;" name="weekdate" type="text" id="weekdate" class="layui-smallinput layui-input" /><input name="datesearch" type="button" value="搜索" class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;
-    margin-left: 10px;" onclick="setDurationFlag(durationflag);"/>
+                 margin-left: 10px;" onclick="setDurationFlag(durationflag);"/>
             </div>
             <div class="layui-tab-item layui-show">
                 <div class="layui-row layui-col-space5">
@@ -1087,7 +1088,7 @@
     };
 
     var zNodes = {!! $json_objective !!};
-    console.log(zNodes);
+    // console.log(zNodes);
     var others_zNodes = {!! $others_all['json_objective'] !!};
 
     function onClick(e,treeId, treeNode) {
@@ -1239,12 +1240,34 @@
         treeObj.expandNode(nodes[3], true);//第二个参数为true证明是展开
     }
 
+    // 打开刚才条件的kr的父节点
+    function openMubiaoPidTreenode(){
+
+        // 获取树对象
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        /* 获取所有树节点 */
+        var nodes = treeObj.transformToArray(treeObj.getNodes());
+        // console.log(nodes);
+        var mubiaopid = getCookie("mubiaopid");
+        // console.log("mubiaopid="+mubiaopid);
+        for (var i = 0, length_1 = nodes.length; i < length_1; i++) {
+            if(nodes[i].id == mubiaopid){
+                // console.log(nodes[i].id);
+                var node = treeObj.getNodeByParam("id", nodes[i].id );
+                // console.log(node);
+                treeObj.expandNode(node, true, false);//指定选中ID节点展
+                delCookie("mubiaopid");
+            }
+        }
+    }
+
+
     $(function(){
       $.fn.zTree.init($("#treeDemo"), setting, zNodes);
       // $.fn.zTree.init($("#myTreeDemo"), setting, zNodes);
       $.fn.zTree.init($("#others_tree"), Otherssetting, others_zNodes);
 
-      openFirstTreenode();
+      openMubiaoPidTreenode();
 
       $("#my_mb .treeview a:contains('我的目标')").parent().addClass('active');
       $(".yg_sec").hide();
@@ -1661,10 +1684,46 @@
         success: function(data){
           console.log(data);
           layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          if(data.status=="1"){
+            setCookie("mubiaopid",pid);
+            window.location.reload();
+          }
         },
       });
     }
+
+    //写cookies 
+
+    function setCookie(name,value) 
+    { 
+        var Days = 30; 
+        var exp = new Date(); 
+        exp.setTime(exp.getTime() + Days*24*60*60*1000); 
+        document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+    } 
+
+    //读取cookies 
+    function getCookie(name) 
+    { 
+        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+     
+        if(arr=document.cookie.match(reg))
+     
+            return unescape(arr[2]); 
+        else 
+            return null; 
+    } 
+
+    //删除cookies 
+    function delCookie(name) 
+    { 
+        var exp = new Date(); 
+        exp.setTime(exp.getTime() - 1); 
+        var cval=getCookie(name); 
+        if(cval!=null) 
+            document.cookie= name + "="+cval+";expires="+exp.toGMTString(); 
+    } 
+
 
     // 关键结果详情
     function detail_keyresult(btn){

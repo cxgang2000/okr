@@ -109,6 +109,7 @@
                     <div class="my_job">
                       <div class="text-center c_333">{{ $arr_others['name'] }} <br> <span class="c_999">{{ $arr_others['position_name'] }}</span></div>
                     </div>
+                  </div>
                 </div>
                 <div class="layui-col-xs12 rp">
                   <div class="layui-row layui-col-space5">
@@ -225,6 +226,23 @@
                 </div>
             </div>
 
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
             <div class="layui-row layui-col-space5">
                 <div class="layui-col-xs12 lp">
                   <div class="time_con">
@@ -241,11 +259,163 @@
                       <option value="10000">年度</option>
                       <option value="2018">2018</option>
                       <option value="2019">2019</option>
+                      <option value="2020">2020</option>
                     </select>
                     
                     <input name="my_weekdate" type="text" id="my_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" /><input class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;margin-left: 10px;" name="datesearch" type="button" value="搜索" onclick="selectMyPeriod(my_perioditem,my_period);"/>
                     
                   </div>
+
+
+
+
+
+
+
+
+
+            <div class="layui-row layui-col-space5">
+              <div class="layui-col-xs12 rp">
+                  <div class="okr_mb">
+                    部门的OKR（<span id="leader_period_show"></span>）
+                  </div>
+              </div>
+              <div class="layui-col-xs12 rp">
+                <div class="layui-row layui-col-space5">
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        本<span id="leader_span_misson_duration">周</span>关注的任务 ({{ substr($arr_my_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_my_weekSatrtAndEnd[1],5,5) }})
+                        <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><span>操作历史</span></a>
+                      </div>
+                      <div class="contains">
+                        <div style="float:right;">（P1必须做，P2应该做）</div>
+                        <br>
+                        <ul>
+
+                          @foreach ($others_all['arr_mission'] as $mission)
+                            <li>P{{ $mission['importance']  }}：{{ $mission['description']  }}
+                              <div class="this_cz">
+                                <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $mission['id'] }}" onclick="pop_comment_div(this,'{{ $mission['description'] }}')"></span>
+                              </div>
+                            </li>
+                          @endforeach
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        目标
+                        <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><span>操作历史</span></a>
+                      </div>
+                      <div class="contains">
+                        <ul id="leader_tree" class="ztree">
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="layui-col-xs12 rp">
+                <div class="layui-row layui-col-space5">
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        未来四<span id="leader_span_plan_duration">周</span>计划
+                        <a href="{{URL::action('PlanController@planlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><span>操作历史</span></a>
+                      </div>
+                      <div class="contains">
+                        <ul>
+                          
+                          @foreach ($others_all['arr_plan'] as $plan)
+                            <li>
+                              {{ $plan['description']  }}
+                              <div class="this_cz">
+                                <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $plan['id'] }}" onclick="pop_comment_div(this,'{{ $plan['description'] }}')"></span>
+                              </div>
+                            </li>
+                          @endforeach
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="layui-col-xs6">
+                    <div>
+                      <div class="titles">
+                        状态指标
+                        <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><span>操作历史</span></a>
+                      </div>
+                      <div class="contains">
+                        <div class="text-right">
+                          <span class="layui-badge-dot layui-bg-green"></span>优秀
+                          <span class="layui-badge-dot layui-bg-cyan"></span>良好
+                          <span class="layui-badge-dot layui-bg-blue"></span>一般
+                          <span class="layui-badge-dot layui-bg-gray"></span>差
+                        </div>
+                        <ul>
+                          
+                          @foreach ($others_all['arr_stateindex'] as $stateindex)
+                          <li>
+
+                            @switch($stateindex['state'])
+                                @case(1)
+                                    <span class="layui-badge-dot layui-bg-green"></span>
+                                    @break
+
+                                @case(2)
+                                   <span class="layui-badge-dot layui-bg-cyan"></span>
+                                    @break
+
+                                @case(3)
+                                    <span class="layui-badge-dot layui-bg-blue"></span>
+                                    @break
+
+                                @case(4)
+                                    <span class="layui-badge-dot layui-bg-gray"></span>
+                                    @break
+
+                            @endswitch
+
+                            {{ $stateindex['description']  }}
+                            <!--div class="this_cz">
+                              <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $stateindex['id'] }}" onclick="pop_comment_div(this,'{{ $stateindex['description'] }}')"></span>
+                            </div-->
+                          </li>
+                          @endforeach
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   <div class="okr_mb">
                     我的OKR（<span id="my_period_show"></span>）
                   </div>
@@ -279,7 +449,7 @@
                       <div>
                         <div class="titles">
                           目标
-                          <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$others_perioditem,'duration'=>$others_period])}}" target="_blank"><span>操作历史</span></a>
+                          <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period])}}" target="_blank"><span>操作历史</span></a>
                         </div>
                         <div class="contains">
                           <ul id="my_tree" class="ztree">
@@ -629,6 +799,8 @@
    
     var my_zNodes = {!! $my_all['json_objective'] !!};
     var others_zNodes = {!! $others_all['json_objective'] !!};
+    var leader_zNodes = {!! $leader_all['json_objective'] !!};
+    
     
     function getFont(treeId, node) {
       return node.font ? node.font : {};
@@ -672,6 +844,8 @@
     $(function(){
       $.fn.zTree.init($("#my_tree"), setting, my_zNodes);
       $.fn.zTree.init($("#others_tree"), setting, others_zNodes);
+      $.fn.zTree.init($("#leader_tree"), setting, leader_zNodes);
+      
 
       $("#cy_mb .treeview a:contains('成员目标')").parent().addClass('active');
 
@@ -720,6 +894,8 @@
           $("#my_seasonperiod").addClass("active");
           $("#my_seasonperiod").val(my_period);
           $("#my_period_show").html($("#my_seasonperiod").find("option:selected").text());
+          $("#leader_period_show").html($("#my_seasonperiod").find("option:selected").text());
+          
           // $("#my_span_misson_duration").html("月");
           // $("#my_span_plan_duration").html("月");
         }
@@ -727,6 +903,8 @@
           $("#my_yearperiod").addClass("active");
           $("#my_yearperiod").val(my_period);
           $("#my_period_show").html($("#my_yearperiod").find("option:selected").text());
+          $("#leader_period_show").html($("#my_yearperiod").find("option:selected").text());
+          
           // $("#my_span_misson_duration").html("季度");
           // $("#my_span_plan_duration").html("季度");
         }
@@ -742,7 +920,7 @@
           $("#others_seasonperiod").addClass("active");
           console.log("others_period="+others_period);
           $("#others_seasonperiod").val(others_period);
-          // $("#others_period_show").html($("#others_seasonperiod").find("option:selected").text());
+          $("#others_period_show").html($("#others_seasonperiod").find("option:selected").text());
           // $("#others_span_misson_duration").html("月");
           // $("#others_span_plan_duration").html("月");
         }

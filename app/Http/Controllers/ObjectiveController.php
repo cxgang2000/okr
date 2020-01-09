@@ -356,11 +356,26 @@ class ObjectiveController extends Controller
         }else{
             $pid = $arr_my->pid;
         }
-        $arr_others = User::find($pid)->toArray();
+
+
+        $arr_tmp = $this->getUser4All($pid,$duration1,$arr_weekSatrtAndEnd);
+        $others_all = $arr_tmp[1];
+        $arr_others = $arr_tmp[0];
+        // var_dump($others_all);
+        // dd();
+
+        return view('index.mine33
+            ',compact('durationflag', 'duration', 'weekdate', 'json_objective','arr_mission','arr_plan','arr_stateindex','arr_weekSatrtAndEnd','others_all','arr_others'));
+    }
+
+    // 取一个人的4象限信息 参数 uid duration arr_weekSatrtAndEnd
+    private function getUser4All($uid,$duration,$arr_weekSatrtAndEnd){
+
+        $arr_others = User::find($uid)->toArray();
         $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
         // dd($arr_others);
 
-        $others_arr_where['duration'] = $duration1;
+        $others_arr_where['duration'] = $duration;
         $others_arr_where['organiser_id'] = $arr_others['id'];
         $others_arr_where['status'] = 0;
         // var_dump($others_arr_where);
@@ -373,7 +388,6 @@ class ObjectiveController extends Controller
             $others_all['arr_plan'] = array();
             $others_all['arr_stateindex'] = array();
         }else{
-
 
             $others_all['json_objective'] = $this->getObject($others_arr_where);
             $others_all['arr_stateindex'] = $this->getStateindex($others_arr_where);
@@ -392,15 +406,9 @@ class ObjectiveController extends Controller
             // dd("aa");
             $others_all['arr_plan'] = $this->getPlan($others_arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
         }
+
+        return [$arr_others,$others_all];
         // dd($others_all);
-
-
-
-
-        
-
-        return view('index.mine33
-            ',compact('durationflag', 'duration', 'weekdate', 'json_objective','arr_mission','arr_plan','arr_stateindex','arr_weekSatrtAndEnd','others_all','arr_others'));
     }
 
     // 取符合条件的O
@@ -537,7 +545,7 @@ class ObjectiveController extends Controller
         return $season;
     }
 
-    public function others(Request $request)
+    public function others_2000108(Request $request)
     {
         // dd($request);
         $myId = session('idUser');
@@ -680,8 +688,6 @@ class ObjectiveController extends Controller
             $others_all['arr_plan'] = array();
             $others_all['arr_stateindex'] = array();
         }else{
-
-
             $others_all['json_objective'] = $this->getObject($others_arr_where);
             $others_all['arr_stateindex'] = $this->getStateindex($others_arr_where);
 
@@ -708,6 +714,104 @@ class ObjectiveController extends Controller
         // $user = User::getLeaderIdByUserId($myId);
 
         return view('index.others',compact('json_allUserDept', 'my_perioditem', 'my_period',  'my_weekdate', 'others_perioditem', 'othersId', 'others_period', 'others_weekdate', 'keyword', 'arr_others', 'my_all', 'others_all','arr_my_weekSatrtAndEnd','arr_others_weekSatrtAndEnd'));
+    }
+
+    public function others(Request $request)
+    {
+        
+        // 员工搜索
+        $keyword = $request->keyword;
+        $tmpUser = new User;
+        $arr_allUserDept = $tmpUser->getAllUserDept1($keyword);
+
+        for ($i=0; $i < count($arr_allUserDept); $i++) { 
+            if (!empty($arr_allUserDept[$i]['userid'])) {
+                // echo $arr_allUserDept[$i]['userid'];
+                $arr_allUserDept[$i]['click'] = "youClick('".$arr_allUserDept[$i]['userid']."')";
+            }
+        }
+        // dd($arr_allUserDept);
+        $json_allUserDept = json_encode($arr_allUserDept,JSON_UNESCAPED_UNICODE);
+        // 替换key为要求名字
+        $json_allUserDept = str_replace("users", "children", $json_allUserDept);
+        // dd($json_allUserDept);
+        
+
+        // dd($request);
+        $myId = session('idUser');
+        $arr_my = User::find($myId);
+        $othersId = $request->othersId;
+        
+        // 如果没有接收到成员id，找部门负责人id
+        // 20180719 修改为找直接上级id
+        if($othersId==""){
+            $othersId = $arr_my->pid;
+            if($othersId=='' || $othersId==0){$othersId=$myId;}
+        }
+        // 20200108 othersId如果为空，othersid就是上级id，上级id是空或是0，就是自己
+
+        // 我的okr搜索条件
+        // 时间维度
+        $my_perioditem = $request->my_perioditem;
+        // 具体数据
+        $my_period = $request->my_period;
+        // 没有就默认月度    
+        if($my_perioditem==""){$my_perioditem = "1";}
+        // 没有就默认当前月
+        if($my_period==""){$my_period = $this->which_season();}
+        // 如果是月度或季度，加上年 如01月，变成201801，如一季度 变成20181
+        if($my_perioditem=="1"){
+            $duration1 = date("Y").$my_period;
+        }else{
+            $duration1 = $my_period;
+        }
+
+        $my_weekdate = $request->my_weekdate;
+        if($my_weekdate=="")$my_weekdate=date("Y-m-d");
+        $arr_my_weekSatrtAndEnd = $this->getWeekStartAndEnd($my_weekdate);
+        // dd($arr_weekSatrtAndEnd);
+        // var_dump($arr_weekSatrtAndEnd);
+
+
+        $arr_tmp = $this->getUser4All($myId,$duration1,$arr_my_weekSatrtAndEnd);
+        $my_all = $arr_tmp[1];
+        // var_dump($my_all);
+        // dd($my_all);
+
+        //部门领导相关
+        $leaderId = $arr_my->pid;
+        if($leaderId=='' || $leaderId==0){$leaderId=$myId;}
+
+        $arr_tmp = $this->getUser4All($leaderId,$duration1,$arr_my_weekSatrtAndEnd);
+        $leader_all = $arr_tmp[1];
+        $arr_leader = $arr_tmp[0];
+        // dd($arr_tmp);
+        
+        // others条件     
+        $others_perioditem = $request->others_perioditem;
+        $others_period = $request->others_period;
+        if($others_perioditem==""){$others_perioditem = "1";}
+        if($others_period==""){$others_period = $this->which_season();}
+
+        if($others_perioditem=="1"){
+            $duration1 = date("Y").$others_period;
+        }else{
+            $duration1 = $others_period;
+        }
+        $others_weekdate = $request->others_weekdate;
+        if($others_weekdate=="")$others_weekdate=date("Y-m-d");
+        $arr_others_weekSatrtAndEnd = $this->getWeekStartAndEnd($others_weekdate);
+        // var_dump($arr_weekSatrtAndEnd);
+
+        $arr_tmp = $this->getUser4All($othersId,$duration1,$arr_others_weekSatrtAndEnd);
+        $others_all = $arr_tmp[1];
+        $arr_others = $arr_tmp[0];
+
+        // var_dump($others_all);
+
+        // $user = User::getLeaderIdByUserId($myId);
+
+        return view('index.others',compact('json_allUserDept', 'my_perioditem', 'my_period',  'my_weekdate', 'others_perioditem', 'othersId', 'others_period', 'others_weekdate', 'keyword', 'arr_others', 'my_all', 'others_all','arr_my_weekSatrtAndEnd','arr_others_weekSatrtAndEnd','leader_all','arr_leader'));
     }
 
     public function heisexecutor(Request $request,$p1)
