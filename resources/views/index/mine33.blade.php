@@ -136,7 +136,8 @@
                 <div class="okr_mb">
                   <span id="dptname">部门</span>的OKR（<span id="others_period_show"></span>）
                   <span class="extend" onclick="toggleElem()">
-                    <i id="leaderArea">↑</i>
+                    <!--i id="leaderArea">↑</i-->
+                    <img src="/okr/resources/images/return.png" />
                   </span>
                 </div>
 
@@ -300,7 +301,7 @@
                             </div-->
 
                             <div class="this_cz right" style="position: relative;" onmouseenter="show_gz('{{ $mission['id']  }}');" onmouseleave= "hide_gz('{{ $mission['id']  }}');">
-                              ...
+                              <img src="/okr/resources/images/3point.png" />
                               <div class="pop" id="gz_{{ $mission['id']  }}">
                                 <span flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);" style="cursor: pointer;">编辑</span>
                                 <br>
@@ -352,7 +353,7 @@
                             </div-->
 
                             <div class="this_cz right" style="position: relative;" onmouseenter="show_gz('{{ $plan['id']  }}');" onmouseleave= "hide_gz('{{ $plan['id']  }}');">
-                              ...
+                              <img src="/okr/resources/images/3point.png" />
                               <div class="pop" id="gz_{{ $plan['id']  }}">
                                 <span flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);" style="cursor: pointer;">编辑</span>
                                 <br>
@@ -416,7 +417,7 @@
 
 
                             <div class="this_cz right" style="position: relative;" onmouseenter="show_gz('{{ $stateindex['id']  }}');" onmouseleave= "hide_gz('{{ $stateindex['id']  }}');">
-                              ...
+                              <img src="/okr/resources/images/3point.png" />
                               <div class="pop" id="gz_{{ $stateindex['id']  }}">
                                 <span flag="stateindex" itemid="{{ $stateindex['id']  }}" onclick="detail_stateindex(this);" style="cursor: pointer;">编辑</span>
                                 <br>
@@ -1209,7 +1210,7 @@
 
 
         a = '<div class="this_cz " style="position: relative;" onmouseenter="show_gz('+treeNode.id+');" onmouseleave= "hide_gz('+treeNode.id+');">';
-        b = '...';
+        b = '<img src="/okr/resources/images/3point.png" />';
         c = ' <div class="pop" id="gz_'+treeNode.id+'">';
 
         d = '  </div>';
@@ -1263,7 +1264,7 @@
         // aObj.after(scoreStr + confidentindexStr + editStr + delStr + commentStr);
 
         a = '<div class="this_cz " style="position: relative;" onmouseenter="show_gz('+treeNode.id+');" onmouseleave= "hide_gz('+treeNode.id+');">';
-        b = '...';
+        b = '<img src="/okr/resources/images/3point.png" />';
         c = ' <div class="pop" id="gz_'+treeNode.id+'">';
 
         d = '  </div>';
@@ -1333,11 +1334,11 @@
 
       // console.log($("#leaderArea").html()); 
 
-      if($("#leaderArea").html()=="↑"){
-        $("#leaderArea").html("↓");
-      }else{
-        $("#leaderArea").html("↑");
-      }
+      // if($("#leaderArea").html()=="↑"){
+      //   $("#leaderArea").html("↓");
+      // }else{
+      //   $("#leaderArea").html("↑");
+      // }
 
       $('.parent-elem').toggle('normal', null, 'blind')
     }
