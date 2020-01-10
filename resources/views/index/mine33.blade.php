@@ -299,7 +299,7 @@
                               <i class="icon iconfont icon-laji" description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);"></i>
                             </div-->
 
-                            <div class="this_cz right" style="position: relative;" onmouseover="show_gz('{{ $mission['id']  }}');" onmouseout= "hide_gz('{{ $mission['id']  }}');">
+                            <div class="this_cz right" style="position: relative;" onmouseenter="show_gz('{{ $mission['id']  }}');" onmouseleave= "hide_gz('{{ $mission['id']  }}');">
                               ...
                               <div class="pop" id="gz_{{ $mission['id']  }}">
                                 <span flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);" style="cursor: pointer;">编辑</span>
@@ -351,7 +351,7 @@
                               <i class="icon iconfont icon-laji" description="{{ $plan['description']  }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);"></i>
                             </div-->
 
-                            <div class="this_cz right" style="position: relative;" onmouseover="show_gz('{{ $plan['id']  }}');" onmouseout= "hide_gz('{{ $plan['id']  }}');">
+                            <div class="this_cz right" style="position: relative;" onmouseenter="show_gz('{{ $plan['id']  }}');" onmouseleave= "hide_gz('{{ $plan['id']  }}');">
                               ...
                               <div class="pop" id="gz_{{ $plan['id']  }}">
                                 <span flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);" style="cursor: pointer;">编辑</span>
@@ -415,7 +415,7 @@
                             </div-->
 
 
-                            <div class="this_cz right" style="position: relative;" onmouseover="show_gz('{{ $stateindex['id']  }}');" onmouseout= "hide_gz('{{ $stateindex['id']  }}');">
+                            <div class="this_cz right" style="position: relative;" onmouseenter="show_gz('{{ $stateindex['id']  }}');" onmouseleave= "hide_gz('{{ $stateindex['id']  }}');">
                               ...
                               <div class="pop" id="gz_{{ $stateindex['id']  }}">
                                 <span flag="stateindex" itemid="{{ $stateindex['id']  }}" onclick="detail_stateindex(this);" style="cursor: pointer;">编辑</span>
@@ -1208,7 +1208,7 @@
         // aObj.after(scoreStr + editStr + delStr + commentStr + addkrStr);
 
 
-        a = '<div class="this_cz " style="position: relative;" onmouseover="show_gz('+treeNode.id+');" onmouseout= "hide_gz('+treeNode.id+');">';
+        a = '<div class="this_cz " style="position: relative;" onmouseenter="show_gz('+treeNode.id+');" onmouseleave= "hide_gz('+treeNode.id+');">';
         b = '...';
         c = ' <div class="pop" id="gz_'+treeNode.id+'">';
 
@@ -1262,7 +1262,7 @@
 
         // aObj.after(scoreStr + confidentindexStr + editStr + delStr + commentStr);
 
-        a = '<div class="this_cz " style="position: relative;" onmouseover="show_gz('+treeNode.id+');" onmouseout= "hide_gz('+treeNode.id+');">';
+        a = '<div class="this_cz " style="position: relative;" onmouseenter="show_gz('+treeNode.id+');" onmouseleave= "hide_gz('+treeNode.id+');">';
         b = '...';
         c = ' <div class="pop" id="gz_'+treeNode.id+'">';
 
