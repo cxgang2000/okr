@@ -74,7 +74,7 @@
         </div>
         <!-- End .clear -->
 
-          <div class="content-box">
+          <div class="content-box clearfix">
             <div class="layui-row layui-col-space5">
                 <div class="layui-col-xs12 rp">
                   <div class="time_con">
@@ -235,6 +235,10 @@
 
 
 
+            <div style="background-color: #fff; padding: 20px 0;">
+              <div style="border: 2px solid #ddd;margin-top: 20px;margin-bottom:20px;"></div>
+            </div>
+
             
 
 
@@ -244,11 +248,10 @@
 
 
 
-            <div class="layui-row layui-col-space5">
-                <div class="layui-col-xs12 lp">
-                  <div class="time_con">
-
-                    <select id="my_seasonperiod" class="list" onchange="selectMyPeriod('1',this.value);">
+            <div class="layui-row layui-col-space5 clearfix" style="background-color: #fff;">
+                <div class="layui-col-xs12 lp rp">
+                  <div class="time_con rp">
+                    <select id="my_seasonperiod" class="list active" onchange="selectMyPeriod('1',this.value);">
                       <option value="1000">季度</option>
                       <option value="1" title="春季(3-5)">春季(3-5)</option>
                       <option value="2" title="暑假(6-8)">暑假(6-8)</option>
@@ -411,18 +414,19 @@
 
 
 
+            <div style="background-color: #fff; padding: 20px 0;">
+              <hr>
+            </div>
 
 
 
 
 
-
-
-                  <div class="okr_mb">
+                  <div class="okr_mb rp">
                     我的OKR（<span id="my_period_show"></span>）
                   </div>
                 </div>
-                <div class="layui-col-xs12 lp">
+                <div class="layui-col-xs12 lp rp">
                   <div class="layui-row layui-col-space5">
                     <div class="layui-col-xs6">
                       <div>
@@ -461,7 +465,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="layui-col-xs12 lp">
+                <div class="layui-col-xs12 lp rp">
                   <div class="layui-row layui-col-space5">
                     <div class="layui-col-xs6">
                       <div>
@@ -844,6 +848,7 @@
     }
 
     $(function(){
+      // $('aside').style.height = $('body').style.height;
       $.fn.zTree.init($("#my_tree"), setting, my_zNodes);
       $.fn.zTree.init($("#others_tree"), setting, others_zNodes);
       $.fn.zTree.init($("#leader_tree"), setting, leader_zNodes);

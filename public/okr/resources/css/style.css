@@ -59,6 +59,16 @@ p {
 .align-right {
     float: right;
 }
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
 /*login*/
 #login{
     background:url(../images/loginbg.png)!important;
@@ -230,7 +240,7 @@ input[type=file] {
 
 .h2Title{
     background:#fff; 
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     height: 32px;
     font-size: 15px;
     line-height: 32px;
@@ -931,8 +941,8 @@ top: 2px;
   position: absolute;
   top:56px;
   left: 0;
-  height: auto!important;
-  min-height: 100%;
+  /* height: auto!important;
+  min-height: 100%; */
   width: 190px;
   z-index: 810;
   background-color: #fff;
