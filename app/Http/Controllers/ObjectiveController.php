@@ -285,12 +285,17 @@ class ObjectiveController extends Controller
         // var_dump($myId);
         // echo $arr_leader['department_id'];
         // var_dump($arr_leader);
-
-        $arr_dpt = Department::getDpt($arr_leader['department_id']);
-        // dd($arr_dpt);
-        $arr_leader['dptname'] = $arr_dpt['name'];
-        // dd($arr_leader);
+        if($arr_leader==[]){
+            $arr_leader['id'] = $uid;
+        }else{
+            // $arr_dpt = Department::getDpt($arr_leader['department_id']);
+            // dd($arr_dpt);
+            // $arr_leader['dptname'] = $arr_dpt['name'];
+            // dd($arr_leader);
+            
+        }
         return $arr_leader;
+        
     }
 
     // 我的okr

@@ -270,6 +270,10 @@ class User extends Model
 
         $user = DB::select('select * from user where isleader=1 and department_id=( SELECT department_id FROM `user` WHERE id=:id ) limit 1', [':id'=>$userid]);
         $data = array_map('get_object_vars', $user);
-        return $data[0];
+        if(empty($data)){
+            return [];
+        }else{
+            return $data[0];
+        }
     }
 }
