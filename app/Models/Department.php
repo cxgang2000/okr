@@ -39,4 +39,10 @@ class Department extends Model
             return 0;
         }
     }
+
+    public static function getDpt($id)
+    {
+        $dpt = Department::find($id)->toArray();
+        return $dpt;
+    }
 }

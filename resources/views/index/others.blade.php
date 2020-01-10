@@ -279,7 +279,7 @@
             <div class="layui-row layui-col-space5">
               <div class="layui-col-xs12 rp">
                   <div class="okr_mb">
-                    部门的OKR（<span id="leader_period_show"></span>）
+                    <span id="dptname">部门</span>的OKR（<span id="leader_period_show"></span>）
                   </div>
               </div>
               <div class="layui-col-xs12 rp">
@@ -850,6 +850,9 @@
       
 
       $("#cy_mb .treeview a:contains('成员目标')").parent().addClass('active');
+
+      // 显示部门名称
+      $("#dptname").html("{{ $arr_leader['dptname'] }}");
 
       document.onkeydown = function(e){  
         var ev = document.all ? window.event : e;

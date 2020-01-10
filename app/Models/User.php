@@ -268,8 +268,8 @@ class User extends Model
     public static function getLeaderIdByUserId($userid)
     {
 
-        $user = DB::select('select * from user where isleader=1 and department_id=( SELECT department_id FROM `user` WHERE id=:id )', [':id'=>$userid]);
-
-        return $user;
+        $user = DB::select('select * from user where isleader=1 and department_id=( SELECT department_id FROM `user` WHERE id=:id ) limit 1', [':id'=>$userid]);
+        $data = array_map('get_object_vars', $user);
+        return $data[0];
     }
 }

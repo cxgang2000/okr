@@ -134,7 +134,7 @@
             <div class="layui-col-xs12 rp">
               
                 <div class="okr_mb">
-                  部门的OKR（<span id="others_period_show"></span>）
+                  <span id="dptname">部门</span>的OKR（<span id="others_period_show"></span>）
                   <span class="extend" onclick="toggleElem()">
                     <i id="leaderArea">↑</i>
                   </span>
@@ -1331,7 +1331,7 @@
     function toggleElem() {
       // id="leaderArea">↑↓
 
-      console.log($("#leaderArea").html()); 
+      // console.log($("#leaderArea").html()); 
 
       if($("#leaderArea").html()=="↑"){
         $("#leaderArea").html("↓");
@@ -1382,6 +1382,7 @@
       // $.fn.zTree.init($("#myTreeDemo"), setting, zNodes);
       $.fn.zTree.init($("#others_tree"), Otherssetting, others_zNodes);
 
+      // 打开刚才条件的kr的父节点
       openMubiaoPidTreenode();
 
       $("#my_mb .treeview a:contains('我的目标')").parent().addClass('active');
@@ -1395,10 +1396,14 @@
       $(".time_con .list").on("click",function(){
         $(this).addClass("active").siblings(".active").removeClass("active");
       })
-       //日期确定
-       $(".laydate-btns-confirm").on("click",function(){
+      //日期确定
+      $(".laydate-btns-confirm").on("click",function(){
 
-       })
+      })
+
+
+      // 显示部门名称
+      $("#dptname").html("{{ $arr_others['dptname'] }}");
 
       document.onkeydown = function(e){  
         var ev = document.all ? window.event : e;

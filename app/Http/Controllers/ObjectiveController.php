@@ -279,6 +279,20 @@ class ObjectiveController extends Controller
         return([$week_start,$week_end]);
     }
 
+    // 取部门领导
+    private function getLeader($uid){
+        $arr_leader = User::getLeaderIdByUserId($uid);
+        // var_dump($myId);
+        // echo $arr_leader['department_id'];
+        // var_dump($arr_leader);
+
+        $arr_dpt = Department::getDpt($arr_leader['department_id']);
+        // dd($arr_dpt);
+        $arr_leader['dptname'] = $arr_dpt['name'];
+        // dd($arr_leader);
+        return $arr_leader;
+    }
+
     // 我的okr
     public function mine(Request $request)
     {
@@ -351,18 +365,13 @@ class ObjectiveController extends Controller
         // dd($arr_my);
         // if($arr_my->pid!=""){
 
-        if($arr_my->pid=="0"){
-            $pid = $myId;
-        }else{
-            $pid = $arr_my->pid;
-        }
+        $arr_leader = $this->getLeader($myId);
 
-
-        $arr_tmp = $this->getUser4All($pid,$duration1,$arr_weekSatrtAndEnd);
+        $arr_tmp = $this->getUser4All($arr_leader['id'],$duration1,$arr_weekSatrtAndEnd);
         $others_all = $arr_tmp[1];
         $arr_others = $arr_tmp[0];
         // var_dump($others_all);
-        // dd();
+        // dd($arr_others);
 
         return view('index.mine33
             ',compact('durationflag', 'duration', 'weekdate', 'json_objective','arr_mission','arr_plan','arr_stateindex','arr_weekSatrtAndEnd','others_all','arr_others'));
@@ -373,6 +382,8 @@ class ObjectiveController extends Controller
 
         $arr_others = User::find($uid)->toArray();
         $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
+        $arr_others['dptname']=Department::getDpt($arr_others['department_id'])['name'];
+        
         // dd($arr_others);
 
         $others_arr_where['duration'] = $duration;
@@ -779,12 +790,17 @@ class ObjectiveController extends Controller
         // dd($my_all);
 
         //部门领导相关
-        $leaderId = $arr_my->pid;
-        if($leaderId=='' || $leaderId==0){$leaderId=$myId;}
+        // $leaderId = $arr_my->pid;
+        // if($leaderId=='' || $leaderId==0){$leaderId=$myId;}
+        $arr_leader = $this->getLeader($myId);
+        $leaderId = $arr_leader['id'];
 
         $arr_tmp = $this->getUser4All($leaderId,$duration1,$arr_my_weekSatrtAndEnd);
         $leader_all = $arr_tmp[1];
         $arr_leader = $arr_tmp[0];
+
+
+
         // dd($arr_tmp);
         
         // others条件     
