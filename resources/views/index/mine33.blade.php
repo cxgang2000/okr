@@ -137,7 +137,7 @@
                   <span id="dptname">部门</span>的OKR（<span id="others_period_show"></span>）
                   <span class="extend" onclick="toggleElem()">
                     <!--i id="leaderArea">↑</i-->
-                    <img src="/okr/resources/images/return.png" />
+                    <img id="leaderArea" src="/okr/resources/images/up.png" />
                   </span>
                 </div>
 
@@ -1330,7 +1330,6 @@
     }
 
     function toggleElem() {
-      // id="leaderArea">↑↓
 
       // console.log($("#leaderArea").html()); 
 
@@ -1339,6 +1338,12 @@
       // }else{
       //   $("#leaderArea").html("↑");
       // }
+      if($("#leaderArea").attr('src')=="/okr/resources/images/up.png"){
+        $("#leaderArea").attr("src","/okr/resources/images/down.png");
+      }else{
+        $("#leaderArea").attr("src","/okr/resources/images/up.png")
+      }
+      
 
       $('.parent-elem').toggle('normal', null, 'blind')
     }
