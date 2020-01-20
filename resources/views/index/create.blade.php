@@ -95,7 +95,24 @@ $(function(){
 		});
 		
 	})
+
+
+	
 })
+
+
+	document.onkeydown = function(e){  
+        var ev = document.all ? window.event : e;
+        if(ev.keyCode==13) {// 如（ev.ctrlKey && ev.keyCode==13）为ctrl+Center 触发
+            $(".sub").click();
+
+
+            return false;
+        }
+      }
+
+
+
 </script>
 <script type="text/javascript" src="/okr/js/main.js"></script></body>
 <!-- Download From www.exet.tk-->
