@@ -1321,13 +1321,35 @@
       // $(objDiv).css("left", event.clientX-210); 
       // $(objDiv).css("top", event.clientY-77); 
 
+
+      pPositionLeft = $("#treeDemo").offset().left;
+      pWidth = $('#treeDemo').width();
+      pOffset = pPositionLeft+pWidth;
+      zPositionLeft = objDiv.offset().left;
+      zWidth = objDiv.width();
+      zOffset = zPositionLeft+zWidth;
+
+      // console.log('tree的最左边位置='+pOffset);
+      // console.log('浮出层位置='+zOffset);
+
       $("#treeDemo").scrollTop(150);
       
-
       if($("#treeDemo").scrollLeft() > 0){
-        $("#treeDemo").scrollLeft($("#treeDemo").scrollLeft()+100);
+        $("#treeDemo").scrollLeft($("#treeDemo").scrollLeft()+50);
+      }else{
+        if(zOffset>pOffset){
+          $("#treeDemo").scrollLeft($("#treeDemo").scrollLeft()+40);
+        }
       }
-      
+
+      // console.log($("#treeDemo").width() + "--" +$("#treeDemo").innerWidth()+ "--" +$("#treeDemo").outerWidth());
+      // console.log($("#treeDemo").height() + "--" +$("#treeDemo").innerHeight());
+      // console.log($("#treeDemo").height() + "--" +$("#treeDemo").innerHeight());
+      // // objDiv.show();
+      // thisParent = objDiv.parent();
+      // parentLeft = $("#treeDemo").offset().left;
+      // console.log(' parentLeft ' + parentLeft);
+      // console.log(objDiv.position().left + ' -- ' + objDiv.offset().left);
       // $("#treeDemo").scroll(0,100);
 
     }
