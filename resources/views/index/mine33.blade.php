@@ -1329,8 +1329,8 @@
       zWidth = objDiv.width();
       zOffset = zPositionLeft+zWidth;
 
-      console.log('tree的最左边位置='+pOffset);
-      console.log('浮出层位置='+zOffset);
+      // console.log('tree的最左边位置='+pOffset);
+      // console.log('浮出层位置='+zOffset);
 
       $("#treeDemo").scrollTop(150);
       
