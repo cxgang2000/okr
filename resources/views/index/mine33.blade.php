@@ -1209,9 +1209,9 @@
         // aObj.after(scoreStr + editStr + delStr + commentStr + addkrStr);
 
 
-        a = '<div class="this_cz " style="position: relative;" onmouseenter="show_gz('+treeNode.id+');" onmouseleave= "hide_gz('+treeNode.id+');">';
-        b = '<img src="/okr/resources/images/3point.png" />';
-        c = ' <div class="pop" style="z-index:999999998;" id="gz_'+treeNode.id+'">';
+        a = '<div class="this_cz " style="position: relative;"  >';
+        b = '<img src="/okr/resources/images/3point.png" onmouseenter="show_gz('+treeNode.id+');"/>';
+        c = ' <div class="pop" style="z-index:999999998;" id="gz_'+treeNode.id+'" onmouseleave= "hide_gz('+treeNode.id+');">';
 
         d = '  </div>';
         e = '</div>';
@@ -1263,9 +1263,9 @@
 
         // aObj.after(scoreStr + confidentindexStr + editStr + delStr + commentStr);
 
-        a = '<div class="this_cz " style="position: relative;" onmouseenter="show_gz('+treeNode.id+');" onmouseleave= "hide_gz('+treeNode.id+');">';
-        b = '<img src="/okr/resources/images/3point.png" />';
-        c = ' <div class="pop" id="gz_'+treeNode.id+'">';
+        a = '<div class="this_cz " style="position: relative;"  >';
+        b = '<img src="/okr/resources/images/3point.png" onmouseenter="show_gz('+treeNode.id+');"/>';
+        c = ' <div class="pop" id="gz_'+treeNode.id+'" onmouseleave= "hide_gz('+treeNode.id+');">';
 
         d = '  </div>';
         e = '</div>';
@@ -1329,8 +1329,8 @@
       zWidth = objDiv.width();
       zOffset = zPositionLeft+zWidth;
 
-      // console.log('tree的最左边位置='+pOffset);
-      // console.log('浮出层位置='+zOffset);
+      console.log('tree的最左边位置='+pOffset);
+      console.log('浮出层位置='+zOffset);
 
       $("#treeDemo").scrollTop(150);
       
