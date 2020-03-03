@@ -1211,7 +1211,7 @@
 
         a = '<div class="this_cz " style="position: relative;" onmouseenter="show_gz('+treeNode.id+');" onmouseleave= "hide_gz('+treeNode.id+');">';
         b = '<img src="/okr/resources/images/3point.png" />';
-        c = ' <div class="pop" id="gz_'+treeNode.id+'">';
+        c = ' <div class="pop" style="z-index:999999998;" id="gz_'+treeNode.id+'">';
 
         d = '  </div>';
         e = '</div>';
@@ -1320,6 +1320,15 @@
       $(objDiv).css("display","block"); 
       // $(objDiv).css("left", event.clientX-210); 
       // $(objDiv).css("top", event.clientY-77); 
+
+      $("#treeDemo").scrollTop(150);
+      
+
+      if($("#treeDemo").scrollLeft() > 0){
+        $("#treeDemo").scrollLeft($("#treeDemo").scrollLeft()+100);
+      }
+      
+      // $("#treeDemo").scroll(0,100);
 
     }
     function hide_gz(str){
