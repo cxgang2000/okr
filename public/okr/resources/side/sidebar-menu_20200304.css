@@ -20,7 +20,7 @@
 }
 
 .sidebar-menu > li > a.active{
-  background: #007AB0;
+  background: #209ee4;
   color: #fff;
 }
 
@@ -30,7 +30,7 @@
 
 .sidebar-menu > li:hover > a, .sidebar-menu > li.active > a {
   color: #fff;
-  background: #007AB0;
+  background: #209ee4;
 }
 
 .sidebar-menu > li > .treeview-menu {
@@ -112,7 +112,7 @@
   width: 267px;
   height: 140px;
   background: #fff;
-  border: 2px solid #007AB0;
+  border: 2px solid #209ee4;
   padding: 16px;
   font-size: 15px;
   color: #666;
@@ -121,11 +121,11 @@
   color: #666;
 }
 .side_content ul li a:hover{
-  color: #007AB0;
+  color: #209ee4;
   cursor: pointer;
 }
 .side_content ul li:hover .fangkuai{
-  background: #007AB0;
+  background: #209ee4;
 }
 .fangkuai{
   display: inline-block;

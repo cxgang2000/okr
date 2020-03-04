@@ -151,16 +151,10 @@
                     <div>
                       <div class="titles">
                         本<span id="others_span_misson_duration">周</span>关注的任务 ({{ substr($arr_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_weekSatrtAndEnd[1],5,5) }})
-
-                        <div style="float:right;">（P1必须做，P2应该做）</div>
-
-                        <div style="float:right;">
-                          <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate,'userid'=>$arr_others['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-
-                        </div>
+                        <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate,'userid'=>$arr_others['id']])}}" target="_blank"><span>操作历史</span></a>
                       </div>
                       <div class="contains">
-                        
+                        <div style="float:right;">（P1必须做，P2应该做）</div>
                         <br>
                         <ul>
 
@@ -180,11 +174,7 @@
                     <div>
                       <div class="titles">
                         目标
-
-                        <div style="float:right;">
-                          <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration,'userid'=>$arr_others['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
-
+                        <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration,'userid'=>$arr_others['id']])}}" target="_blank"><span>操作历史</span></a>
                       </div>
                       <div class="contains">
                         <ul id="others_tree" class="ztree">
@@ -200,10 +190,7 @@
                     <div>
                       <div class="titles">
                         未来四<span id="others_span_plan_duration">周</span>计划
-
-                        <div style="float:right;">
-                          <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate,'userid'=>$arr_others['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
+                        <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate,'userid'=>$arr_others['id']])}}" target="_blank"><span>操作历史</span></a>
                       </div>
                       <div class="contains">
                         <ul>
@@ -225,10 +212,7 @@
                     <div>
                       <div class="titles">
                         状态指标
-
-                        <div style="float:right;">
-                          <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration,'userid'=>$arr_others['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
+                        <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration,'userid'=>$arr_others['id']])}}" target="_blank"><span>操作历史</span></a>
                       </div>
                       <div class="contains">
                         <div class="text-right">
@@ -287,16 +271,13 @@
             <!-- 1y 每个月份 目标值ztree不一样顾就没有写太多 以一月份为例-->
             <div class="okr_mb">
               我的OKR（<span id="my_period_show"></span>）
-
-              <div>
-                <input style="width: 200px;display: inline-block;" name="weekdate" type="text" id="weekdate" class="layui-smallinput layui-input" />
-                <!--input name="datesearch" type="button" value="搜索" class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;
-                   margin-left: 10px;" onclick="setDurationFlag(durationflag);"/-->
-              </div>
-
             </div>
 
-
+            <div>
+              <input style="width: 200px;display: inline-block;" name="weekdate" type="text" id="weekdate" class="layui-smallinput layui-input" />
+              <!--input name="datesearch" type="button" value="搜索" class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;
+                 margin-left: 10px;" onclick="setDurationFlag(durationflag);"/-->
+            </div>
             <div class="layui-tab-item layui-show">
                 <div class="layui-row layui-col-space5">
                   <div class="layui-col-xs6">
@@ -304,17 +285,12 @@
                       <div class="titles">
                         本<span id="span_misson_duration">周</span>关注的任务 ({{ substr($arr_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_weekSatrtAndEnd[1],5,5) }})
                         
-                        <div style="float:right;">（P1必须做，P2应该做）</div>
-
-                        <span class="lf_icon tj_gz_icon"><img src="/okr/resources/images/tianjia.png" /></span>
-
-                        <div style="float:right;">
-                          <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
+                        <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate])}}" target="_blank"><span>操作历史</span></a>
                         
+                        <span class="lf_icon tj_gz_icon">+</span>
                       </div>
                       <div class="contains">
-                      	
+                      	<div style="float:right;">（P1必须做，P2应该做）</div>
                         <br>
                         <ul>
 
@@ -346,11 +322,8 @@
                     <div>
                       <div class="titles">
                         目标
-
-                        <div style="float:right;">
-                          <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
-                        <span class="lf_icon "><img src="/okr/resources/images/tianjia.png" /></span>
+                        <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><span>操作历史</span></a>
+                        <span class="lf_icon xzmb">新增目标</span>
                       </div>
                       <div class="contains">
                         <ul id="treeDemo" class="ztree"></ul>
@@ -363,14 +336,9 @@
                     <div>
                       <div class="titles">
                         未来四<span id="span_plan_duration">周</span>计划
-
-
-                        <div style="float:right;">
-                          <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
+                        <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate])}}" target="_blank"><span>操作历史</span></a>
                         
-                        <span class="lf_icon wl_jh"><img src="/okr/resources/images/tianjia.png" /></span>
-
+                        <span class="lf_icon wl_jh">+</span>
                       </div>
                       
                       <div class="contains">
@@ -407,22 +375,16 @@
                     <div>
                       <div class="titles">
                         状态指标
-
+                        <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><span>操作历史</span></a>
+                        <span class="lf_icon tj_zt_icon">+</span>
+                      </div>
+                      <div class="contains">
                         <div class="text-right">
                           <span class="layui-badge-dot layui-bg-green"></span>优秀
                           <span class="layui-badge-dot layui-bg-cyan"></span>良好
                           <span class="layui-badge-dot layui-bg-blue"></span>一般
                           <span class="layui-badge-dot layui-bg-gray"></span>差
                         </div>
-
-                        <div style="float:right;">
-                          <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
-
-                        <span class="lf_icon tj_zt_icon"><img src="/okr/resources/images/tianjia.png" /></span>
-                      </div>
-                      <div class="contains">
-                        
                         <ul>
 
                           @foreach ($arr_stateindex as $stateindex)

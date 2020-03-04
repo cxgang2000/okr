@@ -204,7 +204,7 @@ a cite {
 }
 
 .layui-layout-admin .layui-header {
-	background-color: #007AB0;
+	background-color: #209ee4;
 }
 
 .layui-layout-admin .layui-side {
@@ -1056,8 +1056,8 @@ a cite {
 }
 
 .layui-btn-primary:hover {
-	border-color: #007AB0;
-	color: #007AB0;
+	border-color: #209ee4;
+	color: #209ee4;
 	text-decoration: none;
 }
 
@@ -1846,7 +1846,7 @@ a cite {
 }
 
 .layui-laypage a:hover {
-	color: #007AB0;
+	color: #209ee4;
 }
 
 .layui-laypage em {
@@ -1878,7 +1878,7 @@ a cite {
 	padding: 1px;
 	width: 100%;
 	height: 100%;
-	background-color: #007AB0;
+	background-color: #209ee4;
 }
 
 .layui-laypage-em {
@@ -2772,7 +2772,7 @@ body .layui-table-tips .layui-layer-content {
 
 .layui-tab-title .layui-this {
 	color: #fff;
-	background: #007AB0;
+	background: #209ee4;
 	border: none;
 }
 

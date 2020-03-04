@@ -250,7 +250,7 @@ input[type=file] {
     color: #999;
 }
 .h2Title a.nows{
-    color: #007AB0;
+    color: #209ee4;
     font-weight: bolder;
 }
 
@@ -292,14 +292,14 @@ input[type=file] {
 .kc_type .type_titles{
     font-size: 15px;
     font-weight: bolder;
-    color: #007AB0;
+    color: #209ee4;
 }
 .con_down.type_active{
-    border: 1px solid #007AB0;
+    border: 1px solid #209ee4;
     border-bottom:none;
 }
 .border_type td{
-    border-bottom: 1px solid #007AB0;
+    border-bottom: 1px solid #209ee4;
 }
 .con_type{
     display: none;
@@ -402,7 +402,7 @@ input[type=file] {
 
 td .layui-btn-primary{
     border: none;
-    color: #007AB0;
+    color: #209ee4;
 }
 
 .ot_time{
@@ -431,7 +431,7 @@ td .layui-btn-primary{
 }
 
 .time_con .active{
-    border: 1px solid #007AB0;
+    border: 1px solid #209ee4;
     border-radius: 5px;
 }
 
@@ -445,10 +445,10 @@ td .layui-btn-primary{
     cursor: pointer!important;
 }
 .jxz{
-    border: 1px solid #007AB0;
+    border: 1px solid #209ee4;
     font-size: 12px!important;
     padding: 1px 4px;
-    color: #007AB0!important;
+    color: #209ee4!important;
     cursor: pointer!important;
 }
 .ywc{
@@ -538,7 +538,7 @@ td .layui-btn-primary{
     padding-top: 10px;
 }
 .c_209{
-    color: #007AB0;
+    color: #209ee4;
 }
 .pointer{
     cursor: pointer;
@@ -547,7 +547,7 @@ td .layui-btn-primary{
     color: #FD5E64;
 }
 .tj_zt{
-    color: #007AB0;
+    color: #209ee4;
     font-size: 12px!important;
     cursor: pointer;
 }
@@ -582,7 +582,7 @@ td .layui-btn-primary{
 .tx_img{
     width:36px;
     height:36px;
-    background:#007AB0;
+    background:#209ee4;
     text-align: center;
     line-height: 36px;
     border-radius: 50%;
@@ -662,14 +662,14 @@ td .layui-btn-primary{
     color: #FD5E64;
 }
 .models_bj:hover{
-    color: #007AB0;
+    color: #209ee4;
 }
 .mb_cont .ul_no li{
     border:none;
     pointer-events: none;
 }
 .layui-layer-btn.bc{
-    background: #007AB0;
+    background: #209ee4;
     color: #fff;
 }
 .demoIcon{
@@ -683,7 +683,7 @@ td .layui-btn-primary{
     cursor: pointer;
 }
 .jgxq.icon.iconfont.icon-chaxun{
-    color: #007AB0;
+    color: #209ee4;
 }
 .trees .icon.iconfont{
     font-size: 18px!important;
@@ -714,11 +714,11 @@ td .layui-btn-primary{
     border: none;
 }
 .layui-tab-content .layui-tab-title li.layui-this{
-    border-bottom: 1px solid #007AB0;
+    border-bottom: 1px solid #209ee4;
 }
 .titles{
     font-size: 14px;
-    color: #333333;
+    color: #209ee4;
     font-weight: bolder;
     height: 36px;
     line-height: 36px;
@@ -780,11 +780,11 @@ td .layui-btn-primary{
 }
 .this_cz i{
     margin-left: 12px;
-    color: #007AB0;
+    color: #209ee4;
 }
 .xzmb{
     font-size: 14px;
-background: #007AB0;
+background: #209ee4;
 color: #fff;
 padding: 0 10px;
 cursor: pointer;
@@ -807,7 +807,7 @@ top: 2px;
     background: #F03B3B!important;
 }
 .demoIcon span{
-    color: #007AB0;
+    color: #209ee4;
     font-size: 14px!important;
     cursor: pointer;
 }
@@ -822,7 +822,7 @@ top: 2px;
     height: 36px;
 }
 .layui-btn-normal{
-    background: #007AB0!important;
+    background: #209ee4!important;
     color: #fff!important;
 }
 .com_models .layui-form-label{
@@ -920,13 +920,13 @@ top: 2px;
     cursor: default;
 }
 .df_bj{
-    background: #007AB0;
+    background: #209ee4;
     padding:1px 3px;
     border-radius: 2px;
     color: #fff;
 }
 #my_mb .layui-col-xs6 > div,#cy_mb .lp .layui-col-xs6 > div,#cy_mb .rp .layui-col-xs6 > div{
-    border:1px solid #fff;
+    border:1px solid #a8dfff;
 }
 #my_mb .layui-tab-content{
     background: #fff;
