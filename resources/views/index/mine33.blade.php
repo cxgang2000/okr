@@ -203,7 +203,7 @@
                           <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate,'userid'=>$arr_others['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
                       </div>
-                      <div class="contains top_border">
+                      <div class="contains top_border bg_fff">
                         <ul>
                           
                           @foreach ($others_all['arr_plan'] as $plan)
@@ -371,7 +371,7 @@
 
                       </div>
                       
-                      <div class="contains top_border">
+                      <div class="contains top_border bg_fff">
                         <ul>
 
                           @foreach ($arr_plan as $key=>$plan)
@@ -398,6 +398,8 @@
                           @endforeach
 
                         </ul>
+                        <br><br><br><br><br><br><br>
+                        <br><br><br><br><br><br><br>
                       </div>
                     </div>
                   </div>
@@ -419,7 +421,7 @@
 
                         <span class="lf_icon tj_zt_icon"><img src="/okr/resources/images/tianjia.png" /></span>
                       </div>
-                      <div class="contains top_border">
+                      <div class="contains top_border bg_fff">
                         
                         <ul>
 
@@ -468,6 +470,8 @@
                           @endforeach
 
                         </ul>
+                        <br><br><br><br><br><br><br>
+                        <br><br><br><br><br><br><br>
                       </div>
                     </div>
                   </div>
@@ -481,7 +485,7 @@
 
   </div>
   <!-- End #main-content -->
-    <br><br><br><br><br><br><br>
+    
 
 <!-- 浮出菜单 -->
 <div class="contains" id="objectiveMenu" style="position: absolute;display: none;z-index: 99999999999" onmouseleave="hide_objectiveMenu();"><ul><li>
@@ -1565,6 +1569,8 @@
             return false;
         }
       }
+
+      $('.main-sidebar').css('height()',$('#main-content').height());
 
     })
 
