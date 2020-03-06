@@ -150,7 +150,7 @@
 
                         <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate,'userid'=>$arr_others['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
 
@@ -177,7 +177,7 @@
                       <div class="titles">
                         目标
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration,'userid'=>$arr_others['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
 
@@ -199,7 +199,7 @@
                       <div class="titles">
                         未来四<span id="others_span_plan_duration">周</span>计划
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate,'userid'=>$arr_others['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
                       </div>
@@ -229,7 +229,7 @@
                           <span class="layui-badge-dot layui-bg-blue"></span>一般
                           <span class="layui-badge-dot layui-bg-gray"></span>差
                         </div>
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration,'userid'=>$arr_others['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
                       </div>
@@ -305,7 +305,7 @@
 
                         <span class="lf_icon tj_gz_icon"><img src="/okr/resources/images/tianjia.png" /></span>
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
                         
@@ -346,7 +346,7 @@
                         
                         <span class="lf_icon "><img src="/okr/resources/images/tianjia.png" /></span>
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
 
@@ -363,7 +363,7 @@
                       <div class="titles">
                         未来四<span id="span_plan_duration">周</span>计划
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
                         
@@ -413,7 +413,7 @@
                           <span class="layui-badge-dot layui-bg-gray"></span>差
                         </div>
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
 
@@ -478,8 +478,10 @@
       </div>
     <!-- End Notifications -->
     <!-- End #footer -->
+
   </div>
   <!-- End #main-content -->
+    <br><br><br><br><br><br><br>
 
 <!-- 浮出菜单 -->
 <div class="contains" id="objectiveMenu" style="position: absolute;display: none;z-index: 99999999999" onmouseleave="hide_objectiveMenu();"><ul><li>

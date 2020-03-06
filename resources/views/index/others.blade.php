@@ -153,7 +153,7 @@
 
                           <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
 
-                          <div class="my_target">
+                          <div class="my_target" title="操作历史">
                             <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$others_weekdate,'userid'=>$othersId])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                           </div>
 
@@ -178,7 +178,7 @@
                         <div class="titles">
                           目标
 
-                          <div class="my_target">
+                          <div class="my_target" title="操作历史">
                             <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$others_perioditem,'duration'=>$others_period,'userid'=>$othersId])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                           </div>
                         </div>
@@ -199,7 +199,7 @@
                         <div class="titles">
                           未来四<span id="others_span_plan_duration">周</span>计划
 
-                          <div class="my_target">
+                          <div class="my_target" title="操作历史">
                             <a href="{{URL::action('PlanController@planlog',['weekdate'=>$others_weekdate,'userid'=>$othersId])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                           </div>
                         </div>
@@ -231,7 +231,7 @@
                             <span class="layui-badge-dot layui-bg-gray"></span>差
                           </div>
 
-                          <div class="my_target">
+                          <div class="my_target" title="操作历史">
                             <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$others_perioditem,'duration'=>$others_period,'userid'=>$othersId])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                           </div>
 
@@ -363,7 +363,7 @@
 
                         <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
                       </div>
@@ -387,7 +387,7 @@
                       <div class="titles">
                         目标
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
 
@@ -407,7 +407,7 @@
                       <div class="titles">
                         未来四<span id="leader_span_plan_duration">周</span>计划
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('PlanController@planlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
 
@@ -440,7 +440,7 @@
                           <span class="layui-badge-dot layui-bg-gray"></span>差
                         </div>
 
-                        <div class="my_target">
+                        <div class="my_target" title="操作历史">
                           <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
                       </div>
@@ -519,7 +519,7 @@
 
                           <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
 
-                          <div class="my_target">
+                          <div class="my_target" title="操作历史">
                             <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                           </div>
 
@@ -544,7 +544,7 @@
                         <div class="titles">
                           目标
 
-                          <div class="my_target">
+                          <div class="my_target" title="操作历史">
                             <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                           </div>
 
@@ -564,7 +564,7 @@
                         <div class="titles">
                           未来四<span id="my_span_plan_duration">周</span>计划
 
-                          <div class="my_target">
+                          <div class="my_target" title="操作历史">
                             <a href="{{URL::action('PlanController@planlog',['weekdate'=>$my_weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                           </div>
 
@@ -597,7 +597,7 @@
                             <span class="layui-badge-dot layui-bg-gray"></span>差
                           </div>
 
-                          <div class="my_target">
+                          <div class="my_target" title="操作历史">
                             <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$others_perioditem,'duration'=>$others_period])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                           </div>
 
