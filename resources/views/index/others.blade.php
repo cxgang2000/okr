@@ -285,8 +285,8 @@
 
 
 
-            <div style="background-color: #fff; padding: 20px 0;">
-              <div style="border: 2px solid #ddd;margin-top: 20px;margin-bottom:20px;"></div>
+            <div style="background-color: #fff; padding: 5px 0;">
+              <div style="border: 1px solid #ddd;margin-top: 5px;margin-bottom:5px;"></div>
             </div>
 
             
