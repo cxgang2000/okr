@@ -35,7 +35,7 @@
       <aside class="main-sidebar">
         <section  class="sidebar">
           <ul class="sidebar-menu">
-            <!--li class="header"></li-->
+            <li class="header"></li>
             <li class="treeview">
               <a href="{{ route('objective.mine') }}">
                 <i class="icon iconfont icon-jiaoseguanli"></i>
@@ -69,19 +69,22 @@
 
       <!-- End #sidebar -->
       <div id="main-content">
-        <div class="h2Title bg_none pd_0">
+        <div class="h2Title">
           成员目标
         </div>
         <!-- End .clear -->
 
           <div class="content-box clearfix">
-            <div class="layui-row layui-col-space10">
-
-                <!-- 日期选择 -->
+            <div class="layui-row layui-col-space5">
                 <div class="layui-col-xs12 rp">
+                  <div class="time_con">
 
+                    <!--select id="others_halfyearperiod" class="list" onchange="selectOthersPeriod('3',this.value);">
+                      <option value="1000">半年度</option>
+                      <option value="001" title="上半年（1月～6月）">上半年</option>
+                      <option value="002" title="下半年（7月～12月）">下半年</option>
+                    </select-->
 
-                  <div class="time_con" style="display: none;">
                     <select id="others_seasonperiod" class="list" onchange="selectOthersPeriod('1',this.value);">
                       <option value="1000">季度</option>
                       <option value="1" title="春季(3-5)">春季(3-5)</option>
@@ -97,38 +100,10 @@
                       <option value="2020">2020</option>
                     </select>
                     
-                    <!-- <input name="others_weekdate" type="text" id="others_weekdate" class="layui-smallinput layui-input" style="width: 150px;height: 30px;display: inline-block;" /> -->
-                  </div>
+                    <input name="others_weekdate" type="text" id="others_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" />
+                      <!--input class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;margin-left: 10px;" name="datesearch" type="button" value="搜索" onclick="selectOthersPeriod(others_perioditem,others_period);"/-->
 
-                  <!-- 日期选择 -->
-                  <div class="bg_fff">
-                    <ul>
-                      <li class="bold_f">
-                        年份：
-                        <ul class="layui-inline">
-                          <!--li class="layui-inline pd_10 active">2019</li-->
-                          <li id="duration-2-2020" onclick="selectOthersPeriod('2',2020);" class="layui-inline pd_10">2020</li>
-                          <li  id="duration-2-2019" onclick="selectOthersPeriod('2',2019);" class="layui-inline pd_10">2019</li>
-                        </ul>
-                      </li>
-                      <li class="bold_f">季度：
-                        <ul class="layui-inline">
-                          <li id="duration-1-1" onclick="selectOthersPeriod('1',1);" class="layui-inline pd_10">春季课（3-5）</li>
-                          <li id="duration-1-2" onclick="selectOthersPeriod('1',2);" class="layui-inline pd_10">暑假课（6-8）</li>
-                          <li id="duration-1-3" onclick="selectOthersPeriod('1',3);" class="layui-inline pd_10">秋季课（9-11）</li>
-                          <li id="duration-1-4" onclick="selectOthersPeriod('1',4);" class="layui-inline pd_10">寒假课（12-2）</li>
-                        </ul>
-                      </li>
-                      <li class="bold_f">时间：
-                        <input name="others_weekdate" type="text" id="others_weekdate" class="layui-smallinput layui-input" style="width: 150px;height: 25px;display: inline-block;" />
-                      </li>
-                    </ul>
-                  </div>
-
-
-
-
-
+                    </div>
                     <div class="okr_mb">
                       {{ $arr_others['name'] }}的OKR（<span id="others_period_show"></span>）
                     </div>
@@ -137,28 +112,17 @@
                     </div>
                   </div>
                 </div>
-
-
-
-
-
-
-                <!-- 任务和目标 -->
                 <div class="layui-col-xs12 rp">
-                  <div class="layui-row layui-col-space10">
+                  <div class="layui-row layui-col-space5">
                     <div class="layui-col-xs6">
-                      <div class="bg_fff">
+                      <div>
                         <div class="titles">
                           本<span id="others_span_misson_duration">周</span>关注的任务 ({{ substr($arr_others_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_others_weekSatrtAndEnd[1],5,5) }})
-
-                          <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
-
-                          <div class="my_target">
-                            <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$others_weekdate,'userid'=>$othersId])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
-
+                          <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$others_weekdate,'userid'=>$othersId])}}" target="_blank"><span>操作历史</span></a>
                         </div>
-                        <div class="contains top_border">
+                        <div class="contains">
+                        	<div style="float:right;">（P1必须做，P2应该做）</div>
+                        	<br>
                           <ul>
 
                             @foreach ($others_all['arr_mission'] as $mission)
@@ -174,15 +138,12 @@
                       </div>
                     </div>
                     <div class="layui-col-xs6">
-                      <div class="bg_fff">
+                      <div>
                         <div class="titles">
                           目标
-
-                          <div class="my_target">
-                            <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$others_perioditem,'duration'=>$others_period,'userid'=>$othersId])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
+                          <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$others_perioditem,'duration'=>$others_period,'userid'=>$othersId])}}" target="_blank"><span>操作历史</span></a>
                         </div>
-                        <div class="contains top_border">
+                        <div class="contains">
                           <ul id="others_tree" class="ztree">
                           </ul>
                         </div>
@@ -190,20 +151,15 @@
                     </div>
                   </div>
                 </div>
-
-                <!-- 计划和指标 -->
                 <div class="layui-col-xs12 rp">
-                  <div class="layui-row layui-col-space10">
+                  <div class="layui-row layui-col-space5">
                     <div class="layui-col-xs6">
-                      <div class="bg_fff">
+                      <div>
                         <div class="titles">
                           未来四<span id="others_span_plan_duration">周</span>计划
-
-                          <div class="my_target">
-                            <a href="{{URL::action('PlanController@planlog',['weekdate'=>$others_weekdate,'userid'=>$othersId])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
+                          <a href="{{URL::action('PlanController@planlog',['weekdate'=>$others_weekdate,'userid'=>$othersId])}}" target="_blank"><span>操作历史</span></a>
                         </div>
-                        <div class="contains top_border">
+                        <div class="contains">
                           <ul>
                             
                             @foreach ($others_all['arr_plan'] as $plan)
@@ -220,23 +176,18 @@
                       </div>
                     </div>
                     <div class="layui-col-xs6">
-                      <div class="bg_fff">
+                      <div>
                         <div class="titles">
                           状态指标
-
-                          <div class="layui-inline mg_l78">
+                          <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$others_perioditem,'duration'=>$others_period,'userid'=>$othersId])}}" target="_blank"><span>操作历史</span></a>
+                        </div>
+                        <div class="contains">
+                          <div class="text-right">
                             <span class="layui-badge-dot layui-bg-green"></span>优秀
                             <span class="layui-badge-dot layui-bg-cyan"></span>良好
                             <span class="layui-badge-dot layui-bg-blue"></span>一般
                             <span class="layui-badge-dot layui-bg-gray"></span>差
                           </div>
-
-                          <div class="my_target">
-                            <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$others_perioditem,'duration'=>$others_period,'userid'=>$othersId])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
-
-                        </div>
-                        <div class="contains top_border">
                           <ul>
                             
                             @foreach ($others_all['arr_stateindex'] as $stateindex)
@@ -274,7 +225,6 @@
                     </div>
                   </div>
                 </div>
-
             </div>
 
 
@@ -300,9 +250,7 @@
 
             <div class="layui-row layui-col-space5 clearfix" style="background-color: #fff;">
                 <div class="layui-col-xs12 lp rp">
-                  
-
-                  <div class="time_con rp" style="display: none;">
+                  <div class="time_con rp">
                     <select id="my_seasonperiod" class="list active" onchange="selectMyPeriod('1',this.value);">
                       <option value="1000">季度</option>
                       <option value="1" title="春季(3-5)">春季(3-5)</option>
@@ -318,56 +266,36 @@
                       <option value="2020">2020</option>
                     </select>
                     
-                    <!-- <input name="my_weekdate" type="text" id="my_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" /> -->
-                  </div>
-
-                  <!-- 日期选择 -->
-                  <div class="bg_fff">
-                    <ul>
-                      <li class="bold_f">
-                        年份：
-                        <ul class="layui-inline">
-                          <!--li class="layui-inline pd_10 active">2019</li-->
-                          <li id="myduration-2-2020" onclick="selectMyPeriod('2',2020);" class="layui-inline pd_10">2020</li>
-                          <li  id="myduration-2-2019" onclick="selectMyPeriod('2',2019);" class="layui-inline pd_10">2019</li>
-                        </ul>
-                      </li>
-                      <li class="bold_f">季度：
-                        <ul class="layui-inline">
-                          <li id="myduration-1-1" onclick="selectMyPeriod('1',1);" class="layui-inline pd_10">春季课（3-5）</li>
-                          <li id="myduration-1-2" onclick="selectMyPeriod('1',2);" class="layui-inline pd_10">暑假课（6-8）</li>
-                          <li id="myduration-1-3" onclick="selectMyPeriod('1',3);" class="layui-inline pd_10">秋季课（9-11）</li>
-                          <li id="myduration-1-4" onclick="selectMyPeriod('1',4);" class="layui-inline pd_10">寒假课（12-2）</li>
-                        </ul>
-                      </li>
-                      <li class="bold_f">时间：
-                        <input name="my_weekdate" type="text" id="my_weekdate" class="layui-smallinput layui-input" style="width: 150px;height: 25px;display: inline-block;" />
-                      </li>
-                    </ul>
+                    <input name="my_weekdate" type="text" id="my_weekdate" class="layui-smallinput layui-input" style="width: 200px;display: inline-block;" />
+                    <!--input class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;margin-left: 10px;" name="datesearch" type="button" value="搜索" onclick="selectMyPeriod(my_perioditem,my_period);"/-->
+                    
                   </div>
 
 
 
-            <div class="layui-row layui-col-space10">
+
+
+
+
+
+
+            <div class="layui-row layui-col-space5">
               <div class="layui-col-xs12 rp">
                   <div class="okr_mb">
                     <span id="dptname">部门</span>的OKR（<span id="leader_period_show"></span>）
                   </div>
               </div>
               <div class="layui-col-xs12 rp">
-                <div class="layui-row layui-col-space10">
+                <div class="layui-row layui-col-space5">
                   <div class="layui-col-xs6">
-                    <div class="bg_fff">
+                    <div>
                       <div class="titles">
                         本<span id="leader_span_misson_duration">周</span>关注的任务 ({{ substr($arr_my_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_my_weekSatrtAndEnd[1],5,5) }})
-
-                        <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
-
-                        <div class="my_target">
-                          <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
+                        <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><span>操作历史</span></a>
                       </div>
-                      <div class="contains top_border">
+                      <div class="contains">
+                        <div style="float:right;">（P1必须做，P2应该做）</div>
+                        <br>
                         <ul>
 
                           @foreach ($others_all['arr_mission'] as $mission)
@@ -383,16 +311,12 @@
                     </div>
                   </div>
                   <div class="layui-col-xs6">
-                    <div class="bg_fff">
+                    <div>
                       <div class="titles">
                         目标
-
-                        <div class="my_target">
-                          <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
-
+                        <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><span>操作历史</span></a>
                       </div>
-                      <div class="contains top_border">
+                      <div class="contains">
                         <ul id="leader_tree" class="ztree">
                         </ul>
                       </div>
@@ -401,18 +325,14 @@
                 </div>
               </div>
               <div class="layui-col-xs12 rp">
-                <div class="layui-row layui-col-space10">
+                <div class="layui-row layui-col-space5">
                   <div class="layui-col-xs6">
-                    <div class="bg_fff">
+                    <div>
                       <div class="titles">
                         未来四<span id="leader_span_plan_duration">周</span>计划
-
-                        <div class="my_target">
-                          <a href="{{URL::action('PlanController@planlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
-
+                        <a href="{{URL::action('PlanController@planlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><span>操作历史</span></a>
                       </div>
-                      <div class="contains top_border">
+                      <div class="contains">
                         <ul>
                           
                           @foreach ($others_all['arr_plan'] as $plan)
@@ -429,22 +349,18 @@
                     </div>
                   </div>
                   <div class="layui-col-xs6">
-                    <div class="bg_fff">
+                    <div>
                       <div class="titles">
                         状态指标
-
-                        <div class="layui-inline mg_l78">
+                        <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><span>操作历史</span></a>
+                      </div>
+                      <div class="contains">
+                        <div class="text-right">
                           <span class="layui-badge-dot layui-bg-green"></span>优秀
                           <span class="layui-badge-dot layui-bg-cyan"></span>良好
                           <span class="layui-badge-dot layui-bg-blue"></span>一般
                           <span class="layui-badge-dot layui-bg-gray"></span>差
                         </div>
-
-                        <div class="my_target">
-                          <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                        </div>
-                      </div>
-                      <div class="contains">
                         <ul>
                           
                           @foreach ($others_all['arr_stateindex'] as $stateindex)
@@ -511,20 +427,16 @@
                   </div>
                 </div>
                 <div class="layui-col-xs12 lp rp">
-                  <div class="layui-row layui-col-space10">
+                  <div class="layui-row layui-col-space5">
                     <div class="layui-col-xs6">
-                      <div class="bg_fff">
+                      <div>
                         <div class="titles">
                           本<span id="my_span_misson_duration">周</span>关注的任务 ({{ substr($arr_my_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_my_weekSatrtAndEnd[1],5,5) }})
-
-                          <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
-
-                          <div class="my_target">
-                            <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
-
+                          <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate])}}" target="_blank"><span>操作历史</span></a>
                         </div>
-                        <div class="contains top_border">
+                        <div class="contains">
+                        	<div style="float:right;">（P1必须做，P2应该做）</div>
+                        	<br>
                           <ul>
 
                             @foreach ($my_all['arr_mission'] as $mission)
@@ -540,16 +452,12 @@
                       </div>
                     </div>
                     <div class="layui-col-xs6">
-                      <div class="bg_fff">
+                      <div>
                         <div class="titles">
                           目标
-
-                          <div class="my_target">
-                            <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
-
+                          <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period])}}" target="_blank"><span>操作历史</span></a>
                         </div>
-                        <div class="contains top_border">
+                        <div class="contains">
                           <ul id="my_tree" class="ztree">
                           </ul>
                         </div>
@@ -558,18 +466,14 @@
                   </div>
                 </div>
                 <div class="layui-col-xs12 lp rp">
-                  <div class="layui-row layui-col-space10">
+                  <div class="layui-row layui-col-space5">
                     <div class="layui-col-xs6">
-                      <div class="bg_fff">
+                      <div>
                         <div class="titles">
                           未来四<span id="my_span_plan_duration">周</span>计划
-
-                          <div class="my_target">
-                            <a href="{{URL::action('PlanController@planlog',['weekdate'=>$my_weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
-
+                          <a href="{{URL::action('PlanController@planlog',['weekdate'=>$my_weekdate])}}" target="_blank"><span>操作历史</span></a>
                         </div>
-                        <div class="contains top_border">
+                        <div class="contains">
                           <ul>
                           
 							              @foreach ($my_all['arr_plan'] as $plan)
@@ -586,23 +490,18 @@
                       </div>
                     </div>
                     <div class="layui-col-xs6">
-                      <div class="bg_fff">
+                      <div>
                         <div class="titles">
                           状态指标
-
-                          <div class="layui-inline mg_l78">
+                          <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$others_perioditem,'duration'=>$others_period])}}" target="_blank"><span>操作历史</span></a>
+                        </div>
+                        <div class="contains">
+                          <div class="text-right">
                             <span class="layui-badge-dot layui-bg-green"></span>优秀
                             <span class="layui-badge-dot layui-bg-cyan"></span>良好
                             <span class="layui-badge-dot layui-bg-blue"></span>一般
                             <span class="layui-badge-dot layui-bg-gray"></span>差
                           </div>
-
-                          <div class="my_target">
-                            <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$others_perioditem,'duration'=>$others_period])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
-
-                        </div>
-                        <div class="contains top_border">
                           <ul>
 
                             @foreach ($my_all['arr_stateindex'] as $stateindex)
@@ -1042,14 +941,6 @@
           // $("#others_span_misson_duration").html("季度");
           // $("#others_span_plan_duration").html("季度");
         }
-
-        // 20200306新增，适应修改成平铺的样式
-        // console.log("others_period="+others_period);
-        // console.log("others_perioditem="+others_perioditem);
-
-        $("#duration-"+others_perioditem+"-"+others_period).addClass("active");
-        $("#myduration-"+my_perioditem+"-"+my_period).addClass("active");
-
     }
 
     initPerild();

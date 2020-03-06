@@ -968,3 +968,68 @@ input:-webkit-autofill {
     position: relative;
     top: 0;
 }
+
+/*2020.3.5*/
+.bg_none{
+    background: none;
+    padding: 0;
+}
+.pd_0{
+    padding: 0;
+}
+.h2Title{
+    color: #007AB0;
+    margin-bottom: 0;
+}
+.bg_fff{
+    background: #fff;
+    padding: 10px;
+}
+.pd_10{
+    padding: 10px;
+    cursor: pointer;
+}
+li.pd_10:hover{
+    color: #209ee4;
+}
+li.active{
+    border-bottom:1px solid #209ee4;
+}
+li.bold_f{
+    font-weight: bold;
+    font-size: 14px;
+}
+.titles{
+    background: none;
+}
+.col_666{
+    color: #666666;
+}
+.ft_12{
+    font-size: 12px;
+}
+.mg_l78{
+    \margin-left: 78px;
+}
+.top_border{
+    border-top: 1px solid #eee;
+}
+.lf_icon{
+    right: 50px;
+    top: 15px;
+}
+.tj_gz_icon{
+    position: absolute;
+}
+.my_target{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+.mg_t10{
+    margin-top: 10px;
+}
+.mg_10{
+    margin: 10px 0;
+}

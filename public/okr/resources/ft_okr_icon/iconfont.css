@@ -24,7 +24,17 @@
 
 .icon-chaxun:before { content: "\e615"; }
 
-.icon-pinglun:before { content: "\e626"; }
+/*.icon-pinglun:before { content: "\e626"; }*/
+
+
+.icon-pinglun{
+    background:url(../images/pinglun.png);
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+}
+
+
 
 .icon-laji:before { content: "\e627"; }
 
