@@ -1570,7 +1570,7 @@
         }
       }
 
-      $('.main-sidebar').css('height()',$('#main-content').height());
+      $('.main-sidebar').css('height',$('#main-content').height());
 
     })
 
