@@ -752,7 +752,6 @@ class ObjectiveController extends Controller
         $json_allUserDept = str_replace("users", "children", $json_allUserDept);
         // dd($json_allUserDept);
         
-
         // dd($request);
         $myId = session('idUser');
         $arr_my = User::find($myId);

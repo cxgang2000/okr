@@ -230,12 +230,12 @@ class User extends Model
                 $query->where('name', 'like', "%{$keyword}%")
                         ->orWhere('phone', 'like', "%{$keyword}%");
                 })
-            ->orderBy('id',"desc")
+            ->orderBy('id',"asc")
             ->get()
             ->toArray();
         }else{
             $arr_alluser = User::select(['id as userid','name','department_id as pId','position_id'])->where($arr_where)
-                ->orderBy('id',"desc")
+                ->orderBy('id',"asc")
                 ->get()->toArray();
         }
         
@@ -276,7 +276,7 @@ class User extends Model
         //     }
         // }
 
-        $arr_litedpt = array_merge($arr_alldpt,$arr_alluser);
+        $arr_litedpt = array_merge($arr_alluser,$arr_alldpt);
         // dd($arr_litedpt);
         // var_dump($arr_litedpt);
         // die();
