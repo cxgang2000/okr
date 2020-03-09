@@ -68,7 +68,7 @@
         </div>
 
         <!-- End .clear -->
-        <div class="content-box">
+        <div class="content-box bg_none">
 
           <!--div class="layui-tab">
             <ul class="layui-tab-title">
