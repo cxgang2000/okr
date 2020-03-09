@@ -344,7 +344,7 @@
                       <div class="titles">
                         目标
                         
-                        <span class="lf_icon "><img src="/okr/resources/images/tianjia.png" /></span>
+                        <span class="lf_icon " onclick="$('.tj_mb').show();"><img src="/okr/resources/images/tianjia.png" /></span>
 
                         <div class="my_target" title="操作历史">
                           <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
