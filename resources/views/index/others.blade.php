@@ -74,7 +74,7 @@
         </div>
         <!-- End .clear -->
 
-          <div class="content-box clearfix">
+          <div class="content-box clearfix bg_none">
             <div class="layui-row layui-col-space10">
 
                 <!-- 日期选择 -->

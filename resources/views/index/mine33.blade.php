@@ -123,11 +123,8 @@
 
 
           <!-- 部门okrdiv -->
-          <div class="layui-row layui-col-space5">
-            
-
-            <div class="layui-col-xs12 rp">
-              
+          <div class="layui-row mg_t10">
+            <div class="layui-col-xs12">
                 <div class="okr_mb">
                   <span id="dptname">部门</span>的OKR（<span id="others_period_show"></span>）
                   <span class="extend" onclick="toggleElem()">
@@ -135,9 +132,8 @@
                     <img id="leaderArea" src="/okr/resources/images/up.png" />
                   </span>
                 </div>
-
             </div>
-
+          </div>
 
 
             <div class="parent-elem">
@@ -272,6 +268,8 @@
                 </div>
               <!--/div-->
             </div>
+
+
           </div>
 
 
