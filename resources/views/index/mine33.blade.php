@@ -135,9 +135,9 @@
 
           <div class="parent-elem">
             <!--div class="layui-col-xs12 rp"-->
-              <div class="layui-row layui-col-space10">
-                <div class="layui-col-xs6">
-                  <div class="bg_fff">
+              <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
+                <div class="layui-col-xs6" style="min-height: 100%;">
+                  <div class="bg_fff" style="height: 100%;">
                     <div class="titles">
                       本<span id="others_span_misson_duration">周</span>关注的任务 ({{ substr($arr_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_weekSatrtAndEnd[1],5,5) }})
 
@@ -179,7 +179,7 @@
 
                     </div>
                     <div class="contains top_border" id=bmmb>
-                      <ul id="others_tree" class="ztree">
+                      <ul id="others_tree" class="ztree" style="overflow:auto">
                       </ul>
                     </div>
                   </div>
@@ -289,9 +289,9 @@
           </div>
 
           <div class=" bg_none">
-            <div class="layui-row layui-col-space10">
-              <div class="layui-col-xs6">
-                <div class="bg_fff">
+            <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
+              <div class="layui-col-xs6" style="min-height: 100%;">
+                <div class="bg_fff" style="height: 100%;">
                   <div class="titles">
                     本<span id="span_misson_duration">周</span>关注的任务 ({{ substr($arr_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_weekSatrtAndEnd[1],5,5) }})
                     
@@ -346,7 +346,7 @@
 
                   </div>
                   <div class="contains top_border">
-                    <ul id="treeDemo" class="ztree"></ul>
+                    <ul id="treeDemo" class="ztree" style="overflow:auto"></ul>
                   </div>
                 </div>
               </div>

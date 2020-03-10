@@ -133,10 +133,10 @@
               </div>
 
               <!-- 任务和目标 -->
-              <div class="layui-col-xs12" >
-                <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
-                  <div class="layui-col-xs6" style="min-height: 100%;">
-                    <div class="bg_fff" style="height: 100%;">
+              <div class="layui-col-xs12 rp">
+                <div class="layui-row layui-col-space10">
+                  <div class="layui-col-xs6">
+                    <div class="bg_fff">
                       <div class="titles">
                         本<span id="others_span_misson_duration">周</span>关注的任务 ({{ substr($arr_others_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_others_weekSatrtAndEnd[1],5,5) }})
 
@@ -172,7 +172,7 @@
                         </div>
                       </div>
                       <div class="contains top_border">
-                        <ul id="others_tree" class="ztree" style="overflow:auto">
+                        <ul id="others_tree" class="ztree">
                         </ul>
                       </div>
                     </div>
@@ -181,7 +181,7 @@
               </div>
 
               <!-- 计划和指标 -->
-              <div class="layui-col-xs12">
+              <div class="layui-col-xs12 rp">
                 <div class="layui-row layui-col-space10">
                   <div class="layui-col-xs6">
                     <div class="bg_fff">
@@ -269,7 +269,9 @@
 
           </div>
 
-					<div style="border: 8px solid #ddd;margin: 10px 0 10px 5px;"></div>
+          <div style="background-color: #fff; padding: 5px 0;">
+            <div style="border: 1px solid #ddd;margin-top: 5px;margin-bottom:5px;"></div>
+          </div>
 
           <div class="layui-row layui-col-space10">
 
@@ -326,11 +328,10 @@
                 </div>
               </div>
 
-              <!-- 任务和目标 -->
-              <div class="layui-col-xs12">
-                  <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
-                    <div class="layui-col-xs6" style="min-height: 100%;">
-                      <div class="bg_fff" style="height: 100%;">
+              <div class="layui-col-xs12 rp">
+                  <div class="layui-row layui-col-space10">
+                    <div class="layui-col-xs6">
+                      <div class="bg_fff">
                         <div class="titles">
                           本<span id="leader_span_misson_duration">周</span>关注的任务 ({{ substr($arr_my_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_my_weekSatrtAndEnd[1],5,5) }})
 
@@ -367,15 +368,14 @@
                           @endif
                         </div>
                         <div class="contains top_border">
-                          <ul id="leader_tree" class="ztree" style="overflow:auto">
+                          <ul id="leader_tree" class="ztree">
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
               </div>
-              <!-- 计划和指标 -->
-              <div class="layui-col-xs12 ">
+              <div class="layui-col-xs12 rp">
                 <div class="layui-row layui-col-space10">
                   <div class="layui-col-xs6">
                     <div class="bg_fff">
@@ -470,10 +470,10 @@
                 </div>
               </div>
 
-              <!-- 任务和目标 -->
-              <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
-                    <div class="layui-col-xs6" style="min-height: 100%;">
-                      <div class="bg_fff" style="height: 100%;">
+              <div class="layui-col-xs12 rp">
+                  <div class="layui-row layui-col-space10">
+                    <div class="layui-col-xs6">
+                      <div class="bg_fff">
                         <div class="titles">
                           本<span id="my_span_misson_duration">周</span>关注的任务 ({{ substr($arr_my_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_my_weekSatrtAndEnd[1],5,5) }})
 
@@ -510,15 +510,14 @@
 
                         </div>
                         <div class="contains top_border">
-                          <ul id="my_tree" class="ztree" style="overflow:auto">
+                          <ul id="my_tree" class="ztree">
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
               </div>
-              <!-- 计划和指标 -->
-              <div class="layui-col-xs12">
+              <div class="layui-col-xs12 rp">
                 <div class="layui-row layui-col-space10">
                   <div class="layui-col-xs6">
                     <div class="bg_fff">
