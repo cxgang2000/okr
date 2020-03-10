@@ -287,6 +287,7 @@ class ObjectiveController extends Controller
         // var_dump($arr_leader);
         if($arr_leader==[]){
             $arr_leader['id'] = $uid;
+            // $arr_leader['id'] = '';
         }else{
             // $arr_dpt = Department::getDpt($arr_leader['department_id']);
             // dd($arr_dpt);
@@ -375,6 +376,8 @@ class ObjectiveController extends Controller
         $arr_tmp = $this->getUser4All($arr_leader['id'],$duration1,$arr_weekSatrtAndEnd);
         $others_all = $arr_tmp[1];
         $arr_others = $arr_tmp[0];
+
+        
         // var_dump($others_all);
         // dd($arr_others);
 
@@ -827,7 +830,14 @@ class ObjectiveController extends Controller
         $others_all = $arr_tmp[1];
         $arr_others = $arr_tmp[0];
 
+        // var_dump(session('idUser'));
+        // var_dump($othersId);
+        
         // var_dump($others_all);
+        // var_dump($arr_leader);
+        // var_dump($leader_all);
+        
+        // die();
 
         // $user = User::getLeaderIdByUserId($myId);
 
