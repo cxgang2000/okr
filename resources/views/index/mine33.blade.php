@@ -277,203 +277,203 @@
           <!--div class="layui-tab-content" -->
             <!-- 1y 每个月份 目标值ztree不一样顾就没有写太多 以一月份为例-->
 
-            <!-- 我的okr -->
-            <div class="okr_mb mg_10">
-              我的OKR（<span id="my_period_show"></span>）
-              <div class="layui-inline">
-                <input style="width: 150px;font-size: 12px;" name="weekdate" type="text" id="weekdate" class="layui-smallinput layui-input layui-inline" lay-key="1">
-                <!--input name="datesearch" type="button" value="搜索" class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;
-                   margin-left: 10px;" onclick="setDurationFlag(durationflag);"/-->
-              </div>
-
+          <!-- 我的okr -->
+          <div class="okr_mb mg_10">
+            我的OKR（<span id="my_period_show"></span>）
+            <div class="layui-inline">
+              <input style="width: 150px;font-size: 12px;" name="weekdate" type="text" id="weekdate" class="layui-smallinput layui-input layui-inline" lay-key="1">
+              <!--input name="datesearch" type="button" value="搜索" class="layui-btn layui-btn-lg layui-btn-normal" style="height: 36px;
+                 margin-left: 10px;" onclick="setDurationFlag(durationflag);"/-->
             </div>
 
-            <div class="content-box bg_none">
-              <div class="layui-row layui-col-space10">
-                <div class="layui-col-xs6">
-                  <div class="bg_fff">
-                    <div class="titles">
-                      本<span id="span_misson_duration">周</span>关注的任务 ({{ substr($arr_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_weekSatrtAndEnd[1],5,5) }})
-                      
-                      <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
+          </div>
 
-                      <span class="lf_icon tj_gz_icon"><img src="/okr/resources/images/tianjia.png" /></span>
+          <div class=" bg_none">
+            <div class="layui-row layui-col-space10">
+              <div class="layui-col-xs6">
+                <div class="bg_fff">
+                  <div class="titles">
+                    本<span id="span_misson_duration">周</span>关注的任务 ({{ substr($arr_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_weekSatrtAndEnd[1],5,5) }})
+                    
+                    <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
 
-                      <div class="my_target" title="操作历史">
-                        <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                      </div>
-                      
-                    </div>
-                    <div class="contains top_border">
-                      <ul>
+                    <span class="lf_icon tj_gz_icon"><img src="/okr/resources/images/tianjia.png" /></span>
 
-                        @foreach ($arr_mission as $mission)
-                        <li>
-                          P{{ $mission['importance']  }}：{{ $mission['description']  }}
-                          <!--div class="this_cz">
-                            <i class="icon iconfont icon-bianji bz_rw"  flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);"></i>
-                            <i class="icon iconfont icon-laji" description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);"></i>
-                          </div-->
-
-                          <div class="this_cz" style="position: relative;" onmouseenter="show_gz('{{ $mission['id']  }}');" onmouseleave= "hide_gz('{{ $mission['id']  }}');">
-                            <img src="/okr/resources/images/3point.png" />
-                            <div class="pop" id="gz_{{ $mission['id']  }}">
-                              <span flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);" style="cursor: pointer;">编辑</span>
-                              <br>
-                              <span description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
-                            </div>
-                          </div>
-
-                        </li>
-                        @endforeach
-
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="layui-col-xs6">
-                  <div class="bg_fff">
-                    <div class="titles">
-                      目标
-                      
-                      <span class="lf_icon " onclick="$('.tj_mb').show();"><img src="/okr/resources/images/tianjia.png" /></span>
-
-                      <div class="my_target" title="操作历史">
-                        <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                      </div>
-
-                    </div>
-                    <div class="contains top_border">
-                      <ul id="treeDemo" class="ztree"></ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="layui-row layui-col-space10">
-                <div class="layui-col-xs6">
-                  <div class="bg_fff">
-                    <div class="titles">
-                      未来四<span id="span_plan_duration">周</span>计划
-
-                      <div class="my_target" title="操作历史">
-                        <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                      </div>
-                      
-                      <span class="lf_icon wl_jh"><img src="/okr/resources/images/tianjia.png" /></span>
-
+                    <div class="my_target" title="操作历史">
+                      <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                     </div>
                     
-                    <div class="contains top_border bg_fff">
-                      <ul>
+                  </div>
+                  <div class="contains top_border">
+                    <ul>
 
-                        @foreach ($arr_plan as $key=>$plan)
-                        <li>
-                          {{ $plan['description']  }}{{ $key+1 }}
+                      @foreach ($arr_mission as $mission)
+                      <li>
+                        P{{ $mission['importance']  }}：{{ $mission['description']  }}
+                        <!--div class="this_cz">
+                          <i class="icon iconfont icon-bianji bz_rw"  flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);"></i>
+                          <i class="icon iconfont icon-laji" description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);"></i>
+                        </div-->
 
-
-                          <!--div class="this_cz">
-                            <i class="icon iconfont icon-bianji wl_sz" flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);"></i>    
-                            <i class="icon iconfont icon-laji" description="{{ $plan['description']  }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);"></i>
-                          </div-->
-
-                          <div class="this_cz" style="position: relative;" onmouseenter="show_gz('{{ $plan['id']  }}');" onmouseleave= "hide_gz('{{ $plan['id']  }}');">
-                            <img src="/okr/resources/images/3point.png" />
-                            <div class="pop" id="gz_{{ $plan['id']  }}">
-                              <span flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);" style="cursor: pointer;">编辑</span>
-                              <br>
-                              <span description="{{ $plan['description'] }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
-                            </div>
+                        <div class="this_cz" style="position: relative;" onmouseenter="show_gz('{{ $mission['id']  }}');" onmouseleave= "hide_gz('{{ $mission['id']  }}');">
+                          <img src="/okr/resources/images/3point.png" />
+                          <div class="pop" id="gz_{{ $mission['id']  }}">
+                            <span flag="mission" itemid="{{ $mission['id']  }}" onclick="detail_mission(this);" style="cursor: pointer;">编辑</span>
+                            <br>
+                            <span description="{{ $mission['description'] }}" flag="mission" itemid="{{ $mission['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
                           </div>
+                        </div>
 
+                      </li>
+                      @endforeach
 
-                        </li>
-                        @endforeach
-
-                      </ul>
-                      <br><br><br><br><br><br><br>
-                      <br><br><br><br><br><br><br>
-                    </div>
+                    </ul>
                   </div>
                 </div>
-                <div class="layui-col-xs6">
-                  <div class="bg_fff">
-                    <div class="titles">
-                      状态指标
+              </div>
 
-                      <div class="layui-inline mg_l78">
-                        <span class="layui-badge-dot layui-bg-green"></span>优秀
-                        <span class="layui-badge-dot layui-bg-cyan"></span>良好
-                        <span class="layui-badge-dot layui-bg-blue"></span>一般
-                        <span class="layui-badge-dot layui-bg-gray"></span>差
-                      </div>
 
-                      <div class="my_target" title="操作历史">
-                        <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                      </div>
+              <div class="layui-col-xs6">
+                <div class="bg_fff">
+                  <div class="titles">
+                    目标
+                    
+                    <span class="lf_icon " onclick="$('.tj_mb').show();"><img src="/okr/resources/images/tianjia.png" /></span>
 
-                      <span class="lf_icon tj_zt_icon"><img src="/okr/resources/images/tianjia.png" /></span>
+                    <div class="my_target" title="操作历史">
+                      <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                     </div>
-                    <div class="contains top_border bg_fff">
-                      
-                      <ul>
 
-                        @foreach ($arr_stateindex as $stateindex)
-                        <li>
-
-                          @switch($stateindex['state'])
-                              @case(1)
-                                  <span class="layui-badge-dot layui-bg-green"></span>
-                                  @break
-
-                              @case(2)
-                                 <span class="layui-badge-dot layui-bg-cyan"></span>
-                                  @break
-
-                              @case(3)
-                                  <span class="layui-badge-dot layui-bg-blue"></span>
-                                  @break
-
-                              @case(4)
-                                  <span class="layui-badge-dot layui-bg-gray"></span>
-                                  @break
-
-                          @endswitch
-
-                          {{ $stateindex['description']  }}
-
-
-                          <!--div class="this_cz">
-                            <i class="icon iconfont icon-bianji wl_sz" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="detail_stateindex(this);"></i>    
-                            <i class="icon iconfont icon-laji" description="{{ $stateindex['description'] }}" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="pop_del_div(this);"></i>
-                          </div-->
-
-
-                          <div class="this_cz" style="position: relative;" onmouseenter="show_gz('{{ $stateindex['id']  }}');" onmouseleave= "hide_gz('{{ $stateindex['id']  }}');">
-                            <img src="/okr/resources/images/3point.png" />
-                            <div class="pop" id="gz_{{ $stateindex['id']  }}">
-                              <span flag="stateindex" itemid="{{ $stateindex['id']  }}" onclick="detail_stateindex(this);" style="cursor: pointer;">编辑</span>
-                              <br>
-                              <span description="{{ $stateindex['description'] }}" flag="stateindex" itemid="{{ $stateindex['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
-                            </div>
-                          </div>
-
-
-                        </li>
-                        @endforeach
-
-                      </ul>
-                      <br><br><br><br><br><br><br>
-                      <br><br><br><br><br><br><br>
-                    </div>
+                  </div>
+                  <div class="contains top_border">
+                    <ul id="treeDemo" class="ztree"></ul>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="layui-row layui-col-space10">
+              <div class="layui-col-xs6">
+                <div class="bg_fff">
+                  <div class="titles">
+                    未来四<span id="span_plan_duration">周</span>计划
+
+                    <div class="my_target" title="操作历史">
+                      <a href="{{URL::action('PlanController@planlog',['weekdate'=>$weekdate])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
+                    </div>
+                    
+                    <span class="lf_icon wl_jh"><img src="/okr/resources/images/tianjia.png" /></span>
+
+                  </div>
+                  
+                  <div class="contains top_border bg_fff">
+                    <ul>
+
+                      @foreach ($arr_plan as $key=>$plan)
+                      <li>
+                        {{ $plan['description']  }}{{ $key+1 }}
+
+
+                        <!--div class="this_cz">
+                          <i class="icon iconfont icon-bianji wl_sz" flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);"></i>    
+                          <i class="icon iconfont icon-laji" description="{{ $plan['description']  }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);"></i>
+                        </div-->
+
+                        <div class="this_cz" style="position: relative;" onmouseenter="show_gz('{{ $plan['id']  }}');" onmouseleave= "hide_gz('{{ $plan['id']  }}');">
+                          <img src="/okr/resources/images/3point.png" />
+                          <div class="pop" id="gz_{{ $plan['id']  }}">
+                            <span flag="plan" itemid="{{ $plan['id']  }}" onclick="detail_plan(this);" style="cursor: pointer;">编辑</span>
+                            <br>
+                            <span description="{{ $plan['description'] }}" flag="plan" itemid="{{ $plan['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
+                          </div>
+                        </div>
+
+
+                      </li>
+                      @endforeach
+
+                    </ul>
+                    <br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br>
+                  </div>
+                </div>
+              </div>
+              <div class="layui-col-xs6">
+                <div class="bg_fff">
+                  <div class="titles">
+                    状态指标
+
+                    <div class="layui-inline mg_l78">
+                      <span class="layui-badge-dot layui-bg-green"></span>优秀
+                      <span class="layui-badge-dot layui-bg-cyan"></span>良好
+                      <span class="layui-badge-dot layui-bg-blue"></span>一般
+                      <span class="layui-badge-dot layui-bg-gray"></span>差
+                    </div>
+
+                    <div class="my_target" title="操作历史">
+                      <a href="{{URL::action('StateindexController@stateindexlog',['durationflag'=>$durationflag,'duration'=>$duration])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
+                    </div>
+
+                    <span class="lf_icon tj_zt_icon"><img src="/okr/resources/images/tianjia.png" /></span>
+                  </div>
+                  <div class="contains top_border bg_fff">
+                    
+                    <ul>
+
+                      @foreach ($arr_stateindex as $stateindex)
+                      <li>
+
+                        @switch($stateindex['state'])
+                            @case(1)
+                                <span class="layui-badge-dot layui-bg-green"></span>
+                                @break
+
+                            @case(2)
+                               <span class="layui-badge-dot layui-bg-cyan"></span>
+                                @break
+
+                            @case(3)
+                                <span class="layui-badge-dot layui-bg-blue"></span>
+                                @break
+
+                            @case(4)
+                                <span class="layui-badge-dot layui-bg-gray"></span>
+                                @break
+
+                        @endswitch
+
+                        {{ $stateindex['description']  }}
+
+
+                        <!--div class="this_cz">
+                          <i class="icon iconfont icon-bianji wl_sz" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="detail_stateindex(this);"></i>    
+                          <i class="icon iconfont icon-laji" description="{{ $stateindex['description'] }}" flag="stateindex" itemid="{{ $stateindex['id'] }}" onclick="pop_del_div(this);"></i>
+                        </div-->
+
+
+                        <div class="this_cz" style="position: relative;" onmouseenter="show_gz('{{ $stateindex['id']  }}');" onmouseleave= "hide_gz('{{ $stateindex['id']  }}');">
+                          <img src="/okr/resources/images/3point.png" />
+                          <div class="pop" id="gz_{{ $stateindex['id']  }}">
+                            <span flag="stateindex" itemid="{{ $stateindex['id']  }}" onclick="detail_stateindex(this);" style="cursor: pointer;">编辑</span>
+                            <br>
+                            <span description="{{ $stateindex['description'] }}" flag="stateindex" itemid="{{ $stateindex['id']  }}" onclick="pop_del_div(this);" style="cursor: pointer;">删除</span>
+                          </div>
+                        </div>
+
+
+                      </li>
+                      @endforeach
+
+                    </ul>
+                    <br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <!--/div-->
 
-      </div>
+        </div>
     <!-- End Notifications -->
     <!-- End #footer -->
 
@@ -1188,8 +1188,9 @@
 
     var zNodes = {!! $json_objective !!};
     // console.log(zNodes);
+    var others_zNodes = "";
     @if($arr_others['id']!==session('idUser'))
-    var others_zNodes = {!! $others_all['json_objective'] !!};
+    others_zNodes = {!! $others_all['json_objective'] !!};
     @endif
     function onClick(e,treeId, treeNode) {
       var zTree = $.fn.zTree.getZTreeObj(treeId);
