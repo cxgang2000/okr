@@ -328,51 +328,51 @@
 
               <!-- 任务和目标 -->
               <div class="layui-col-xs12">
-                  <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
-                    <div class="layui-col-xs6" style="min-height: 100%;">
-                      <div class="bg_fff" style="height: 100%;">
-                        <div class="titles">
-                          本<span id="leader_span_misson_duration">周</span>关注的任务 ({{ substr($arr_my_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_my_weekSatrtAndEnd[1],5,5) }})
+                <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
+                  <div class="layui-col-xs6" style="min-height: 100%;">
+                    <div class="bg_fff" style="height: 100%;">
+                      <div class="titles">
+                        本<span id="leader_span_misson_duration">周</span>关注的任务 ({{ substr($arr_my_weekSatrtAndEnd[0],5,5) }} ~ {{ substr($arr_my_weekSatrtAndEnd[1],5,5) }})
 
-                          <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
-                          @if($arr_leader['id']!==session('idUser'))
-                          <div class="my_target" title="操作历史">
-                            <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
-                          @endif
+                        <div class="layui-inline col_666 ft_12 mg_l78">（P1必须做，P2应该做）</div>
+                        @if($arr_leader['id']!==session('idUser'))
+                        <div class="my_target" title="操作历史">
+                          <a href="{{URL::action('MissionController@missionlog',['weekdate'=>$my_weekdate,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
                         </div>
-                        <div class="contains top_border">
-                          <ul>
-                            @if($arr_leader['id']!==session('idUser'))
-                            @foreach ($leader_all['arr_mission'] as $mission)
-                              <li>P{{ $mission['importance']  }}：{{ $mission['description']  }}
-                                <div class="this_cz">
-                                  <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $mission['id'] }}" onclick="pop_comment_div(this,'{{ $mission['description'] }}')"></span>
-                                </div>
-                              </li>
-                            @endforeach
-                            @endif
-                          </ul>
-                        </div>
+                        @endif
                       </div>
-                    </div>
-                    <div class="layui-col-xs6">
-                      <div class="bg_fff">
-                        <div class="titles">
-                          目标
+                      <div class="contains top_border">
+                        <ul>
                           @if($arr_leader['id']!==session('idUser'))
-                          <div class="my_target" title="操作历史">
-                            <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
-                          </div>
+                          @foreach ($leader_all['arr_mission'] as $mission)
+                            <li>P{{ $mission['importance']  }}：{{ $mission['description']  }}
+                              <div class="this_cz">
+                                <span class="mbxq icon iconfont icon-pinglun" title="评论" flag="mission" itemid="{{ $mission['id'] }}" onclick="pop_comment_div(this,'{{ $mission['description'] }}')"></span>
+                              </div>
+                            </li>
+                          @endforeach
                           @endif
-                        </div>
-                        <div class="contains top_border">
-                          <ul id="leader_tree" class="ztree" style="overflow:auto">
-                          </ul>
-                        </div>
+                        </ul>
                       </div>
                     </div>
                   </div>
+                  <div class="layui-col-xs6">
+                    <div class="bg_fff">
+                      <div class="titles">
+                        目标
+                        @if($arr_leader['id']!==session('idUser'))
+                        <div class="my_target" title="操作历史">
+                          <a href="{{URL::action('ObjectiveController@mineObjectivelog',['durationflag'=>$my_perioditem,'duration'=>$my_period,'userid'=>$arr_leader['id']])}}" target="_blank"><img src="/okr/resources/images/lishijilu.png" /></a>
+                        </div>
+                        @endif
+                      </div>
+                      <div class="contains top_border">
+                        <ul id="leader_tree" class="ztree" style="overflow:auto">
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- 计划和指标 -->
               <div class="layui-col-xs12 ">
@@ -471,7 +471,8 @@
               </div>
 
               <!-- 任务和目标 -->
-              <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
+              <div class="layui-col-xs12">
+                <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
                     <div class="layui-col-xs6" style="min-height: 100%;">
                       <div class="bg_fff" style="height: 100%;">
                         <div class="titles">
@@ -516,6 +517,7 @@
                       </div>
                     </div>
                   </div>
+                </div>
               </div>
               <!-- 计划和指标 -->
               <div class="layui-col-xs12">
