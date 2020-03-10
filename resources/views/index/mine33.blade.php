@@ -351,9 +351,9 @@
                 </div>
               </div>
             </div>
-            <div class="layui-row layui-col-space10">
-              <div class="layui-col-xs6">
-                <div class="bg_fff">
+            <div class="layui-row layui-col-space10" style="display: flex;margin-bottom:1px;">
+              <div class="layui-col-xs6" style="min-height: 100%;">
+                <div class="bg_fff" style="height: 100%;">
                   <div class="titles">
                     未来四<span id="span_plan_duration">周</span>计划
 
