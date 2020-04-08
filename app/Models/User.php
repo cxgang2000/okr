@@ -223,7 +223,7 @@ class User extends Model
         // 计算员工上级 1取所有部门 2取所有员工 2将员工放在部门下 4去掉没有员工的部门
         $arr_litedpt = array();
         // $arr_alldpt = Department::select(['id','name'])->whereIn("status",$arr_status)->orderBy('id',"asc")->get()->toArray();
-        $arr_alldpt = Department::select(['id','name','pId'])->where($arr_where)->orderBy('id',"asc")->get()->toArray();
+        $arr_alldpt = Department::select(['id','name','pId'])->where($arr_where)->orderBy('sort',"asc")->get()->toArray();
         
         // return $arr_alldpt;
         // var_dump($arr_alldpt);die();
