@@ -279,6 +279,31 @@ class ObjectiveController extends Controller
         return([$week_start,$week_end]);
     }
 
+    private function getMonthStartAndEnd($weekdate){
+        // $sdefaultDate = $weekdate;
+        // //$first =1 表示每周星期一为开始日期 0表示每周日为开始日期
+        // $first=1;
+        // //获取当前周的第几天 周日是 0 周一到周六是 1 - 6
+        // $w=date('w',strtotime($sdefaultDate));
+        // //获取本周开始日期，如果$w是0，则表示周日，减去 6 天
+        // $week_start=date('Y-m-d',strtotime("$sdefaultDate -".($w ? $w - $first : 6).' days'))." 00:00:00";
+        // //本周结束日期
+        // $week_end=date('Y-m-d',strtotime("$week_start +6 days"))." 23:59:59";
+        // // dd([$week_start,$week_end]);
+        // return([$week_start,$week_end]);
+
+        $y = date("Y", strtotime($weekdate));
+        $m = date("m", strtotime($weekdate));
+        $t = date("t", strtotime($weekdate));
+
+        $beginThismonth = date('Y-m-d H:i:s',mktime(0, 0, 0, $m, 1, $y));
+        $endThismonth = date('Y-m-d H:i:s',mktime(23, 59, 59, $m, $t, $y));
+ 
+        return([$beginThismonth,$endThismonth]);
+
+
+    }
+
     // 取部门领导
     private function getLeader($uid){
         $arr_leader = User::getLeaderIdByUserId($uid);
@@ -309,9 +334,9 @@ class ObjectiveController extends Controller
         $weekdate = $request->weekdate;
         if($weekdate=="")$weekdate=date("Y-m-d");
         $arr_weekSatrtAndEnd = $this->getWeekStartAndEnd($weekdate);
-        
+        $arr_monthSatrtAndEnd = $this->getMonthStartAndEnd($weekdate);
         // echo ($duration);
-
+        // var_dump($arr_monthSatrtAndEnd);die();
         // 季度下面的标签
         if ($duration=="") {
             // $month=date("m");
@@ -361,7 +386,7 @@ class ObjectiveController extends Controller
         // dd($arr_where);
 
         $arr_mission = $this->getMission($arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
-        $arr_plan = $this->getPlan($arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
+        $arr_plan = $this->getPlan($arr_where,$arr_monthSatrtAndEnd[0],$arr_monthSatrtAndEnd[1]);
 
 
 
