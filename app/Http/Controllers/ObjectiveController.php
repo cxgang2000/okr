@@ -542,7 +542,8 @@ class ObjectiveController extends Controller
         // 取目标
         // $mission = Mission::where($arr_where)->whereBetween('created_at',[strtotime($week_start),strtotime($week_end)])->get();
 
-        $mission = Mission::where($arr_where)->whereDate('created_at', '>=', $week_start)->whereDate('created_at', '<', $week_end)->get();
+        // $mission = Mission::where($arr_where)->whereDate('created_at', '>=', $week_start)->whereDate('created_at', '<', $week_end)->get();
+        $mission = Mission::where($arr_where)->whereDate('mission_at', '>=', $week_start)->whereDate('mission_at', '<', $week_end)->get();
         
         // var_dump($mission);
         // dd($mission);

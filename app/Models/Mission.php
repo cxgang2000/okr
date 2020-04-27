@@ -9,7 +9,7 @@ class Mission extends Model
 {
     protected $table = 'mission';
 
-    protected $fillable=['durationflag','duration','organiser_id','description','importance','status']; 
+    protected $fillable=['durationflag','duration','organiser_id','description','importance','status','mission_at']; 
 
 
     // 取评论

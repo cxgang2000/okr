@@ -2232,10 +2232,18 @@
 
     // 关注任务新增
     function new_mission(){
+      
       // alert("submit_user");
       if(cansubmit == 0){return false;}
       var m_description = $("#m_description").val();
       var m_importance = $("#m_importance").val();
+      var weekdate = $("#weekdate").val();
+      // alert(weekdate);
+
+      if (weekdate.trim()=="") {
+        layer.msg("日期不能为空",{time:1000});
+        return false;
+      }
 
       if (m_description.trim()=="") {
         layer.msg("本周关注的任务不能为空",{time:1000});
@@ -2254,7 +2262,7 @@
       $.ajax({
         type: ajax_type,
         url: submit_url,
-        data: { durationflag : durationflag, duration:duration, m_description : m_description, m_importance  : m_importance},
+        data: { durationflag : durationflag, duration:duration, m_description : m_description, m_importance  : m_importance, weekdate : weekdate},
         dataType: 'json',
         headers: {
           'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -2307,7 +2315,13 @@
       if(cansubmit == 0){return false;}
       var m_description = $("#m_description_u").val();
       var m_importance = $("#m_importance_u").val();
+      var weekdate = $("#weekdate").val();
+      // alert(weekdate);
       
+      if (weekdate.trim()=="") {
+        layer.msg("日期不能为空",{time:1000});
+        return false;
+      }
       if (m_description.trim()=="") {
         layer.msg("本周关注的任务不能为空",{time:1000});
         return false;
@@ -2323,7 +2337,7 @@
       $.ajax({
         type: ajax_type,
         url: submit_url,
-        data: { id : itemid, m_description : m_description,m_importance:m_importance},
+        data: { id : itemid, m_description : m_description,m_importance:m_importance,weekdate : weekdate},
         dataType: 'json',
         headers: {
           'X-CSRF-TOKEN': '{{csrf_token()}}'
