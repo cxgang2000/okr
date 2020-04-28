@@ -82,7 +82,7 @@ class MissionController extends Controller
             $descbefore = "";
             $descafter = $data['description'];
 
-            $this->setLog($type,$itemid,$descbefore,$descafter,$data['mission_at']);
+            $this->setLog($type,$itemid,$descbefore,$descafter);
 
             $array = array('msg'=>'新增本周关注的任务结果成功!','status'=>1);
             return json_encode($array);
@@ -90,13 +90,13 @@ class MissionController extends Controller
     }
 
     // 加log
-    private function setLog($type,$itemid,$descbefore,$descafter,$mission_at){
+    private function setLog($type,$itemid,$descbefore,$descafter){
         $data['type'] = $type;
         $data['itemid'] = $itemid;
         $data['descbefore'] = $descbefore;
         $data['descafter'] = $descafter;
         $data['created_at'] = date("Y-m-d H:i:s");
-        $data['mission_at'] = $mission_at;        
+        // $data['mission_at'] = $mission_at;    
 
         // $data = [
         // 'type' => $type,
@@ -152,7 +152,7 @@ class MissionController extends Controller
             'id' => 'required|integer',
             'm_description' => 'required|',
             'm_importance' => 'required|',
-            'weekdate' => 'required|',
+            // 'weekdate' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -184,7 +184,7 @@ class MissionController extends Controller
         
         $item->save();
         // dd($item);
-        $data['mission_at'] = $request->weekdate;
+        // $data['mission_at'] = $request->weekdate;
 
         if($item===false){
             $array = array('msg'=>'编辑失败!','status'=>0);
@@ -195,7 +195,7 @@ class MissionController extends Controller
             $type = 2;
             $descafter = $data['description'];
 
-            $this->setLog($type,$itemid,$descbefore,$descafter,$data['mission_at']);
+            $this->setLog($type,$itemid,$descbefore,$descafter);
 
             $array = array('msg'=>'编辑成功!','status'=>1);
             return json_encode($array);

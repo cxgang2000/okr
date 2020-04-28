@@ -398,7 +398,7 @@ class ObjectiveController extends Controller
 
         $arr_leader = $this->getLeader($myId);
 
-        $arr_tmp = $this->getUser4All($arr_leader['id'],$duration1,$arr_weekSatrtAndEnd);
+        $arr_tmp = $this->getUser4All($arr_leader['id'],$duration1,$arr_weekSatrtAndEnd,$arr_monthSatrtAndEnd);
         $others_all = $arr_tmp[1];
         $arr_others = $arr_tmp[0];
 
@@ -411,7 +411,7 @@ class ObjectiveController extends Controller
     }
 
     // 取一个人的4象限信息 参数 uid duration arr_weekSatrtAndEnd
-    private function getUser4All($uid,$duration,$arr_weekSatrtAndEnd){
+    private function getUser4All($uid,$duration,$arr_weekSatrtAndEnd,$arr_monthSatrtAndEnd){
 
         $arr_others = User::find($uid)->toArray();
         $arr_others['position_name']=User::$arr_position[$arr_others['position_id']];
@@ -426,7 +426,6 @@ class ObjectiveController extends Controller
         // dd("aaaa");
 
         if($arr_others['id']==""){
-
             $others_all['json_objective'] = '';
             $others_all['arr_mission'] = array();
             $others_all['arr_plan'] = array();
@@ -448,7 +447,7 @@ class ObjectiveController extends Controller
             $others_all['arr_mission'] = $this->getMission($others_arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
             // var_dump($others_all['arr_mission']);
             // dd("aa");
-            $others_all['arr_plan'] = $this->getPlan($others_arr_where,$arr_weekSatrtAndEnd[0],$arr_weekSatrtAndEnd[1]);
+            $others_all['arr_plan'] = $this->getPlan($others_arr_where,$arr_monthSatrtAndEnd[0],$arr_monthSatrtAndEnd[1]);
         }
 
         return [$arr_others,$others_all];
@@ -556,11 +555,12 @@ class ObjectiveController extends Controller
     }
 
     private function getPlan($arr_where,$week_start,$week_end){
+
         // 取目标
         // $plan = Plan::where($arr_where)->get();
         $plan = Plan::where($arr_where)->whereDate('mission_at', '>=', $week_start)->whereDate('mission_at', '<', $week_end)->get();
         // var_dump($mission);
-        // dd($mission);
+        // dd($plan);
 
         $arr_plan=$plan->toArray();
         // dd($arr_plan);
@@ -815,9 +815,9 @@ class ObjectiveController extends Controller
         $arr_my_weekSatrtAndEnd = $this->getWeekStartAndEnd($my_weekdate);
         // dd($arr_weekSatrtAndEnd);
         // var_dump($arr_weekSatrtAndEnd);
+        $arr_my_monthSatrtAndEnd = $this->getMonthStartAndEnd($my_weekdate);
 
-
-        $arr_tmp = $this->getUser4All($myId,$duration1,$arr_my_weekSatrtAndEnd);
+        $arr_tmp = $this->getUser4All($myId,$duration1,$arr_my_weekSatrtAndEnd,$arr_my_monthSatrtAndEnd);
         $my_all = $arr_tmp[1];
         // var_dump($my_all);
         // dd($my_all);
@@ -828,7 +828,7 @@ class ObjectiveController extends Controller
         $arr_leader = $this->getLeader($myId);
         $leaderId = $arr_leader['id'];
 
-        $arr_tmp = $this->getUser4All($leaderId,$duration1,$arr_my_weekSatrtAndEnd);
+        $arr_tmp = $this->getUser4All($leaderId,$duration1,$arr_my_weekSatrtAndEnd,$arr_my_monthSatrtAndEnd);
         $leader_all = $arr_tmp[1];
         $arr_leader = $arr_tmp[0];
 
@@ -851,8 +851,9 @@ class ObjectiveController extends Controller
         if($others_weekdate=="")$others_weekdate=date("Y-m-d");
         $arr_others_weekSatrtAndEnd = $this->getWeekStartAndEnd($others_weekdate);
         // var_dump($arr_weekSatrtAndEnd);
+        $arr_others_monthSatrtAndEnd = $this->getMonthStartAndEnd($others_weekdate);
 
-        $arr_tmp = $this->getUser4All($othersId,$duration1,$arr_others_weekSatrtAndEnd);
+        $arr_tmp = $this->getUser4All($othersId,$duration1,$arr_others_weekSatrtAndEnd,$arr_others_monthSatrtAndEnd);
         $others_all = $arr_tmp[1];
         $arr_others = $arr_tmp[0];
 
