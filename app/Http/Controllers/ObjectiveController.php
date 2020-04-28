@@ -543,7 +543,7 @@ class ObjectiveController extends Controller
         // $mission = Mission::where($arr_where)->whereBetween('created_at',[strtotime($week_start),strtotime($week_end)])->get();
 
         // $mission = Mission::where($arr_where)->whereDate('created_at', '>=', $week_start)->whereDate('created_at', '<', $week_end)->get();
-        $mission = Mission::where($arr_where)->whereDate('mission_at', '>=', $week_start)->whereDate('mission_at', '<', $week_end)->get();
+        $mission = Mission::where($arr_where)->whereDate('mission_at', '>=', $week_start)->whereDate('mission_at', '<', $week_end)->orderBy('importance',"asc","mission_at")->get();
         
         // var_dump($mission);
         // dd($mission);
@@ -558,7 +558,7 @@ class ObjectiveController extends Controller
     private function getPlan($arr_where,$week_start,$week_end){
         // 取目标
         // $plan = Plan::where($arr_where)->get();
-        $plan = Plan::where($arr_where)->whereDate('created_at', '>=', $week_start)->whereDate('created_at', '<', $week_end)->get();
+        $plan = Plan::where($arr_where)->whereDate('mission_at', '>=', $week_start)->whereDate('mission_at', '<', $week_end)->get();
         // var_dump($mission);
         // dd($mission);
 

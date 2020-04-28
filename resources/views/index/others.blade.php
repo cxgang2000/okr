@@ -1304,13 +1304,33 @@
   		  elem: '#my_weekdate' //指定元素
         ,done: function(value, date, endDate){
             selectMyPeriod(my_perioditem,my_period);
-          }
+          },
+        // btns: ['clear', 'now']
+        ready: function(date){  
+
+          //日期确定
+          $(".laydate-btns-confirm").on("click",function(){
+            // alert(1111);
+            selectMyPeriod(my_perioditem,my_period);
+          })
+          
+        },
   	  });
   	  laydate.render({
   		  elem: '#others_weekdate' //指定元素
         ,done: function(value, date, endDate){
             selectOthersPeriod(others_perioditem,others_period)
-          }
+          },
+        // btns: ['clear', 'now']
+        ready: function(date){  
+
+          //日期确定
+          $(".laydate-btns-confirm").on("click",function(){
+            // alert(1111);
+            selectMyPeriod(my_perioditem,my_period);
+          })
+          
+        },
   	  });
   	});
   	

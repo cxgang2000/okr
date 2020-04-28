@@ -282,9 +282,9 @@ class MissionController extends Controller
         $arr_log = Missionlog::whereIn("itemid",$ids)->orderBy('id')->get()->toArray();
         // var_dump($arr_log);die();
 
-        for ($i=0; $i < count($arr_log); $i++) { 
-            $arr_log[$i]['created_at'] = $arr_log[$i]['mission_at'];
-        }
+        // for ($i=0; $i < count($arr_log); $i++) { 
+        //     $arr_log[$i]['created_at'] = $arr_log[$i]['mission_at'];
+        // }
 
         return view('index.mineObjectivelog',compact('arr_log'));
     }

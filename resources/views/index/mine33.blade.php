@@ -1535,7 +1535,7 @@
       })
       //日期确定
       $(".laydate-btns-confirm").on("click",function(){
-
+        alert(1111);
       })
 
 
@@ -1732,6 +1732,7 @@
       }
       
 	    weekdate = $("#weekdate").val();
+      // alert(weekdate);
       // console.log("durationflag="+durationflag+" duration="+duration);
       window.location.href = "{{ route('objective.mine') }}" + "?durationflag=" + durationflag + "&duration=" + duration + "&weekdate=" + weekdate;
     }
@@ -2356,7 +2357,13 @@
       // alert("submit_user");
       if(cansubmit == 0){return false;}
       var p_description = $("#p_description").val();
+      var weekdate = $("#weekdate").val();
+      // alert(weekdate);
 
+      if (weekdate.trim()=="") {
+        layer.msg("日期不能为空",{time:1000});
+        return false;
+      }
       if (p_description.trim()=="") {
         layer.msg("未来四周计划不能为空",{time:1000});
         return false;
@@ -2369,7 +2376,7 @@
       $.ajax({
         type: ajax_type,
         url: submit_url,
-        data: { durationflag : durationflag, duration:duration, p_description : p_description},
+        data: { durationflag : durationflag, duration:duration, p_description : p_description, weekdate : weekdate},
         dataType: 'json',
         headers: {
           'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -2420,7 +2427,13 @@
       // alert("submit_user");
       if(cansubmit == 0){return false;}
       var p_description = $("#p_description_u").val();
-
+      var weekdate = $("#weekdate").val();
+      // alert(weekdate);
+      
+      if (weekdate.trim()=="") {
+        layer.msg("日期不能为空",{time:1000});
+        return false;
+      }
       if (p_description.trim()=="") {
         layer.msg("未来四周计划不能为空",{time:1000});
         return false;
@@ -2433,7 +2446,7 @@
       $.ajax({
         type: ajax_type,
         url: submit_url,
-        data: { id : itemid, p_description : p_description},
+        data: { id : itemid, p_description : p_description,weekdate : weekdate},
         dataType: 'json',
         headers: {
           'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -2707,9 +2720,21 @@
   	  laydate.render({
   		  elem: '#weekdate' //指定元素
         ,done: function(value, date, endDate){
+            // alert($("#weekdate").val());
+            // alert(durationflag);
             setDurationFlag(durationflag);
-          }
+            // $('.laydate-btns-confirm').trigger('click');
+          },
+        // btns: ['clear', 'now']
+        ready: function(date){  
 
+          //日期确定
+          $(".laydate-btns-confirm").on("click",function(){
+            // alert(1111);
+            setDurationFlag(durationflag);
+          })
+          
+        },
   	  });
   	});
   	

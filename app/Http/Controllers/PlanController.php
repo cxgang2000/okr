@@ -34,6 +34,7 @@ class PlanController extends Controller
             'durationflag' => 'required|',
             'duration' => 'required|',
             'p_description' => 'required|',
+            'weekdate' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -60,6 +61,7 @@ class PlanController extends Controller
         $data['duration'] = $duration;   
         $data['organiser_id'] = session('idUser'); 
         $data['description'] = $request->p_description;
+        $data['mission_at'] = $request->weekdate;
 
         // var_dump($data);
         // var_dump($arr_partake_id);
@@ -78,7 +80,7 @@ class PlanController extends Controller
             $descbefore = "";
             $descafter = $data['description'];
 
-            $this->setLog($type,$itemid,$descbefore,$descafter);
+            $this->setLog($type,$itemid,$descbefore,$descafter,$data['mission_at']);
 
             $array = array('msg'=>'新增未来四周计划成功!','status'=>1);
             return json_encode($array);
@@ -86,12 +88,13 @@ class PlanController extends Controller
     }
 
     // 加log
-    private function setLog($type,$itemid,$descbefore,$descafter){
+    private function setLog($type,$itemid,$descbefore,$descafter,$mission_at){
         $data['type'] = $type;
         $data['itemid'] = $itemid;
         $data['descbefore'] = $descbefore;
         $data['descafter'] = $descafter;
         $data['created_at'] = date("Y-m-d H:i:s");
+        $data['mission_at'] = $mission_at;        
 
         // $data = [
         // 'type' => $type,
@@ -146,6 +149,7 @@ class PlanController extends Controller
         $rules = [
             'id' => 'required|integer',
             'p_description' => 'required|',
+            'weekdate' => 'required|',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -175,6 +179,7 @@ class PlanController extends Controller
         
         $item->save();
         // dd($item);
+        $data['mission_at'] = $request->weekdate;
 
         if($item===false){
             $array = array('msg'=>'编辑失败!','status'=>0);
@@ -185,7 +190,7 @@ class PlanController extends Controller
             $type = 2;
             $descafter = $data['description'];
 
-            $this->setLog($type,$itemid,$descbefore,$descafter);
+            $this->setLog($type,$itemid,$descbefore,$descafter,$data['mission_at']);
 
             $array = array('msg'=>'编辑成功!','status'=>1);
             return json_encode($array);
@@ -264,7 +269,7 @@ class PlanController extends Controller
         $arr_where['organiser_id'] = $userid;
 
         // var_dump($arr_where);die();
-        $arr_plan = plan::where($arr_where)->whereDate('created_at', '>=', $arr_weekSatrtAndEnd[0])->whereDate('created_at', '<=', $arr_weekSatrtAndEnd[1])->get()->toArray();
+        $arr_plan = plan::where($arr_where)->whereDate('mission_at', '>=', $arr_weekSatrtAndEnd[0])->whereDate('mission_at', '<=', $arr_weekSatrtAndEnd[1])->get()->toArray();
         $ids = array_column($arr_plan, 'id');
         $str_ids = implode($ids, ",");
         // var_dump($str_ids);die();

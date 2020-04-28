@@ -9,7 +9,7 @@ class Plan extends Model
 {
     protected $table = 'plan';
 
-    protected $fillable=['durationflag','duration','organiser_id','description','status']; 
+    protected $fillable=['durationflag','duration','organiser_id','description','status','mission_at']; 
 
 
     // 取评论
