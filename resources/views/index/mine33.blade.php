@@ -1803,8 +1803,9 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".dafen_models").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -1838,8 +1839,9 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".tj_mb").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -1907,8 +1909,9 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".bj_mb").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -1947,10 +1950,14 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
+          $(".tj_jg").hide();
+          layer.msg(data.msg,{time:2000});
           if(data.status=="1"){
-            setCookie("mubiaopid",pid);
-            window.location.reload();
+
+            setTimeout(function(){ setCookie("mubiaopid",pid);window.location.reload(); }, 2000);
+
+            // setCookie("mubiaopid",pid);
+            // window.location.reload();
           }
         },
       });
@@ -2046,8 +2053,9 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".bj_jg").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -2085,8 +2093,9 @@
 
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".zjsc_models").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -2186,8 +2195,8 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -2270,8 +2279,11 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".tj_gz").hide();
+          layer.msg(data.msg,{time:2000});
+          // if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+
         },
       });
     }
@@ -2345,8 +2357,9 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".bj_gz").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -2383,8 +2396,9 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".tj_jh").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -2453,8 +2467,9 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".bj_jh").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -2490,8 +2505,9 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".tj_ztzb").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -2560,8 +2576,9 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
-          if(data.status=="1"){window.location.reload();}
+          $(".bj_ztzb").hide();
+          layer.msg(data.msg,{time:2000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
         },
       });
     }
@@ -2681,7 +2698,7 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg);
+          layer.msg(data.msg,{time:2000});
           if(data.status=="1"){
             // window.location.reload();
 
