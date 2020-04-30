@@ -1804,8 +1804,8 @@
         success: function(data){
           // console.log(data);
           $(".dafen_models").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -1840,8 +1840,8 @@
         success: function(data){
           // console.log(data);
           $(".tj_mb").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -1910,8 +1910,8 @@
         success: function(data){
           // console.log(data);
           $(".bj_mb").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -1951,7 +1951,7 @@
         success: function(data){
           // console.log(data);
           $(".tj_jg").hide();
-          layer.msg(data.msg,{time:2000});
+          layer.msg(data.msg,{time:5000});
           if(data.status=="1"){
 
             setTimeout(function(){ setCookie("mubiaopid",pid);window.location.reload(); }, 2000);
@@ -2054,8 +2054,8 @@
         success: function(data){
           // console.log(data);
           $(".bj_jg").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -2094,8 +2094,8 @@
         success: function(data){
           // console.log(data);
           $(".zjsc_models").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -2195,8 +2195,8 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -2280,9 +2280,9 @@
         success: function(data){
           // console.log(data);
           $(".tj_gz").hide();
-          layer.msg(data.msg,{time:2000});
-          // if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          // if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
 
         },
       });
@@ -2358,8 +2358,8 @@
         success: function(data){
           // console.log(data);
           $(".bj_gz").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -2397,8 +2397,8 @@
         success: function(data){
           // console.log(data);
           $(".tj_jh").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -2468,8 +2468,8 @@
         success: function(data){
           // console.log(data);
           $(".bj_jh").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -2506,8 +2506,8 @@
         success: function(data){
           // console.log(data);
           $(".tj_ztzb").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -2577,8 +2577,8 @@
         success: function(data){
           // console.log(data);
           $(".bj_ztzb").hide();
-          layer.msg(data.msg,{time:2000});
-          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 2000);}
+          layer.msg(data.msg,{time:5000});
+          if(data.status=="1"){setTimeout(function(){ window.location.reload(); }, 1000);}
         },
       });
     }
@@ -2698,7 +2698,7 @@
         },
         success: function(data){
           // console.log(data);
-          layer.msg(data.msg,{time:2000});
+          layer.msg(data.msg,{time:5000});
           if(data.status=="1"){
             // window.location.reload();
 
