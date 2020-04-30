@@ -1238,6 +1238,9 @@
       */
     }
 
+    // 可以提交标志 防止重复提交
+    cansubmit = 1;
+
     // 发表评论
     function new_comment(){
       if(cansubmit == 0){return false;}
@@ -1283,6 +1286,7 @@
                   $("#comment_input").val('');
                   $("#comment_showArea").html(getComment(data.comments));
                   // $(".pl_models").show();
+                  cansubmit = 1;
                 }
               },
             });
